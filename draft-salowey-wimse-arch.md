@@ -1,7 +1,7 @@
 ---
 title: "Workload Identity in a Multi System Environment (WIMSE) Architecture"
 abbrev: "WIMSE Architecture"
-docname: draft-salowey-wimse-arch
+docname: draft-salowey-wimse-arch-latest
 category: info
 
 ipr: trust200902
