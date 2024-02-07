@@ -22,8 +22,8 @@ author:
  -
     ins: Y. Rosomakho
     name: Yaroslav Rosomakho
-    organization: 
-    email: 
+    organization:
+    email:
  -
     ins: H. Tschofenig
     name: Hannes Tschofenig
