@@ -53,6 +53,12 @@ TODO Introduction
 
 {::boilerplate bcp14-tagged}
 
+## Definitions
+
+* Workload
+
+A workload is a process that performs one or mote functions within a system. A workload will often make requests to and or service requests from other workloads and components within a system. Some workloads may be replicas of each other in order to scale a particular function within the system. A workload is often deployed in a contain virtual machine or physical host, but a collection of these may be considered a workload if it is identified to the rest of the system as a single entity.
+
 # Use Cases
 
 # Architecture
