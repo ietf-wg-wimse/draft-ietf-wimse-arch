@@ -53,9 +53,15 @@ TODO Introduction
 
 {::boilerplate bcp14-tagged}
 
+# Use Cases
+
+# Architecture
+
+
 
 # Security Considerations
 
+# Threat Model
 TODO Security
 
 
