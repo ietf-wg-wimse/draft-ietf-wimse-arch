@@ -57,7 +57,7 @@ TODO Introduction
 
 * Workload
 
-A workload is a a running instance of software executing for a specific purpose.
+A workload is a running instance of software executing for a specific purpose.
 
 
 # Use Cases
