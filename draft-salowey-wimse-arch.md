@@ -56,7 +56,7 @@ TODO Introduction
 
 # Use Cases
 
-1. Basic Serivce Authentication
+1. Basic Service Authentication
 
 One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one microservice is making a request of another microservice within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
 
@@ -66,7 +66,7 @@ One of the most basic use cases for workload identity is for authenticating one 
 * Environment
 * Trust Domain
 * Software Attestation
-* Hardare Attestation
+* Hardware Attestation
 
 These attributes are used for various purposes:
 
@@ -83,7 +83,7 @@ There are several methods defined to perform this authentication.  SOme of the m
 
 2. Additional Context Establishment
 
-3. Asynchronos Requests
+3. Asynchronous Requests
 
 4. Scheduled Batch Requests
 
