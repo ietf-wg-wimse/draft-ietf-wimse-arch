@@ -54,6 +54,13 @@ TODO Introduction
 
 {::boilerplate bcp14-tagged}
 
+## Definitions
+
+* Workload
+
+A workload is a running instance of software executing for a specific purpose that interacts with other parts of a larger system. A workload may exist for a very short durations of time (nanoseconds) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration such as months or years - examples include database services and machine learning training jobs.
+
+
 # Use Cases
 
 1. Basic Service Authentication
