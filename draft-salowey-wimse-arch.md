@@ -58,7 +58,7 @@ TODO Introduction
 
 1. Basic Service Authentication
 
-One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one microservice is making a request of another microservice within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
+One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one service is making a request of another service within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
 
 * Service Name
 * Instance Name
@@ -75,7 +75,7 @@ These attributes are used for various purposes:
 * providing an audit train of requests within a system
 * providing context for other decisions made within a service
 
-There are several methods defined to perform this authentication.  SOme of the most common include:
+There are several methods defined to perform this authentication.  Some of the most common include:
 
 * TLS authentication of the server using X.509 certificates and bearer token JWTs within an HTTP or other protocol request.
 * Mutual TLS authentication using X.509 certificate for both client and server
