@@ -23,8 +23,8 @@ author:
  -
     ins: Y. Rosomakho
     name: Yaroslav Rosomakho
-    organization:
-    email:
+    organization: Zscaler
+    email: yaroslavros@gmail.com
  -
     ins: H. Tschofenig
     name: Hannes Tschofenig
