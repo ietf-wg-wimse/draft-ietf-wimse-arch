@@ -63,7 +63,25 @@ A workload is a running instance of software executing for a specific purpose th
 
 # Use Cases
 
-1. Basic Service Authentication
+## Initial Workload Identity
+
+Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity is built. Some common mechanisms for obtaining this initial identity include:
+
+* File System projection - in this mechanisms the identity is provisioned to the workload as an entity in the filesystem.
+* Local API - the identity is provided through an api such as a local domain socket (SPIFFE) or local Network API call (Cloud Provider Metadata Server)
+* Environment Injection - identity may also be injected into the workloads execution environment.
+
+### Attestation
+
+### Identity Credentials
+
+The identity is provisioned to the workload as a set of credentials. There are two main types of workload credentials: bearer tokens and X.509 certificates.
+
+Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often.
+
+X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to to prove that the presenter has access to the private that corresponds to the public key in the certificate.
+
+## Basic Service Authentication
 
 One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one service is making a request of another service within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
 
@@ -88,11 +106,13 @@ There are several methods defined to perform this authentication.  Some of the m
 * Mutual TLS authentication using X.509 certificate for both client and server
 * TLS authentication of the server and HTTP request signing using a secret key
 
-2. Additional Context Establishment
+## Security Context Establishment and Propagation
 
-3. Asynchronous Requests
+In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request.  This type of information is part of the security context that the workload uses during authorization, accounting and auditing.  This context is propagated and possibly augmented from workload to workload using tokens.  Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
 
-4. Scheduled Batch Requests
+## Delegation and Impersonation
+
+## Asynchronous and Batch Requests
 
 
 
