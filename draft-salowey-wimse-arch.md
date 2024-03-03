@@ -77,7 +77,7 @@ Typically a workload obtains its identity early in its lifecycle. This identity 
 
 The identity is provisioned to the workload as a set of credentials. There are two main types of workload credentials: bearer tokens and X.509 certificates.
 
-Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of thee risks, bearer tokens may have short lifespans and may be rotated often.
+Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often.
 
 X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to to prove that the presenter has access to the private that corresponds to the public key in the certificate.
 
