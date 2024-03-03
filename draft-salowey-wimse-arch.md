@@ -62,7 +62,7 @@ A workload is a running instance of software executing for a specific purpose th
 
 * Security Context
 
-A security context contains information needed for a workload to pefrom its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples inlcude user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.  
+A security context contains information needed for a workload to pefrom its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples inlcude user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
 
 * Identity Proxy
 
