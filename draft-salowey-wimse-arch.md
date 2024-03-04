@@ -54,7 +54,7 @@ Workloads need to be provisioned with a unique identity when they are started. O
 
 {{arch-fig}} shows the software layering at a host running workloads. As the workloads get started, they get their identity provisioned with the help of an agent. The agent is responsible for interacting with a server that ensures workloads in set of hosts are managed conviently and identity provisioned to workloads are associated with the expected authorization privileges. The server manages the lifecycle of the workloads with the help of the agent. The agent may also need to request attestation information about the hardware, lower layer software/firmware, and characteristics of the workload before the server identity information can be obtained.
 
-How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environmet variables or domain sockets) have been used in deployments today. 
+How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environmet variables or domain sockets) have been used in deployments today.
 
 ~~~
    +---------------+
