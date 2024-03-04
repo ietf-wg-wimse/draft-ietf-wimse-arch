@@ -42,7 +42,7 @@ informative:
 
 The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.
 
-Workloads need to be provisioned with a unique identity when they are started. This information  their security context needs to be passed along the call chain. This architecture document discusses the motivation for designing and standardizing protocols and payloads for conveying identity and security context information.
+Workloads need to be provisioned with a unique identity when they are started. This information and their security context needs to be passed along the call chain. This architecture document discusses the motivation for designing and standardizing protocols and payloads for conveying identity and security context information.
 
 --- middle
 
