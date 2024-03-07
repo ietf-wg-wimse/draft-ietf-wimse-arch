@@ -57,10 +57,14 @@ Workloads need to be provisioned with a unique identity when they are started. O
 How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environmet variables or domain sockets) have been used in deployments today.
 
 ~~~
-   +---------------+
-   |    Server     |
-   |               |
-   +---------------+
+  +-----------------+
+  |     Server      |
+  |                 |
+  |                 |
+  | +-------------+ |
+  | | Attestation | |
+  | +-------------+ |
+  +-----------------+
            ^|
            ||
            ||
@@ -121,11 +125,21 @@ Typically a workload obtains its identity early in its lifecycle. This identity 
 * Local API - the identity is provided through an api such as a local domain socket (SPIFFE) or local network API calls (Cloud Provider Metadata Server).
 * Environment Variables - identity may also be injected into workloads using operating system environment variables.
 
+## Agent
+
+The Agent performs the function of translating the underlying Security Context and Workload Identity into Workload Identity Credentials.  The Agent makes the Identity Credentials available to the Workload.
+
+A task scheduler installs and starts a task containing the Agent on the Host Operating System.  A Host Operating System function performs attestation of the Agent-identity and issues a corresponding Agent-credential to the Agent.  The Agent presents the Agent-credential together with the Workload Identity to the Server to obtain the Workload's Identity Credentials.
+
 ## Attestation
+
+Attestation is the function through which a task verifies the identity of a separate Workload or task.
+
+During Workload Attestation, the Server verifies the Agent-credential, Workload Identity, and the permission of the Agent to receive Credentials authenticating the Workload Identity.  The Server can use a variety of means to verify that permission, including a Policy decision based on the contents of a Workload Registration database or requesting assistance from a trusted Identity Provider.
 
 ## Identity Credentials
 
-The identity is provisioned to the workload as a set of credentials. There are two main types of workload credentials: bearer tokens and X.509 certificates.
+The Agent provisions the identity credentials to the workload. There are two main types of workload credentials: bearer tokens and X.509 certificates.
 
 Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often.
 
