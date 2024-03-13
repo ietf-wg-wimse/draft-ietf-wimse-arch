@@ -50,11 +50,11 @@ Workloads need to be provisioned with a unique identity when they are started. T
 
 The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.
 
-Workloads need to be provisioned with a unique identity when they are started. Often, also other information needs to be provided, such as trust anchors. We use the term "identity" in a generic way to express that the information may vary with deployments since workloads run applications and some of these applications may require X.509 cerificates (along with the private key), or JSON Web Tokens (JWTs) acting as bearer tokens at the application layer, or both.
+Workloads need to be provisioned with a unique identity when they are started. Often, also other information needs to be provided, such as trust anchors. We use the term "identity" in a generic way to express that the information may vary with deployments since workloads run applications and some of these applications may require X.509 certificates (along with the private key), or JSON Web Tokens (JWTs) acting as bearer tokens at the application layer, or both.
 
-{{arch-fig}} shows the software layering at a host running workloads. As the workloads get started, they get their identity provisioned with the help of an agent. The agent is responsible for interacting with a server that ensures workloads in set of hosts are managed conviently and identity provisioned to workloads are associated with the expected authorization privileges. The server manages the lifecycle of the workloads with the help of the agent. The agent may also need to request attestation information about the hardware, lower layer software/firmware, and characteristics of the workload before the server identity information can be obtained.
+{{arch-fig}} shows the software layering at a host running workloads. As the workloads get started, they get their identity provisioned with the help of an agent. The agent is responsible for interacting with a server that ensures workloads in a set of hosts are managed conveniently and identity provisioned to workloads are associated with the expected authorization privileges. The server manages the lifecycle of the workloads with the help of the agent. The agent may also need to request attestation information about the hardware, lower layer software/firmware, and characteristics of the workload before the server identity information can be obtained.
 
-How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environmet variables or domain sockets) have been used in deployments today.
+How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environment variables or domain sockets) have been used in deployments today.
 
 ~~~
    +---------------+
@@ -105,7 +105,7 @@ A workload is a running instance of software executing for a specific purpose th
 
 * Security Context
 
-A security context contains information needed for a workload to pefrom its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples inlcude user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
+A security context contains information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
 
 * Identity Proxy
 
@@ -129,7 +129,7 @@ The identity is provisioned to the workload as a set of credentials. There are t
 
 Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often.
 
-X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to to prove that the presenter has access to the private that corresponds to the public key in the certificate.
+X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
 ## Basic Service Authentication
 
@@ -174,9 +174,9 @@ As workloads often need to communicate across administrative boundaries, extra c
 
 ### Egress Identity Generalization
 
-A workload communicating with a service, or another workload provided by external organization may need to provide more generic identity information. Detailed identity of internal workload originating the communication is relevant inside the administrative domain but could be excessive for the outside world and expose internal topology information that can be sensitive.
+A workload communicating with a service, or another workload provided by an external organization may need to provide more generic identity information. Detailed identity of internal workload originating the communication is relevant inside the administrative domain but could be excessive for the outside world and expose internal topology information that can be sensitive.
 
-A security gateway at the edge of administrative domain can be used to validate identity information of the workload, perform context specific authorization of the transaction and replace workload specific identity with a generalized one for given administrative domain.
+A security gateway at the edge of an administrative domain can be used to validate identity information of the workload, perform context specific authorization of the transaction and replace workload specific identity with a generalized one for a given administrative domain.
 
 ### Inbound Gateway Identity Validation
 
