@@ -125,9 +125,13 @@ Typically a workload obtains its identity early in its lifecycle. This identity 
 * Local API - the identity is provided through an api such as a local domain socket (SPIFFE) or local network API calls (Cloud Provider Metadata Server).
 * Environment Variables - identity may also be injected into workloads using operating system environment variables.
 
+## Server
+
+The server issues workload identity credentials when requested by the Agent.
+
 ## Agent
 
-The Agent performs the function of translating the underlying Security Context and Workload Identity into Workload Identity Credentials.  The Agent makes the Identity Credentials available to the Workload.
+The Agent performs the function of transmitting the initial workload identity to the Server to obtain the workload identity credentials.  The Agent makes the workload identity credentials available to the workload.
 
 A task scheduler installs and starts a task containing the Agent on the Host Operating System.  A Host Operating System function performs attestation of the Agent-identity and issues a corresponding Agent-credential to the Agent.  The Agent presents the Agent-credential together with the Workload Identity to the Server to obtain the Workload's Identity Credentials.
 
