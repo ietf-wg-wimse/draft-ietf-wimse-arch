@@ -56,7 +56,7 @@ Workloads need to be provisioned with a unique identity when they are started. O
 
 How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environment variables or domain sockets) have been used in deployments today.
 
-~~~
+~~~aasvg
   +-----------------+
   |     Server      |
   |                 |
@@ -64,30 +64,31 @@ How the workload obtains identity information and interacts with the agent is su
   | +-------------+ |
   | | Attestation | |
   | +-------------+ |
-  +-----------------+
-           ^|
-           ||
-           ||
-           || Identity
-           || Information                   ..
-           ||                               ||
-           ||                               || Workload
-           ||                               ||    to
-           ||                               || Workload
-           ||                               || Communication
-  +--------||-------------------------------vv-----------+
-  |        |v                        +-----------------+ |
-  |  +---------------+              +-----------------+| |
-  |  | Agent         |              | Workload        || |
-  |  |               |              |                 || |
-  |  |              <...............>                 || |
-  |  |            ^  |  Identity    | ^               |+ |
-  |  +------------'--+  Information +-'---------------+  |
-  |               '                   '                  |
-  |               ' & Identity        ' Identity         |
-  |   Attestation ' Information       ' Information      |
-  |               v                   v                  |
-  |------------------------------------------------------|
+  +---------+-------+
+          ^ |
+          | |
+          | |
+          | | Identity
+          | | Information                  . .
+          | |                              | |
+          | |                              | | Workload
+          | |                              | |    to
+          | |                              | | Workload
+          | |                              | | Communication
+  +-------+-+------------------------------+-+-----------+
+  |       | |                              v V           |
+  |       | v                         +----------------+ |
+  |  +----+----------+              +-+--------------+ | |
+  |  | Agent         |              | Workloads      | | |
+  |  |               |              |                | | |
+  |  |              <+--------------+>               | | |
+  |  |            ^  |  Identity    |  ^             +-+ |
+  |  +------------+--+  Information +--+-------------+   |
+  |               |                    |                 |
+  |               | & Identity         | Identity        |
+  |   Attestation | Information        | Information     |
+  |               v                    v                 |
+  +------------------------------------------------------+
   | Host Operating System and Hardware                   |
   +------------------------------------------------------+
 ~~~~
