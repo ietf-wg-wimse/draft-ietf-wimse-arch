@@ -31,12 +31,9 @@ author:
     organization:
     email: hannes.tschofenig@gmx.net
 
-
-
 normative:
 
 informative:
-
 
 --- abstract
 
@@ -92,7 +89,7 @@ How the workload obtains identity information and interacts with the agent is su
   | Host Operating System and Hardware                   |
   +------------------------------------------------------+
 ~~~~
-{: #arch-fig title="Host Software Layinger in a Workload Identity Architecture."}
+{: #arch-fig title="Host Software Layering in a Workload Identity Architecture."}
 
 Once the workload is started and has obtained unique identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context to be passed along the call chain.
 
