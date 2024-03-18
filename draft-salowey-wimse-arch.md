@@ -57,19 +57,13 @@ How the workload obtains identity information and interacts with the agent is su
   +-----------------+
   |     Server      |
   |                 |
-  |                 |
   | +-------------+ |
   | | Attestation | |
   | +-------------+ |
   +---------+-------+
-          ^ |
-          | |
-          | |
-          | | Identity
-          | | Information                  . .
-          | |                              | |
-          | |                              | | Workload
-          | |                              | |    to
+          ^ |                              . .
+          | | Identity                     | | Workload
+          | | Information                  | |    to
           | |                              | | Workload
           | |                              | | Communication
   +-------+-+------------------------------+-+-----------+
@@ -77,7 +71,6 @@ How the workload obtains identity information and interacts with the agent is su
   |       | v                         +----------------+ |
   |  +----+----------+              +-+--------------+ | |
   |  | Agent         |              | Workloads      | | |
-  |  |               |              |                | | |
   |  |              <+--------------+>               | | |
   |  |            ^  |  Identity    |  ^             +-+ |
   |  +------------+--+  Information +--+-------------+   |
