@@ -42,7 +42,7 @@ informative:
 
 The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.
 
-Workloads need to be provisioned with a unique identity when they are started. This information and their security context needs to be passed along the call chain. This architecture document discusses the motivation for designing and standardizing protocols and payloads for conveying identity and security context information.
+Workloads need to be provisioned with an identity when they are started. This information and their security context needs to be passed along the call chain. This architecture document discusses the motivation for designing and standardizing protocols and payloads for conveying identity and security context information.
 
 --- middle
 
@@ -50,7 +50,9 @@ Workloads need to be provisioned with a unique identity when they are started. T
 
 The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.
 
-Workloads need to be provisioned with a unique identity when they are started. Often, also other information needs to be provided, such as trust anchors. We use the term "identity" in a generic way to express that the information may vary with deployments since workloads run applications and some of these applications may require X.509 certificates (along with the private key), or JSON Web Tokens (JWTs) acting as bearer tokens at the application layer, or both.
+Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. In the call chain some of this context information may be removed or generalized depending on application needs.
+
+This architecture considers two ways to express identity information: X.509 certificates embedded on TLS layer and JSON Web Tokens (JWTs) acting as bearer tokens at the application layer. Collectively, these are referred to as WIMSE tokens. The applicability of given token format depends on application and security context and will be explored in later sections.
 
 {{arch-fig}} shows the software layering at a host running workloads. As the workloads get started, they get their identity provisioned with the help of an agent. The agent is responsible for interacting with a server that ensures workloads in a set of hosts are managed conveniently and identity provisioned to workloads are associated with the expected authorization privileges. The server manages the lifecycle of the workloads with the help of the agent. The agent may also need to request attestation information about the hardware, lower layer software/firmware, and characteristics of the workload before the server identity information can be obtained.
 
@@ -93,7 +95,7 @@ How the workload obtains identity information and interacts with the agent is su
 ~~~~
 {: #arch-fig title="Host Software Layinger in a Workload Identity Architecture."}
 
-Once the workload is started and has obtained unique identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context to be passed along the call chain.
+Once the workload is started and has obtained identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context to be passed along the call chain.
 
 In the rest of the document we describe terminology and use cases, discuss details of the architecture, and discuss threats.
 
@@ -105,15 +107,15 @@ This document uses the following terms:
 
 * Workload
 
-A workload is a running instance of software executing for a specific purpose that interacts with other parts of a larger system. A workload may exist for a very short durations of time (nanoseconds) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration such as months or years - examples include database services and machine learning training jobs.
+A workload is a running instance of software executing for a specific purpose. Workload typically interacts with other parts of a larger system. A workload may exist for a very short durations of time (nanoseconds) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration such as months or years - examples include database services and machine learning training jobs.
 
 * Security Context
 
-A security context contains information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
+A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
 
 * Identity Proxy
 
-Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in service performing explicit connection processing, such as a reverse proxy or a CDN service.
+Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as a reverse proxy or a CDN service.
 
 # Architecture
 
@@ -122,30 +124,28 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity is built. Some common mechanisms for obtaining this initial identity include:
 
 * File System projection - in this mechanisms the identity is provisioned to the workload as an entity in the filesystem.
-* Local API - the identity is provided through an api such as a local domain socket (SPIFFE) or local network API calls (Cloud Provider Metadata Server).
+* Local API - the identity is provided through an API such as a local domain socket (such as SPIFFE and QEMU guest agent) or local network API calls (for example Cloud Provider Metadata Server).
 * Environment Variables - identity may also be injected into workloads using operating system environment variables.
 
 ## Server
 
-The server issues workload identity credentials when requested by the Agent.
+The Server issues workload identity credentials when requested by the Agent.
 
 ## Agent
 
-The Agent performs the function of transmitting the initial workload identity to the Server to obtain the workload identity credentials.  The Agent makes the workload identity credentials available to the workload.
-
-A task scheduler installs and starts a task containing the Agent on the Host Operating System.  A Host Operating System function performs attestation of the Agent-identity and issues a corresponding Agent-credential to the Agent.  The Agent presents the Agent-credential together with the Workload Identity to the Server to obtain the Workload's Identity Credentials.
+The Agent performs the function of transmitting the initial workload identity to the Server to obtain the workload identity credentials. The Agent makes the workload identity credentials available to the workload.
 
 ## Attestation
 
-Attestation is the function through which a task verifies the identity of a separate Workload or task.
+Attestation is the function through which a task verifies the identity of a separate Workload.
 
-During Workload Attestation, the Server verifies the Agent-credential, Workload Identity, and the permission of the Agent to receive Credentials authenticating the Workload Identity.  The Server can use a variety of means to verify that permission, including a Policy decision based on the contents of a Workload Registration database or requesting assistance from a trusted Identity Provider.
+During Workload Attestation, the Server verifies the Agent credentials, Workload Identity, and the permission of the Agent to receive Credentials authenticating the Workload Identity. The Server can use a variety of means to verify that permission, including a Policy decision based on the contents of a Workload Registration database or requesting assistance from a trusted Identity Provider.
 
 ## Identity Credentials
 
-The Agent provisions the identity credentials to the workload. There are two main types of workload credentials: bearer tokens and X.509 certificates.
+The Agent provisions the identity credentials to the workload. These credentials are later used to obtain WIMSE tokens: JWT tokens and X.509 certificates.
 
-Bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often.
+JWT bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are often not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often or converted to a bound approach such as binding to a TLS session.
 
 X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
@@ -153,6 +153,7 @@ X.509 certificate credentials consist of two parts, a public key certificate tha
 
 One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one service is making a request of another service within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
 
+* Trigger Information
 * Service Name
 * Instance Name
 * Role
@@ -165,18 +166,18 @@ These attributes are used for various purposes:
 
 * ensuring the request is made to the correct service or service instance
 * authorizing access to APIs and resources
-* providing an audit train of requests within a system
+* providing an audit trail of requests within a system
 * providing context for other decisions made within a service
 
 There are several methods defined to perform this authentication.  Some of the most common include:
 
-* TLS authentication of the server using X.509 certificates and bearer token, encoded as JWTs, on top of HTTP or other protocol request.
+* TLS authentication of the server using X.509 certificates and bearer token, encoded as JWTs.
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
 
 ## Security Context Establishment and Propagation
 
-In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request.  This type of information is part of the security context that the workload uses during authorization, accounting and auditing.  This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
+In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
 
 ## Delegation and Impersonation
 
