@@ -75,13 +75,13 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 * Attestation
 
-Attestation is the function through which a task verifies the identity of a separate Workload. [TBD: sync definition with reference RaTS architecture]
+Attestation is the function through which a task verifies the identity of a separate Workload. (TBD: sync definition with reference RaTS architecture)
 
 # Architecture
 
 ## Workload Identity
 
-### Bootstrapping Workload Identity 
+### Bootstrapping Workload Identity
 
 A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
 
@@ -132,7 +132,8 @@ The Agent provisions the identity credentials to the workload. These credentials
 
 JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have a short lifespan. Alternatively, sender constrained tokens can be used such as TLS session binding.
 
-X.509 certificate credentials consist of two parts: 
+X.509 certificate credentials consist of two parts:
+
 - a certificate is a signed data structure that contains a public key and identity information
 - a corresponding private key
 
@@ -141,7 +142,7 @@ The certificate is presented during authentication, however the private key is k
 ## Workload Identity Use Cases
 ### Basic Service Authentication
 
-One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one service is making a request of another service within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
+One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service within a larger application. Even in this simple case the identity of a workload is often composed of many attributes such as:
 
 * Trigger Information
 * Service Name
@@ -152,7 +153,7 @@ One of the most basic use cases for workload identity is for authenticating one 
 * Software Attestation
 * Hardware Attestation
 
-These attributes are used for various purposes:
+These attributes are used for various purposes such as:
 
 * ensuring the request is made to the correct service or service instance
 * authorizing access to APIs and resources
@@ -179,17 +180,17 @@ TBD.
 
 ### Cross-boundary Workload Identity
 
-As workloads often need to communicate across administrative boundaries, extra care needs to be taken when it comes to identity communication to ensure scalability and privacy.
+As workloads often need to communicate across trust boundaries, extra care needs to be taken when it comes to identity communication to ensure scalability and privacy. (TODO: align with OAuth cross domain identity and authorization)
 
 #### Egress Identity Generalization
 
-A workload communicating with a service, or another workload provided by an external organization may need to provide more generic identity information. Detailed identity of internal workload originating the communication is relevant inside the administrative domain but could be excessive for the outside world and expose internal topology information that can be sensitive.
+A workload communicating with a service, or another workload located outside the trust boundary may need to provide modified identity information. Detailed identity of internal workload originating the communication is relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.
 
-A security gateway at the edge of an administrative domain can be used to validate identity information of the workload, perform context specific authorization of the transaction and replace workload specific identity with a generalized one for a given administrative domain.
+A security gateway at the edge of a trust boundary can be used to validate identity information of the workload, perform context specific authorization of the transaction and replace workload specific identity with a generalized one for a given trust domain.
 
 #### Inbound Gateway Identity Validation
 
-Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.
+Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification of inbound requests should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.
 
 # Security Considerations
 
