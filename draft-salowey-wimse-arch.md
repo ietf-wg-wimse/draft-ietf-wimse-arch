@@ -77,11 +77,11 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 ## Workload Identity
 
-Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
+A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
 
-Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used obtain specific identity credentials for a workload. This process may use attestation and the presentation of additional evidence to ensure the worload receives correct identity credentials.  An example of the bootstrapping process follows.
+Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation  to ensure the workload receives correct identity credentials. An example of a bootstrapping process follows.
 
-{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides credentials, attestation evidence and other information to a server, which validates this information and provides the agent with correct identity credentials for the workloads it is associated with.
+{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with.
 
 ~~~aasvg
   +-----------------+
@@ -93,7 +93,7 @@ Identity bootstrapping often utilizes identity information provisioned through m
   +---------+-------+
           ^ |                              . .
           | | Identity                     | | Workload
-          | | Information                  | |    to
+          | | Credentials                  | |    to
           | |                              | | Workload
           | |                              | | Communication
   +-------+-+------------------------------+-+-----------+
@@ -103,10 +103,10 @@ Identity bootstrapping often utilizes identity information provisioned through m
   |  | Agent         |              | Workloads      | | |
   |  |              <+--------------+>               | | |
   |  |            ^  |  Identity    |  ^             +-+ |
-  |  +------------+--+  Information +--+-------------+   |
+  |  +------------+--+  Credentials +--+-------------+   |
   |               |                    |                 |
-  |               | & Identity         | Identity        |
-  |   Attestation | Information        | Information     |
+  |               |                    | Identity        |
+  |   Attestation |                    | Credentials     |
   |               v                    v                 |
   +------------------------------------------------------+
   | Host Operating System and Hardware                   |
@@ -114,11 +114,11 @@ Identity bootstrapping often utilizes identity information provisioned through m
 ~~~~
 {: #arch-fig title="Host Software Layering in a Workload Identity Architecture."}
 
-How the workload obtains its identity information and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:
+How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:
 
-* File System Projection - in this mechanisms the identity is provisioned to the workload as an entity in the filesystem.
-* Local API - the identity is provided through an API such as a local domain socket (such as SPIFFE and QEMU guest agent) or local network API calls (for example Cloud Provider Metadata Server).
-* Environment Variables - identity may also be injected into workloads using operating system environment variables.
+* File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.
+* Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).
+* Environment Variables - identity credential may also be injected into workloads using operating system environment variables.
 
 ## Server
 
