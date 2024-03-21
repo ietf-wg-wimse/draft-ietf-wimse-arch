@@ -128,11 +128,15 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 ### Identity Credentials
 
-The Agent provisions the identity credentials to the workload. These credentials are later used to obtain WIMSE tokens: JWT tokens and X.509 certificates.
+The Agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
 
-JWT bearer tokens are tokens presented to another party as proof of identity.  They are typically signed to prevent forgery, however since these credentials are often not bound to other information its possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have short lifespans and may be rotated often or converted to a bound approach such as binding to a TLS session.
+JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have a short lifespan. Alternatively, sender constrained tokens can be used such as TLS session binding.
 
-X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
+X.509 certificate credentials consist of two parts: 
+- a certificate is a signed data structure that contains a public key and identity information
+- a corresponding private key
+
+The certificate is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
 ## Workload Identity Use Cases
 ### Basic Service Authentication
