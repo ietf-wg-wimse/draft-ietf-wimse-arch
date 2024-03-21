@@ -77,11 +77,11 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 ## Workload Identity
 
-Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built. 
+Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
 
-Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used obtain specific identity credentials for a workload. This process may use attestation and the presentation of additional evidence to ensure the worload receives correct identity credentials.  An example of the bootstrapping process follows. 
+Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used obtain specific identity credentials for a workload. This process may use attestation and the presentation of additional evidence to ensure the worload receives correct identity credentials.  An example of the bootstrapping process follows.
 
-{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be assocaited with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides credentials, attestations, evidence and other information to a service  which validates this information and provides the agent with correct identity credentials for the workloads it is associated with. 
+{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be assocaited with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides credentials, attestations, evidence and other information to a service  which validates this information and provides the agent with correct identity credentials for the workloads it is associated with.
 
 ~~~aasvg
   +-----------------+
