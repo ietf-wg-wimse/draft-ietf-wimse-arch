@@ -45,15 +45,43 @@ Workloads need to be provisioned with an identity when they are started. This in
 
 # Introduction
 
-The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.
+The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a running instance of software executing for a specific purpose.
 
 Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. In the call chain some of this context information may be removed or generalized depending on application needs.
 
-This architecture considers two ways to express identity information: X.509 certificates embedded on TLS layer and JSON Web Tokens (JWTs) acting as bearer tokens at the application layer. Collectively, these are referred to as WIMSE tokens. The applicability of given token format depends on application and security context and will be explored in later sections.
+This architecture considers two ways to express identity information: X.509 certificates often used in the TLS layer and JSON Web Tokens (JWTs) used at the application layer. Collectively, these are referred to as WIMSE tokens. The applicability of given token format depends on application and security context and will be explored in later sections.
 
-{{arch-fig}} shows the software layering at a host running workloads. As the workloads get started, they get their identity provisioned with the help of an agent. The agent is responsible for interacting with a server that ensures workloads in a set of hosts are managed conveniently and identity provisioned to workloads are associated with the expected authorization privileges. The server manages the lifecycle of the workloads with the help of the agent. The agent may also need to request attestation information about the hardware, lower layer software/firmware, and characteristics of the workload before the server identity information can be obtained.
+Once the workload is started and has obtained identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context associated with the authorization to be passed along the call chain.
 
-How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environment variables or domain sockets) have been used in deployments today.
+In the rest of the document we describe terminology and use cases, discuss details of the architecture, and discuss threats.
+
+# Conventions and Definitions
+
+{::boilerplate bcp14-tagged}
+
+This document uses the following terms:
+
+* Workload
+
+A workload is a running instance of software executing for a specific purpose. Workload typically interacts with other parts of a larger system. A workload may exist for a very short durations of time (nanoseconds) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration such as months or years - examples include database services and machine learning training jobs.
+
+* Security Context
+
+A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
+
+* Identity Proxy
+
+Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as a reverse proxy or a CDN service.
+
+# Architecture
+
+## Workload Identity
+
+Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built. 
+
+Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used obtain specific identity credentials for a workload. This process may use attestation and the presentation of additional evidence to ensure the worload receives correct identity credentials.  An example of the bootstrapping process follows. 
+
+{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be assocaited with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides credentials, attestations, evidence and other information to a service  which validates this information and provides the agent with correct identity credentials for the workloads it is associated with. 
 
 ~~~aasvg
   +-----------------+
@@ -86,35 +114,9 @@ How the workload obtains identity information and interacts with the agent is su
 ~~~~
 {: #arch-fig title="Host Software Layering in a Workload Identity Architecture."}
 
-Once the workload is started and has obtained identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context to be passed along the call chain.
+How the workload obtains its identity information and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:
 
-In the rest of the document we describe terminology and use cases, discuss details of the architecture, and discuss threats.
-
-# Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
-This document uses the following terms:
-
-* Workload
-
-A workload is a running instance of software executing for a specific purpose. Workload typically interacts with other parts of a larger system. A workload may exist for a very short durations of time (nanoseconds) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration such as months or years - examples include database services and machine learning training jobs.
-
-* Security Context
-
-A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different authorities.
-
-* Identity Proxy
-
-Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as a reverse proxy or a CDN service.
-
-# Architecture
-
-## Initial Workload Identity
-
-Typically a workload obtains its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity is built. Some common mechanisms for obtaining this initial identity include:
-
-* File System projection - in this mechanisms the identity is provisioned to the workload as an entity in the filesystem.
+* File System Projection - in this mechanisms the identity is provisioned to the workload as an entity in the filesystem.
 * Local API - the identity is provided through an API such as a local domain socket (such as SPIFFE and QEMU guest agent) or local network API calls (for example Cloud Provider Metadata Server).
 * Environment Variables - identity may also be injected into workloads using operating system environment variables.
 
