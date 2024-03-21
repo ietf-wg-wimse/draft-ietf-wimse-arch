@@ -73,15 +73,21 @@ A security context provides information needed for a workload to perform its fun
 
 Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service.
 
+* Attestation
+
+Attestation is the function through which a task verifies the identity of a separate Workload. [TBD: sync definition with reference RaTS architecture]
+
 # Architecture
 
 ## Workload Identity
+
+### Bootstrapping Workload Identity 
 
 A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
 
 Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation  to ensure the workload receives correct identity credentials. An example of a bootstrapping process follows.
 
-{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with.
+{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. After obtaining identity credentials from the Server it passes them to the workload. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy.
 
 ~~~aasvg
   +-----------------+
@@ -120,21 +126,7 @@ How the workload obtains its identity credentials and interacts with the agent i
 * Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).
 * Environment Variables - identity credential may also be injected into workloads using operating system environment variables.
 
-## Server
-
-The Server issues workload identity credentials when requested by the Agent.
-
-## Agent
-
-The Agent performs the function of transmitting the initial workload identity to the Server to obtain the workload identity credentials. The Agent makes the workload identity credentials available to the workload.
-
-## Attestation
-
-Attestation is the function through which a task verifies the identity of a separate Workload.
-
-During Workload Attestation, the Server verifies the Agent credentials, Workload Identity, and the permission of the Agent to receive Credentials authenticating the Workload Identity. The Server can use a variety of means to verify that permission, including a Policy decision based on the contents of a Workload Registration database or requesting assistance from a trusted Identity Provider.
-
-## Identity Credentials
+### Identity Credentials
 
 The Agent provisions the identity credentials to the workload. These credentials are later used to obtain WIMSE tokens: JWT tokens and X.509 certificates.
 
@@ -142,7 +134,8 @@ JWT bearer tokens are tokens presented to another party as proof of identity.  T
 
 X.509 certificate credentials consist of two parts, a public key certificate that is a signed data structure that contains a public key and identity information and a private key which. The certificate is sent during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
-## Basic Service Authentication
+## Workload Identity Use Cases
+### Basic Service Authentication
 
 One of the most basic use cases for workload identity is for authenticating one workload to another such as in the case where one service is making a request of another service within a larger application. Even in this simple case the identity of the workload is often a composite of many attributes such as:
 
@@ -168,29 +161,29 @@ There are several methods defined to perform this authentication.  Some of the m
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
 
-## Security Context Establishment and Propagation
+### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
 
-## Delegation and Impersonation
+### Delegation and Impersonation
 
 TBD.
 
-## Asynchronous and Batch Requests
+### Asynchronous and Batch Requests
 
 TBD.
 
-## Cross-boundary Workload Identity
+### Cross-boundary Workload Identity
 
 As workloads often need to communicate across administrative boundaries, extra care needs to be taken when it comes to identity communication to ensure scalability and privacy.
 
-### Egress Identity Generalization
+#### Egress Identity Generalization
 
 A workload communicating with a service, or another workload provided by an external organization may need to provide more generic identity information. Detailed identity of internal workload originating the communication is relevant inside the administrative domain but could be excessive for the outside world and expose internal topology information that can be sensitive.
 
 A security gateway at the edge of an administrative domain can be used to validate identity information of the workload, perform context specific authorization of the transaction and replace workload specific identity with a generalized one for a given administrative domain.
 
-### Inbound Gateway Identity Validation
+#### Inbound Gateway Identity Validation
 
 Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.
 
