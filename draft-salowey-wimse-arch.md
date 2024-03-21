@@ -31,12 +31,9 @@ author:
     organization:
     email: hannes.tschofenig@gmx.net
 
-
-
 normative:
 
 informative:
-
 
 --- abstract
 
@@ -58,42 +55,36 @@ This architecture considers two ways to express identity information: X.509 cert
 
 How the workload obtains identity information and interacts with the agent is subject to different implementations, as described in this document. A few variants (such as environment variables or domain sockets) have been used in deployments today.
 
-~~~
+~~~aasvg
   +-----------------+
   |     Server      |
-  |                 |
   |                 |
   | +-------------+ |
   | | Attestation | |
   | +-------------+ |
-  +-----------------+
-           ^|
-           ||
-           ||
-           || Identity
-           || Information                   ..
-           ||                               ||
-           ||                               || Workload
-           ||                               ||    to
-           ||                               || Workload
-           ||                               || Communication
-  +--------||-------------------------------vv-----------+
-  |        |v                        +-----------------+ |
-  |  +---------------+              +-----------------+| |
-  |  | Agent         |              | Workload        || |
-  |  |               |              |                 || |
-  |  |              <...............>                 || |
-  |  |            ^  |  Identity    | ^               |+ |
-  |  +------------'--+  Information +-'---------------+  |
-  |               '                   '                  |
-  |               ' & Identity        ' Identity         |
-  |   Attestation ' Information       ' Information      |
-  |               v                   v                  |
-  |------------------------------------------------------|
+  +---------+-------+
+          ^ |                              . .
+          | | Identity                     | | Workload
+          | | Information                  | |    to
+          | |                              | | Workload
+          | |                              | | Communication
+  +-------+-+------------------------------+-+-----------+
+  |       | |                              v V           |
+  |       | v                         +----------------+ |
+  |  +----+----------+              +-+--------------+ | |
+  |  | Agent         |              | Workloads      | | |
+  |  |              <+--------------+>               | | |
+  |  |            ^  |  Identity    |  ^             +-+ |
+  |  +------------+--+  Information +--+-------------+   |
+  |               |                    |                 |
+  |               | & Identity         | Identity        |
+  |   Attestation | Information        | Information     |
+  |               v                    v                 |
+  +------------------------------------------------------+
   | Host Operating System and Hardware                   |
   +------------------------------------------------------+
 ~~~~
-{: #arch-fig title="Host Software Layinger in a Workload Identity Architecture."}
+{: #arch-fig title="Host Software Layering in a Workload Identity Architecture."}
 
 Once the workload is started and has obtained identity information, it can offer its services. Once a service is invoked on a workload it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context to be passed along the call chain.
 
