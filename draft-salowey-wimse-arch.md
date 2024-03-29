@@ -138,9 +138,10 @@ X.509 certificate credentials consist of two parts:
 The certificate is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
 ## Workload Identity Use Cases
-### Basic Service Authentication
 
-One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service within a larger application. Even in this simple case the identity of a workload is often composed of many attributes such as:
+### Basic Service Authentication and Authorization
+
+One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the request to the service offered by the workload it needs to be authorized. Even in this simple case the identity of a workload is often composed of many attributes such as:
 
 * Trigger Information
 * Service Name
@@ -163,6 +164,37 @@ There are several methods defined to perform this authentication.  Some of the m
 * TLS authentication of the server using X.509 certificates and bearer token, encoded as JWTs.
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
+
+{{arch-chain}} illustrates the communication between different workloads. Two aspects are important
+to highlight: First, there is a need to consider the interaction with workloads that are external
+to the trust domain (sometimes called cross-domain). Second, the interaction does
+not only occur between workloads that directly interact with each other but instead may also
+take place across intermediate workloads (in an end-to-end style).
+
+~~~aasvg
+  +-----------------+
+  |     Workload    |
+  |    (external)   |
+  |       ^         |
+  +-------+---------+
+          |
+          |
+  +-------+-------------------------Trust Boundary---------------+
+  |       |                                                      |
+  |       |                                                      |
+  |  +----+------+ Hop-by-  +-----------+ Hop-by-  +-----------+ |
+  |  |    v      | Hop      |           | Hop      |           | |
+  |  | Workload  | Security | Workload  | Security | Workload  | |
+  |  |          <+----------+>         <+----------+>          | |
+  |  |           |          |           |          |           | |
+  |  |           |          |           |          |           | |
+  |  |    O<-----+----------+-----------+----------+---->O     | |
+  |  +-----------+   E2E    +-----------+   E2E    +-----------+ |
+  |                                                              |
+  |                                                              |
+  +--------------------------------------------------------------+
+~~~~
+{: #arch-chain title="Workload-to-Workload Communication."}
 
 ### Security Context Establishment and Propagation
 
