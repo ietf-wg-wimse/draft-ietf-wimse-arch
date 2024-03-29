@@ -140,6 +140,7 @@ X.509 certificate credentials consist of two parts:
 The certificate is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
 ## Workload Identity Use Cases
+
 ### Basic Service Authentication
 
 One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service within a larger application. Even in this simple case the identity of a workload is often composed of many attributes such as:
