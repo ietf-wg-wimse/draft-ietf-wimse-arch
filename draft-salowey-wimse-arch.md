@@ -166,8 +166,7 @@ There are several methods defined to perform this authentication.  Some of the m
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
 
-  ~~~aasvg
-
+~~~aasvg
   +-----------------+
   |     Workload    |
   |    (external)   |
@@ -187,7 +186,6 @@ There are several methods defined to perform this authentication.  Some of the m
   |                                                      |
   |                                                      |
   +------------------------------------------------------+
-
 ~~~~
 
 ### Security Context Establishment and Propagation
