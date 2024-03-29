@@ -166,6 +166,30 @@ There are several methods defined to perform this authentication.  Some of the m
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
 
+  ~~~aasvg
+
+  +-----------------+
+  |     Workload    |
+  |    (external)   |
+  |       ^         |
+  +-------+---------+
+          |
+          |
+  +-------+-------------------------Trust Boundary-------+
+  |       |                                              |
+  |       |                                              |
+  |  +----+----------+              +----------------+   |
+  |  |    v          |              |                |   |
+  |  | Workload      |              | Workload       |   |
+  |  |              <+--------------+>               |   |
+  |  |               |              |                |   |
+  |  +---------------+              +----------------+   |
+  |                                                      |
+  |                                                      |
+  +------------------------------------------------------+
+
+~~~~
+
 ### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
