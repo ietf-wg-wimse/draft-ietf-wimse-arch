@@ -169,7 +169,7 @@ There are several methods defined to perform this authentication.  Some of the m
 
 {{arch-chain}} illustrates the communication between different workloads. Two aspects are important
 to highlight: First, there is a need to consider the interaction with workloads that are external
-to the trust domain (sometimes called cross-domain). Second, the authentication interaction does
+to the trust domain (sometimes called cross-domain). Second, the interaction does
 not only occur between workloads that directly interact with each other but instead may also
 take place across intermediate workloads (in an end-to-end style).
 
