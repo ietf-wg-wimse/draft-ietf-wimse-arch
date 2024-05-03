@@ -1,4 +1,4 @@
 # License
 
 See the
-[guidelines for contributions](https://github.com/jsalowey/wimse-arch/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/main/CONTRIBUTING.md).
