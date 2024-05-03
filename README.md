@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "Workload Identity in a Multi System Environment (WIMSE) Architecture".
 
-* [Editor's Copy](https://jsalowey.github.io/wimse-arch/#go.draft-salowey-wimse-arch.html)
+* [Editor's Copy](https://ietf-wg-wimse.github.io/draft-ietf-wimse-arch/#go.draft-ietf-wimse-arch.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-salowey-wimse-arch)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-salowey-wimse-arch)
-* [Compare Editor's Copy to Individual Draft](https://jsalowey.github.io/wimse-arch/#go.draft-salowey-wimse-arch.diff)
+* [Compare Editor's Copy to Individual Draft](https://ietf-wimse-wg.github.io/draft-ietf-wimse-arch/#go.draft-ietf-wimse-arch.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/jsalowey/wimse-arch/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wimse-wg/draft-ietf-wimse-arch/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
