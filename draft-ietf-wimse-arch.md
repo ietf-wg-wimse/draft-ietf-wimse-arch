@@ -6,8 +6,8 @@ category: info
 submissionType: IETF
 
 ipr: trust200902
-area: General
-workgroup: wimse
+area: "Applications and Real-Time"
+workgroup: "Workload Identity in Multi System Environments"
 keyword: Internet-Draft
 
 stand_alone: yes
