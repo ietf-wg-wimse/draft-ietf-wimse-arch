@@ -200,6 +200,43 @@ take place across intermediate workloads (in an end-to-end style).
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
 
+One example of security context establishment and propagation is as follows:
+
+~~~aasvg
+┌───────────────────────────────────────────────────────────┐
+│                                                           │
+│       ┌───────────────────┐     ┌──────────────────┐      │
+│       │  -Identity 1      │     │ -Identity 1 + 2  │      │
+│       │  -Security Context│     │ -Security Context│      │
+│       └──────────┬────────┘     └────┬─────────────┘      │
+│                  │                   │                    │
+│    ┌──────────┐  ▼   ┌──────────┐    ▼ ┌──────────┐       │
+│    │ Workload1├──────► Workload2├──────► Workload3│       │
+│    └─────▲────┘      └──────────┘      └──────────┘       │
+│          │                                                │
+│          │Attestation                                     │
+│          │                                                │
+├──────────▼────────────────────────────────────────────────┤
+│                                                           │
+│    Platform: Host Operating System/Hardware Software      │
+└───────────────────────────────────────────────────────────┘
+~~~~
+{: #arch-chain title="Security context establishment and propagation"}
+
+1. Workload 1 requests to load the LLM(Large Language Model) within Workload 2; Workload 2 requires that Workload 1 has hardware-based security to prevent model leakage. The hardware-based security context information of Workload 1 can be obtained by running a remote attestation protocol. Workload 1 provides its Identity and the security context information to Workload 2 to apply for loading the LLM.
+
+2. Workload 2 verifies the Identity and corresponding security context information provided by Workload 1 to confirm whether the model can be provided to Workload 1.
+
+3. Workload 1 also requires the LLM on Workload 2 to use the vertical industry domain-specific data on Workload 3 for model fine-tuning training.
+
+4. Workload 2 provides its Identity, Workload 1’s Identity, and its hardware-based security context information to Workload 3.
+
+5. Workload 3 uses this information for authentication and, upon passing, provides the industry domain-specific data to Workload 2.
+
+6. After fine-tuning training with the industry domain-specific data provided by Workload 3, Workload 2 provides the Model to Workload 1.
+
+
+
 ### Delegation and Impersonation
 
 TBD.
