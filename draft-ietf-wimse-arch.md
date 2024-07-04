@@ -139,7 +139,7 @@ The certificate is presented during authentication, however the private key is k
 
 ## Workload Identity Use Cases
 
-### Basic Service Authentication and Authorization
+### Service Authentication
 
 One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the request to the service offered by the workload it needs to be authorized. Even in this simple case the identity of a workload is often composed of many attributes such as:
 
@@ -199,6 +199,10 @@ take place across intermediate workloads (in an end-to-end style).
 ### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.
+
+###  Service Authorization
+
+After authentication of the peer, workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates security context, checks validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
 ### Delegation and Impersonation
 
