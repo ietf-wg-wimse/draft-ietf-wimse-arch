@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T01:26:44.247876+00:00",
+  "timestamp": "2024-07-07T01:39:51.771919+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1350,6 +1350,40 @@
           ]
         }
       ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOLPTb0M50bvja",
+      "title": "Added initial minimal service authorization section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/37",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-04T11:18:54Z",
+      "updatedAt": "2024-07-04T11:19:50Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "yaroslavros-patch-1",
+      "headRefOid": "495afaf7e6a2c6cd642d9838a0d280b73a6188ec",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This should address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/33",
+          "createdAt": "2024-07-04T11:19:49Z",
+          "updatedAt": "2024-07-04T11:19:49Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
