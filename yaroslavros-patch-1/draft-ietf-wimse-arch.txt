@@ -5,9 +5,9 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 5 January 2025                                          Zscaler
+Expires: 9 January 2025                                          Zscaler
                                                            H. Tschofenig
-                                                             4 July 2024
+                                                             8 July 2024
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2025.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -371,13 +371,13 @@ Table of Contents
 
 3.2.3.  Service Authorization
 
-   After authentication of the peer, workload can perform authorization
-   by verifying that the authenticated identity has the appropriate
-   permissions to access the requested resources and perform required
-   actions.  This process involves evaluating the security context
-   described previously.  The workload validates security context,
-   checks validity of permissions against its security policies to
-   ensure that only authorized actions are allowed.
+   After authentication of the peer, a workload can perform
+   authorization by verifying that the authenticated identity has the
+   appropriate permissions to access the requested resources and perform
+   required actions.  This process involves evaluating the security
+   context described previously.  The workload validates security
+   context, checks validity of permissions against its security policies
+   to ensure that only authorized actions are allowed.
 
 3.2.4.  Delegation and Impersonation
 
