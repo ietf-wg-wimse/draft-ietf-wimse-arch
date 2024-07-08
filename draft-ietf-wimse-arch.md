@@ -221,7 +221,7 @@ One example of security context establishment and propagation is as follows:
 │    Platform: Host Operating System/Hardware Software      │
 └───────────────────────────────────────────────────────────┘
 ~~~~
-{: #arch-chain title="Security context establishment and propagation"}
+{: #arch-chain title="Security Context Establishment and Propagation"}
 
 1. Workload 1 requests to load the LLM(Large Language Model) within Workload 2; Workload 2 requires that Workload 1 has hardware-based security to prevent model leakage. The hardware-based security context information of Workload 1 can be obtained by running a remote attestation protocol. Workload 1 provides its Identity and the security context information to Workload 2 to apply for loading the LLM.
 
