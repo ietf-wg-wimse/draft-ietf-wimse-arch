@@ -5,9 +5,9 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 5 November 2024                                         Zscaler
+Expires: 9 January 2025                                          Zscaler
                                                            H. Tschofenig
-                                                              4 May 2024
+                                                             8 July 2024
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 November 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -75,11 +75,12 @@ Table of Contents
        3.1.1.  Bootstrapping Workload Identity
        3.1.2.  Identity Credentials
      3.2.  Workload Identity Use Cases
-       3.2.1.  Basic Service Authentication and Authorization
+       3.2.1.  Service Authentication
        3.2.2.  Security Context Establishment and Propagation
-       3.2.3.  Delegation and Impersonation
-       3.2.4.  Asynchronous and Batch Requests
-       3.2.5.  Cross-boundary Workload Identity
+       3.2.3.  Service Authorization
+       3.2.4.  Delegation and Impersonation
+       3.2.5.  Asynchronous and Batch Requests
+       3.2.6.  Cross-boundary Workload Identity
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
@@ -271,7 +272,7 @@ Table of Contents
 
 3.2.  Workload Identity Use Cases
 
-3.2.1.  Basic Service Authentication and Authorization
+3.2.1.  Service Authentication
 
    One of the most basic use cases for workload identity is
    authentication of one workload to another, such as in the case where
@@ -368,22 +369,32 @@ Table of Contents
    only be used by an authorized workload and that the context
    information originated from an authorized workload.
 
-3.2.3.  Delegation and Impersonation
+3.2.3.  Service Authorization
+
+   After authentication of the peer, a workload can perform
+   authorization by verifying that the authenticated identity has the
+   appropriate permissions to access the requested resources and perform
+   required actions.  This process involves evaluating the security
+   context described previously.  The workload validates security
+   context, checks validity of permissions against its security policies
+   to ensure that only authorized actions are allowed.
+
+3.2.4.  Delegation and Impersonation
 
    TBD.
 
-3.2.4.  Asynchronous and Batch Requests
+3.2.5.  Asynchronous and Batch Requests
 
    TBD.
 
-3.2.5.  Cross-boundary Workload Identity
+3.2.6.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.2.5.1.  Egress Identity Generalization
+3.2.6.1.  Egress Identity Generalization
 
    A workload communicating with a service, or another workload located
    outside the trust boundary may need to provide modified identity
@@ -397,7 +408,7 @@ Table of Contents
    specific authorization of the transaction and replace workload
    specific identity with a generalized one for a given trust domain.
 
-3.2.5.2.  Inbound Gateway Identity Validation
+3.2.6.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -474,9 +485,9 @@ Table of Contents
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
               "Transaction Tokens", Work in Progress, Internet-Draft,
-              draft-ietf-oauth-transaction-tokens-01, 16 March 2024,
+              draft-ietf-oauth-transaction-tokens-03, 3 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              transaction-tokens-01>.
+              transaction-tokens-03>.
 
 Acknowledgments
 
