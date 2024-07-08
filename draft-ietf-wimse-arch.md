@@ -79,7 +79,7 @@ Attestation is the function through which a task verifies the identity of a sepa
 
 ## Workload Identity
 
-A workload identity may be composed of many attributes describing different aspects of a workload. These attributes may describe different sets of information such as a workload's role within a system, the software that the workload runs or the hardware that the workload runs on. Sets of attributes may be determined by different authorities running in different parts of the system. WIMSE defines a **Workload Identifier** to used in representing and referencing the workload.  It allows different authorities of sets identity attributes to reference the workload in a consistent way.
+Workload identity often comprises multiple attributes that describe various aspects of a workload. These attributes can encompass diverse sets of information, including the workload's role within a system, the software it operates, and the hardware environment it utilizes. Different authorities across various parts of the system define these attribute sets. This architecture introduces a Workload Identifier for representing and referencing workloads, enabling diverse authorities with distinct identity attribute sets to consistently reference the workload.
 
 The Workload Identifier consists of a concise string allocated within a namespace defined by a Trust Domain. This Workload Identifier is present in Workload Identity Tokens and X.509 certificates issued by the authority for the Trust Domain. The Workload Identifier is used to associate additional identity attributes to the workload through the use of tokens (workload attribute tokens?) or online look up services. It may also be used directly in authorization calculations and audit logs.
 
