@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T01:39:51.771919+00:00",
+  "timestamp": "2024-07-09T01:34:15.141376+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1176,43 +1176,81 @@
       "labels": [],
       "body": "Propose to add one use case of security context establishment and propagation.",
       "createdAt": "2024-06-19T14:10:07Z",
-      "updatedAt": "2024-06-19T14:10:07Z",
+      "updatedAt": "2024-07-08T12:30:50Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
       "headRepository": "maxpassion/draft-ietf-wimse-arch",
       "headRefName": "patch-2",
-      "headRefOid": "644fac6f64ba98ef62a608e277475b5a9b740dc0",
+      "headRefOid": "733361f0f03617f37682c5a12b2ebd0cde6efc7d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Max, are machine learning models really so valuable to companies that they want to prevent competitors or other parties to see them unencrypted? I think that is the most important assumption behind your use case.",
+          "createdAt": "2024-07-08T12:27:08Z",
+          "updatedAt": "2024-07-08T12:27:08Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe your text is good otherwise but I think we will need to talk a bit about confidential computing before we add the description. IMHO we should definitely touch confidential computing in this architecture document!",
+          "createdAt": "2024-07-08T12:28:05Z",
+          "updatedAt": "2024-07-08T12:28:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6A7yL8",
+          "commit": {
+            "abbreviatedOid": "644fac6"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:28:33Z",
+          "updatedAt": "2024-07-08T12:28:34Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n{: #arch-chain title=\"Security Context Establishment and Propagation\"}\r\n```",
+              "createdAt": "2024-07-08T12:28:34Z",
+              "updatedAt": "2024-07-08T12:28:34Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 36,
       "id": "PR_kwDOLPTb0M5zA2yK",
       "title": "Initial workload identity section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/36",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Define workload identity.  Resolves issue #17 ",
       "createdAt": "2024-06-20T00:56:08Z",
-      "updatedAt": "2024-07-03T16:10:40Z",
+      "updatedAt": "2024-07-08T14:44:07Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "js-workload-identity",
-      "headRefOid": "76a778dc52322bfd0c50a4df5027ee75931e2d4f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "224581bd46c48f3d7d912130fa88d5dd71c84bdd",
+      "closedAt": "2024-07-08T14:44:07Z",
+      "mergedAt": "2024-07-08T14:44:07Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "dd404f95b7807ce198c071a969399e877c14162f"
+      },
       "comments": [
         {
           "author": "jricher",
@@ -1348,6 +1386,126 @@
               "updatedAt": "2024-07-03T16:10:40Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A4DXn",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "mingpeiwk",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T03:49:28Z",
+          "updatedAt": "2024-07-08T03:49:28Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Typo in \"to used in representing\". Maybe \"to be used in representing\"?\r\nTypo in \"different authorities of sets\"... Maybe \"different authorities to set\"? The full sentence may revise.",
+              "createdAt": "2024-07-08T03:49:28Z",
+              "updatedAt": "2024-07-08T03:49:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A7suJ",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:19:41Z",
+          "updatedAt": "2024-07-08T12:19:42Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nWorkload identity often comprises multiple attributes that describe various aspects of a workload. These attributes can encompass diverse sets of information, including the workload's role within a system, the software it operates, and the hardware environment it utilizes. Different authorities across various parts of the system define these attribute sets. This architecture introduces a Workload Identifier for representing and referencing workloads, enabling diverse authorities with distinct identity attribute sets to consistently reference the workload.\r\n```",
+              "createdAt": "2024-07-08T12:19:41Z",
+              "updatedAt": "2024-07-08T12:19:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A7ubc",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:23:00Z",
+          "updatedAt": "2024-07-08T12:23:01Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThe Workload Identifier is a concise string allocated within a namespace defined by a Trust Domain. It appears in Workload Identity Tokens and X.509 certificates issued by a Trust Domain. This identifier facilitates the association of additional identity attributes with the workload through tokens (such as workload attribute tokens) or online lookup services. Moreover, it plays a role in authorization decisions and for use in audit logs.\r\n```",
+              "createdAt": "2024-07-08T12:23:01Z",
+              "updatedAt": "2024-07-08T12:23:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A7vCR",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:23:52Z",
+          "updatedAt": "2024-07-08T12:23:53Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nThe Trust Domain is represented as a string formatted like a fully qualified domain name (FQDN). While ideally linked to an organization's registered domain name, this may vary. The Trust Domain maps to the issuer of cryptographically signed Workload Identity Tokens (WITs) or X.509 certificates. The secure association between a Trust Domain and the cryptographic root of the signing authority must be established using out-of-band mechanisms (TODO: Specify where these mechanisms should be defined).\r\n```",
+              "createdAt": "2024-07-08T12:23:53Z",
+              "updatedAt": "2024-07-08T12:23:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A7vhN",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:24:35Z",
+          "updatedAt": "2024-07-08T12:24:35Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nThe Trust Domain also dictates the construction of the Workload Identifier. It may represent a workload type where the same identifier is shared among multiple instances of the service. Alternatively, it can uniquely identify specific instances of a workload type through a hierarchical naming scheme.\r\n```",
+              "createdAt": "2024-07-08T12:24:35Z",
+              "updatedAt": "2024-07-08T12:24:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6A7v1J",
+          "commit": {
+            "abbreviatedOid": "76a778d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:25:00Z",
+          "updatedAt": "2024-07-08T12:25:00Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\nAdditionally, the Trust Domain defines the mechanisms for initially bootstrapping a workload with a Workload Identifier and the procedures for obtaining workload identity credentials in the form of X.509 certificates and Workload Identity Tokens.\r\n```",
+              "createdAt": "2024-07-08T12:25:00Z",
+              "updatedAt": "2024-07-08T12:25:00Z"
+            }
+          ]
         }
       ]
     },
@@ -1356,24 +1514,26 @@
       "id": "PR_kwDOLPTb0M50bvja",
       "title": "Added initial minimal service authorization section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/37",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-07-04T11:18:54Z",
-      "updatedAt": "2024-07-04T11:19:50Z",
+      "updatedAt": "2024-07-08T12:16:52Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "yaroslavros-patch-1",
-      "headRefOid": "495afaf7e6a2c6cd642d9838a0d280b73a6188ec",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ae3f7ed2770a9fb4690ece1173628703c2e33f0c",
+      "closedAt": "2024-07-08T12:16:49Z",
+      "mergedAt": "2024-07-08T12:16:49Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "f9400c1facb55c0fc685c41056218ec1dcaa2e39"
+      },
       "comments": [
         {
           "author": "yaroslavros",
@@ -1383,7 +1543,28 @@
           "updatedAt": "2024-07-04T11:19:49Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6A7quS",
+          "commit": {
+            "abbreviatedOid": "495afaf"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T12:16:38Z",
+          "updatedAt": "2024-07-08T12:16:38Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nAfter authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates security context, checks validity of permissions against its security policies to ensure that only authorized actions are allowed.\r\n```",
+              "createdAt": "2024-07-08T12:16:38Z",
+              "updatedAt": "2024-07-08T12:16:39Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
