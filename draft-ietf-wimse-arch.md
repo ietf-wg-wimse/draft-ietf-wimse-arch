@@ -83,9 +83,9 @@ Workload identity often comprises multiple attributes that describe various aspe
 
 The Workload Identifier consists of a concise string allocated within a namespace defined by a Trust Domain. This Workload Identifier is present in Workload Identity Tokens and X.509 certificates issued by the authority for the Trust Domain. The Workload Identifier is used to associate additional identity attributes to the workload through the use of tokens (workload attribute tokens?) or online look up services. It may also be used directly in authorization calculations and audit logs.
 
-The Trust Domain consists of a string that matches the format of a fully qualified domain name. It is the intent that a Trust Domain is actually a domain name registered to the organization defining the Trust Domain, but this may not be true in all cases. The Trust Domain also maps to the issuer of cryptographically signed Workload Identity Tokens (WIT) or X.509 Certificate. The association between a Trust Domain and the cryptographic root of the signing authority for that Trust Domain must be made securely through an out-of-band mechanisms.
+The Trust Domain consists of a string that matches the format of a fully qualified domain name. It is the intent that a Trust Domain is actually a domain name allocated for the organization defining the Trust Domain, but this may not be true in all cases. The Trust Domain also maps to the issuer of cryptographically signed X.509 certificates and Workload Identity Tokens. The association between a Trust Domain and the cryptographic key of the signing authority for that Trust Domain must be made securely through an out-of-band mechanisms.
 
-The Trust Domain also defines how the rest of the Workload Identifier is constructed. The Workload Identifier may represent a type of workload such that the same identifier may be used by many instances of the same service. A Trust Domain may choose identifiers to represent a specific instance of a workload such that each workload of the same type will have a specific identity.  The Trust Domain could choose a naming scheme that allows for both objects by imposing a hierarchical structure on the naming format.
+The Trust Domain also defines how the rest of the Workload Identifier is constructed. The Workload Identifier may represent a type of workload such that the same identifier may be used by many instances of the same service. A Trust Domain may choose identifiers to represent a specific instance of a workload such that each workload of the same type will have a specific identity.  The Trust Domain could choose a naming scheme that composes both concepts by imposing a hierarchical structure on the naming format.
 
 The Trust Domain also defines which mechanisms are used to initially bootstrap a workload with a Workload Identifier and the mechanisms for a workload to obtain its workload identity credentials in the form of X.509 certificates and Workload Identity Tokens.
 
@@ -93,11 +93,11 @@ The Trust Domain also defines which mechanisms are used to initially bootstrap a
 
 [TODO: this section will need to be updated to discuss workload identifier as a concept as well]
 
-A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.
+A workload needs to obtain its identity early in its lifecycle. This identity is the base identity upon which further identity and security context are built.
 
-Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation  to ensure the workload receives correct identity credentials. An example of a bootstrapping process follows.
+Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation to ensure the workload receives the correct identity credentials. An example of a bootstrapping process follows.
 
-{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. After obtaining identity credentials from the Server it passes them to the workload. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy.
+{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining identity credentials from the Server, the agent passes them to the workload.
 
 ~~~aasvg
   +-----------------+
@@ -140,7 +140,7 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 The Agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
 
-JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have a short lifespan. Alternatively, sender constrained tokens can be used such as TLS session binding.
+JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have a short lifespan. Alternatively, sender constrained tokens can be used such as TLS session binding, X.509 certificate binding, or TLS identity binding.
 
 X.509 certificate credentials consist of two parts:
 
@@ -153,7 +153,7 @@ The certificate is presented during authentication, however the private key is k
 
 ### Service Authentication
 
-One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the request to the service offered by the workload it needs to be authorized. Even in this simple case the identity of a workload is often composed of many attributes such as:
+One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the request to the service offered by the workload needs to be authorized. Even in this simple case the identity of a workload is often composed of many attributes such as:
 
 * Trigger Information
 * Service Name
@@ -173,7 +173,7 @@ These attributes are used for various purposes such as:
 
 There are several methods defined to perform this authentication.  Some of the most common include:
 
-* TLS authentication of the server using X.509 certificates and bearer token, encoded as JWTs.
+* TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
 
@@ -214,15 +214,17 @@ In a typical system of workloads additional information is needed in order for t
 
 ###  Service Authorization
 
-After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates security context, checks validity of permissions against its security policies to ensure that only authorized actions are allowed.
+After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
 ### Delegation and Impersonation
 
-TBD.
+When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.
+
+WIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by TrustDomains, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across Trust Domains, when arriving at authorization decisions.
 
 ### Asynchronous and Batch Requests
 
-TBD.
+Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped access to upstream workloads. These credentials should identify the identify the service as the actor in the actor chain. To mitigate risks associated with long-duration credentials, these credentials should be bound to the X.509 certificate of the acting service performing asynchronous computation on the source workload's behalf.
 
 ### Cross-boundary Workload Identity
 
