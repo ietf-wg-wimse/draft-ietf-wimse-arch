@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-23T01:35:37.723427+00:00",
+  "timestamp": "2024-07-25T01:34:59.213618+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1176,7 +1176,7 @@
       "labels": [],
       "body": "Propose to add one use case of security context establishment and propagation.",
       "createdAt": "2024-06-19T14:10:07Z",
-      "updatedAt": "2024-07-08T12:30:50Z",
+      "updatedAt": "2024-07-24T04:18:45Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
@@ -1201,6 +1201,20 @@
           "body": "I believe your text is good otherwise but I think we will need to talk a bit about confidential computing before we add the description. IMHO we should definitely touch confidential computing in this architecture document!",
           "createdAt": "2024-07-08T12:28:05Z",
           "updatedAt": "2024-07-08T12:28:05Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "NONE",
+          "body": "> Max, are machine learning models really so valuable to companies that they want to prevent competitors or other parties to see them unencrypted? I think that is the most important assumption behind your use case.\r\n\r\nHi Hannes,\r\n\r\nGood question, we do see the trends that machine learning models (including domain-specific training data) are considered as valuable and important assets for many stakeholders in the ecosystem so they have higher security requirements for the computing environment.",
+          "createdAt": "2024-07-24T04:18:02Z",
+          "updatedAt": "2024-07-24T04:18:02Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "NONE",
+          "body": "> I believe your text is good otherwise but I think we will need to talk a bit about confidential computing before we add the description. IMHO we should definitely touch confidential computing in this architecture document!\r\n\r\nI agree we should touch confidential computing in this architecture document.",
+          "createdAt": "2024-07-24T04:18:44Z",
+          "updatedAt": "2024-07-24T04:18:44Z"
         }
       ],
       "reviews": [
@@ -1565,6 +1579,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOLPTb0M52RbTe",
+      "title": "Minor cleanup, and initial Delegation and Impersonation, and Asynchronous and Batch Requests content",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/38",
+      "state": "OPEN",
+      "author": "kenmccracken-google",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixed some of the wording and parallelism in the intro to keep the same ordering of X.509 certificates followed by Workload identity tokens.  Generalized some of the phrasing.  Removed concepts that aren't well defined in the document, such as \"bottom turtle\".  I'm not opposed to adding these, I just don't think they make sense without an explanation of the analogy either inline or by-reference; so I tended towards keeping the document self-contained.\r\n\r\nProvided initial content for the Delegation and Impersonation, and Asynchronous and Batch Requests sections.",
+      "createdAt": "2024-07-23T23:08:23Z",
+      "updatedAt": "2024-07-24T00:46:04Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
+      "headRepository": "kenmccracken-google/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "f77a30a4a1b4a9e5d0956f20e99ad17794d3a66c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
