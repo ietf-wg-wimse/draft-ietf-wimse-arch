@@ -218,7 +218,7 @@ After authentication of the peer, a workload can perform authorization by verify
 
 ### Delegation and Impersonation
 
-TBD.
+The use case for identity delegation and impersonation is as follows: When a user's cloud computing workload requests the creation of cloud resources, the control plane of the cloud computing service provider acts as an agent for the workload's identity. It creates the relevant resources by calling the API, using the delegated identity of the user
 
 ### Asynchronous and Batch Requests
 
