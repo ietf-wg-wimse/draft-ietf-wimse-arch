@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-10T01:43:02.953507+00:00",
+  "timestamp": "2024-09-12T01:42:10.781498+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1176,7 +1176,7 @@
       "labels": [],
       "body": "Propose to add one use case of security context establishment and propagation.",
       "createdAt": "2024-06-19T14:10:07Z",
-      "updatedAt": "2024-07-24T04:18:45Z",
+      "updatedAt": "2024-09-11T21:45:50Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
@@ -1215,6 +1215,13 @@
           "body": "> I believe your text is good otherwise but I think we will need to talk a bit about confidential computing before we add the description. IMHO we should definitely touch confidential computing in this architecture document!\r\n\r\nI agree we should touch confidential computing in this architecture document.",
           "createdAt": "2024-07-24T04:18:44Z",
           "updatedAt": "2024-07-24T04:18:44Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I would suggest to generalise this use case beyond LLM. Hardware attestation and propagation of attested identity is useful for many other applications - for example processing PII have severe legal implications and many organisations want to mitigate associated risks.",
+          "createdAt": "2024-09-11T21:45:49Z",
+          "updatedAt": "2024-09-11T21:45:49Z"
         }
       ],
       "reviews": [
