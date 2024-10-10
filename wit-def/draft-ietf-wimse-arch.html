@@ -11,22 +11,22 @@
 <meta content="
        The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information. 
     " name="description">
-<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="xml2rfc 3.23.2" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-wimse-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.22.0
-    Python 3.12.3
+  xml2rfc 3.23.2
+    Python 3.12.7
     ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+    google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
     lxml 4.9.4
-    platformdirs 4.2.2
+    platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.32.3
-    setuptools 69.5.1
+    setuptools 70.3.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-wimse-arch.xml" rel="alternate" type="application/rfc+xml">
@@ -1026,11 +1026,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">WIMSE Architecture</td>
-<td class="right">July 2024</td>
+<td class="right">October 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 9 January 2025</td>
+<td class="center">Expires 13 April 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-08" class="published">8 July 2024</time>
+<time datetime="2024-10-10" class="published">10 October 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-09">9 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-04-13">13 April 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1100,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1258,6 +1258,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
       </ul>
 <p id="section-2-10">Attestation is the function through which a task verifies the identity of a separate Workload. (TBD: sync definition with reference RaTS architecture)<a href="#section-2-10" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-11.1">
+          <p id="section-2-11.1.1">Workload Identity Token<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-12">An authentication token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span><a href="#section-2-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="architecture">
@@ -1270,18 +1276,24 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-workload-identity">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-workload-identity" class="section-name selfRef">Workload Identity</a>
         </h3>
+<p id="section-3.1-1">Workload identity often comprises multiple attributes that describe various aspects of a workload. These attributes can encompass diverse sets of information, including the workload's role within a system, the software it operates, and the hardware environment it utilizes. Different authorities across various parts of the system define these attribute sets. This architecture introduces a Workload Identifier for representing and referencing workloads, enabling diverse authorities with distinct identity attribute sets to consistently reference the workload.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The Workload Identifier consists of a concise string allocated within a namespace defined by a Trust Domain. This Workload Identifier is present in Workload Identity Tokens and X.509 certificates issued by the authority for the Trust Domain. The Workload Identifier is used to associate additional identity attributes to the workload through the use of tokens (workload attribute tokens?) or online look up services. It may also be used directly in authorization calculations and audit logs.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">The Trust Domain consists of a string that matches the format of a fully qualified domain name. It is the intent that a Trust Domain is actually a domain name registered to the organization defining the Trust Domain, but this may not be true in all cases. The Trust Domain also maps to the issuer of cryptographically signed Workload Identity Tokens (WIT) or X.509 Certificate. The association between a Trust Domain and the cryptographic root of the signing authority for that Trust Domain must be made securely through an out-of-band mechanisms.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">The Trust Domain also defines how the rest of the Workload Identifier is constructed. The Workload Identifier may represent a type of workload such that the same identifier may be used by many instances of the same service. A Trust Domain may choose identifiers to represent a specific instance of a workload such that each workload of the same type will have a specific identity.  The Trust Domain could choose a naming scheme that allows for both objects by imposing a hierarchical structure on the naming format.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">The Trust Domain also defines which mechanisms are used to initially bootstrap a workload with a Workload Identifier and the mechanisms for a workload to obtain its workload identity credentials in the form of X.509 certificates and Workload Identity Tokens.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div id="bootstrapping-workload-identity">
 <section id="section-3.1.1">
           <h4 id="name-bootstrapping-workload-iden">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-bootstrapping-workload-iden" class="section-name selfRef">Bootstrapping Workload Identity</a>
           </h4>
-<p id="section-3.1.1-1">A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation  to ensure the workload receives correct identity credentials. An example of a bootstrapping process follows.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-3"><a href="#arch-fig" class="auto internal xref">Figure 1</a> provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. After obtaining identity credentials from the Server it passes them to the workload. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">[TODO: this section will need to be updated to discuss workload identifier as a concept as well]<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">A workload needs to obtain its identity early in its lifecycle. This identity is sometimes referred to as the "bottom turtle" on which further identity and security context is built.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation  to ensure the workload receives correct identity credentials. An example of a bootstrapping process follows.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-4"><a href="#arch-fig" class="auto internal xref">Figure 1</a> provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. After obtaining identity credentials from the Server it passes them to the workload. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 <span id="name-host-software-layering-in-a"></span><div id="arch-fig">
 <figure id="figure-1">
-            <div id="section-3.1.1-4.1">
-              <div class="alignLeft art-svg artwork" id="section-3.1.1-4.1.1">
+            <div id="section-3.1.1-5.1">
+              <div class="alignLeft art-svg artwork" id="section-3.1.1-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="480" width="472" viewBox="0 0 472 480" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,32 L 8,128" fill="none" stroke="black"></path>
                   <path d="M 8,224 L 8,448" fill="none" stroke="black"></path>
@@ -1347,23 +1359,23 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                     <text x="208" y="436">and</text>
                     <text x="260" y="436">Hardware</text>
                   </g>
-                </svg><a href="#section-3.1.1-4.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-3.1.1-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-host-software-layering-in-a" class="selfRef">Host Software Layering in a Workload Identity Architecture.</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-5">How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-6">How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.1-6.1">
-              <p id="section-3.1.1-6.1.1">File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.<a href="#section-3.1.1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1.1-7.1">
+              <p id="section-3.1.1-7.1.1">File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.<a href="#section-3.1.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.1-6.2">
-              <p id="section-3.1.1-6.2.1">Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).<a href="#section-3.1.1-6.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.1-7.2">
+              <p id="section-3.1.1-7.2.1">Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).<a href="#section-3.1.1-7.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.1-6.3">
-              <p id="section-3.1.1-6.3.1">Environment Variables - identity credential may also be injected into workloads using operating system environment variables.<a href="#section-3.1.1-6.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.1-7.3">
+              <p id="section-3.1.1-7.3.1">Environment Variables - identity credential may also be injected into workloads using operating system environment variables.<a href="#section-3.1.1-7.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -1624,6 +1636,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <p id="section-5-1">This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="sec-combined-references">
 <section id="section-6">
       <h2 id="name-references">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -1652,13 +1665,18 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-oauth-transaction-tokens">[I-D.ietf-oauth-transaction-tokens]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-03</span>, <time datetime="2024-07-03" class="refDate">3 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-03">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-wimse-s2s-protocol">[I-D.ietf-wimse-s2s-protocol]</dt>
+      <dd>
+<span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Feldman, D.</span>, <span class="refAuthor">Salowey, J.</span>, <span class="refAuthor">Schwenkschuster, A.</span>, and <span class="refAuthor">Y. Sheffer</span>, <span class="refTitle">"WIMSE Service to Service Authentication"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-s2s-protocol-00</span>, <time datetime="2024-08-15" class="refDate">15 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-00">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
 </section>
+</div>
 <div id="acknowledgments">
 <section id="appendix-A">
       <h2 id="name-acknowledgments">
