@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:48:43.598976+00:00",
+  "timestamp": "2024-10-17T01:47:25.716624+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -340,7 +340,7 @@
       "id": "I_kwDOLPTb0M6H3kLy",
       "title": "Authorization",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/33",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "NONE",
       "assignees": [
@@ -349,9 +349,24 @@
       "labels": [],
       "body": "Sec. 3.2.1 has \"authorization\" in the title, but really focuses on authentication. We should mention that the architecture needs to support authz policies within each trust domain, starting with the basic \"service A is allowed to call service B\". Any workload should be able to include a policy enforcement point (PEP) for incoming requests. There are also cases where a workload needs to be a PEP for outgoing requests, e.g. when calling \"passive\" resources such as data objects.",
       "createdAt": "2024-05-05T11:54:23Z",
-      "updatedAt": "2024-06-17T15:56:44Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-10-16T12:02:28Z",
+      "closedAt": "2024-10-16T09:46:07Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as resolved with a previous commit. @yaronf please re-open if you believe we need to explore this topic further.",
+          "createdAt": "2024-10-16T09:46:07Z",
+          "updatedAt": "2024-10-16T09:46:07Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "NONE",
+          "body": "@yaroslavros I'm not very happy with the new text because in a service-to-service call (our core use case), both sides are typically authenticated, and this is very different from accessing a resource. Related to that, the paragraph starts with \"After authentication of the peer\", and I'm not quite clear who the peer is.",
+          "createdAt": "2024-10-16T12:02:26Z",
+          "updatedAt": "2024-10-16T12:02:26Z"
+        }
+      ]
     },
     {
       "number": 34,
@@ -370,6 +385,131 @@
       "updatedAt": "2024-06-17T15:59:08Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOLPTb0M6aUa0h",
+      "title": "Workloads can consist of multiple running instances. ",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L40\r\n\r\nThe current workload definition says it is defined as \"a running instance of software....\". I think this is overly restrictive - workloads can consist of one or more running instances of software. ",
+      "createdAt": "2024-10-15T14:56:21Z",
+      "updatedAt": "2024-10-16T14:51:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is accurate, but I'm not sure the difference would be meaningful. Is there are particular scenario that makes you want this clarification?\r\n",
+          "createdAt": "2024-10-16T03:58:11Z",
+          "updatedAt": "2024-10-16T03:58:11Z"
+        },
+        {
+          "author": "fandreas",
+          "authorAssociation": "NONE",
+          "body": "The basic question is whether we always want to identify (and authorize) individual/specific workload instances, or whether there can be a set of workloads that have the same identity and associated authorizations. I believe the latter is important since we often run multiple instances of the same workload (and the specific instances come and go). ",
+          "createdAt": "2024-10-16T14:51:41Z",
+          "updatedAt": "2024-10-16T14:51:41Z"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOLPTb0M6aUdOf",
+      "title": "Task is not well defined",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/43",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L76\r\n\r\nThe \"Attestation\" definition needs further work (as alluded to in the \"TBD\"). Specific questions with the current definition include:\r\n1) What is a task ? \r\n2) Why is it calling out a \"separate\" workload ? ",
+      "createdAt": "2024-10-15T14:59:34Z",
+      "updatedAt": "2024-10-15T14:59:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOLPTb0M6aU8Ov",
+      "title": "Consider Delegation and Impersonation",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/44",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L184\r\n\r\nA third scenario is when a workload operates on behalf of another entity (e.g. a user). There is an (empty) \"Delegation and Impersonation\" section a bit later, however it should be called out here as well. ",
+      "createdAt": "2024-10-15T15:40:45Z",
+      "updatedAt": "2024-10-15T15:40:45Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOLPTb0M6aVDIo",
+      "title": "Definition of Identity and Authenticated Identity",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/45",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L217\r\n\r\nThe term \"Authenticated Identity\" suggests that all identity-related information can be authenticated. However the definition of identity earlier in the document includes various attributes that cannot necessarily be authenticated. There is a pull request that changes the Identity section significantly, however it doesn't clearly define the term \"Identity\" either. Further work is needed to ensure crips defintions. ",
+      "createdAt": "2024-10-15T15:51:38Z",
+      "updatedAt": "2024-10-16T14:48:59Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think the challenge here is going to be to define identity here just enough to make the appropriate points.  I think for the purposes of this section, the authorization calculation is based on the following:\r\n1. The value of the peer workload's authenticated identifier and other information that may be present in the WIT or certificate\r\n2. Authorization context information based on the current transaction.  An example may be a context token issued by a token service  \r\n3. Other information that is bound to the peer's workload identifier or authorization context through mechanisms that are currently outside the scope of this document.  ",
+          "createdAt": "2024-10-16T03:50:20Z",
+          "updatedAt": "2024-10-16T03:50:20Z"
+        },
+        {
+          "author": "fandreas",
+          "authorAssociation": "NONE",
+          "body": "I agree that the \"identity\" term and a concise definition of it is a challenge (not least based on the earlier thread on this: https://mailarchive.ietf.org/arch/msg/wimse/lkBh5AS63J8gXxtgHqo5X4RxN6A/) \r\n\r\nIs the suggestion to remove that term from the document (throughout) and just talk about authenticated identifiers and authorization instead ? ",
+          "createdAt": "2024-10-16T14:48:58Z",
+          "updatedAt": "2024-10-16T14:48:58Z"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "I_kwDOLPTb0M6aVEyi",
+      "title": "Trust Boundary versus Trust Domain",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/46",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L229\r\n\r\nDoes trust boundary imply different trust domains ? If so, we should trust domain terminology for consistency. If not, we should clarify what a trust boundary is. ",
+      "createdAt": "2024-10-15T15:54:15Z",
+      "updatedAt": "2024-10-16T14:40:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Trust boundary often is used in different contexts to mean related but slightly different concepts.  I don't think we want to try to define it in this document if we do not have to.  \r\n\r\nPropose changing this to \r\n\"As a workload often needs to communicate with a workload in another trust domain, extra care needs... \r\n",
+          "createdAt": "2024-10-16T03:39:50Z",
+          "updatedAt": "2024-10-16T03:39:50Z"
+        },
+        {
+          "author": "fandreas",
+          "authorAssociation": "NONE",
+          "body": "Sounds good. ",
+          "createdAt": "2024-10-16T14:40:30Z",
+          "updatedAt": "2024-10-16T14:40:30Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1608,19 +1748,40 @@
       "labels": [],
       "body": "Fixed some of the wording and parallelism in the intro to keep the same ordering of X.509 certificates followed by Workload identity tokens.  Generalized some of the phrasing.  Removed concepts that aren't well defined in the document, such as \"bottom turtle\".  I'm not opposed to adding these, I just don't think they make sense without an explanation of the analogy either inline or by-reference; so I tended towards keeping the document self-contained.\r\n\r\nProvided initial content for the Delegation and Impersonation, and Asynchronous and Batch Requests sections.",
       "createdAt": "2024-07-23T23:08:23Z",
-      "updatedAt": "2024-07-24T00:46:04Z",
+      "updatedAt": "2024-10-16T15:08:10Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "kenmccracken-google/wimse-arch",
       "headRefName": "main",
-      "headRefOid": "f77a30a4a1b4a9e5d0956f20e99ad17794d3a66c",
+      "headRefOid": "96d71f168abc33347946302f7d325246394b7447",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6NJlBc",
+          "commit": {
+            "abbreviatedOid": "f77a30a"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T03:50:17Z",
+          "updatedAt": "2024-10-15T03:50:17Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "Thanks for providing the text here.  I made a few modifications to try to align with terminology that is in the works (workload identity token).  I think we really need to flesh out the concept of context (in particular authorization context) a bit more in order to have things make more sense.  \r\n\r\n```suggestion\r\nSource workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the workload identity credential such as an X.509 certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.\r\n```",
+              "createdAt": "2024-10-15T03:50:17Z",
+              "updatedAt": "2024-10-15T03:50:17Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 39,
@@ -1660,7 +1821,7 @@
       "labels": [],
       "body": "Resolves issues #34 ",
       "createdAt": "2024-10-10T03:20:32Z",
-      "updatedAt": "2024-10-10T03:20:32Z",
+      "updatedAt": "2024-10-16T09:44:15Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
@@ -1672,7 +1833,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6NX4nD",
+          "commit": {
+            "abbreviatedOid": "0317d56"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T09:42:16Z",
+          "updatedAt": "2024-10-16T09:44:15Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Maybe call it WIMSE token?",
+              "createdAt": "2024-10-16T09:42:16Z",
+              "updatedAt": "2024-10-16T09:44:15Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "Let's drop first \"authentication\". That is,\r\n\r\nA token that contains a workload identifier used for service to service authentication. It is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}",
+              "createdAt": "2024-10-16T09:44:09Z",
+              "updatedAt": "2024-10-16T09:44:15Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 41,
@@ -1686,19 +1874,52 @@
       "labels": [],
       "body": "Addresses issue #17 ",
       "createdAt": "2024-10-10T03:44:29Z",
-      "updatedAt": "2024-10-10T03:44:29Z",
+      "updatedAt": "2024-10-16T09:40:58Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "wl-identity",
-      "headRefOid": "f42e4c9b707d52d2c21b4c1221ff245551eb50d8",
+      "headRefOid": "a69511c1bb95cc6da5aad6c8ae3b37a19bcfe9a2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6NXvJP",
+          "commit": {
+            "abbreviatedOid": "a69511c"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Terrific work! Few minor suggestions inline.",
+          "createdAt": "2024-10-16T09:30:09Z",
+          "updatedAt": "2024-10-16T09:40:58Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I would suggest to re-word it as\r\nWorkload identity construct consists of three basic building blocks: trust domain, workload identifier and workflow identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes.",
+              "createdAt": "2024-10-16T09:30:09Z",
+              "updatedAt": "2024-10-16T09:40:58Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "I would not introduce new \"WIMSE certificates\" construct unnecessarily. Perhaps we could change it to \"Workload certificates\"?\r\nMaybe \"associated with\" is better than \"belonging\" when it comes to domains?\r\n\"WIMSE WIT tokens\"? Or \"WIMSE tokens\"?",
+              "createdAt": "2024-10-16T09:35:06Z",
+              "updatedAt": "2024-10-16T09:40:58Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "Is it a \"SHOULD\" or a \"MUST\"? Do we really need do deal with trust domains that are not associated with FQDNs?\r\nThere is an overlap with a previous wording. How about we shorten \"The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier.\" to \"FQDN notation of trust domain ensures uniqueness of the trust domain identifier\"?",
+              "createdAt": "2024-10-16T09:39:28Z",
+              "updatedAt": "2024-10-16T09:40:58Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
