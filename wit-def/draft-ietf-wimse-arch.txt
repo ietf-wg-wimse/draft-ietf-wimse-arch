@@ -5,9 +5,9 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 13 April 2025                                           Zscaler
+Expires: 21 April 2025                                           Zscaler
                                                            H. Tschofenig
-                                                         10 October 2024
+                                                         18 October 2024
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2025.
+   This Internet-Draft will expire on 21 April 2025.
 
 Copyright Notice
 
@@ -173,11 +173,11 @@ Table of Contents
 
    *  Workload Identity Token
 
-   An authentication token that contains a workload identifier used for
-   service to service authentication.  The token is bound to a
-   cryptographic key and requires that the presenter provide proof of
-   possession of the secret key material.  This token is further defined
-   in [I-D.ietf-wimse-s2s-protocol]
+   A token that contains a workload identifier used for service to
+   service authentication.  The token is bound to a cryptographic key
+   and requires that the presenter provide proof of possession of the
+   secret key material.  This token is further defined in
+   [I-D.ietf-wimse-s2s-protocol]
 
 3.  Architecture
 
@@ -547,9 +547,9 @@ Table of Contents
               Campbell, B., Feldman, D., Salowey, J., Schwenkschuster,
               A., and Y. Sheffer, "WIMSE Service to Service
               Authentication", Work in Progress, Internet-Draft, draft-
-              ietf-wimse-s2s-protocol-00, 15 August 2024,
+              ietf-wimse-s2s-protocol-01, 18 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              s2s-protocol-00>.
+              s2s-protocol-01>.
 
 Acknowledgments
 
