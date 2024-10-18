@@ -77,17 +77,42 @@ Attestation is the function through which a task verifies the identity of a sepa
 
 # Architecture
 
-## Workload Identity
+## Workload Identity {#whimsical-identity}
 
-Workload identity often comprises multiple attributes that describe various aspects of a workload. These attributes can encompass diverse sets of information, including the workload's role within a system, the software it operates, and the hardware environment it utilizes. Different authorities across various parts of the system define these attribute sets. This architecture introduces a Workload Identifier for representing and referencing workloads, enabling diverse authorities with distinct identity attribute sets to consistently reference the workload.
+Workload identity construct consists of three basic building blocks: trust domain, workload identifier and workflow identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes. More complex identity constructs can be created from these basic building blocks.
 
-The Workload Identifier consists of a concise string allocated within a namespace defined by a Trust Domain. This Workload Identifier is present in Workload Identity Tokens and X.509 certificates issued by the authority for the Trust Domain. The Workload Identifier is used to associate additional identity attributes to the workload through the use of tokens (workload attribute tokens?) or online look up services. It may also be used directly in authorization calculations and audit logs.
+### Trust Domain
 
-The Trust Domain consists of a string that matches the format of a fully qualified domain name. It is the intent that a Trust Domain is actually a domain name registered to the organization defining the Trust Domain, but this may not be true in all cases. The Trust Domain also maps to the issuer of cryptographically signed Workload Identity Tokens (WIT) or X.509 Certificate. The association between a Trust Domain and the cryptographic root of the signing authority for that Trust Domain must be made securely through an out-of-band mechanisms.
+A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains SHOULD be identified by a fully qualified domain name associated with the organization defining the trust domain. THe FQDN format of trust domain helps to ensure uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JWK Set {{!RFC7517}} for validating WIMSE WIT tokens. This mapping MUST be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. This secure mechanism is out of scope for this document.
 
-The Trust Domain also defines how the rest of the Workload Identifier is constructed. The Workload Identifier may represent a type of workload such that the same identifier may be used by many instances of the same service. A Trust Domain may choose identifiers to represent a specific instance of a workload such that each workload of the same type will have a specific identity.  The Trust Domain could choose a naming scheme that allows for both objects by imposing a hierarchical structure on the naming format.
+A single organization may define multiple trust domains for different purpose such as different departments or environments. Each trust domain must have a unique identifier. Workload identifiers are scoped within a trust domain. If two identifiers differ only by trust domain they still refer to two different entities.
 
-The Trust Domain also defines which mechanisms are used to initially bootstrap a workload with a Workload Identifier and the mechanisms for a workload to obtain its workload identity credentials in the form of X.509 certificates and Workload Identity Tokens.
+### Workload Identifier
+
+The WIMSE architecture defines a workload identifier as a URI {{!RFC3986}}. This URI is used in the subject fields in the certificates and tokens defined later in this document. The URI MUST meet the criteria for the URI type of Subject Alternative Name defined in Section 4.2.1.6 of {{!RFC5280}}.
+
+>   The name MUST NOT be a relative URI, and it MUST follow the URI syntax and
+>   encoding rules specified in {{!RFC3986}}.  The name MUST include both a
+>   scheme and a scheme-specific-part.
+
+In addition the URI MUST include an authority that identifies the trust domain within which the identifier is scoped. The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is [SPIFFE ID](https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
+
+While the URI encoding rules allow host names to be specified as IP addresses, IP addresses MUT NOT be used to represent trust domains except in the case where they are needed for compatibility with existing naming schemes.
+
+A workload identity only has meaning within the scope of a specific issuer. Two identities of the same value issued by different issuers may or may not refer to the same workload. In order to avoid collisions identity URIs SHOULD specify, in the URI's "authority" field, the trust domain associated with an issuer that is selected from a global name space such as host domains. However, the validator of an identity credential MUST make sure that they are using the correct issuer credential to verify the identity credential and that the issuer is trusted to issue tokens for the defined trust domain.
+
+### Workload Identity Credentials
+
+The Agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
+
+JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity token that binds a JWT to a cryptographic key.
+
+Both X.509 certificate and workload identity token credentials consist of two parts:
+
+- a certificate or WIT is a signed data structure that contains a public key and identity information
+- a corresponding private key
+
+The certificate or WIT is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key corresponding to the public key.
 
 ### Bootstrapping Workload Identity
 
@@ -136,18 +161,7 @@ How the workload obtains its identity credentials and interacts with the agent i
 * Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).
 * Environment Variables - identity credential may also be injected into workloads using operating system environment variables.
 
-### Identity Credentials
 
-The Agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
-
-JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To reduce some of these risks, bearer tokens may have a short lifespan. Alternatively, sender constrained tokens can be used such as TLS session binding.
-
-X.509 certificate credentials consist of two parts:
-
-- a certificate is a signed data structure that contains a public key and identity information
-- a corresponding private key
-
-The certificate is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key that corresponds to the public key in the certificate.
 
 ## Workload Identity Use Cases
 
