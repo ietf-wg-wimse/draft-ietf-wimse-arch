@@ -77,7 +77,7 @@ Attestation is the function through which a task verifies the identity of a sepa
 
 * Workload Identity Token
 
-An authentication token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}
+A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}
 
 # Architecture
 
