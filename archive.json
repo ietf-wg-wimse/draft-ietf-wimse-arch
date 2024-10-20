@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T01:47:25.716624+00:00",
+  "timestamp": "2024-10-20T01:55:23.094854+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1821,13 +1821,13 @@
       "labels": [],
       "body": "Resolves issues #34 ",
       "createdAt": "2024-10-10T03:20:32Z",
-      "updatedAt": "2024-10-16T09:44:15Z",
+      "updatedAt": "2024-10-18T22:41:32Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "wit-def",
-      "headRefOid": "0317d56467fd7288f915c12251cf073c7948f138",
+      "headRefOid": "61ecd2fe291ad56141e551aee4be379f8278b7a8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1859,6 +1859,46 @@
               "updatedAt": "2024-10-16T09:44:15Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6NzXT2",
+          "commit": {
+            "abbreviatedOid": "0317d56"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T22:39:58Z",
+          "updatedAt": "2024-10-18T22:39:58Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "This is what it is called in the S2S spec,  we would need to change the name there. ",
+              "createdAt": "2024-10-18T22:39:58Z",
+              "updatedAt": "2024-10-18T22:39:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6NzXj6",
+          "commit": {
+            "abbreviatedOid": "0317d56"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T22:41:32Z",
+          "updatedAt": "2024-10-18T22:41:32Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Updated",
+              "createdAt": "2024-10-18T22:41:32Z",
+              "updatedAt": "2024-10-18T22:41:32Z"
+            }
+          ]
         }
       ]
     },
@@ -1870,17 +1910,19 @@
       "state": "OPEN",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "Addresses issue #17 ",
       "createdAt": "2024-10-10T03:44:29Z",
-      "updatedAt": "2024-10-16T09:40:58Z",
+      "updatedAt": "2024-10-18T22:38:46Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "wl-identity",
-      "headRefOid": "a69511c1bb95cc6da5aad6c8ae3b37a19bcfe9a2",
+      "headRefOid": "bf3f4444e328b28bf4e6b7de84ca6493f4b551d7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1916,6 +1958,66 @@
               "body": "Is it a \"SHOULD\" or a \"MUST\"? Do we really need do deal with trust domains that are not associated with FQDNs?\r\nThere is an overlap with a previous wording. How about we shorten \"The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier.\" to \"FQDN notation of trust domain ensures uniqueness of the trust domain identifier\"?",
               "createdAt": "2024-10-16T09:39:28Z",
               "updatedAt": "2024-10-16T09:40:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6NzV8W",
+          "commit": {
+            "abbreviatedOid": "a69511c"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T22:30:57Z",
+          "updatedAt": "2024-10-18T22:30:57Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Updated",
+              "createdAt": "2024-10-18T22:30:57Z",
+              "updatedAt": "2024-10-18T22:30:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6NzWLW",
+          "commit": {
+            "abbreviatedOid": "a69511c"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T22:32:25Z",
+          "updatedAt": "2024-10-18T22:32:25Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Changed to workload, and associated. WIT is what is defined in the S2S spec. Keeping as WIMSE WIT for now. ",
+              "createdAt": "2024-10-18T22:32:25Z",
+              "updatedAt": "2024-10-18T22:32:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6NzW5H",
+          "commit": {
+            "abbreviatedOid": "a69511c"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T22:37:14Z",
+          "updatedAt": "2024-10-18T22:37:14Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "I don't think we can realistically make it a MUST.  I updated to the following:\r\n\r\nTrust domains SHOULD be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of trust domain helps to ensure uniqueness of the trust domain identifier.  \r\nI agree that this can probably be improved. ",
+              "createdAt": "2024-10-18T22:37:14Z",
+              "updatedAt": "2024-10-18T22:37:15Z"
             }
           ]
         }
