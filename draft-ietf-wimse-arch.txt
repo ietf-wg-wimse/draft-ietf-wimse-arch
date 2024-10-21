@@ -173,6 +173,14 @@ Table of Contents
    identity of a separate Workload.  (TBD: sync definition with
    reference RaTS architecture)
 
+   *  Workload Identity Token
+
+   A token that contains a workload identifier used for service to
+   service authentication.  The token is bound to a cryptographic key
+   and requires that the presenter provide proof of possession of the
+   secret key material.  This token is further defined in
+   [I-D.ietf-wimse-s2s-protocol]
+
 3.  Architecture
 
 3.1.  Workload Identity
@@ -574,6 +582,14 @@ Table of Contents
               draft-ietf-oauth-transaction-tokens-03, 3 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
               transaction-tokens-03>.
+
+   [I-D.ietf-wimse-s2s-protocol]
+              Campbell, B., Feldman, D., Salowey, J., Schwenkschuster,
+              A., and Y. Sheffer, "WIMSE Service to Service
+              Authentication", Work in Progress, Internet-Draft, draft-
+              ietf-wimse-s2s-protocol-01, 18 October 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
+              s2s-protocol-01>.
 
 Acknowledgments
 

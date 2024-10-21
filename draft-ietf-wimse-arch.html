@@ -1264,6 +1264,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
       </ul>
 <p id="section-2-10">Attestation is the function through which a task verifies the identity of a separate Workload. (TBD: sync definition with reference RaTS architecture)<a href="#section-2-10" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-11.1">
+          <p id="section-2-11.1.1">Workload Identity Token<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-12">A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span><a href="#section-2-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="architecture">
@@ -1700,8 +1706,12 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-oauth-transaction-tokens">[I-D.ietf-oauth-transaction-tokens]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-03</span>, <time datetime="2024-07-03" class="refDate">3 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-03">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-wimse-s2s-protocol">[I-D.ietf-wimse-s2s-protocol]</dt>
+      <dd>
+<span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Feldman, D.</span>, <span class="refAuthor">Salowey, J.</span>, <span class="refAuthor">Schwenkschuster, A.</span>, and <span class="refAuthor">Y. Sheffer</span>, <span class="refTitle">"WIMSE Service to Service Authentication"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-s2s-protocol-01</span>, <time datetime="2024-10-18" class="refDate">18 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-01">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
