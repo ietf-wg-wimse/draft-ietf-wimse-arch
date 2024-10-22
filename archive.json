@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:55:23.094854+00:00",
+  "timestamp": "2024-10-22T01:48:43.499202+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -398,7 +398,7 @@
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L40\r\n\r\nThe current workload definition says it is defined as \"a running instance of software....\". I think this is overly restrictive - workloads can consist of one or more running instances of software. ",
       "createdAt": "2024-10-15T14:56:21Z",
-      "updatedAt": "2024-10-16T14:51:42Z",
+      "updatedAt": "2024-10-20T17:21:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -414,6 +414,13 @@
           "body": "The basic question is whether we always want to identify (and authorize) individual/specific workload instances, or whether there can be a set of workloads that have the same identity and associated authorizations. I believe the latter is important since we often run multiple instances of the same workload (and the specific instances come and go). ",
           "createdAt": "2024-10-16T14:51:41Z",
           "updatedAt": "2024-10-16T14:51:41Z"
+        },
+        {
+          "author": "jricher",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Perhaps we should be specific and pedantic about a workload software vs a workload instance ",
+          "createdAt": "2024-10-20T17:21:10Z",
+          "updatedAt": "2024-10-20T17:21:24Z"
         }
       ]
     },
@@ -1741,24 +1748,26 @@
       "id": "PR_kwDOLPTb0M52RbTe",
       "title": "Minor cleanup, and initial Delegation and Impersonation, and Asynchronous and Batch Requests content",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kenmccracken-google",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Fixed some of the wording and parallelism in the intro to keep the same ordering of X.509 certificates followed by Workload identity tokens.  Generalized some of the phrasing.  Removed concepts that aren't well defined in the document, such as \"bottom turtle\".  I'm not opposed to adding these, I just don't think they make sense without an explanation of the analogy either inline or by-reference; so I tended towards keeping the document self-contained.\r\n\r\nProvided initial content for the Delegation and Impersonation, and Asynchronous and Batch Requests sections.",
       "createdAt": "2024-07-23T23:08:23Z",
-      "updatedAt": "2024-10-16T15:08:10Z",
+      "updatedAt": "2024-10-21T17:49:28Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
+      "baseRefOid": "c39386eb92ed760321d7960056ad26fda525218b",
       "headRepository": "kenmccracken-google/wimse-arch",
       "headRefName": "main",
-      "headRefOid": "96d71f168abc33347946302f7d325246394b7447",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e5bad23ccb847e9f94dfa7632ae65658d83abf1a",
+      "closedAt": "2024-10-21T17:49:28Z",
+      "mergedAt": "2024-10-21T17:49:28Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "9d92ccdd6b65c044d2a2c29f0fe3326f2989765b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1814,24 +1823,26 @@
       "id": "PR_kwDOLPTb0M5-J2HY",
       "title": "added WIT definition",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/40",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves issues #34 ",
       "createdAt": "2024-10-10T03:20:32Z",
-      "updatedAt": "2024-10-18T22:41:32Z",
+      "updatedAt": "2024-10-21T17:39:32Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "wit-def",
       "headRefOid": "61ecd2fe291ad56141e551aee4be379f8278b7a8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-21T17:39:32Z",
+      "mergedAt": "2024-10-21T17:39:31Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "c39386eb92ed760321d7960056ad26fda525218b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1907,7 +1918,7 @@
       "id": "PR_kwDOLPTb0M5-J7Jk",
       "title": "updated workload identity section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/41",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1916,17 +1927,19 @@
       "labels": [],
       "body": "Addresses issue #17 ",
       "createdAt": "2024-10-10T03:44:29Z",
-      "updatedAt": "2024-10-18T22:38:46Z",
+      "updatedAt": "2024-10-21T17:39:07Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "wl-identity",
       "headRefOid": "bf3f4444e328b28bf4e6b7de84ca6493f4b551d7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-21T17:39:07Z",
+      "mergedAt": "2024-10-21T17:39:07Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "dda6e2db0530fea42ac3475194b52fff11303b13"
+      },
       "comments": [],
       "reviews": [
         {
