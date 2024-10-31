@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T01:49:45.969403+00:00",
+  "timestamp": "2024-10-31T01:49:49.070416+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -323,7 +323,7 @@
       "labels": [],
       "body": "The wording here (Sec. 2) cannot be (and IMO, should be) distinguished from \"workload authentication\", where the basic identity of the workload is validated, even in the absence of any trusted environment.\r\n",
       "createdAt": "2024-05-05T11:53:55Z",
-      "updatedAt": "2024-07-02T22:09:49Z",
+      "updatedAt": "2024-10-30T21:07:38Z",
       "closedAt": null,
       "comments": [
         {
@@ -332,6 +332,13 @@
           "body": ">Attestation\r\n>\r\n>Attestation is the function through which a task verifies the identity of a separate Workload. \r\n>(TBD: sync definition with reference RaTS architecture)\r\n\r\nRATS Arch chose not to define attestation formally. NIST has two definitions:\r\n(1) \u201cThe process of providing a digital signature for a set of measurements securely stored in hardware, and then having the requester validate the signature and the set of measurements.\u201d\r\n(2) \u201cThe issue of a statement, based on a decision, that fulfillment of specified requirements has been demonstrated.\u201d\r\n\r\nDefinition (1) is consistent with RATS WG conventional wisdom (but they haven't officially adopted it). \r\nDefinition (2) is typically applied in the context of a manual workflow process but has been used in the context of (automated) SBOM.\r\n\r\nRATS Arch would describe SBOM workflows as \"Endorsements\" performed by \"Endorsers\".\r\n\r\nThe WIMSE definition is somewhere in between. RATS qualifies usage of the \"attestation\" term with \"remote\", which is helpful. Possibly, WIMSE should do something similar - as in \"workload attestation\"?\r\n\r\nIt may be relevant to describe WL Attestation both in terms of singleton WLs as well as a \"workflow\" of nodes. This suggests there is both a vertical (singleton) and a horizontal (workflow) aspect to workload attestation. \r\n\r\nFrom a WL identity perspective, that implies there could be both a nodal identity as well as an identity for a collection / cluster of nodes that cooperate to implement a workflow.\r\n\r\nA WL is typically deployed in post-manufacturing contexts (aka production networks). As such the RATS \"Endorsement\" terminology doesn't seem correct. Rather, each WL node would be regarded as a Relying Party (RP) that has as its input an Attestation Results message. But also, each WL node is an Attester. Hence, each WL nodes implements both the Attester and RP roles (as defined by RATS Arch). \r\n\r\nA set of WL nodes cooperating to achieve a collective task will have a collective attestation context, which is the combination of attestation results from each WL node. Each WL node will have a collection of Evidences from each measured component that contributes to the WL image and execution and an Attestation Result for the node.\r\n\r\nA collection of ARs therefore is needed to describe the trust for the workflow. A new concept is the idea that a summary Attestation Result may be needed that describes the trust properties of the workflow. An Attestation Results result (ARR) if you will?\r\n",
           "createdAt": "2024-07-02T21:52:22Z",
           "updatedAt": "2024-07-02T22:09:49Z"
+        },
+        {
+          "author": "dhs-BI",
+          "authorAssociation": "NONE",
+          "body": "Re-reading this doc, this was one of the first things that stood out to me.  Nowhere else in the doc is the term attestation used to refer to an authentication process.  The definition refers to authentication.  Attestations are provided by an authority over a set of data.  For example, a FIDO attestation is not used for authentication, but to demonstrate the provenance of the hardware device the credential resides upon and its properties, such as FIDO certification or FIPS compliance.  \r\n\r\nThe definition, as given here, is inaccurate and not useful in the context of the doc.  I urge the authors to give serious consideration to removing it entirely from the document.",
+          "createdAt": "2024-10-30T21:07:37Z",
+          "updatedAt": "2024-10-30T21:07:37Z"
         }
       ]
     },
