@@ -223,17 +223,15 @@ One example of security context establishment and propagation is as follows:
 ~~~~
 {: #arch-chain title="Security Context Establishment and Propagation"}
 
-1. Workload 1 requests to load the LLM(Large Language Model) within Workload 2; Workload 2 requires that Workload 1 has hardware-based security to prevent model leakage. The hardware-based security context information of Workload 1 can be obtained by running a remote attestation protocol. Workload 1 provides its Identity and the security context information to Workload 2 to apply for loading the LLM.
+1. Workload 1 requests to load a service function within Workload 2. For example, the service function may be a LLM(Large Language Model) or a function to process PII information; Workload 2 requires that Workload 1 has hardware-based security （confidential computing） to prevent model or PII information leakage. The hardware-based security context information of Workload 1 can be obtained by running a remote attestation protocol. Workload 1 provides its Identity and the security context information to Workload 2 to apply for loading the service function.
 
-2. Workload 2 verifies the Identity and corresponding security context information provided by Workload 1 to confirm whether the model can be provided to Workload 1.
+3. Workload 2 verifies the Identity and corresponding security context information provided by Workload 1 to confirm whether the service function can be provided to Workload 1.
 
-3. Workload 1 also requires the LLM on Workload 2 to use the vertical industry domain-specific data on Workload 3 for model fine-tuning training.
+4. Workload 1 also requires the service function on Workload 2 to use the service function or data on Workload 3. For example, in the case of LLM, Workload 2 may required to load the vertical industry domain-specific data on Workload 3 for model fine-tuning.
+   
+6. Workload 2 provides its Identity, Workload 1’s Identity, and its hardware-based security context information to Workload 3.
 
-4. Workload 2 provides its Identity, Workload 1’s Identity, and its hardware-based security context information to Workload 3.
-
-5. Workload 3 uses this information for authentication and, upon passing, provides the industry domain-specific data to Workload 2.
-
-6. After fine-tuning training with the industry domain-specific data provided by Workload 3, Workload 2 provides the Model to Workload 1.
+7. Workload 3 uses this information for authentication and, upon passing, provides the required service function or data to Workload 2.
 
 
 
