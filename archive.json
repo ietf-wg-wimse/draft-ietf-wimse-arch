@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T01:46:07.525983+00:00",
+  "timestamp": "2024-11-07T01:45:49.259780+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1332,13 +1332,13 @@
       "labels": [],
       "body": "Propose to add one use case of security context establishment and propagation.",
       "createdAt": "2024-06-19T14:10:07Z",
-      "updatedAt": "2024-10-12T04:04:40Z",
+      "updatedAt": "2024-11-06T05:40:35Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
       "headRepository": "maxpassion/draft-ietf-wimse-arch",
       "headRefName": "patch-2",
-      "headRefOid": "733361f0f03617f37682c5a12b2ebd0cde6efc7d",
+      "headRefOid": "70ab669ec4a1c8a1ba66541337f67918354d4337",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1385,6 +1385,13 @@
           "body": "> I would suggest to generalise this use case beyond LLM. Hardware attestation and propagation of attested identity is useful for many other applications - for example processing PII have severe legal implications and many organisations want to mitigate associated risks.\r\n\r\nHi Yaroslav, Thanks for the comments, will update the text soon.",
           "createdAt": "2024-10-12T04:04:39Z",
           "updatedAt": "2024-10-12T04:04:39Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "NONE",
+          "body": "> generalized the use case of security context establishment and propagation.\r\n\r\n@hannestschofenig @yaroslavros Could you please review the updated text? thanks",
+          "createdAt": "2024-11-06T05:40:33Z",
+          "updatedAt": "2024-11-06T05:40:33Z"
         }
       ],
       "reviews": [
@@ -1407,6 +1414,19 @@
               "updatedAt": "2024-07-08T12:28:34Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6QE0Xn",
+          "commit": {
+            "abbreviatedOid": "70ab669"
+          },
+          "author": "maxpassion",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "generalized the use case of security context establishment and propagation.",
+          "createdAt": "2024-11-06T03:38:00Z",
+          "updatedAt": "2024-11-06T03:38:00Z",
+          "comments": []
         }
       ]
     },
