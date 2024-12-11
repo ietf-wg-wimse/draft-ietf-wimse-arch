@@ -536,7 +536,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -1046,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 12 June 2025</td>
+<td class="center">Expires 14 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1059,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-09" class="published">9 December 2024</time>
+<time datetime="2024-12-11" class="published">11 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-12">12 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-14">14 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1538,7 +1542,7 @@ The client request is typically made over HTTPS, but other protocols may be used
           <h4 id="name-context-and-workload-identi">
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-context-and-workload-identi" class="section-name selfRef">Context and workload Identity</a>
           </h4>
-<span id="name-basic-example-workload-appli"></span><div id="arch-context">
+<span id="name-context-example-workload-ap"></span><div id="arch-context">
 <figure id="figure-2">
             <div id="section-3.2.2-1.1">
               <div class="alignLeft art-svg artwork" id="section-3.2.2-1.1.1">
@@ -1579,7 +1583,7 @@ The client request is typically made over HTTPS, but other protocols may be used
                   <polygon class="arrowhead" points="184,128 172,122.4 172,133.6" fill="black" transform="rotate(180,176,128)"></polygon>
                   <polygon class="arrowhead" points="120,240 108,234.4 108,245.6" fill="black" transform="rotate(0,112,240)"></polygon>
                   <g class="text">
-                    <text x="392" y="100">Token</text>
+                    <text x="392" y="100">Context</text>
                     <text x="256" y="116">(3)</text>
                     <text x="392" y="132">Service</text>
                     <text x="256" y="148">(c)</text>
@@ -1618,15 +1622,15 @@ The client request is typically made over HTTPS, but other protocols may be used
 </div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-basic-example-workload-appli" class="selfRef">Basic example workload application system.</a>
+<a href="#name-context-example-workload-ap" class="selfRef">Context example workload application system.</a>
             </figcaption></figure>
 </div>
 <p id="section-3.2.2-2">In many cases the application system uses other security context information about the request during authorization and auditing.  The following is a basic scenario that illustrates the propagation of security context in the workload system.
 Some of the components and interactions have been removed from the previous scenario for simplicity.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.2-3.1">
-              <p id="section-3.2.2-3.1.1">Token Service
-This scenario adds a token service component which is responsible for issuing, translating and exchanging tokens. For example, token exchange may involve converting an OAuth 2.0 access token into a different token format that is understood by internal services, while token transformation could include modifying the token to include additional claims or removing sensitive information before forwarding it to other workloads.<a href="#section-3.2.2-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.2-3.1.1">Context Service
+This scenario adds a context service component which is responsible for creating security context based on authentication and other calculations. Context can be represented in many ways; it can be a plaintext data structure, a signed data structure such as a jwt or a pointer used to lookup the context as a data structure stored somewhere else. In one common example, creating the context may involve a token exchange converting an OAuth 2.0 access token into a different token format, such as a transaction token,  that is understood by internal services.<a href="#section-3.2.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.2-3.2">
               <p id="section-3.2.2-3.2.1">(1) Initial Authentication
@@ -1639,17 +1643,17 @@ The application client makes a request to the gateway over HTTPS.  The client ma
 </li>
             <li class="normal" id="section-3.2.2-3.4">
               <p id="section-3.2.2-3.4.1">(3) Establishing the request context
-The gateway service requests a security context token (c) from a token service. This process may entail sending an access token (a) along with other information to a token exchange endpoint to obtain the context token, which contains information about the entity accessing the system. This context token is typically only relevant to the internal system and is not returned to the client.
-The gateway may use alternative mechanisms to get the internal context token (c).<a href="#section-3.2.2-3.4.1" class="pilcrow">¶</a></p>
+The gateway service requests a security context token (c) from a token service. This process may entail sending an access token (a) along with other information to a token exchange endpoint to obtain the context token, which contains information about the entity accessing the system. This context is typically only relevant to the internal system and is not returned to the client.
+The gateway may use alternative mechanisms to get the internal security context information (c).<a href="#section-3.2.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.2-3.5">
               <p id="section-3.2.2-3.5.1">(4) Forwarding Request to Workload
-The gateway forwards the request along with the context token (c) to the appropriate workload. A bearer token, such as an access token (a), is not usually forwarded as it is only meant for external access. The workload uses information in the context token in applying authorization policy to the application client's request.
+The gateway forwards the request along with the context information (c) to the appropriate workload. A bearer token, such as an access token (a), is not usually forwarded as it is only meant for external access. The workload uses information in the context token in applying authorization policy to the application client's request.
 If the workload does not receive a context token, then it will deny requests that rely on information from the token.<a href="#section-3.2.2-3.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.2-3.6">
               <p id="section-3.2.2-3.6.1">(5) Making Additional Workload Originated Requests
-The workload may need to make requests of other workloads. When making these requests, the workload includes the context token so Workload 2 can authorize and audit the request. Workload 2 may have a policy requiring Workload 1 to authenticate its service identity and provide a valid context token (c) to access certain APIs.<a href="#section-3.2.2-3.6.1" class="pilcrow">¶</a></p>
+The workload may need to make requests of other workloads. When making these requests, the workload includes the context information so Workload 2 can authorize and audit the request. Workload 2 may have a policy requiring Workload 1 to authenticate its service identity and provide valid context information (c) to access certain APIs.<a href="#section-3.2.2-3.6.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -1658,7 +1662,147 @@ The workload may need to make requests of other workloads. When making these req
 <section id="section-3.2.3">
           <h4 id="name-cross-domain-communication">
 <a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-cross-domain-communication" class="section-name selfRef">Cross-Domain Communication</a>
-        </h4>
+          </h4>
+<span id="name-external-request-workload-a"></span><div id="arch-cross">
+<figure id="figure-3">
+            <div id="section-3.2.3-1.1">
+              <div class="alignLeft art-svg artwork" id="section-3.2.3-1.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="608" width="528" viewBox="0 0 528 608" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,144 L 8,192" fill="none" stroke="black"></path>
+                  <path d="M 72,144 L 72,192" fill="none" stroke="black"></path>
+                  <path d="M 120,64 L 120,352" fill="none" stroke="black"></path>
+                  <path d="M 144,32 L 144,64" fill="none" stroke="black"></path>
+                  <path d="M 144,352 L 144,416" fill="none" stroke="black"></path>
+                  <path d="M 168,64 L 168,352" fill="none" stroke="black"></path>
+                  <path d="M 176,512 L 176,576" fill="none" stroke="black"></path>
+                  <path d="M 224,144 L 224,208" fill="none" stroke="black"></path>
+                  <path d="M 240,208 L 240,512" fill="none" stroke="black"></path>
+                  <path d="M 304,272 L 304,336" fill="none" stroke="black"></path>
+                  <path d="M 312,512 L 312,576" fill="none" stroke="black"></path>
+                  <path d="M 328,144 L 328,208" fill="none" stroke="black"></path>
+                  <path d="M 360,512 L 360,576" fill="none" stroke="black"></path>
+                  <path d="M 384,144 L 384,208" fill="none" stroke="black"></path>
+                  <path d="M 392,208 L 392,272" fill="none" stroke="black"></path>
+                  <path d="M 400,272 L 400,336" fill="none" stroke="black"></path>
+                  <path d="M 464,208 L 464,512" fill="none" stroke="black"></path>
+                  <path d="M 488,512 L 488,576" fill="none" stroke="black"></path>
+                  <path d="M 496,144 L 496,208" fill="none" stroke="black"></path>
+                  <path d="M 520,32 L 520,416" fill="none" stroke="black"></path>
+                  <path d="M 144,32 L 520,32" fill="none" stroke="black"></path>
+                  <path d="M 120,64 L 168,64" fill="none" stroke="black"></path>
+                  <path d="M 8,144 L 72,144" fill="none" stroke="black"></path>
+                  <path d="M 224,144 L 328,144" fill="none" stroke="black"></path>
+                  <path d="M 384,144 L 496,144" fill="none" stroke="black"></path>
+                  <path d="M 72,176 L 112,176" fill="none" stroke="black"></path>
+                  <path d="M 168,176 L 216,176" fill="none" stroke="black"></path>
+                  <path d="M 328,176 L 376,176" fill="none" stroke="black"></path>
+                  <path d="M 8,192 L 72,192" fill="none" stroke="black"></path>
+                  <path d="M 224,208 L 328,208" fill="none" stroke="black"></path>
+                  <path d="M 384,208 L 496,208" fill="none" stroke="black"></path>
+                  <path d="M 304,272 L 400,272" fill="none" stroke="black"></path>
+                  <path d="M 304,336 L 400,336" fill="none" stroke="black"></path>
+                  <path d="M 120,352 L 168,352" fill="none" stroke="black"></path>
+                  <path d="M 144,416 L 520,416" fill="none" stroke="black"></path>
+                  <path d="M 176,512 L 232,512" fill="none" stroke="black"></path>
+                  <path d="M 248,512 L 312,512" fill="none" stroke="black"></path>
+                  <path d="M 360,512 L 456,512" fill="none" stroke="black"></path>
+                  <path d="M 472,512 L 488,512" fill="none" stroke="black"></path>
+                  <path d="M 176,576 L 312,576" fill="none" stroke="black"></path>
+                  <path d="M 360,576 L 488,576" fill="none" stroke="black"></path>
+                  <path d="M 312,208 C 320.83064,208 328,200.83064 328,192" fill="none" stroke="black"></path>
+                  <path d="M 400,208 C 391.16936,208 384,200.83064 384,192" fill="none" stroke="black"></path>
+                  <path d="M 384,272 C 392.83064,272 400,279.16936 400,288" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="472,512 460,506.4 460,517.6" fill="black" transform="rotate(90,464,512)"></polygon>
+                  <polygon class="arrowhead" points="384,176 372,170.4 372,181.6" fill="black" transform="rotate(0,376,176)"></polygon>
+                  <polygon class="arrowhead" points="248,512 236,506.4 236,517.6" fill="black" transform="rotate(90,240,512)"></polygon>
+                  <polygon class="arrowhead" points="224,176 212,170.4 212,181.6" fill="black" transform="rotate(0,216,176)"></polygon>
+                  <polygon class="arrowhead" points="120,176 108,170.4 108,181.6" fill="black" transform="rotate(0,112,176)"></polygon>
+                  <g class="text">
+                    <text x="144" y="100">G</text>
+                    <text x="144" y="116">a</text>
+                    <text x="144" y="132">t</text>
+                    <text x="144" y="148">e</text>
+                    <text x="48" y="164">App</text>
+                    <text x="96" y="164">(1)</text>
+                    <text x="144" y="164">w</text>
+                    <text x="192" y="164">(2)</text>
+                    <text x="360" y="164">(4)</text>
+                    <text x="44" y="180">Client</text>
+                    <text x="144" y="180">a</text>
+                    <text x="268" y="180">workload</text>
+                    <text x="312" y="180">1</text>
+                    <text x="436" y="180">workload</text>
+                    <text x="480" y="180">2</text>
+                    <text x="96" y="196">(a)</text>
+                    <text x="144" y="196">y</text>
+                    <text x="192" y="196">(c)</text>
+                    <text x="360" y="196">(c)</text>
+                    <text x="144" y="228">S</text>
+                    <text x="144" y="244">e</text>
+                    <text x="224" y="244">(3)</text>
+                    <text x="376" y="244">(5)</text>
+                    <text x="408" y="244">(c)</text>
+                    <text x="144" y="260">r</text>
+                    <text x="144" y="276">v</text>
+                    <text x="144" y="292">i</text>
+                    <text x="352" y="292">Token</text>
+                    <text x="144" y="308">c</text>
+                    <text x="448" y="308">(6)</text>
+                    <text x="480" y="308">(t)</text>
+                    <text x="144" y="324">e</text>
+                    <text x="352" y="324">Service</text>
+                    <text x="380" y="404">Internal</text>
+                    <text x="440" y="404">Trust</text>
+                    <text x="492" y="404">Domain</text>
+                    <text x="244" y="532">Infrastructure</text>
+                    <text x="428" y="532">External</text>
+                    <text x="240" y="564">Service</text>
+                    <text x="424" y="564">Service</text>
+                  </g>
+                </svg><a href="#section-3.2.3-1.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-external-request-workload-a" class="selfRef">External request workload application system.</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.2.3-2">In many applications workloads must make requests of infrastructure that operates as a different trust domain or external services that are in a separate trust domain. Figure <a href="#arch-cross" class="auto internal xref">Figure 3</a> shows this scenario. The scenario shows some new components described below.
+Components and interactions from previous scenarios are still relevant to this example, but are omitted for simplicity.<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3-3.1">
+              <p id="section-3.2.3-3.1.1">Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in the external trust domain or there may be token services in both the internal trust domain and the external trust domain.  In some cases the workload will need to contact both the internal token service and an external token service in order to gain access to infrastructure or external service.<a href="#section-3.2.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-3.2">
+              <p id="section-3.2.3-3.2.1">Infrastructure Service - this service is often part of the application, but it is managed by an infrastructure provider and may require different information to access it.<a href="#section-3.2.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-3.3">
+              <p id="section-3.2.3-3.3.1">External Service - this service is distinct from the application and hosted in a separate trust domain.  This trust domain often has different access requirements that workloads in the internal trust domain.<a href="#section-3.2.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-3.2.3-4">Some example interactions in this scenario:<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3-5.1">
+              <p id="section-3.2.3-5.1.1">(1) The application client is making requests with authentication information as in the other scenarios<a href="#section-3.2.3-5.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.2">
+              <p id="section-3.2.3-5.2.1">(2) The gateway forwards the request to the appropriate workload with the security context information<a href="#section-3.2.3-5.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.3">
+              <p id="section-3.2.3-5.3.1">(3) The workload needs to access an infrastructure service and, because it is managed by the same organization, it authenticates to the service directly using its workload credentials.<a href="#section-3.2.3-5.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.4">
+              <p id="section-3.2.3-5.4.1">(4) Workload 1 contacts Workload 2 to perform an operation. This request is accompanied by a security context as in the other scenarios.<a href="#section-3.2.3-5.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.5">
+              <p id="section-3.2.3-5.5.1">(5) Workload 2 determines it needs to communicate with an external service.  In order to gain access to this service it must first obtain a token/credential (t) that it can use externally.  It authenticates to the token service using its workload identity and provides security context information.  The token service determines what type of externally usable token to issue to the workload.<a href="#section-3.2.3-5.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.6">
+              <p id="section-3.2.3-5.6.1">(6) Workload 2 uses this new token/credential (t) to access the external service.<a href="#section-3.2.3-5.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.3-5.7">
+              <p id="section-3.2.3-5.7.1">Note that in (3) and (6) the workload may need to authenticate to an external token service to obtain an access token to access the system in the foreign trust domain.<a href="#section-3.2.3-5.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 </section>
@@ -1676,9 +1820,9 @@ The workload may need to make requests of other workloads. When making these req
 <p id="section-3.3.1-1">[TODO: this section will need to be updated to discuss workload identifier as a concept as well]<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-2">A workload needs to obtain its identity early in its lifecycle. This identity is the base identity upon which further identity and security context are built.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-3">Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation to ensure the workload receives the correct identity credentials. An example of a bootstrapping process follows.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.1-4"><a href="#arch-fig" class="auto internal xref">Figure 3</a> provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining identity credentials from the Server, the agent passes them to the workload.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-4"><a href="#arch-fig" class="auto internal xref">Figure 4</a> provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining identity credentials from the Server, the agent passes them to the workload.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
 <span id="name-host-software-layering-in-a"></span><div id="arch-fig">
-<figure id="figure-3">
+<figure id="figure-4">
             <div id="section-3.3.1-5.1">
               <div class="alignLeft art-svg artwork" id="section-3.3.1-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="480" width="472" viewBox="0 0 472 480" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -1749,7 +1893,7 @@ The workload may need to make requests of other workloads. When making these req
                 </svg><a href="#section-3.3.1-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-host-software-layering-in-a" class="selfRef">Host Software Layering in a Workload Identity Architecture.</a>
             </figcaption></figure>
 </div>
@@ -1826,13 +1970,13 @@ The workload may need to make requests of other workloads. When making these req
               <p id="section-3.3.2-6.3.1">TLS authentication of the server and HTTP request signing using a secret key.<a href="#section-3.3.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.3.2-7"><a href="#arch-chain" class="auto internal xref">Figure 4</a> illustrates the communication between different workloads. Two aspects are important
+<p id="section-3.3.2-7"><a href="#arch-chain" class="auto internal xref">Figure 5</a> illustrates the communication between different workloads. Two aspects are important
 to highlight: First, there is a need to consider the interaction with workloads that are external
 to the trust domain (sometimes called cross-domain). Second, the interaction does
 not only occur between workloads that directly interact with each other but instead may also
 take place across intermediate workloads (in an end-to-end style).<a href="#section-3.3.2-7" class="pilcrow">¶</a></p>
 <span id="name-workload-to-workload-commun"></span><div id="arch-chain">
-<figure id="figure-4">
+<figure id="figure-5">
             <div id="section-3.3.2-8.1">
               <div class="alignLeft art-svg artwork" id="section-3.3.2-8.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="520" viewBox="0 0 520 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -1891,7 +2035,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
                 </svg><a href="#section-3.3.2-8.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-workload-to-workload-commun" class="selfRef">Workload-to-Workload Communication.</a>
             </figcaption></figure>
 </div>
