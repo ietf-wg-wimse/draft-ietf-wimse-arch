@@ -209,7 +209,7 @@ Similarly to the previous flow, the gateway may determine that for another API c
                  |                                              |
                  |                      +----------------+      |
               +--+--+                   |                |      |
-              |     +------------------>|     Token      |      |
+              |     +------------------>|    Context     |      |
               |     |         (3)       |                |      |
               |     |<------------------+    Service     |      |
               |     |         (c)       |                |      |
@@ -236,13 +236,13 @@ Similarly to the previous flow, the gateway may determine that for another API c
                  +----------------------------------------------+
 
 ~~~~
-{: #arch-context title="Basic example workload application system."}
+{: #arch-context title="Context example workload application system."}
 
 In many cases the application system uses other security context information about the request during authorization and auditing.  The following is a basic scenario that illustrates the propagation of security context in the workload system.
 Some of the components and interactions have been removed from the previous scenario for simplicity.
 
-* Token Service
-This scenario adds a token service component which is responsible for issuing, translating and exchanging tokens. For example, token exchange may involve converting an OAuth 2.0 access token into a different token format that is understood by internal services, while token transformation could include modifying the token to include additional claims or removing sensitive information before forwarding it to other workloads.
+* Context Service
+This scenario adds a context service component which is responsible for creating security context based on authentication and other calculations. Context can be represented in many ways; it can be a plaintext data structure, a signed data structure such as a jwt or a pointer used to lookup the context as a data structure stored somewhere else. In one common example, creating the context may involve a token exchange converting an OAuth 2.0 access token into a different token format, such as a transaction token,  that is understood by internal services.
 
 * (1) Initial Authentication
 In the initial authentication the gateway service obtains credentials it can use with the gateway service. This authentication may involve several steps and may be performed by an external entity such as an identity provider. The authentication process will result in a credential that the gateway service can evaluate. For example, the credential could be an OAuth Access token.
@@ -252,19 +252,82 @@ If the client already has an access token that it can use to authenticate to the
 The application client makes a request to the gateway over HTTPS.  The client may be authenticated to the gateway through TLS client authentication (mutual TLS) or through a credential such as an access token obtained in step 1.
 
 * (3) Establishing the request context
-The gateway service requests a security context token (c) from a token service. This process may entail sending an access token (a) along with other information to a token exchange endpoint to obtain the context token, which contains information about the entity accessing the system. This context token is typically only relevant to the internal system and is not returned to the client.
-The gateway may use alternative mechanisms to get the internal context token (c).
+The gateway service requests a security context token (c) from a token service. This process may entail sending an access token (a) along with other information to a token exchange endpoint to obtain the context token, which contains information about the entity accessing the system. This context is typically only relevant to the internal system and is not returned to the client.
+The gateway may use alternative mechanisms to get the internal security context information (c).
 
 * (4) Forwarding Request to Workload
-The gateway forwards the request along with the context token (c) to the appropriate workload. A bearer token, such as an access token (a), is not usually forwarded as it is only meant for external access. The workload uses information in the context token in applying authorization policy to the application client's request.
+The gateway forwards the request along with the context information (c) to the appropriate workload. A bearer token, such as an access token (a), is not usually forwarded as it is only meant for external access. The workload uses information in the context token in applying authorization policy to the application client's request.
 If the workload does not receive a context token, then it will deny requests that rely on information from the token.
 
 * (5) Making Additional Workload Originated Requests
-The workload may need to make requests of other workloads. When making these requests, the workload includes the context token so Workload 2 can authorize and audit the request. Workload 2 may have a policy requiring Workload 1 to authenticate its service identity and provide a valid context token (c) to access certain APIs.
+The workload may need to make requests of other workloads. When making these requests, the workload includes the context information so Workload 2 can authorize and audit the request. Workload 2 may have a policy requiring Workload 1 to authenticate its service identity and provide valid context information (c) to access certain APIs.
 
 
 ### Cross-Domain Communication
+~~~aasvg
+                 +----------------------------------------------+
+                 |                                              |
+              +--+--+                                           |
+              |     |                                           |
+              |  G  |                                           |
+              |  a  |                                           |
+              |  t  |                                           |
++-------+     |  e  |      +------------+      +-------------+  |
+|   App | (1) |  w  | (2)  |            |  (4) |             |  |
+| Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
++-------+ (a) |  y  | (c)  |            |  (c) |             |  |
+              |     |      +-+---------++      ++--------+---+  |
+              |  S  |        |                  |        |      |
+              |  e  |     (3)|               (5)|(c)     |      |
+              |  r  |        |                  |        |      |
+              |  v  |        |       +-+--------++       |      |
+              |  i  |        |       |   Token   |       |      |
+              |  c  |        |       |           |    (6)|(t)   |
+              |  e  |        |       |  Service  |       |      |
+              |     |        |       +-----------+       |      |
+              +--+--+        |                           |      |
+                 |           |                           |      |
+                 |           |                           |      |
+                 |           |             Internal Trust|Domain|
+                 +-----------+---------------------------+------+
+                             |                           |       
+                             |                           |       
+                             |                           |       
+                             |                           |       
+                             |                           |       
+                     +-------v--------+     +------------v--+    
+                     | Infrastructure |     |    External   |    
+                     |                |     |               |    
+                     |    Service     |     |    Service    |    
+                     +----------------+     +---------------+ 
 
+~~~~
+{: #arch-cross title="External request workload application system."}
+
+In many applications workloads must make requests of infrastructure that operates as a different trust domain or external services that are in a separate trust domain. Figure {{arch-cross}} shows this scenario. The scenario shows some new components described below.
+Components and interactions from previous scenarios are still relevant to this example, but are omitted for simplicity. 
+
+* Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in the external trust domain or there may be token services in both the internal trust domain and the external trust domain.  In some cases the workload will need to contact both the internal token service and an external token service in order to gain access to infrastructure or external service.
+
+* Infrastructure Service - this service is often part of the application, but it is managed by an infrastructure provider and may require different information to access it.  
+
+* External Service - this service is distinct from the application and hosted in a separate trust domain.  This trust domain often has different access requirements that workloads in the internal trust domain. 
+
+Some example interactions in this scenario:
+
+* (1) The application client is making requests with authentication information as in the other scenarios
+
+* (2) The gateway forwards the request to the appropriate workload with the security context information
+
+* (3) The workload needs to access an infrastructure service and, because it is managed by the same organization, it authenticates to the service directly using its workload credentials.
+
+* (4) Workload 1 contacts Workload 2 to perform an operation. This request is accompanied by a security context as in the other scenarios.
+
+* (5) Workload 2 determines it needs to communicate with an external service.  In order to gain access to this service it must first obtain a token/credential (t) that it can use externally.  It authenticates to the token service using its workload identity and provides security context information.  The token service determines what type of externally usable token to issue to the workload. 
+
+* (6) Workload 2 uses this new token/credential (t) to access the external service.
+
+* Note that in (3) and (6) the workload may need to authenticate to an external token service to obtain an access token to access the system in the foreign trust domain. 
 
 
 ## Workload Identity Use Cases
