@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-10T01:59:06.208742+00:00",
+  "timestamp": "2024-12-12T01:57:02.373549+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -2062,6 +2062,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOLPTb0M6EzBxu",
+      "title": "Added some scenarios to the architecture",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/47",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added some scenarios to the architecture.",
+      "createdAt": "2024-12-11T04:53:40Z",
+      "updatedAt": "2024-12-11T04:54:02Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9d92ccdd6b65c044d2a2c29f0fe3326f2989765b",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "arch-scenarios",
+      "headRefOid": "d8cc092c139a7d1d15e62a1e5930c4a32b56f78d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
