@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-19T01:53:59.839856+00:00",
+  "timestamp": "2024-12-22T01:54:48.074008+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -2075,7 +2075,7 @@
       "labels": [],
       "body": "Added some scenarios to the architecture.",
       "createdAt": "2024-12-11T04:53:40Z",
-      "updatedAt": "2024-12-11T04:54:02Z",
+      "updatedAt": "2024-12-21T17:39:38Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "9d92ccdd6b65c044d2a2c29f0fe3326f2989765b",
@@ -2087,7 +2087,64 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6WIDbO",
+          "commit": {
+            "abbreviatedOid": "d8cc092"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-21T17:26:57Z",
+          "updatedAt": "2024-12-21T17:39:38Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n                       +-------------------------------Trust Boundary---------------+\r\n                       |                                                            |\r\n                       |                                                            |\r\n                    +-----+         +--------------+                                |\r\n                    |     |         |              |       (3)                      |\r\n                    |     |     +--->  Workload 1  +-------------------+            |\r\n                    |  G  |     |   |              |                   |            |\r\n                    |  a  |     |   +-------^------+                   |            |\r\n                    |  t  |     |           |                          |            |\r\n+------------+      |  e  |     |           | (1)                      |            |\r\n|            | (2)  |  w  | (3) |           |                          |            |\r\n| App Client +----->|  a  +-----+   +-------+-------+                  |            |\r\n|            |      |  y  |         |               |          +-------+------+     |\r\n+------------+      |     +-----+   | CA/Credential |    (1)   |              |     |\r\n                    |  S  | (4) |   |    Service    +---------->   Workload 3 |     |\r\n                    |  e  |     |   |               |          |              |     |\r\n                    |  r  |     |   +-------+-------+          +-------+------+     |\r\n                    |  v  |     |           |                          |            |\r\n                    |  i  |     |           | (1)                      |            |\r\n                    |  c  |     |           |                          |            |\r\n                    |  e  |     |   +-------v------+                   |            |\r\n                    |     |     |   |              |      (4)          |            |\r\n                    |     |     +--->  Workload 2  +-------------------+            |\r\n                    |     |         |              |                                |\r\n                    +-----+         +--------------+                                |\r\n                       |                                                            |\r\n                       |                                                            |\r\n                       |                                                            |\r\n```\r\n\r\nHarmonise diagrams",
+              "createdAt": "2024-12-21T17:34:54Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nThe above diagram presents a basic workload application system.  The large box represents a trust domain within which the workload application is hosted.  Within this example\r\n```\r\n\r\nLet's keep terms consistent",
+              "createdAt": "2024-12-21T17:35:54Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\r\nThe large box represents a trust domain of the application that is composed of several workloads.  A trust domain may have a more complex internal structure with more workloads, multiple gateways, internal infrastructure, and other services.\r\n```\r\n\r\n\"Internal\" means different things for different people",
+              "createdAt": "2024-12-21T17:36:27Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "```suggestion\r\nIn this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the same trust domain. The credentials are often X.509 based or JWT based.\r\n```\r\nSame as above",
+              "createdAt": "2024-12-21T17:37:17Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 118,
+              "body": "```suggestion\r\n                 +-----------------------Trust Boundary---------+\r\n                 |                                              |\r\n                 |                      +----------------+      |\r\n              +--+--+                   |                |      |\r\n              |     +------------------>|    Context     |      |\r\n              |     |         (3)       |                |      |\r\n              |     |<------------------+    Service     |      |\r\n              |     |         (c)       |                |      |\r\n              |  G  |                   +----------------+      |\r\n              |  a  |                                           |\r\n   (1)        |  t  |                                           |\r\n+-------+     |  e  |      +------------+      +-------------+  |\r\n|   App | (2) |  w  | (4)  |            |  (5) |             |  |\r\n| Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |\r\n+-------+ (a) |  y  | (c)  |            |  (c) |             |  |\r\n              |     |      +------------+      +-------------+  |\r\n              |  S  |                                           |\r\n              |  e  |                                           |\r\n              |  r  |                                           |\r\n              |  v  |                                           |\r\n              |  i  |                                           |\r\n              |  c  |                                           |\r\n              |  e  |                                           |\r\n              |     |                                           |\r\n              +--+--+                                           |\r\n                 |                                              |\r\n                 |                                              |\r\n                 |                                              |\r\n```\r\n\r\nSame as above",
+              "createdAt": "2024-12-21T17:38:01Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 174,
+              "body": "```suggestion\r\n                 +--------------------------Trust Boundary------+\r\n                 |                                              |\r\n              +--+--+                                           |\r\n              |     |                                           |\r\n              |  G  |                                           |\r\n              |  a  |                                           |\r\n              |  t  |                                           |\r\n+-------+     |  e  |      +------------+      +-------------+  |\r\n|   App | (1) |  w  | (2)  |            |  (4) |             |  |\r\n| Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |\r\n+-------+ (a) |  y  | (c)  |            |  (c) |             |  |\r\n              |     |      +-+---------++      ++--------+---+  |\r\n              |  S  |        |                  |        |      |\r\n              |  e  |     (3)|               (5)|(c)     |      |\r\n              |  r  |        |                  |        |      |\r\n              |  v  |        |       +-+--------++       |      |\r\n              |  i  |        |       |   Token   |       |      |\r\n              |  c  |        |       |           |    (6)|(t)   |\r\n              |  e  |        |       |  Service  |       |      |\r\n              |     |        |       +-----------+       |      |\r\n              +--+--+        |                           |      |\r\n                 |           |                           |      |\r\n                 |           |                           |      |\r\n                 |           |                           |      |\r\n```\r\n\r\nSame as above",
+              "createdAt": "2024-12-21T17:38:37Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            },
+            {
+              "originalPosition": 193,
+              "body": "```suggestion\r\n* Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in a different trust domain or there may be token services in multiple trust domains.  In some cases the workload will need to contact token services in various domains in order to gain access to infrastructure or external service.\r\n```\r\n\r\nSame as above",
+              "createdAt": "2024-12-21T17:39:15Z",
+              "updatedAt": "2024-12-21T17:39:38Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
