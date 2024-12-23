@@ -125,7 +125,7 @@ The certificate or WIT is presented during authentication, however the private k
 ### Basic Workload Identity Scenario
 
 ~~~aasvg
-                       +------------------------------------------------------------+
+                       +-------------------------------Trust Boundary---------------+
                        |                                                            |
                        |                                                            |
                     +-----+         +--------------+                                |
@@ -152,7 +152,7 @@ The certificate or WIT is presented during authentication, however the private k
                     +-----+         +--------------+                                |
                        |                                                            |
                        |                                                            |
-                       |                                  Internal Trust Domain     |
+                       |                                                            |
                        +------------------------------------------------------------+
 ~~~~
 {: #arch-basic title="Basic example workload application system."}
