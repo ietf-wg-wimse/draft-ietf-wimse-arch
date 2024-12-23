@@ -180,7 +180,7 @@ The gateway may also handle authentication, token exchange, and token transforma
 
 * CA/Credential Service
 
-In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the internal trust domain. The credentials are often X.509 based or JWT based.
+In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the same trust domain. The credentials are often X.509 based or JWT based.
 
 High level flows within the diagram
 
