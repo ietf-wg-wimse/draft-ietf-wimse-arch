@@ -158,7 +158,7 @@ The certificate or WIT is presented during authentication, however the private k
 {: #arch-basic title="Basic example workload application system."}
 
 
-The above diagram presents a basic workload application system.  The large box represents a trust boundary within which the workload application is hosted.  Within this example
+The above diagram presents a basic workload application system.  The large box represents a trust domain within which the workload application is hosted.  Within this example
 there are three workloads, a gateway, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
 to the workload application system there is an application client that calls APIs on workloads.
 
