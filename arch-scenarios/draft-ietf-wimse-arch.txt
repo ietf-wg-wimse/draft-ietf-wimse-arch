@@ -559,11 +559,10 @@ Table of Contents
       identity and/or security context information for a token that can
       be presented to an external service to gain access to
       infrastructure or an external service.  Note that in some cases
-      the token service may reside in the external trust domain or there
-      may be token services in both the internal trust domain and the
-      external trust domain.  In some cases the workload will need to
-      contact both the internal token service and an external token
-      service in order to gain access to infrastructure or external
+      the token service may reside in a different trust domain or there
+      may be token services in multiple trust domains.  In some cases
+      the workload will need to contact token services in various
+      domains in order to gain access to infrastructure or external
       service.
 
    *  Infrastructure Service - this service is often part of the
