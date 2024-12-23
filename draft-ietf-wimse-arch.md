@@ -205,7 +205,7 @@ Similarly to the previous flow, the gateway may determine that for another API c
 ### Context and workload Identity
 
 ~~~aasvg
-                 +----------------------------------------------+
+                 +-----------------------Trust Boundary---------+
                  |                                              |
                  |                      +----------------+      |
               +--+--+                   |                |      |
@@ -232,7 +232,7 @@ Similarly to the previous flow, the gateway may determine that for another API c
               +--+--+                                           |
                  |                                              |
                  |                                              |
-                 |                       Internal Trust Domain  |
+                 |                                              |
                  +----------------------------------------------+
 
 ~~~~
