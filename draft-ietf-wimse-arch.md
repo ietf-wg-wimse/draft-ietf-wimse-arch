@@ -265,7 +265,7 @@ The workload may need to make requests of other workloads. When making these req
 
 ### Cross-Domain Communication
 ~~~aasvg
-                 +----------------------------------------------+
+                 +--------------------------Trust Boundary------+
                  |                                              |
               +--+--+                                           |
               |     |                                           |
@@ -288,7 +288,7 @@ The workload may need to make requests of other workloads. When making these req
               +--+--+        |                           |      |
                  |           |                           |      |
                  |           |                           |      |
-                 |           |             Internal Trust|Domain|
+                 |           |                           |      |
                  +-----------+---------------------------+------+
                              |                           |
                              |                           |
