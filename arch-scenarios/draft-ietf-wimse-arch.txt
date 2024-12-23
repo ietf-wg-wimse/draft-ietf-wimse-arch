@@ -415,7 +415,7 @@ Table of Contents
 
 3.2.2.  Context and workload Identity
 
-                    +----------------------------------------------+
+                    +-----------------------Trust Boundary---------+
                     |                                              |
                     |                      +----------------+      |
                  +--+--+                   |                |      |
@@ -442,7 +442,7 @@ Table of Contents
                  +--+--+                                           |
                     |                                              |
                     |                                              |
-                    |                       Internal Trust Domain  |
+                    |                                              |
                     +----------------------------------------------+
 
            Figure 2: Context example workload application system.
