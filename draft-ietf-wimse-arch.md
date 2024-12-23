@@ -166,7 +166,7 @@ Here is a brief summary of each component
 
 * Trust Domain
 
-The large box represents the internal trust domain of the application that is composed of several workloads.  A trust domain may have a more complex internal structure with more workloads, multiple gateways, internal infrastructure, and other services.
+The large box represents a trust domain of the application that is composed of several workloads.  A trust domain may have a more complex internal structure with more workloads, multiple gateways, internal infrastructure, and other services.
 
 * Workload
 
