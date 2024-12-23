@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 24 June 2025</td>
+<td class="center">Expires 26 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-21" class="published">21 December 2024</time>
+<time datetime="2024-12-23" class="published">23 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-24">24 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-26">26 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1478,7 +1478,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#name-basic-example-workload-appl" class="selfRef">Basic example workload application system.</a>
             </figcaption></figure>
 </div>
-<p id="section-3.2.1-2">The above diagram presents a basic workload application system.  The large box represents a trust domain within which the workload application is hosted.  Within this example
+<p id="section-3.2.1-2">The above diagram presents a basic workload application system.  The large box represents a trust boundary within which the workload application is hosted.  Within this example
 there are three workloads, a gateway, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
 to the workload application system there is an application client that calls APIs on workloads.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-3">Here is a brief summary of each component<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
@@ -1487,7 +1487,7 @@ to the workload application system there is an application client that calls API
               <p id="section-3.2.1-4.1.1">Trust Domain<a href="#section-3.2.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.2.1-5">The large box represents a trust domain of the application that is composed of several workloads.  A trust domain may have a more complex internal structure with more workloads, multiple gateways, internal infrastructure, and other services.<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-5">The large box represents the internal trust domain of the application that is composed of several workloads.  A trust domain may have a more complex internal structure with more workloads, multiple gateways, internal infrastructure, and other services.<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.1-6.1">
               <p id="section-3.2.1-6.1.1">Workload<a href="#section-3.2.1-6.1.1" class="pilcrow">¶</a></p>
@@ -1507,7 +1507,7 @@ The gateway may also handle authentication, token exchange, and token transforma
               <p id="section-3.2.1-10.1.1">CA/Credential Service<a href="#section-3.2.1-10.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.2.1-11">In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the trust domain. The credentials are often X.509 based or JWT based.<a href="#section-3.2.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-11">In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the internal trust domain. The credentials are often X.509 based or JWT based.<a href="#section-3.2.1-11" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-12">High level flows within the diagram<a href="#section-3.2.1-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.1-13.1">
@@ -1560,8 +1560,7 @@ The client request is typically made over HTTPS, but other protocols may be used
                   <path d="M 464,64 L 464,160" fill="none" stroke="black"></path>
                   <path d="M 496,208 L 496,272" fill="none" stroke="black"></path>
                   <path d="M 520,32 L 520,480" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 328,32" fill="none" stroke="black"></path>
-                  <path d="M 448,32 L 520,32" fill="none" stroke="black"></path>
+                  <path d="M 144,32 L 520,32" fill="none" stroke="black"></path>
                   <path d="M 328,64 L 464,64" fill="none" stroke="black"></path>
                   <path d="M 120,80 L 168,80" fill="none" stroke="black"></path>
                   <path d="M 168,96 L 320,96" fill="none" stroke="black"></path>
@@ -1584,8 +1583,6 @@ The client request is typically made over HTTPS, but other protocols may be used
                   <polygon class="arrowhead" points="184,128 172,122.4 172,133.6" fill="black" transform="rotate(180,176,128)"></polygon>
                   <polygon class="arrowhead" points="120,240 108,234.4 108,245.6" fill="black" transform="rotate(0,112,240)"></polygon>
                   <g class="text">
-                    <text x="352" y="36">Trust</text>
-                    <text x="412" y="36">Boundary</text>
                     <text x="392" y="100">Context</text>
                     <text x="256" y="116">(3)</text>
                     <text x="392" y="132">Service</text>
@@ -1617,6 +1614,9 @@ The client request is typically made over HTTPS, but other protocols may be used
                     <text x="144" y="356">i</text>
                     <text x="144" y="372">c</text>
                     <text x="144" y="388">e</text>
+                    <text x="364" y="468">Internal</text>
+                    <text x="424" y="468">Trust</text>
+                    <text x="476" y="468">Domain</text>
                   </g>
                 </svg><a href="#section-3.2.2-1.1.1" class="pilcrow">¶</a>
 </div>
@@ -1688,8 +1688,7 @@ The workload may need to make requests of other workloads. When making these req
                   <path d="M 488,512 L 488,576" fill="none" stroke="black"></path>
                   <path d="M 496,144 L 496,208" fill="none" stroke="black"></path>
                   <path d="M 520,32 L 520,416" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 352,32" fill="none" stroke="black"></path>
-                  <path d="M 472,32 L 520,32" fill="none" stroke="black"></path>
+                  <path d="M 144,32 L 520,32" fill="none" stroke="black"></path>
                   <path d="M 120,64 L 168,64" fill="none" stroke="black"></path>
                   <path d="M 8,144 L 72,144" fill="none" stroke="black"></path>
                   <path d="M 224,144 L 328,144" fill="none" stroke="black"></path>
@@ -1719,8 +1718,6 @@ The workload may need to make requests of other workloads. When making these req
                   <polygon class="arrowhead" points="224,176 212,170.4 212,181.6" fill="black" transform="rotate(0,216,176)"></polygon>
                   <polygon class="arrowhead" points="120,176 108,170.4 108,181.6" fill="black" transform="rotate(0,112,176)"></polygon>
                   <g class="text">
-                    <text x="376" y="36">Trust</text>
-                    <text x="436" y="36">Boundary</text>
                     <text x="144" y="100">G</text>
                     <text x="144" y="116">a</text>
                     <text x="144" y="132">t</text>
@@ -1754,6 +1751,9 @@ The workload may need to make requests of other workloads. When making these req
                     <text x="480" y="308">(t)</text>
                     <text x="144" y="324">e</text>
                     <text x="352" y="324">Service</text>
+                    <text x="380" y="404">Internal</text>
+                    <text x="440" y="404">Trust</text>
+                    <text x="492" y="404">Domain</text>
                     <text x="244" y="532">Infrastructure</text>
                     <text x="428" y="532">External</text>
                     <text x="240" y="564">Service</text>
@@ -1770,7 +1770,7 @@ The workload may need to make requests of other workloads. When making these req
 Components and interactions from previous scenarios are still relevant to this example, but are omitted for simplicity.<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.3-3.1">
-              <p id="section-3.2.3-3.1.1">Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in a different trust domain or there may be token services in multiple trust domains.  In some cases the workload will need to contact token services in various domains in order to gain access to infrastructure or external service.<a href="#section-3.2.3-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.3-3.1.1">Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in the external trust domain or there may be token services in both the internal trust domain and the external trust domain.  In some cases the workload will need to contact both the internal token service and an external token service in order to gain access to infrastructure or external service.<a href="#section-3.2.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.3-3.2">
               <p id="section-3.2.3-3.2.1">Infrastructure Service - this service is often part of the application, but it is managed by an infrastructure provider and may require different information to access it.<a href="#section-3.2.3-3.2.1" class="pilcrow">¶</a></p>

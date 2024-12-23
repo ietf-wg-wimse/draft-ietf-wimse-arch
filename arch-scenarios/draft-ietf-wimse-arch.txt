@@ -5,9 +5,9 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 24 June 2025                                            Zscaler
+Expires: 26 June 2025                                            Zscaler
                                                            H. Tschofenig
-                                                        21 December 2024
+                                                        23 December 2024
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 June 2025.
+   This Internet-Draft will expire on 26 June 2025.
 
 Copyright Notice
 
@@ -317,7 +317,7 @@ Table of Contents
          Figure 1: Basic example workload application system.
 
    The above diagram presents a basic workload application system.  The
-   large box represents a trust domain within which the workload
+   large box represents a trust boundary within which the workload
    application is hosted.  Within this example there are three
    workloads, a gateway, that accepts external clients and a CA/
    credential service that issues workload identity credentials for the
@@ -328,10 +328,10 @@ Table of Contents
 
    *  Trust Domain
 
-   The large box represents a trust domain of the application that is
-   composed of several workloads.  A trust domain may have a more
-   complex internal structure with more workloads, multiple gateways,
-   internal infrastructure, and other services.
+   The large box represents the internal trust domain of the application
+   that is composed of several workloads.  A trust domain may have a
+   more complex internal structure with more workloads, multiple
+   gateways, internal infrastructure, and other services.
 
    *  Workload
 
@@ -354,8 +354,8 @@ Table of Contents
    *  CA/Credential Service
 
    In this diagram the token/Credential service is a service responsible
-   for issuing workload identities to workloads in the trust domain.
-   The credentials are often X.509 based or JWT based.
+   for issuing workload identities to workloads in the internal trust
+   domain.  The credentials are often X.509 based or JWT based.
 
    High level flows within the diagram
 
@@ -415,7 +415,7 @@ Table of Contents
 
 3.2.2.  Context and workload Identity
 
-                    +-----------------------Trust Boundary---------+
+                    +----------------------------------------------+
                     |                                              |
                     |                      +----------------+      |
                  +--+--+                   |                |      |
@@ -442,7 +442,7 @@ Table of Contents
                  +--+--+                                           |
                     |                                              |
                     |                                              |
-                    |                                              |
+                    |                       Internal Trust Domain  |
                     +----------------------------------------------+
 
            Figure 2: Context example workload application system.
@@ -509,7 +509,7 @@ Table of Contents
 
 3.2.3.  Cross-Domain Communication
 
-                    +--------------------------Trust Boundary------+
+                    +----------------------------------------------+
                     |                                              |
                  +--+--+                                           |
                  |     |                                           |
@@ -532,7 +532,7 @@ Table of Contents
                  +--+--+        |                           |      |
                     |           |                           |      |
                     |           |                           |      |
-                    |           |                           |      |
+                    |           |             Internal Trust|Domain|
                     +-----------+---------------------------+------+
                                 |                           |
                                 |                           |
@@ -559,10 +559,11 @@ Table of Contents
       identity and/or security context information for a token that can
       be presented to an external service to gain access to
       infrastructure or an external service.  Note that in some cases
-      the token service may reside in a different trust domain or there
-      may be token services in multiple trust domains.  In some cases
-      the workload will need to contact token services in various
-      domains in order to gain access to infrastructure or external
+      the token service may reside in the external trust domain or there
+      may be token services in both the internal trust domain and the
+      external trust domain.  In some cases the workload will need to
+      contact both the internal token service and an external token
+      service in order to gain access to infrastructure or external
       service.
 
    *  Infrastructure Service - this service is often part of the
