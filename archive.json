@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-22T01:54:48.074008+00:00",
+  "timestamp": "2024-12-24T01:47:35.953354+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -2075,13 +2075,13 @@
       "labels": [],
       "body": "Added some scenarios to the architecture.",
       "createdAt": "2024-12-11T04:53:40Z",
-      "updatedAt": "2024-12-21T17:39:38Z",
+      "updatedAt": "2024-12-23T05:27:09Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "9d92ccdd6b65c044d2a2c29f0fe3326f2989765b",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "arch-scenarios",
-      "headRefOid": "d8cc092c139a7d1d15e62a1e5930c4a32b56f78d",
+      "headRefOid": "eb75c8ca836467f6a862eea4b6d671771009554d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
