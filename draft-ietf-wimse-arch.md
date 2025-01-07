@@ -28,8 +28,10 @@ author:
  -
     ins: H. Tschofenig
     name: Hannes Tschofenig
-    organization:
-    email: hannes.tschofenig@gmx.net
+    abbrev: H-BRS
+    organization: University of Applied Sciences Bonn-Rhein-Sieg
+    country: Germany
+    email: Hannes.Tschofenig@gmx.net
 
 normative:
 
