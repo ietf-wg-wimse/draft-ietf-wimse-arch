@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T02:19:30.422689+00:00",
+  "timestamp": "2025-01-12T01:58:29.241498+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -72,6 +72,11 @@
       "name": "Scenarios",
       "description": "",
       "color": "A99B0A"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "02BA53"
     }
   ],
   "issues": [
@@ -652,10 +657,12 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "Introduction\r\n\r\n\"Workload identity credential is used to authenticate communications between workloads.\" -> \"Workload identity credentials are used to authenticate communications between workloads.\"\r\n\r\nConsider swapping these two sentences: \r\n\r\n\"Workload identity credential is used to authenticate communications between workloads. Workloads make use of identity information and additional context information to perform authentication and authorization.\" ->  \"Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credential is used to authenticate communications between workloads.\"",
       "createdAt": "2025-01-07T16:53:41Z",
-      "updatedAt": "2025-01-07T16:53:41Z",
+      "updatedAt": "2025-01-10T19:46:50Z",
       "closedAt": null,
       "comments": []
     },
@@ -668,12 +675,22 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Terminology"
+      ],
       "body": "The architecture document introduces the term WIMSE tokens as a collective name for JWT and X.509 certs but never uses it. It is not used in the Service-to-service authentication draft either. Perhaps better to remove it to avoid unnecessary new concepts and just refer to these as \"workload identity credentials\". \r\n\r\nRemoving it also avoids confusion on whether an X.509 certs a token or not (it serves the same purpose, but in common use certs mean something different from token). Referring to \"credential format\" vs \"token format\" may be more aligned with commonly used patterns.",
       "createdAt": "2025-01-07T16:57:20Z",
-      "updatedAt": "2025-01-07T17:00:18Z",
+      "updatedAt": "2025-01-10T19:47:47Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "sounds good.",
+          "createdAt": "2025-01-10T19:47:31Z",
+          "updatedAt": "2025-01-10T19:47:31Z"
+        }
+      ]
     },
     {
       "number": 53,
@@ -683,11 +700,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [],
       "body": "The text refers to attestation as something a \"task\" performs - is there a definition for a \"task\"? Is it just another workload? How does attestation differ from authentication. \r\n\r\nThe lines seem blurry - perhaps attestation is about identity proofing by the issuer at issuance time, while authentication is about identity assertion by the workload at runtime using a credential issued by the issuer?",
       "createdAt": "2025-01-07T17:17:57Z",
-      "updatedAt": "2025-01-07T17:18:21Z",
+      "updatedAt": "2025-01-10T19:49:30Z",
       "closedAt": null,
       "comments": []
     },
@@ -700,12 +719,22 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Terminology"
+      ],
       "body": "Perhaps this section can be renamed as Workload Identity Credentials (the cert vs token terminology)\r\n\r\nThe definition seems very narrow and excludes JWT bearer tokens (as much as we don't like them) - would we preclude the use of bearer tokens in the architecture document, or should we allow them for backwards compatibility reasons (e.g. cloud service providers expect JWT bearer tokens to be exchanged for OAuth Access tokens). ",
       "createdAt": "2025-01-07T17:22:52Z",
-      "updatedAt": "2025-01-07T17:22:52Z",
+      "updatedAt": "2025-01-10T19:52:18Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I like the term credentials.\r\n\r\nI think we will want to talk some about JWT bearer tokens so we can point out the issues and maybe discuss how to transition away from them.\r\n\r\nPerhaps we should have a bearer credentials vs. bound credential terminology",
+          "createdAt": "2025-01-10T19:52:03Z",
+          "updatedAt": "2025-01-10T19:52:03Z"
+        }
+      ]
     },
     {
       "number": 55,
@@ -716,10 +745,12 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Terminology"
+      ],
       "body": "To avvoid the \"let's define identity\" trap, perhaps rename section 3.1 as \"Workload Identity Concepts\". This avoids the trap of trying to define identity and allows the core concepts like trust domain, identifier and credentials to be defined.",
       "createdAt": "2025-01-07T17:24:31Z",
-      "updatedAt": "2025-01-07T17:31:36Z",
+      "updatedAt": "2025-01-10T19:53:10Z",
       "closedAt": null,
       "comments": [
         {
@@ -743,9 +774,17 @@
       "labels": [],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-01-07T17:32:32Z",
+      "updatedAt": "2025-01-10T19:54:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes the intent is that we are consistent and we should state it.  Can you elaborate on the high bar for consistency? ",
+          "createdAt": "2025-01-10T19:54:23Z",
+          "updatedAt": "2025-01-10T19:54:23Z"
+        }
+      ]
     },
     {
       "number": 57,
@@ -771,11 +810,14 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey",
+        "yaroslavros"
+      ],
       "labels": [],
       "body": "This may just be terminology I am not familiar with - perhaps for each element, list an example as a sub-bullet?",
       "createdAt": "2025-01-07T17:47:55Z",
-      "updatedAt": "2025-01-07T17:47:55Z",
+      "updatedAt": "2025-01-10T19:56:27Z",
       "closedAt": null,
       "comments": []
     },
@@ -787,11 +829,14 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey",
+        "yaroslavros"
+      ],
       "labels": [],
       "body": " Not sure if the list in section 3.2.1 is meant to be exhaustive or just illustrative. Some others to consider:\r\n \r\n   *  Mutual TLS authentication using X.509 certificate for both client\r\n      and server and and client bearer token, encoded as JWTs at the application layer\r\n\r\nAlso might be worth adding some reference to the mechanisms defined in the S2S auth spec - or perhaps that is all that needs to be done?",
       "createdAt": "2025-01-07T17:52:35Z",
-      "updatedAt": "2025-01-07T17:52:35Z",
+      "updatedAt": "2025-01-10T19:59:15Z",
       "closedAt": null,
       "comments": []
     },
@@ -803,11 +848,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "I struggled a little bit with this sentence. Perhaps introduce the concept of \"workload constrained security context\" to communicate the idea that it is necessary to prove that a security context originated from a specific workload or may only be used by a specific workload.\r\n\r\nFrom:  \"Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.\"\r\n\r\nTo: \"A security context may be constrained to a workload by including the workload identifier as part of the context. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context\"\r\n\r\nAfter reading the above, I think there are two ways of constraining the context, one to the originator and one to the recipient. These are probably different mechanisms/claims in a token - not sure how specific we should be in the architecture document.",
       "createdAt": "2025-01-07T19:32:37Z",
-      "updatedAt": "2025-01-07T19:32:37Z",
+      "updatedAt": "2025-01-10T20:01:06Z",
       "closedAt": null,
       "comments": []
     },
@@ -835,11 +882,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "I think everything in section 3.2.4 is correct, but I wonder if this is really about delegation and impersonation or whether this is more about obtaining a credential from another \"logical trust domain\" using the credential obtained from the current trust domain. Workloads are not so much delegating or impersonating in this case as they are requesting a credential from another issuer than their own trust domain. Perhaps this is more about \"Obtaining Credentials from other Issuers\"? \r\n\r\nI do think there are use cases around delegation and impersonation where platforms may request credentials on-behalf of workloads and may even use them on their behalf (e.g. egress gateways or service meshes). So perhaps there is a separate section on those \"brokered\" scenarios where workloads are impersonating or delegating to a platform to present their credentials on their behalf?",
       "createdAt": "2025-01-07T19:46:13Z",
-      "updatedAt": "2025-01-07T19:46:13Z",
+      "updatedAt": "2025-01-10T20:02:23Z",
       "closedAt": null,
       "comments": []
     },
@@ -852,12 +901,22 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Scenarios"
+      ],
       "body": "Consider casting this as cross domain chaining - should make it easier to align with the cross domain identity chaining and authorization spec.",
       "createdAt": "2025-01-07T19:56:53Z",
-      "updatedAt": "2025-01-07T19:56:53Z",
+      "updatedAt": "2025-01-09T21:58:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes I realize that there needs to be some alignment here.  I need to catch up on the Identity chaining since I wasn't sure of the direction after the last IETF meeting.  ",
+          "createdAt": "2025-01-09T21:58:20Z",
+          "updatedAt": "2025-01-09T21:58:20Z"
+        }
+      ]
     },
     {
       "number": 64,
@@ -867,11 +926,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [],
       "body": "It is not entirely clear what \"generalize\" mean in this context. From reading this, I think this is something egress gateways do to hide the workload identities, so it is almost a kind of identity proxy scenario?",
       "createdAt": "2025-01-07T20:00:11Z",
-      "updatedAt": "2025-01-07T20:00:11Z",
+      "updatedAt": "2025-01-09T21:56:13Z",
       "closedAt": null,
       "comments": []
     },
@@ -884,12 +945,22 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Scenarios"
+      ],
       "body": "Ingress gateways may also include context of the inbound identity via something like transaction tokens. Perhaps worth calling out transaction tokens role at the ingress gateway?",
       "createdAt": "2025-01-07T20:02:18Z",
-      "updatedAt": "2025-01-07T20:02:18Z",
+      "updatedAt": "2025-01-09T21:50:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The document briefly mentios this in section 3.2.2, but in explicitly in the enumerated steps.  This is is an oversight and we should include the use of transaction tokens to carry context as I would expect this to be a main use case.  ",
+          "createdAt": "2025-01-09T21:50:16Z",
+          "updatedAt": "2025-01-09T21:50:16Z"
+        }
+      ]
     },
     {
       "number": 66,
@@ -900,12 +971,22 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "security-consideration"
+      ],
       "body": "Should we have a security consideration that makes it clear that authentication is not sufficient to determine access control, a seperate authorization decision is required. Authentication only establishes that the issuer collected proof of the workload identity, and that the same workload is now attempting to access a resource. The access control decision depends on a separate authorisation decision.",
       "createdAt": "2025-01-07T20:08:22Z",
-      "updatedAt": "2025-01-07T20:08:22Z",
+      "updatedAt": "2025-01-09T21:44:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes we should add this.  ",
+          "createdAt": "2025-01-09T21:44:10Z",
+          "updatedAt": "2025-01-09T21:44:10Z"
+        }
+      ]
     }
   ],
   "pulls": [
