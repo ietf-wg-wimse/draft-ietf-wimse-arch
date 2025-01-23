@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T01:44:35.667749+00:00",
+  "timestamp": "2025-01-23T01:45:10.248339+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -473,13 +473,15 @@
       "state": "OPEN",
       "author": "fandreas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L40\r\n\r\nThe current workload definition says it is defined as \"a running instance of software....\". I think this is overly restrictive - workloads can consist of one or more running instances of software. ",
       "createdAt": "2024-10-15T14:56:21Z",
-      "updatedAt": "2025-01-07T15:21:48Z",
+      "updatedAt": "2025-01-21T15:09:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -513,13 +515,15 @@
       "state": "OPEN",
       "author": "fandreas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L76\r\n\r\nThe \"Attestation\" definition needs further work (as alluded to in the \"TBD\"). Specific questions with the current definition include:\r\n1) What is a task ? \r\n2) Why is it calling out a \"separate\" workload ? ",
       "createdAt": "2024-10-15T14:59:34Z",
-      "updatedAt": "2025-01-07T15:22:24Z",
+      "updatedAt": "2025-01-21T15:09:58Z",
       "closedAt": null,
       "comments": []
     },
@@ -531,13 +535,15 @@
       "state": "OPEN",
       "author": "fandreas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [
         "usecases"
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L184\r\n\r\nA third scenario is when a workload operates on behalf of another entity (e.g. a user). There is an (empty) \"Delegation and Impersonation\" section a bit later, however it should be called out here as well. ",
       "createdAt": "2024-10-15T15:40:45Z",
-      "updatedAt": "2025-01-07T15:29:27Z",
+      "updatedAt": "2025-01-21T15:10:19Z",
       "closedAt": null,
       "comments": []
     },
@@ -587,13 +593,15 @@
       "state": "OPEN",
       "author": "fandreas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L229\r\n\r\nDoes trust boundary imply different trust domains ? If so, we should trust domain terminology for consistency. If not, we should clarify what a trust boundary is. ",
       "createdAt": "2024-10-15T15:54:15Z",
-      "updatedAt": "2025-01-07T15:22:06Z",
+      "updatedAt": "2025-01-21T15:10:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -620,13 +628,15 @@
       "state": "OPEN",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [
         "Scenarios"
       ],
       "body": "Current scenarios show a single instance of gateway.  Actual deployments may have multiple gateways perhaps in front of each service.  Is the current depiction ok as a concept or do we need to cover other topologies. ",
       "createdAt": "2025-01-07T15:42:56Z",
-      "updatedAt": "2025-01-07T15:50:40Z",
+      "updatedAt": "2025-01-21T15:12:05Z",
       "closedAt": null,
       "comments": []
     },
@@ -638,13 +648,15 @@
       "state": "OPEN",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [
         "Scenarios"
       ],
       "body": "The cross domain section only shows one token service.  There may be an additional token service external to the trust boundary. \r\n\r\nAlso should reference Identity chaining work. ",
       "createdAt": "2025-01-07T15:45:25Z",
-      "updatedAt": "2025-01-07T15:50:24Z",
+      "updatedAt": "2025-01-21T15:12:31Z",
       "closedAt": null,
       "comments": []
     },
@@ -656,13 +668,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [
         "editorial"
       ],
       "body": "Introduction\r\n\r\n\"Workload identity credential is used to authenticate communications between workloads.\" -> \"Workload identity credentials are used to authenticate communications between workloads.\"\r\n\r\nConsider swapping these two sentences: \r\n\r\n\"Workload identity credential is used to authenticate communications between workloads. Workloads make use of identity information and additional context information to perform authentication and authorization.\" ->  \"Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credential is used to authenticate communications between workloads.\"",
       "createdAt": "2025-01-07T16:53:41Z",
-      "updatedAt": "2025-01-10T19:46:50Z",
+      "updatedAt": "2025-01-21T15:13:33Z",
       "closedAt": null,
       "comments": []
     },
@@ -674,13 +688,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "The architecture document introduces the term WIMSE tokens as a collective name for JWT and X.509 certs but never uses it. It is not used in the Service-to-service authentication draft either. Perhaps better to remove it to avoid unnecessary new concepts and just refer to these as \"workload identity credentials\". \r\n\r\nRemoving it also avoids confusion on whether an X.509 certs a token or not (it serves the same purpose, but in common use certs mean something different from token). Referring to \"credential format\" vs \"token format\" may be more aligned with commonly used patterns.",
       "createdAt": "2025-01-07T16:57:20Z",
-      "updatedAt": "2025-01-10T19:47:47Z",
+      "updatedAt": "2025-01-21T15:13:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -718,13 +734,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "Perhaps this section can be renamed as Workload Identity Credentials (the cert vs token terminology)\r\n\r\nThe definition seems very narrow and excludes JWT bearer tokens (as much as we don't like them) - would we preclude the use of bearer tokens in the architecture document, or should we allow them for backwards compatibility reasons (e.g. cloud service providers expect JWT bearer tokens to be exchanged for OAuth Access tokens). ",
       "createdAt": "2025-01-07T17:22:52Z",
-      "updatedAt": "2025-01-10T19:52:18Z",
+      "updatedAt": "2025-01-21T15:15:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -733,6 +751,13 @@
           "body": "I like the term credentials.\r\n\r\nI think we will want to talk some about JWT bearer tokens so we can point out the issues and maybe discuss how to transition away from them.\r\n\r\nPerhaps we should have a bearer credentials vs. bound credential terminology",
           "createdAt": "2025-01-10T19:52:03Z",
           "updatedAt": "2025-01-10T19:52:03Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://mailarchive.ietf.org/arch/msg/wimse/Qhi6JDXFfh9B6_bsrIXJQ3qteNk/",
+          "createdAt": "2025-01-21T15:14:58Z",
+          "updatedAt": "2025-01-21T15:14:58Z"
         }
       ]
     },
@@ -744,13 +769,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [
         "Terminology"
       ],
       "body": "To avvoid the \"let's define identity\" trap, perhaps rename section 3.1 as \"Workload Identity Concepts\". This avoids the trap of trying to define identity and allows the core concepts like trust domain, identifier and credentials to be defined.",
       "createdAt": "2025-01-07T17:24:31Z",
-      "updatedAt": "2025-01-10T19:53:10Z",
+      "updatedAt": "2025-01-21T15:15:23Z",
       "closedAt": null,
       "comments": [
         {
@@ -770,11 +797,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-01-10T19:54:24Z",
+      "updatedAt": "2025-01-21T15:15:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -794,11 +823,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [],
       "body": "To avoid talking about \"identity\" which can be quite vague, it may be better to be clear about the artefacts that is getting provisioned. \r\n\r\nLikewise, the paragraph written as:\r\n\r\n   A workload needs to obtain its identity early in its lifecycle.  This\r\n   identity is the base identity upon which further identity and\r\n   security context are built.\r\n\r\nmay be clearer (and have less scope for interpretation) if stated as:\r\n\r\n   A workload needs to obtain its identifier and associated credentials early in its lifecycle.  The identifier and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.\r\n   \r\nLikewise\r\n\r\n   Identity bootstrapping often utilizes identity information\r\n   provisioned through mechanisms specific to hosting platforms and\r\n   orchestration services.  This initial bootstrapping information is\r\n   used to obtain specific identity credentials for a workload.  This\r\n   process may use attestation to ensure the workload receives the\r\n   correct identity credentials.  An example of a bootstrapping process\r\n   follows.\r\n   \r\nCould be written as\r\n\r\n   Identifier and credential bootstrapping often utilizes attribute information\r\n   provisioned through mechanisms specific to hosting platforms and\r\n   orchestration services.  This initial bootstrapping information is\r\n   used to issue specific credentials for a workload.  This\r\n   process may use attestation to ensure the workload receives the\r\n   correct identity credentials.  An example of a bootstrapping process\r\n   follows.\r\n  \r\nSimilarly: \r\n\r\n   Figure 1 provides an example of software layering at a host running\r\n   workloads.  During startup, workloads bootstrap their identity with\r\n   the help of an agent.  The agent may be associated with one or more\r\n   workloads to help ensure that workloads are provisioned with the\r\n   correct identity.  The agent provides attestation evidence and other\r\n   relevant information to a server.  The server validates this\r\n   information and provides the agent with identity credentials for the\r\n   workloads it is associated with.  The server can use a variety of\r\n   internal and external means to validate the request against policy.\r\n   After obtaining identity credentials from the Server, the agent\r\n   passes them to the workload.\r\n\r\nMay be stated as:\r\n\r\n   Figure 1 provides an example of software layering at a host running\r\n   workloads.  During startup, workloads bootstrap their identifiers and credentials with\r\n   the help of an agent.  The agent may be associated with one or more\r\n   workloads to help ensure that workloads are provisioned with the\r\n   correct identifiers and credentials.  The agent provides attestation evidence and other\r\n   relevant information to a server.  The server validates this\r\n   information and provides the agent with identifiers and credentials for the\r\n   workloads it is associated with.  The server can use a variety of\r\n   internal and external means to validate the request against policy.\r\n   After obtaining credentials from the Server, the agent\r\n   passes them to the workload.",
       "createdAt": "2025-01-07T17:38:09Z",
-      "updatedAt": "2025-01-07T17:44:58Z",
+      "updatedAt": "2025-01-21T15:16:20Z",
       "closedAt": null,
       "comments": []
     },
@@ -866,11 +897,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [],
       "body": "Editorial note- section 3.2.4",
       "createdAt": "2025-01-07T19:37:55Z",
-      "updatedAt": "2025-01-07T19:37:55Z",
+      "updatedAt": "2025-01-21T15:17:26Z",
       "closedAt": null,
       "comments": []
     },
@@ -900,13 +933,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [
         "Scenarios"
       ],
       "body": "Consider casting this as cross domain chaining - should make it easier to align with the cross domain identity chaining and authorization spec.",
       "createdAt": "2025-01-07T19:56:53Z",
-      "updatedAt": "2025-01-09T21:58:29Z",
+      "updatedAt": "2025-01-21T15:18:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -944,13 +979,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [
         "Scenarios"
       ],
       "body": "Ingress gateways may also include context of the inbound identity via something like transaction tokens. Perhaps worth calling out transaction tokens role at the ingress gateway?",
       "createdAt": "2025-01-07T20:02:18Z",
-      "updatedAt": "2025-01-09T21:50:27Z",
+      "updatedAt": "2025-01-21T15:18:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -970,13 +1007,15 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [
         "security-consideration"
       ],
       "body": "Should we have a security consideration that makes it clear that authentication is not sufficient to determine access control, a seperate authorization decision is required. Authentication only establishes that the issuer collected proof of the workload identity, and that the same workload is now attempting to access a resource. The access control decision depends on a separate authorisation decision.",
       "createdAt": "2025-01-07T20:08:22Z",
-      "updatedAt": "2025-01-09T21:44:38Z",
+      "updatedAt": "2025-01-21T15:17:16Z",
       "closedAt": null,
       "comments": [
         {
