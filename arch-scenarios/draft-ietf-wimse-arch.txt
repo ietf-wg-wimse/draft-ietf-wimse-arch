@@ -5,9 +5,9 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 26 June 2025                                            Zscaler
+Expires: 6 August 2025                                           Zscaler
                                                            H. Tschofenig
-                                                        23 December 2024
+                                                         2 February 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -50,11 +50,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 June 2025.
+   This Internet-Draft will expire on 6 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -937,17 +937,17 @@ Table of Contents
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
               "Transaction Tokens", Work in Progress, Internet-Draft,
-              draft-ietf-oauth-transaction-tokens-03, 3 July 2024,
+              draft-ietf-oauth-transaction-tokens-04, 30 December 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              transaction-tokens-03>.
+              transaction-tokens-04>.
 
    [I-D.ietf-wimse-s2s-protocol]
-              Campbell, B., Feldman, D., Salowey, J., Schwenkschuster,
-              A., and Y. Sheffer, "WIMSE Service to Service
-              Authentication", Work in Progress, Internet-Draft, draft-
-              ietf-wimse-s2s-protocol-01, 18 October 2024,
+              Campbell, B., Salowey, J., Schwenkschuster, A., and Y.
+              Sheffer, "WIMSE Service to Service Authentication", Work
+              in Progress, Internet-Draft, draft-ietf-wimse-s2s-
+              protocol-02, 17 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              s2s-protocol-01>.
+              s2s-protocol-02>.
 
 Acknowledgments
 
