@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 11 July 2025                                            Zscaler
+Expires: 7 August 2025                                           Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                          7 January 2025
+                                                         3 February 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2025.
+   This Internet-Draft will expire on 7 August 2025.
 
 Copyright Notice
 
@@ -943,12 +943,12 @@ Table of Contents
               transaction-tokens-04>.
 
    [I-D.ietf-wimse-s2s-protocol]
-              Campbell, B., Feldman, D., Salowey, J., Schwenkschuster,
-              A., and Y. Sheffer, "WIMSE Service to Service
-              Authentication", Work in Progress, Internet-Draft, draft-
-              ietf-wimse-s2s-protocol-01, 18 October 2024,
+              Campbell, B., Salowey, J., Schwenkschuster, A., and Y.
+              Sheffer, "WIMSE Service to Service Authentication", Work
+              in Progress, Internet-Draft, draft-ietf-wimse-s2s-
+              protocol-02, 17 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              s2s-protocol-01>.
+              s2s-protocol-02>.
 
 Acknowledgments
 
