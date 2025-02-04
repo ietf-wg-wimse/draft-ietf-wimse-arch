@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:43:19.563562+00:00",
+  "timestamp": "2025-02-04T01:45:28.434699+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -2690,6 +2690,60 @@
       "mergedBy": "hannestschofenig",
       "mergeCommit": {
         "oid": "183737ba528c49aa1fbf0faf11d2c992630eeabd"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOLPTb0M6JxmGn",
+      "title": "Typo",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/68",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/67",
+      "createdAt": "2025-02-02T23:44:18Z",
+      "updatedAt": "2025-02-03T00:00:04Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "183737ba528c49aa1fbf0faf11d2c992630eeabd",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "3babaed783622d922ff81bae995bb050d3bd9f71",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOLPTb0M6Jxnpb",
+      "title": "GitHub automation update",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/69",
+      "state": "MERGED",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated GitHub workflows",
+      "createdAt": "2025-02-03T00:02:01Z",
+      "updatedAt": "2025-02-03T19:38:31Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "183737ba528c49aa1fbf0faf11d2c992630eeabd",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "automation",
+      "headRefOid": "476eff038aed8d5a171d14e9f54e8eac5b7650a1",
+      "closedAt": "2025-02-03T19:38:31Z",
+      "mergedAt": "2025-02-03T19:38:30Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445"
       },
       "comments": [],
       "reviews": []
