@@ -175,9 +175,8 @@ Table of Contents
    *  Remote Attestation
 
    The term "attestation" is not explicitly defined in [RFC9334] but was
-   later clarified in [I-D.ietf-rats-tpm-based-network-device-attest].
-   It refers to the process of generating and evaluating remote
-   attestation Evidence.
+   later clarified in [RFC9683].  It refers to the process of generating
+   and evaluating remote attestation Evidence.
 
    *  Workload Identity Token
 
@@ -963,6 +962,12 @@ Table of Contents
               protocol-02, 17 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
               s2s-protocol-02>.
+
+   [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
+              "Remote Integrity Verification of Network Devices
+              Containing Trusted Platform Modules", RFC 9683,
+              DOI 10.17487/RFC9683, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9683>.
 
 Acknowledgments
 
