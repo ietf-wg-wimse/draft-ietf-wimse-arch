@@ -355,7 +355,7 @@ relevant information to a server. The server validates this
 information and provides the agent with identifiers and credentials for the
 workloads it is associated with. The server can use a variety of
 internal and external means to validate the request against policy.
-After obtaining credentials from the Server, the agent
+After obtaining credentials from the server, the agent
 passes them to the workload.
 
 ~~~aasvg
