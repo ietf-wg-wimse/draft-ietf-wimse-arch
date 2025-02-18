@@ -333,15 +333,29 @@ Some example interactions in this scenario:
 
 ## Workload Identity Use Cases
 
-### Bootstrapping Workload Identity
+### Bootstrapping Workload Identifiers and Credentials
 
-[TODO: this section will need to be updated to discuss workload identifier as a concept as well]
+A workload needs to obtain its identifier and associated credentials early in its lifecycle. It also needs to learn what trust domain it belongs to. The identifier, trust domain and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.
 
-A workload needs to obtain its identity early in its lifecycle. This identity is the base identity upon which further identity and security context are built.
+Identifier and credential bootstrapping often utilizes attribute information
+provisioned through mechanisms specific to hosting platforms and
+orchestration services. This initial bootstrapping information is
+used to issue specific credentials for a workload. This
+process may use attestation to ensure the workload receives the
+correct identity credentials. An example of a bootstrapping process
+follows.
 
-Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation to ensure the workload receives the correct identity credentials. An example of a bootstrapping process follows.
-
-{{arch-fig}} provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining identity credentials from the Server, the agent passes them to the workload.
+{{arch-fig}} provides an example of software layering at a host running
+workloads. During startup, workloads bootstrap their identifiers and credentials with
+the help of an agent. The agent may be associated with one or more
+workloads to help ensure that workloads are provisioned with the
+correct identifiers and credentials. The agent provides attestation evidence and other
+relevant information to a server. The server validates this
+information and provides the agent with identifiers and credentials for the
+workloads it is associated with. The server can use a variety of
+internal and external means to validate the request against policy.
+After obtaining credentials from the server, the agent
+passes them to the workload.
 
 ~~~aasvg
   +-----------------+
