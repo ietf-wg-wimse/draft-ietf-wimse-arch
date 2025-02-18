@@ -1191,7 +1191,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-workload-identity-use-cases" class="internal xref">Workload Identity Use Cases</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
-                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-bootstrapping-workload-iden" class="internal xref">Bootstrapping Workload Identity</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-bootstrapping-workload-iden" class="internal xref">Bootstrapping Workload Identifiers and Credentials</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
                     <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-service-authentication" class="internal xref">Service Authentication</a></p>
@@ -1813,19 +1813,34 @@ Components and interactions from previous scenarios are still relevant to this e
         <h3 id="name-workload-identity-use-cases">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-workload-identity-use-cases" class="section-name selfRef">Workload Identity Use Cases</a>
         </h3>
-<div id="bootstrapping-workload-identity">
+<div id="bootstrapping-workload-identifiers-and-credentials">
 <section id="section-3.3.1">
           <h4 id="name-bootstrapping-workload-iden">
-<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-bootstrapping-workload-iden" class="section-name selfRef">Bootstrapping Workload Identity</a>
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-bootstrapping-workload-iden" class="section-name selfRef">Bootstrapping Workload Identifiers and Credentials</a>
           </h4>
-<p id="section-3.3.1-1">[TODO: this section will need to be updated to discuss workload identifier as a concept as well]<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.1-2">A workload needs to obtain its identity early in its lifecycle. This identity is the base identity upon which further identity and security context are built.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.3.1-3">Identity bootstrapping often utilizes identity information provisioned through mechanisms specific to hosting platforms and orchestration services. This initial bootstrapping information is used to obtain specific identity credentials for a workload. This process may use attestation to ensure the workload receives the correct identity credentials. An example of a bootstrapping process follows.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.1-4"><a href="#arch-fig" class="auto internal xref">Figure 4</a> provides an example of software layering at a host running workloads. During startup, workloads bootstrap their identity with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identity. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identity credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining identity credentials from the Server, the agent passes them to the workload.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-1">A workload needs to obtain its identifier and associated credentials early in its lifecycle. It also needs to learn what trust domain it belongs to. The identifier, trust domain and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">Identifier and credential bootstrapping often utilizes attribute information
+provisioned through mechanisms specific to hosting platforms and
+orchestration services. This initial bootstrapping information is
+used to issue specific credentials for a workload. This
+process may use attestation to ensure the workload receives the
+correct identity credentials. An example of a bootstrapping process
+follows.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-3"><a href="#arch-fig" class="auto internal xref">Figure 4</a> provides an example of software layering at a host running
+workloads. During startup, workloads bootstrap their identifiers and credentials with
+the help of an agent. The agent may be associated with one or more
+workloads to help ensure that workloads are provisioned with the
+correct identifiers and credentials. The agent provides attestation evidence and other
+relevant information to a server. The server validates this
+information and provides the agent with identifiers and credentials for the
+workloads it is associated with. The server can use a variety of
+internal and external means to validate the request against policy.
+After obtaining credentials from the server, the agent
+passes them to the workload.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
 <span id="name-host-software-layering-in-a"></span><div id="arch-fig">
 <figure id="figure-4">
-            <div id="section-3.3.1-5.1">
-              <div class="alignLeft art-svg artwork" id="section-3.3.1-5.1.1">
+            <div id="section-3.3.1-4.1">
+              <div class="alignLeft art-svg artwork" id="section-3.3.1-4.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="480" width="472" viewBox="0 0 472 480" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,32 L 8,128" fill="none" stroke="black"></path>
                   <path d="M 8,224 L 8,448" fill="none" stroke="black"></path>
@@ -1891,23 +1906,23 @@ Components and interactions from previous scenarios are still relevant to this e
                     <text x="208" y="436">and</text>
                     <text x="260" y="436">Hardware</text>
                   </g>
-                </svg><a href="#section-3.3.1-5.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-3.3.1-4.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-host-software-layering-in-a" class="selfRef">Host Software Layering in a Workload Identity Architecture.</a>
             </figcaption></figure>
 </div>
-<p id="section-3.3.1-6">How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-5">How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.3.1-7.1">
-              <p id="section-3.3.1-7.1.1">File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.<a href="#section-3.3.1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.3.1-6.1">
+              <p id="section-3.3.1-6.1.1">File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.<a href="#section-3.3.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.3.1-7.2">
-              <p id="section-3.3.1-7.2.1">Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).<a href="#section-3.3.1-7.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.3.1-6.2">
+              <p id="section-3.3.1-6.2.1">Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).<a href="#section-3.3.1-6.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.3.1-7.3">
-              <p id="section-3.3.1-7.3.1">Environment Variables - identity credential may also be injected into workloads using operating system environment variables.<a href="#section-3.3.1-7.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.3.1-6.3">
+              <p id="section-3.3.1-6.3.1">Environment Variables - identity credential may also be injected into workloads using operating system environment variables.<a href="#section-3.3.1-6.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
