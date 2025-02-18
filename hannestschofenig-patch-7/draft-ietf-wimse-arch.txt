@@ -808,11 +808,11 @@ Table of Contents
    OAuth 2.0 Access Token Exchange.
 
    WIMSE credentials constrain the subjects and actors identified in
-   delegation and impersonation tokens to be bound by trust domains, and
-   to follow their issuing authorities' trust configurations.  Upstream
-   workloads should consider the security context of delegation and/or
-   impersonation tokens within and across trust domains, when arriving
-   at authorization decisions.
+   delegation and impersonation tokens to be bound by a trust domain,
+   and to follow their issuing authorities' trust configurations.
+   Upstream workloads should consider the security context of delegation
+   and/or impersonation tokens within and across trust domains, when
+   arriving at authorization decisions.
 
 3.3.6.  Asynchronous and Batch Requests
 
