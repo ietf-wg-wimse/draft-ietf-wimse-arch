@@ -336,7 +336,7 @@ Some example interactions in this scenario:
 
 ### Bootstrapping Workload Identifiers and Credentials
 
-A workload needs to obtain its identifier and associated credentials early in its lifecycle. The identifier and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.
+A workload needs to obtain its identifier and associated credentials early in its lifecycle. It also needs to learn what trust domain it belongs to. The identifier, trust domain and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.
 
 Identifier and credential bootstrapping often utilizes attribute information
 provisioned through mechanisms specific to hosting platforms and
