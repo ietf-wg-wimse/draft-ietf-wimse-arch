@@ -35,7 +35,6 @@ author:
 
 normative:
 informative:
-  I-D.ietf-rats-tpm-based-network-device-attest:
 
 --- abstract
 
