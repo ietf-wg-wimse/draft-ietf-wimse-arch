@@ -111,7 +111,7 @@ Table of Contents
    started.  Often, additional information needs to be provided, such as
    trust anchors and security context details.  Workloads make use of
    identity information and additional context information to perform
-   authentication and authorization.  Workload identity credential is
+   authentication and authorization.  Workload identity credentials are
    used to authenticate communications between workloads.
 
    This architecture considers two ways to express identity information:
