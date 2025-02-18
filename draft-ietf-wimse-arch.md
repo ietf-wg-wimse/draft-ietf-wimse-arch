@@ -34,7 +34,6 @@ author:
     email: Hannes.Tschofenig@gmx.net
 
 normative:
-
 informative:
 
 --- abstract
@@ -73,9 +72,9 @@ A security context provides information needed for a workload to perform its fun
 
 Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. Identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
 
-* Attestation
+* Remote Attestation
 
-Attestation is the function through which a task verifies the identity of a separate Workload. (TBD: sync definition with reference RaTS architecture)
+The term "attestation", as defined in {{?RFC9683}}, refers to the process of generating and evaluating remote attestation Evidence. {{!RFC9334}} describes Evidence and the different communication patterns.
 
 * Workload Identity Token
 
