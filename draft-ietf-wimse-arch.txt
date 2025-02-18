@@ -175,11 +175,12 @@ Table of Contents
    communicated as a transaction token
    [I-D.ietf-oauth-transaction-tokens].
 
-   *  Attestation
+   *  Remote Attestation
 
-   Attestation is the function through which a task verifies the
-   identity of a separate Workload.  (TBD: sync definition with
-   reference RaTS architecture)
+   The term "attestation", as defined in [RFC9683], refers to the
+   process of generating and evaluating remote attestation Evidence.
+   [RFC9334] describes Evidence and the different communication
+   patterns.
 
    *  Workload Identity Token
 
@@ -954,6 +955,11 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote ATtestation procedureS (RATS)
+              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
+              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
+
 6.2.  Informative References
 
    [I-D.ietf-oauth-transaction-tokens]
@@ -970,6 +976,12 @@ Table of Contents
               protocol-02, 17 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
               s2s-protocol-02>.
+
+   [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
+              "Remote Integrity Verification of Network Devices
+              Containing Trusted Platform Modules", RFC 9683,
+              DOI 10.17487/RFC9683, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9683>.
 
 Acknowledgments
 
