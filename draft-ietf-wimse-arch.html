@@ -1292,7 +1292,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-2-7.1.1">Identity Proxy<a href="#section-2-7.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-8">Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<p id="section-2-8">Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. Identity proxy <span class="bcp14">MAY</span> introduce additional context based on source identifier, communication properties and administrative policy. This context <span class="bcp14">MAY</span> be communicated as a transaction token <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span>.<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-9.1">
           <p id="section-2-9.1.1">Attestation<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
@@ -1502,7 +1502,7 @@ of sending and receiving requests to and from external systems or other internal
 </li>
           </ul>
 <p id="section-3.2.1-9">A gateway service typically acts as an intermediary between the internal application trust domain and external systems. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
-The gateway may also handle authentication, token exchange, and token transformation.<a href="#section-3.2.1-9" class="pilcrow">¶</a></p>
+The gateway <span class="bcp14">MAY</span> also implement identity proxy functionality including authentication, token exchange, and token transformation.<a href="#section-3.2.1-9" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.1-10.1">
               <p id="section-3.2.1-10.1.1">CA/Credential Service<a href="#section-3.2.1-10.1.1" class="pilcrow">¶</a></p>
