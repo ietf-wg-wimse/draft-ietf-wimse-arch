@@ -611,7 +611,8 @@ Table of Contents
 3.3.1.  Bootstrapping Workload Identifiers and Credentials
 
    A workload needs to obtain its identifier and associated credentials
-   early in its lifecycle.  The identifier and credentials forms the
+   early in its lifecycle.  It also needs to learn what trust domain it
+   belongs to.  The identifier, trust domain and credentials forms the
    basis from which further credentials, attributes, identifiers and
    security context are derived.
 
