@@ -34,7 +34,6 @@ author:
     email: Hannes.Tschofenig@gmx.net
 
 normative:
-  RFC9334:
 informative:
   I-D.ietf-rats-tpm-based-network-device-attest:
 
