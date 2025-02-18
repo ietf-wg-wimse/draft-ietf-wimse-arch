@@ -71,7 +71,7 @@ A security context provides information needed for a workload to perform its fun
 
 * Identity Proxy
 
-Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service.
+Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. Identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
 
 * Attestation
 
@@ -178,7 +178,7 @@ of sending and receiving requests to and from external systems or other internal
 * Gateway Service
 
 A gateway service typically acts as an intermediary between the internal application trust domain and external systems. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
-The gateway may also handle authentication, token exchange, and token transformation.
+The gateway MAY also implement identity proxy functionality including authentication, token exchange, and token transformation.
 
 * CA/Credential Service
 
