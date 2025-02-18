@@ -11,12 +11,12 @@
 <meta content="
        The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information. 
     " name="description">
-<meta content="xml2rfc 3.26.0" name="generator">
+<meta content="xml2rfc 3.27.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-wimse-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.26.0
-    Python 3.12.8
+  xml2rfc 3.27.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -437,7 +437,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 7 August 2025</td>
+<td class="center">Expires 22 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-03" class="published">3 February 2025</time>
+<time datetime="2025-02-18" class="published">18 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-07">7 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-22">22 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1341,7 +1341,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
           </ul>
 <p id="section-3.1.2-3">In addition the URI <span class="bcp14">MUST</span> include an authority that identifies the trust domain within which the identifier is scoped. The trust domain <span class="bcp14">SHOULD</span> be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is <a href="https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md">SPIFFE ID</a>.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-4">While the URI encoding rules allow host names to be specified as IP addresses, IP addresses MUT NOT be used to represent trust domains except in the case where they are needed for compatibility with existing naming schemes.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-4">While the URI encoding rules allow host names to be specified as IP addresses, IP addresses <span class="bcp14">MUST NOT</span> be used to represent trust domains except in the case where they are needed for compatibility with existing naming schemes.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-5">A workload identity only has meaning within the scope of a specific issuer. Two identities of the same value issued by different issuers may or may not refer to the same workload. In order to avoid collisions identity URIs <span class="bcp14">SHOULD</span> specify, in the URI's "authority" field, the trust domain associated with an issuer that is selected from a global name space such as host domains. However, the validator of an identity credential <span class="bcp14">MUST</span> make sure that they are using the correct issuer credential to verify the identity credential and that the issuer is trusted to issue tokens for the defined trust domain.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>

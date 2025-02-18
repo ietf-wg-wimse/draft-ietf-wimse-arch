@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 7 August 2025                                           Zscaler
+Expires: 22 August 2025                                          Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                         3 February 2025
+                                                        18 February 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 22 August 2025.
 
 Copyright Notice
 
@@ -239,7 +239,7 @@ Table of Contents
    (https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
 
    While the URI encoding rules allow host names to be specified as IP
-   addresses, IP addresses MUT NOT be used to represent trust domains
+   addresses, IP addresses MUST NOT be used to represent trust domains
    except in the case where they are needed for compatibility with
    existing naming schemes.
 
