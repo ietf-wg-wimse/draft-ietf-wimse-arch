@@ -109,10 +109,10 @@ Table of Contents
 
    Workloads need to be provisioned with an identity when they are
    started.  Often, additional information needs to be provided, such as
-   trust anchors and security context details.  Workload identity
-   credential is used to authenticate communications between workloads.
-   Workloads make use of identity information and additional context
-   information to perform authentication and authorization.
+   trust anchors and security context details.  Workloads make use of
+   identity information and additional context information to perform
+   authentication and authorization.  Workload identity credentials are
+   used to authenticate communications between workloads.
 
    This architecture considers two ways to express identity information:
    X.509 certificates often used in the TLS layer and JSON Web Tokens
