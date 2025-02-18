@@ -75,7 +75,7 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 * Remote Attestation
 
-The term "attestation" is not explicitly defined in {{RFC9334}} but was later clarified in {{I-D.ietf-rats-tpm-based-network-device-attest}}. It refers to the process of generating and evaluating remote attestation Evidence.
+The term "attestation" is not explicitly defined in {{!RFC9334}} but was later clarified in {{?RFC9683}}. It refers to the process of generating and evaluating remote attestation Evidence.
 
 * Workload Identity Token
 
