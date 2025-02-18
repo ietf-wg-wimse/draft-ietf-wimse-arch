@@ -109,7 +109,7 @@ A workload identifier only has a meaning within the scope of a specific issuer. 
 
 ### Workload Identity Credentials
 
-An implementation-specific Agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
+An agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
 
 JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity token that binds a JWT to a cryptographic key.
 
