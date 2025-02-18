@@ -947,14 +947,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
               transaction-tokens-04>.
 
-   [I-D.ietf-rats-tpm-based-network-device-attest]
-              Fedorkow, G., Voit, E., and J. Fitzgerald-McKay, "TPM-
-              based Network Device Remote Integrity Verification", Work
-              in Progress, Internet-Draft, draft-ietf-rats-tpm-based-
-              network-device-attest-14, 22 March 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              tpm-based-network-device-attest-14>.
-
    [I-D.ietf-wimse-s2s-protocol]
               Campbell, B., Salowey, J., Schwenkschuster, A., and Y.
               Sheffer, "WIMSE Service to Service Authentication", Work
