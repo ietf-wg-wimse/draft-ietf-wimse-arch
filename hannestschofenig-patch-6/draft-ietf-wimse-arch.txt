@@ -634,7 +634,7 @@ Table of Contents
    with identifiers and credentials for the workloads it is associated
    with.  The server can use a variety of internal and external means to
    validate the request against policy.  After obtaining credentials
-   from the Server, the agent passes them to the workload.
+   from the server, the agent passes them to the workload.
 
      +-----------------+
      |     Server      |
