@@ -116,10 +116,9 @@ Table of Contents
 
    This architecture considers two ways to express identity information:
    X.509 certificates often used in the TLS layer and JSON Web Tokens
-   (JWTs) used at the application layer.  Collectively, these are
-   referred to as WIMSE tokens.  The applicability of given token format
-   depends on application and security context and will be explored in
-   later sections.
+   (JWTs) used at the application layer.  The applicability of given
+   token format depends on application and security context and will be
+   explored in later sections.
 
    Once the workload is started and has obtained identity information,
    it can start performing its functions.  Once the workload is invoked
