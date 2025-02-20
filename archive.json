@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T01:47:01.422585+00:00",
+  "timestamp": "2025-02-20T01:48:23.147159+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -289,7 +289,7 @@
       "id": "I_kwDOLPTb0M6DDj8X",
       "title": "RATS terminology for attestation process",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -301,8 +301,8 @@
       ],
       "body": "Lets use consistent terminology with RATS or at least refer to RATS terminology where applicable",
       "createdAt": "2024-03-20T23:04:59Z",
-      "updatedAt": "2025-01-07T15:25:29Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:36:59Z",
+      "closedAt": "2025-02-18T15:36:59Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -373,7 +373,7 @@
       "id": "I_kwDOLPTb0M6H3kJg",
       "title": "Terminology: Attestation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/32",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "NONE",
       "assignees": [
@@ -385,8 +385,8 @@
       ],
       "body": "The wording here (Sec. 2) cannot be (and IMO, should be) distinguished from \"workload authentication\", where the basic identity of the workload is validated, even in the absence of any trusted environment.\r\n",
       "createdAt": "2024-05-05T11:53:55Z",
-      "updatedAt": "2025-01-07T15:25:46Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:37:28Z",
+      "closedAt": "2025-02-18T15:37:28Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -401,6 +401,13 @@
           "body": "Re-reading this doc, this was one of the first things that stood out to me.  Nowhere else in the doc is the term attestation used to refer to an authentication process.  The definition refers to authentication.  Attestations are provided by an authority over a set of data.  For example, a FIDO attestation is not used for authentication, but to demonstrate the provenance of the hardware device the credential resides upon and its properties, such as FIDO certification or FIPS compliance.  \r\n\r\nThe definition, as given here, is inaccurate and not useful in the context of the doc.  I urge the authors to give serious consideration to removing it entirely from the document.",
           "createdAt": "2024-10-30T21:07:37Z",
           "updatedAt": "2024-10-30T21:07:37Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed with https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/75",
+          "createdAt": "2025-02-18T14:09:17Z",
+          "updatedAt": "2025-02-18T14:09:17Z"
         }
       ]
     },
@@ -512,7 +519,7 @@
       "id": "I_kwDOLPTb0M6aUdOf",
       "title": "Task is not well defined",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -523,9 +530,17 @@
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L76\r\n\r\nThe \"Attestation\" definition needs further work (as alluded to in the \"TBD\"). Specific questions with the current definition include:\r\n1) What is a task ? \r\n2) Why is it calling out a \"separate\" workload ? ",
       "createdAt": "2024-10-15T14:59:34Z",
-      "updatedAt": "2025-01-21T15:09:58Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-02-18T15:38:13Z",
+      "closedAt": "2025-02-18T15:38:13Z",
+      "comments": [
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/75",
+          "createdAt": "2025-02-18T14:08:43Z",
+          "updatedAt": "2025-02-18T14:08:43Z"
+        }
+      ]
     },
     {
       "number": 44,
@@ -590,7 +605,7 @@
       "id": "I_kwDOLPTb0M6aVEyi",
       "title": "Trust Boundary versus Trust Domain",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/46",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -601,8 +616,8 @@
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L229\r\n\r\nDoes trust boundary imply different trust domains ? If so, we should trust domain terminology for consistency. If not, we should clarify what a trust boundary is. ",
       "createdAt": "2024-10-15T15:54:15Z",
-      "updatedAt": "2025-01-21T15:10:45Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:36:30Z",
+      "closedAt": "2025-02-18T15:36:30Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -665,7 +680,7 @@
       "id": "I_kwDOLPTb0M6lTXBP",
       "title": "Editorial notes - Draft -03",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/51",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -676,8 +691,8 @@
       ],
       "body": "Introduction\r\n\r\n\"Workload identity credential is used to authenticate communications between workloads.\" -> \"Workload identity credentials are used to authenticate communications between workloads.\"\r\n\r\nConsider swapping these two sentences: \r\n\r\n\"Workload identity credential is used to authenticate communications between workloads. Workloads make use of identity information and additional context information to perform authentication and authorization.\" ->  \"Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credential is used to authenticate communications between workloads.\"",
       "createdAt": "2025-01-07T16:53:41Z",
-      "updatedAt": "2025-01-21T15:13:33Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:38:44Z",
+      "closedAt": "2025-02-18T15:38:44Z",
       "comments": []
     },
     {
@@ -685,7 +700,7 @@
       "id": "I_kwDOLPTb0M6lTZBR",
       "title": "Remove reference to \"WIMSE tokens\"",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/52",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -696,8 +711,8 @@
       ],
       "body": "The architecture document introduces the term WIMSE tokens as a collective name for JWT and X.509 certs but never uses it. It is not used in the Service-to-service authentication draft either. Perhaps better to remove it to avoid unnecessary new concepts and just refer to these as \"workload identity credentials\". \r\n\r\nRemoving it also avoids confusion on whether an X.509 certs a token or not (it serves the same purpose, but in common use certs mean something different from token). Referring to \"credential format\" vs \"token format\" may be more aligned with commonly used patterns.",
       "createdAt": "2025-01-07T16:57:20Z",
-      "updatedAt": "2025-01-21T15:13:52Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:38:02Z",
+      "closedAt": "2025-02-18T15:38:02Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -713,7 +728,7 @@
       "id": "I_kwDOLPTb0M6lTi1t",
       "title": "Attestation vs Authentication",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/53",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -722,8 +737,8 @@
       "labels": [],
       "body": "The text refers to attestation as something a \"task\" performs - is there a definition for a \"task\"? Is it just another workload? How does attestation differ from authentication. \r\n\r\nThe lines seem blurry - perhaps attestation is about identity proofing by the issuer at issuance time, while authentication is about identity assertion by the workload at runtime using a credential issued by the issuer?",
       "createdAt": "2025-01-07T17:17:57Z",
-      "updatedAt": "2025-01-10T19:49:30Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:38:54Z",
+      "closedAt": "2025-02-18T15:38:54Z",
       "comments": []
     },
     {
@@ -766,7 +781,7 @@
       "id": "I_kwDOLPTb0M6lTlwQ",
       "title": " Workload Identity -> Workload Identifier",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -777,8 +792,8 @@
       ],
       "body": "To avvoid the \"let's define identity\" trap, perhaps rename section 3.1 as \"Workload Identity Concepts\". This avoids the trap of trying to define identity and allows the core concepts like trust domain, identifier and credentials to be defined.",
       "createdAt": "2025-01-07T17:24:31Z",
-      "updatedAt": "2025-01-21T15:15:23Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:36:09Z",
+      "closedAt": "2025-02-18T15:36:09Z",
       "comments": [
         {
           "author": "jricher",
@@ -820,7 +835,7 @@
       "id": "I_kwDOLPTb0M6lTrVx",
       "title": "Bootstrapping Workload Identity -> Bootstrapping Workload Identifiers and Credentials",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/57",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -829,8 +844,8 @@
       "labels": [],
       "body": "To avoid talking about \"identity\" which can be quite vague, it may be better to be clear about the artefacts that is getting provisioned. \r\n\r\nLikewise, the paragraph written as:\r\n\r\n   A workload needs to obtain its identity early in its lifecycle.  This\r\n   identity is the base identity upon which further identity and\r\n   security context are built.\r\n\r\nmay be clearer (and have less scope for interpretation) if stated as:\r\n\r\n   A workload needs to obtain its identifier and associated credentials early in its lifecycle.  The identifier and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.\r\n   \r\nLikewise\r\n\r\n   Identity bootstrapping often utilizes identity information\r\n   provisioned through mechanisms specific to hosting platforms and\r\n   orchestration services.  This initial bootstrapping information is\r\n   used to obtain specific identity credentials for a workload.  This\r\n   process may use attestation to ensure the workload receives the\r\n   correct identity credentials.  An example of a bootstrapping process\r\n   follows.\r\n   \r\nCould be written as\r\n\r\n   Identifier and credential bootstrapping often utilizes attribute information\r\n   provisioned through mechanisms specific to hosting platforms and\r\n   orchestration services.  This initial bootstrapping information is\r\n   used to issue specific credentials for a workload.  This\r\n   process may use attestation to ensure the workload receives the\r\n   correct identity credentials.  An example of a bootstrapping process\r\n   follows.\r\n  \r\nSimilarly: \r\n\r\n   Figure 1 provides an example of software layering at a host running\r\n   workloads.  During startup, workloads bootstrap their identity with\r\n   the help of an agent.  The agent may be associated with one or more\r\n   workloads to help ensure that workloads are provisioned with the\r\n   correct identity.  The agent provides attestation evidence and other\r\n   relevant information to a server.  The server validates this\r\n   information and provides the agent with identity credentials for the\r\n   workloads it is associated with.  The server can use a variety of\r\n   internal and external means to validate the request against policy.\r\n   After obtaining identity credentials from the Server, the agent\r\n   passes them to the workload.\r\n\r\nMay be stated as:\r\n\r\n   Figure 1 provides an example of software layering at a host running\r\n   workloads.  During startup, workloads bootstrap their identifiers and credentials with\r\n   the help of an agent.  The agent may be associated with one or more\r\n   workloads to help ensure that workloads are provisioned with the\r\n   correct identifiers and credentials.  The agent provides attestation evidence and other\r\n   relevant information to a server.  The server validates this\r\n   information and provides the agent with identifiers and credentials for the\r\n   workloads it is associated with.  The server can use a variety of\r\n   internal and external means to validate the request against policy.\r\n   After obtaining credentials from the Server, the agent\r\n   passes them to the workload.",
       "createdAt": "2025-01-07T17:38:09Z",
-      "updatedAt": "2025-01-21T15:16:20Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:36:20Z",
+      "closedAt": "2025-02-18T15:36:20Z",
       "comments": []
     },
     {
@@ -894,7 +909,7 @@
       "id": "I_kwDOLPTb0M6lUbRA",
       "title": "TrustDomains -> Trust Domains",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/61",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -903,8 +918,8 @@
       "labels": [],
       "body": "Editorial note- section 3.2.4",
       "createdAt": "2025-01-07T19:37:55Z",
-      "updatedAt": "2025-01-21T15:17:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:36:00Z",
+      "closedAt": "2025-02-18T15:36:00Z",
       "comments": []
     },
     {
@@ -1032,15 +1047,15 @@
       "id": "I_kwDOLPTb0M6nS7g8",
       "title": "Editorial: MUT NOT -> MUST NOT",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/67",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "See section 3.1.2.  Workload Identifier",
       "createdAt": "2025-01-23T12:17:26Z",
-      "updatedAt": "2025-01-23T12:17:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-18T15:35:48Z",
+      "closedAt": "2025-02-18T15:35:48Z",
       "comments": []
     }
   ],
@@ -2699,21 +2714,21 @@
       "id": "PR_kwDOLPTb0M6JxmGn",
       "title": "Typo",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/67",
       "createdAt": "2025-02-02T23:44:18Z",
-      "updatedAt": "2025-02-03T00:00:04Z",
+      "updatedAt": "2025-02-18T15:09:49Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "183737ba528c49aa1fbf0faf11d2c992630eeabd",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "main",
       "headRefOid": "3babaed783622d922ff81bae995bb050d3bd9f71",
-      "closedAt": null,
+      "closedAt": "2025-02-18T15:09:49Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2753,24 +2768,26 @@
       "id": "PR_kwDOLPTb0M6LhYOC",
       "title": "Identity Proxy / Gateway / Transaction Tokens",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/70",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Mentioned transaction tokens for identity proxy. Also mentioned that gateway service may implement identity proxy capabilities.",
       "createdAt": "2025-02-18T00:08:47Z",
-      "updatedAt": "2025-02-18T00:18:48Z",
+      "updatedAt": "2025-02-18T15:12:23Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "ingress-tt",
       "headRefOid": "34ce7445797d596231747fa433e244be4f04b4a7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-18T15:12:22Z",
+      "mergedAt": "2025-02-18T15:12:22Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "96c16cc63f479a9cdc97a2d7be193d5f494a9468"
+      },
       "comments": [
         {
           "author": "yaroslavros",
@@ -2787,52 +2804,449 @@
       "id": "PR_kwDOLPTb0M6LhaWF",
       "title": "Identity generalisation story",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/71",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/64",
       "createdAt": "2025-02-18T00:20:37Z",
-      "updatedAt": "2025-02-18T00:20:38Z",
+      "updatedAt": "2025-02-18T15:21:22Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "generalize-identity",
-      "headRefOid": "16785bb5bb390831628b9e84e8617cca7aeb122f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f6b2800bb4c6571fc25ee4c1ea47b22167b727f2",
+      "closedAt": "2025-02-18T15:21:22Z",
+      "mergedAt": "2025-02-18T15:21:22Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "2a52a9e56f7c2f641a7d7ed50647fa1ce52c549c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cZiHK",
+          "commit": {
+            "abbreviatedOid": "16785bb"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T15:17:41Z",
+          "updatedAt": "2025-02-18T15:17:42Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nFor example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the workload identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.\r\n```",
+              "createdAt": "2025-02-18T15:17:41Z",
+              "updatedAt": "2025-02-18T15:20:03Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 72,
       "id": "PR_kwDOLPTb0M6LhcuP",
       "title": "Minor Workload Identity Concepts section wording improvements",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/72",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/55",
       "createdAt": "2025-02-18T00:34:00Z",
-      "updatedAt": "2025-02-18T00:34:01Z",
+      "updatedAt": "2025-02-18T15:27:23Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "2a52a9e56f7c2f641a7d7ed50647fa1ce52c549c",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "identity-concepts",
+      "headRefOid": "27767621be9170613df1cd0d600e6bbc91d6dbbc",
+      "closedAt": "2025-02-18T15:27:23Z",
+      "mergedAt": "2025-02-18T15:27:23Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "d2db7781825f56e00f3a91e524670084569d1cb2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cZpCg",
+          "commit": {
+            "abbreviatedOid": "02efebd"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T15:24:45Z",
+          "updatedAt": "2025-02-18T15:24:45Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\nAn agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.\r\n```",
+              "createdAt": "2025-02-18T15:24:45Z",
+              "updatedAt": "2025-02-18T15:25:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6cZsLD",
+          "commit": {
+            "abbreviatedOid": "98082fe"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T15:26:59Z",
+          "updatedAt": "2025-02-18T15:26:59Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\nWhile IP addresses are allowed as host names in the URI encoding rules, they MUST NOT be used to represent trust domains except in the case where they are needed for compatibility with legacy naming schemes.\r\n```",
+              "createdAt": "2025-02-18T15:26:59Z",
+              "updatedAt": "2025-02-18T15:26:59Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOLPTb0M6LmhuG",
+      "title": "Removed \"WIMSE tokens\" terminology",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/73",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/52",
+      "createdAt": "2025-02-18T13:52:47Z",
+      "updatedAt": "2025-02-18T15:28:09Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
-      "headRepository": "yaroslavros/wimse-arch",
-      "headRefName": "identity-concepts",
-      "headRefOid": "02efebd3bec61735596f867cb6d10a605f339d11",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-3",
+      "headRefOid": "cc067e3c3c37c06f20692462dd1a65214a31fcd0",
+      "closedAt": "2025-02-18T15:28:05Z",
+      "mergedAt": "2025-02-18T15:28:05Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "e09b0cf7c263093d8cf347d114d3d3298387735a"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYeYH",
+          "commit": {
+            "abbreviatedOid": "cc067e3"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T13:57:49Z",
+          "updatedAt": "2025-02-18T13:57:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOLPTb0M6LmjBn",
+      "title": "Editorial change in the introduction",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/74",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/51",
+      "createdAt": "2025-02-18T13:55:10Z",
+      "updatedAt": "2025-02-18T15:28:42Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-4",
+      "headRefOid": "1dbb654af240e8737f22bf62eb498ffd16959c84",
+      "closedAt": "2025-02-18T15:28:38Z",
+      "mergedAt": "2025-02-18T15:28:38Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "41ebd48efe0e93b2f4f6361f35a72d6e39a39697"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYcvL",
+          "commit": {
+            "abbreviatedOid": "d09ebb6"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T13:55:46Z",
+          "updatedAt": "2025-02-18T13:55:46Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nWorkloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credentials are used to authenticate communications between workloads.\r\n```",
+              "createdAt": "2025-02-18T13:55:46Z",
+              "updatedAt": "2025-02-18T13:55:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6cYfQU",
+          "commit": {
+            "abbreviatedOid": "1dbb654"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T13:59:00Z",
+          "updatedAt": "2025-02-18T13:59:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOLPTb0M6Lmn1T",
+      "title": "Update Remote Attestation Terminology",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/75",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/53",
+      "createdAt": "2025-02-18T14:03:19Z",
+      "updatedAt": "2025-02-18T15:32:36Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-5",
+      "headRefOid": "fbad74e81b080f80dd66b27dc56531d8fa79eb57",
+      "closedAt": "2025-02-18T15:32:17Z",
+      "mergedAt": "2025-02-18T15:32:17Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "ff3443f30cb28cc5dba54a41f87798f27ca97c71"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYkCO",
+          "commit": {
+            "abbreviatedOid": "0895f6f"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T14:05:32Z",
+          "updatedAt": "2025-02-18T14:13:36Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n```\r\n\r\nLet's keep references inline.",
+              "createdAt": "2025-02-18T14:05:32Z",
+              "updatedAt": "2025-02-18T14:13:36Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nThe term \"attestation\" is not explicitly defined in {{!RFC9334}} but was later clarified in {{?RFC9683}}. It refers to the process of generating and evaluating remote attestation Evidence.\r\n```\r\n\r\nDo we have \"Remote attestation Evidence\" term defined somewhere?",
+              "createdAt": "2025-02-18T14:06:15Z",
+              "updatedAt": "2025-02-18T14:13:36Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n```\r\nSame as above",
+              "createdAt": "2025-02-18T14:07:58Z",
+              "updatedAt": "2025-02-18T14:13:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6cZw1U",
+          "commit": {
+            "abbreviatedOid": "8ea8063"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T15:31:06Z",
+          "updatedAt": "2025-02-18T15:31:06Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nThe term \"attestation\", as defined in {{?RFC9683}}, refers to the process of generating and evaluating remote attestation Evidence. {{!RFC9334}} describes Evidence and the different communication patterns.\r\n```",
+              "createdAt": "2025-02-18T15:31:06Z",
+              "updatedAt": "2025-02-18T15:31:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOLPTb0M6LmqWC",
+      "title": "Editorial Updates to Bootstrapping Workload Identity Section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/76",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/57",
+      "createdAt": "2025-02-18T14:07:52Z",
+      "updatedAt": "2025-02-18T15:33:28Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-6",
+      "headRefOid": "e917599264d6cda66082c78ffaecad602f397b02",
+      "closedAt": "2025-02-18T15:33:25Z",
+      "mergedAt": "2025-02-18T15:33:25Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "0e630a9bb6986e6ee0b70eb35f761ccd02ea93f5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYoiP",
+          "commit": {
+            "abbreviatedOid": "e0e2516"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T14:11:36Z",
+          "updatedAt": "2025-02-18T14:13:06Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nA workload needs to obtain its identifier and associated credentials early in its lifecycle. It also needs to learn what trust domain it belongs to. The identifier, trust domain and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.\r\n```\r\nLet's be consistent with the previous architecture section.",
+              "createdAt": "2025-02-18T14:11:36Z",
+              "updatedAt": "2025-02-18T14:13:06Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nAfter obtaining credentials from the server, the agent\r\n```",
+              "createdAt": "2025-02-18T14:12:58Z",
+              "updatedAt": "2025-02-18T14:13:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOLPTb0M6Lmv96",
+      "title": "Trust Domain",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/77",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/61",
+      "createdAt": "2025-02-18T14:17:00Z",
+      "updatedAt": "2025-02-18T15:34:49Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-7",
+      "headRefOid": "d7c1a1f0b16430132543ea3353a03ff3f011197f",
+      "closedAt": "2025-02-18T15:34:45Z",
+      "mergedAt": "2025-02-18T15:34:45Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "b0a4fc34def0af82a5ce48e5be94370de4d54c00"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYyl0",
+          "commit": {
+            "abbreviatedOid": "431eda5"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-18T14:21:19Z",
+          "updatedAt": "2025-02-18T14:21:19Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nWIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by a trust domain, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across trust domains, when arriving at authorization decisions.\r\n```",
+              "createdAt": "2025-02-18T14:21:19Z",
+              "updatedAt": "2025-02-18T14:21:19Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOLPTb0M6LmwnI",
+      "title": "Editorial Nit",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/78",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/67",
+      "createdAt": "2025-02-18T14:18:04Z",
+      "updatedAt": "2025-02-18T14:20:00Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8d599c34b1ea5d958f8ea4efa6f72e09ad445",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-8",
+      "headRefOid": "8fbdeee60d4e6160d44bcdd86f4af5ee384ab38d",
+      "closedAt": "2025-02-18T14:20:00Z",
+      "mergedAt": "2025-02-18T14:20:00Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "fb44aec6fe2356572cfc7a0b6d5dd76559a4d0b7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6cYwnr",
+          "commit": {
+            "abbreviatedOid": "8fbdeee"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-18T14:19:51Z",
+          "updatedAt": "2025-02-18T14:19:51Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
