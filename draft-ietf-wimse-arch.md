@@ -78,12 +78,12 @@ The term "attestation", as defined in {{?RFC9683}}, refers to the process of gen
 
 * Workload Identity Token
 
-A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}
+A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}.
 
 * Trust Domain
 
-The collection of workloads under the control of a single administrative authority. It is a logical domain within which authentication and authorization of workloads is managed and enforced.
-
+A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in {{?I-D.ietf-wimse-s2s-protocol}}, trust domains should be identified by a fully qualified domain name belonging to the organization defining the trust domain.
+   
 # Architecture
 
 ## Workload Identity Concepts {#whimsical-identity}
