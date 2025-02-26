@@ -501,7 +501,7 @@ Observation and interception of network traffic is not the only means of disclos
 
 ## Credential Theft
 
-When the information disclosed to an attacker is a credential, the attacker may be able to use that credential to escalate their privilege, attack another system to gain lateral movement within an organization or to impersonate a workload.  Bearer credentials are particularly vulnerable to disclosure since they are communicated between systems and may be revealed in communication channels or application logs. Credentials bound to a cryptographic key are typically less vulnerable because the key is not disclosed in the authentication process. However, care must still be taken to prevent disclosure during key management operations.
+When the information disclosed to an attacker is a credential, the attacker may be able to use that credential to escalate their privilege, attack another system via lateral movement within the organization or to impersonate a workload.  Bearer credentials are particularly vulnerable to disclosure since they are communicated between systems and may be revealed in communication channels or application logs. Credentials bound to a cryptographic key are typically less vulnerable because the key is not disclosed in the authentication process. However, care must still be taken to prevent disclosure during key management operations.
 
 ## Workload Compromise
 
