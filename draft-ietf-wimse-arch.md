@@ -84,7 +84,7 @@ token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}.
 
 * Trust Domain
 
-A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in {{?I-D.ietf-wimse-s2s-protocol}}, trust domains should be identified by a fully qualified domain name belonging to the organization defining the trust domain.
+A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in {{?I-D.ietf-wimse-s2s-protocol}}, trust domains should be identified by a fully qualified domain name associated with the organization defining the trust domain.
 # Architecture
 
 ## Workload Identity Concepts {#whimsical-identity}
