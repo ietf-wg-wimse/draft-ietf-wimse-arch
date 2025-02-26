@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 22 August 2025                                          Zscaler
+Expires: 30 August 2025                                          Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                        18 February 2025
+                                                        26 February 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2025.
+   This Internet-Draft will expire on 30 August 2025.
 
 Copyright Notice
 
@@ -786,10 +786,14 @@ Table of Contents
    already been done to the request.  This type of information is part
    of the security context that the workload uses during authorization,
    accounting and auditing.  This context is propagated and possibly
-   augmented from workload to workload using tokens.  Workload identity
-   comes into play to ensure that the information in the context can
-   only be used by an authorized workload and that the context
-   information originated from an authorized workload.
+   augmented from workload to workload using tokens.  The context may be
+   associated with a specific source or target workload by binding it to
+   a specific workload identifier.  This may indicate that the context
+   originated from a specific workload, or that only a specific workload
+   may make use of the context.  A workload may also use a workload
+   identity credential to bind a context to one or more transaction so
+   the receiver can verify which workload initiated the transaction and
+   the context that was intended for the transaction.
 
 3.3.4.  Service Authorization
 
