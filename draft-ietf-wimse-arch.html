@@ -1222,7 +1222,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-information-disclosure" class="internal xref">Information Disclosure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-workload-compromise" class="internal xref">Workload Compromise</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-credential-theft" class="internal xref">Credential Theft</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-workload-compromise" class="internal xref">Workload Compromise</a></p>
 </li>
             </ul>
 </li>
@@ -2135,15 +2138,23 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
         <h3 id="name-information-disclosure">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-information-disclosure" class="section-name selfRef">Information Disclosure</a>
         </h3>
-<p id="section-3.2-1">Observation and interception of network traffic is not the only means of disclosure in these systems. Other vectors of information leakage is through disclosure in log files and other observability and troubleshooting mechanisms. For example, an application may log the contents of HTTP headers containing JWT bearer tokens. The information in these logs may be made available to other systems with less stringent access controls, which may result in this token falling into an attackers hands who then uses it to compromise a system. This creates privacy risks and potential surface for reconnaissance attacks. If observed tokens can be reused, this also may allow attackers to impersonate workloads.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">Observation and interception of network traffic is not the only means of disclosure in these systems. Other vectors of information leakage is through disclosure in log files and other observability and troubleshooting mechanisms. For example, an application may log the contents of HTTP headers containing JWT bearer tokens, user names, email addresses and other sensitive information. The information in these logs may be made available to other systems with less stringent access controls, which may result in this information falling into an attackers hands. This creates privacy risks and potential surface for reconnaissance attacks.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-theft">
+<section id="section-3.3">
+        <h3 id="name-credential-theft">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-credential-theft" class="section-name selfRef">Credential Theft</a>
+        </h3>
+<p id="section-3.3-1">When the information disclosed to an attacker is a credential, the attacker may be able to use that credential to escalate their privilege, attack another system via lateral movement within the organization or to impersonate a workload.  Bearer credentials are particularly vulnerable to disclosure since they are communicated between systems and may be revealed in communication channels or application logs. Credentials bound to a cryptographic key are typically less vulnerable because the key is not disclosed in the authentication process. However, care must still be taken to prevent disclosure during key management operations.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="workload-compromise">
-<section id="section-3.3">
+<section id="section-3.4">
         <h3 id="name-workload-compromise">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-workload-compromise" class="section-name selfRef">Workload Compromise</a>
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-workload-compromise" class="section-name selfRef">Workload Compromise</a>
         </h3>
-<p id="section-3.3-1">Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

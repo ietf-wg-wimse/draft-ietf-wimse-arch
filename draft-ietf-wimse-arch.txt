@@ -90,7 +90,8 @@ Table of Contents
    3.  Security Considerations
      3.1.  Traffic Interception
      3.2.  Information Disclosure
-     3.3.  Workload Compromise
+     3.3.  Credential Theft
+     3.4.  Workload Compromise
    4.  IANA Considerations
    5.  References
      5.1.  Normative References
@@ -913,15 +914,27 @@ Table of Contents
    of disclosure in these systems.  Other vectors of information leakage
    is through disclosure in log files and other observability and
    troubleshooting mechanisms.  For example, an application may log the
-   contents of HTTP headers containing JWT bearer tokens.  The
-   information in these logs may be made available to other systems with
-   less stringent access controls, which may result in this token
-   falling into an attackers hands who then uses it to compromise a
-   system.  This creates privacy risks and potential surface for
-   reconnaissance attacks.  If observed tokens can be reused, this also
-   may allow attackers to impersonate workloads.
+   contents of HTTP headers containing JWT bearer tokens, user names,
+   email addresses and other sensitive information.  The information in
+   these logs may be made available to other systems with less stringent
+   access controls, which may result in this information falling into an
+   attackers hands.  This creates privacy risks and potential surface
+   for reconnaissance attacks.
 
-3.3.  Workload Compromise
+3.3.  Credential Theft
+
+   When the information disclosed to an attacker is a credential, the
+   attacker may be able to use that credential to escalate their
+   privilege, attack another system via lateral movement within the
+   organization or to impersonate a workload.  Bearer credentials are
+   particularly vulnerable to disclosure since they are communicated
+   between systems and may be revealed in communication channels or
+   application logs.  Credentials bound to a cryptographic key are
+   typically less vulnerable because the key is not disclosed in the
+   authentication process.  However, care must still be taken to prevent
+   disclosure during key management operations.
+
+3.4.  Workload Compromise
 
    Even the most well-designed and implemented workloads may contain
    security flaws that allow an attacker to gain limited or full
