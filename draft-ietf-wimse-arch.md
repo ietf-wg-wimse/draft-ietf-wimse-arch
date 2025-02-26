@@ -462,6 +462,41 @@ In a typical system of workloads additional information is needed in order for t
 
 After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
+One example of security context establishment and propagation is as follows:
+
+~~~aasvg
+┌───────────────────────────────────────────────────────────┐
+│                                                           │
+│       ┌───────────────────┐     ┌──────────────────┐      │
+│       │  -Identity 1      │     │ -Identity 1 + 2  │      │
+│       │  -Security Context│     │ -Security Context│      │
+│       └──────────┬────────┘     └────┬─────────────┘      │
+│                  │                   │                    │
+│    ┌──────────┐  ▼   ┌──────────┐    ▼ ┌──────────┐       │
+│    │ Workload1├──────► Workload2├──────► Workload3│       │
+│    └─────▲────┘      └──────────┘      └──────────┘       │
+│          │                                                │
+│          │Attestation                                     │
+│          │                                                │
+├──────────▼────────────────────────────────────────────────┤
+│                                                           │
+│    Platform: Host Operating System/Hardware Software      │
+└───────────────────────────────────────────────────────────┘
+~~~~
+{: #arch-chain title="Security Context Establishment and Propagation"}
+
+1. Workload 1 requests to load a service function within Workload 2. For example, the service function may be a LLM(Large Language Model) or a function to process PII information; Workload 2 requires that Workload 1 has hardware-based security （confidential computing） to prevent model or PII information leakage. The hardware-based security context information of Workload 1 can be obtained by running a remote attestation protocol. Workload 1 provides its Identity and the security context information to Workload 2 to apply for loading the service function.
+
+3. Workload 2 verifies the Identity and corresponding security context information provided by Workload 1 to confirm whether the service function can be provided to Workload 1.
+
+4. Workload 1 also requires the service function on Workload 2 to use the service function or data on Workload 3. For example, in the case of LLM, Workload 2 may required to load the vertical industry domain-specific data on Workload 3 for model fine-tuning.
+   
+6. Workload 2 provides its Identity, Workload 1’s Identity, and its hardware-based security context information to Workload 3.
+
+7. Workload 3 uses this information for authentication and, upon passing, provides the required service function or data to Workload 2.
+
+
+
 ### Delegation and Impersonation
 
 When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.
