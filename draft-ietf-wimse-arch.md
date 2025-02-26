@@ -78,7 +78,9 @@ The term "attestation", as defined in {{?RFC9683}}, refers to the process of gen
 
 * Workload Identity Token
 
-A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}.
+A token that contains a workload identifier used for service to service authentication. The token is bound to a
+cryptographic key and requires that the presenter provide proof of possession of the secret key material. This
+token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}.
 
 * Trust Domain
 
