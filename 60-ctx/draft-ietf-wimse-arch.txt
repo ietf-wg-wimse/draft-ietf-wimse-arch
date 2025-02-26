@@ -786,9 +786,9 @@ Table of Contents
    already been done to the request.  This type of information is part
    of the security context that the workload uses during authorization,
    accounting and auditing.  This context is propagated and possibly
-   augmented from workload to workload using tokens.  A security context
-   may be constrained to a workload by including the workload identifier
-   as part of the context.  This may indicate that the context
+   augmented from workload to workload using tokens.  The context may be
+   associated with a specific source or target workload by binding it to
+   a specific workload identifier.  This may indicate that the context
    originated from a specific workload, or that only a specific workload
    may make use of the context.  A workload may also use a workload
    identity credential to bind a context to one or more transaction so
