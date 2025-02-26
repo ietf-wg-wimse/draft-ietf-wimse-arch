@@ -187,7 +187,7 @@ Table of Contents
    service authentication.  The token is bound to a cryptographic key
    and requires that the presenter provide proof of possession of the
    secret key material.  This token is further defined in
-   [I-D.ietf-wimse-s2s-protocol].
+   [I-D.ietf-wimse-s2s-protocol]
 
    *  Trust Domain
 
