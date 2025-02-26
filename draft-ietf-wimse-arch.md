@@ -76,9 +76,9 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 The term "attestation", as defined in {{?RFC9683}}, refers to the process of generating and evaluating remote attestation Evidence. {{!RFC9334}} describes Evidence and the different communication patterns.
 
-* Workload Identity Token
+* Workload Identity Credential
 
-A token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}
+A credential that contains a workload identifier used for service to service authentication. The credential is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. Examples of this credential inlcude X.509 certificates and the workload identity token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoprate with legacy systems that do not support credentials bound to keys.
 
 * Trust Domain
 
@@ -114,9 +114,9 @@ A workload identifier only has a meaning within the scope of a specific issuer. 
 
 An agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
 
-JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity token that binds a JWT to a cryptographic key.
+JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity credential that binds a JWT to a cryptographic key.
 
-Both X.509 certificate and workload identity token credentials consist of two parts:
+Both X.509 certificate and workload identity token (WIT) credentials consist of two parts:
 
 - a certificate or WIT is a signed data structure that contains a public key and identity information
 - a corresponding private key
