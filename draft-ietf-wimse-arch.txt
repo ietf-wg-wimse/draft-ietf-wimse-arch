@@ -71,31 +71,30 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Architecture
-     3.1.  Workload Identity Concepts
-       3.1.1.  Trust Domain
-       3.1.2.  Workload Identifier
-       3.1.3.  Workload Identity Credentials
-     3.2.  Workload Identity System Scenarios
-       3.2.1.  Basic Workload Identity Scenario
-       3.2.2.  Context and workload Identity
-       3.2.3.  Cross-Domain Communication
-     3.3.  Workload Identity Use Cases
-       3.3.1.  Bootstrapping Workload Identifiers and Credentials
-       3.3.2.  Service Authentication
-       3.3.3.  Security Context Establishment and Propagation
-       3.3.4.  Service Authorization
-       3.3.5.  Delegation and Impersonation
-       3.3.6.  Asynchronous and Batch Requests
-       3.3.7.  Cross-boundary Workload Identity
-   4.  Security Considerations
-     4.1.  Traffic Interception
-     4.2.  Information Disclosure
-     4.3.  Workload Compromise
-   5.  IANA Considerations
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+     2.1.  Workload Identity Concepts
+       2.1.1.  Trust Domain
+       2.1.2.  Workload Identifier
+       2.1.3.  Workload Identity Credentials
+     2.2.  Workload Identity System Scenarios
+       2.2.1.  Basic Workload Identity Scenario
+       2.2.2.  Context and workload Identity
+       2.2.3.  Cross-Domain Communication
+     2.3.  Workload Identity Use Cases
+       2.3.1.  Bootstrapping Workload Identifiers and Credentials
+       2.3.2.  Service Authentication
+       2.3.3.  Security Context Establishment and Propagation
+       2.3.4.  Service Authorization
+       2.3.5.  Delegation and Impersonation
+       2.3.6.  Asynchronous and Batch Requests
+       2.3.7.  Cross-boundary Workload Identity
+   3.  Security Considerations
+     3.1.  Traffic Interception
+     3.2.  Information Disclosure
+     3.3.  Workload Compromise
+   4.  IANA Considerations
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -195,14 +194,13 @@ Table of Contents
 
    *  Trust Domain
 
-   The collection of workloads under the control of a single
-   administrative authority.  It is a logical domain within which
-   authentication and authorization of workloads is managed and
-   enforced.
+   A trust domain is a logical grouping of systems that share a common
+   set of security controls and policies.  As described in
+   [I-D.ietf-wimse-s2s-protocol], trust domains should be identified by
+   a fully qualified domain name associated with the organization
+   defining the trust domain. # Architecture
 
-3.  Architecture
-
-3.1.  Workload Identity Concepts
+2.1.  Workload Identity Concepts
 
    Workload identity construct consists of three basic building blocks:
    trust domain, workload identifier and identity credentials.  These
@@ -210,7 +208,7 @@ Table of Contents
    authorization and accounting processes.  More complex workload
    identity constructs can be created from these basic building blocks.
 
-3.1.1.  Trust Domain
+2.1.1.  Trust Domain
 
    A trust domain is a logical grouping of systems that share a common
    set of security controls and policies.  Workload certificates and
@@ -232,7 +230,7 @@ Table of Contents
    are scoped within a trust domain.  If two identifiers differ only by
    trust domain they still refer to two different entities.
 
-3.1.2.  Workload Identifier
+2.1.2.  Workload Identifier
 
    The WIMSE architecture defines a workload identifier as a URI
    [RFC3986].  This URI is used in the subject fields in the
@@ -269,7 +267,7 @@ Table of Contents
    and that the issuer is trusted to issue tokens for the defined trust
    domain.
 
-3.1.3.  Workload Identity Credentials
+2.1.3.  Workload Identity Credentials
 
    An agent provisions the identity credentials to the workload.  These
    credentials are represented in form of JWT tokens and/or X.509
@@ -296,9 +294,9 @@ Table of Contents
    computation to prove that the presenter has access to the private key
    corresponding to the public key.
 
-3.2.  Workload Identity System Scenarios
+2.2.  Workload Identity System Scenarios
 
-3.2.1.  Basic Workload Identity Scenario
+2.2.1.  Basic Workload Identity Scenario
 
                        +-------------------------------Trust Boundary---------------+
                        |                                                            |
@@ -430,7 +428,7 @@ Table of Contents
    workload 3.  If workload 1 or 2 makes an API request that it is not
    authorized for, then workload 3 will reject the request.
 
-3.2.2.  Context and workload Identity
+2.2.2.  Context and workload Identity
 
                     +-----------------------Trust Boundary---------+
                     |                                              |
@@ -524,7 +522,7 @@ Table of Contents
       identity and provide valid context information (c) to access
       certain APIs.
 
-3.2.3.  Cross-Domain Communication
+2.2.3.  Cross-Domain Communication
 
                     +--------------------------Trust Boundary------+
                     |                                              |
@@ -622,9 +620,9 @@ Table of Contents
       an external token service to obtain an access token to access the
       system in the foreign trust domain.
 
-3.3.  Workload Identity Use Cases
+2.3.  Workload Identity Use Cases
 
-3.3.1.  Bootstrapping Workload Identifiers and Credentials
+2.3.1.  Bootstrapping Workload Identifiers and Credentials
 
    A workload needs to obtain its identifier and associated credentials
    early in its lifecycle.  It also needs to learn what trust domain it
@@ -697,7 +695,7 @@ Table of Contents
    *  Environment Variables - identity credential may also be injected
       into workloads using operating system environment variables.
 
-3.3.2.  Service Authentication
+2.3.2.  Service Authentication
 
    One of the most basic use cases for workload identity is
    authentication of one workload to another, such as in the case where
@@ -778,7 +776,7 @@ Table of Contents
 
                Figure 5: Workload-to-Workload Communication.
 
-3.3.3.  Security Context Establishment and Propagation
+2.3.3.  Security Context Establishment and Propagation
 
    In a typical system of workloads additional information is needed in
    order for the workload to perform its function.  For example, it is
@@ -798,7 +796,7 @@ Table of Contents
    the receiver can verify which workload initiated the transaction and
    the context that was intended for the transaction.
 
-3.3.4.  Service Authorization
+2.3.4.  Service Authorization
 
    After authentication of the peer, a workload can perform
    authorization by verifying that the authenticated identity has the
@@ -808,7 +806,7 @@ Table of Contents
    context, and checks the validity of permissions against its security
    policies to ensure that only authorized actions are allowed.
 
-3.3.5.  Delegation and Impersonation
+2.3.5.  Delegation and Impersonation
 
    When source workloads send authenticated requests to destination
    workloads, those destination workloads may rely on upstream
@@ -826,7 +824,7 @@ Table of Contents
    and/or impersonation tokens within and across trust domains, when
    arriving at authorization decisions.
 
-3.3.6.  Asynchronous and Batch Requests
+2.3.6.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
    requests to destination workloads.  A destination workload may need
@@ -844,14 +842,14 @@ Table of Contents
    acting service performing asynchronous computation on the source
    workload's behalf.
 
-3.3.7.  Cross-boundary Workload Identity
+2.3.7.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.3.7.1.  Egress Identity Generalization
+2.3.7.1.  Egress Identity Generalization
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
@@ -881,7 +879,7 @@ Table of Contents
    communications adhere to security and privacy requirements while
    maintaining interoperability across trust boundaries.
 
-3.3.7.2.  Inbound Gateway Identity Validation
+2.3.7.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -892,9 +890,9 @@ Table of Contents
    it unmodified or replace it with its own identity to be validated by
    the destination.
 
-4.  Security Considerations
+3.  Security Considerations
 
-4.1.  Traffic Interception
+3.1.  Traffic Interception
 
    Workloads communicating with applications may face different threats
    to traffic interception in different deployments.  In many
@@ -909,7 +907,7 @@ Table of Contents
    of confidentiality, integrity and correct identity passthrough in
    those middleware devices and services.
 
-4.2.  Information Disclosure
+3.2.  Information Disclosure
 
    Observation and interception of network traffic is not the only means
    of disclosure in these systems.  Other vectors of information leakage
@@ -923,7 +921,7 @@ Table of Contents
    reconnaissance attacks.  If observed tokens can be reused, this also
    may allow attackers to impersonate workloads.
 
-4.3.  Workload Compromise
+3.3.  Workload Compromise
 
    Even the most well-designed and implemented workloads may contain
    security flaws that allow an attacker to gain limited or full
@@ -936,13 +934,13 @@ Table of Contents
    communicating workloads apply the principle of least privilege
    through security controls such as authorization.
 
-5.  IANA Considerations
+4.  IANA Considerations
 
    This document has no IANA actions.
 
-6.  References
+5.  References
 
-6.1.  Normative References
+5.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -973,7 +971,7 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
-6.2.  Informative References
+5.2.  Informative References
 
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
