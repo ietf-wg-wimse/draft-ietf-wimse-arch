@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                    Venafi
 Intended status: Informational                              Y. Rosomakho
-Expires: 29 August 2025                                          Zscaler
+Expires: 30 August 2025                                          Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                        25 February 2025
+                                                        26 February 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2025.
+   This Internet-Draft will expire on 30 August 2025.
 
 Copyright Notice
 
@@ -910,11 +910,11 @@ Table of Contents
    is through disclosure in log files and other observability and
    troubleshooting mechanisms.  For example, an application may log the
    contents of HTTP headers containing JWT bearer tokens, user names,
-   emails and other sensitive information.  The information in these
-   logs may be made available to other systems with less stringent
+   email addresses and other sensitive information.  The information in
+   these logs may be made available to other systems with less stringent
    access controls, which may result in this information falling into an
    attackers hands.  This creates privacy risks and potential surface
-   for reconnaissance attacks. ≈
+   for reconnaissance attacks.
 
 4.3.  Credential Theft
 
