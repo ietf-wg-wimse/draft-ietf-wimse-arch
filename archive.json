@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T01:50:40.537888+00:00",
+  "timestamp": "2025-02-27T01:50:45.641778+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -232,16 +232,24 @@
       ],
       "body": "Perhaps consider using similar terminology as in the OAuth cross-domain authorization draft? Also worth cosnidering using languagge like \"Trust boundary\" instead of \"administrative boudnary\" as different trust domains may be administered by the same entities, but trust is segmented on purpose to minimise blast radius in cases of compromise etc.",
       "createdAt": "2024-03-18T00:23:43Z",
-      "updatedAt": "2025-01-07T15:26:52Z",
+      "updatedAt": "2025-02-25T04:03:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "we no longer use the term administrative boundary in the document.  I propose that we close this issue as aligning wi the cross identity draft is covered in issue #63 ",
+          "createdAt": "2025-02-25T04:03:23Z",
+          "updatedAt": "2025-02-25T04:03:23Z"
+        }
+      ]
     },
     {
       "number": 20,
       "id": "I_kwDOLPTb0M6Cl94j",
       "title": "Information Disclosure == Credential Theft?",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -252,8 +260,8 @@
       ],
       "body": "Should we distinguish between information disclosure (attacker learns information it should not have) vs attacker obtains control of a credential that it can use to impersonate a workload, perform lateral moves or elevate privelage.",
       "createdAt": "2024-03-18T00:26:30Z",
-      "updatedAt": "2025-01-07T15:26:51Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-26T15:30:44Z",
+      "closedAt": "2025-02-26T15:30:44Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -900,9 +908,17 @@
       "labels": [],
       "body": "I struggled a little bit with this sentence. Perhaps introduce the concept of \"workload constrained security context\" to communicate the idea that it is necessary to prove that a security context originated from a specific workload or may only be used by a specific workload.\r\n\r\nFrom:  \"Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.\"\r\n\r\nTo: \"A security context may be constrained to a workload by including the workload identifier as part of the context. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context\"\r\n\r\nAfter reading the above, I think there are two ways of constraining the context, one to the originator and one to the recipient. These are probably different mechanisms/claims in a token - not sure how specific we should be in the architecture document.",
       "createdAt": "2025-01-07T19:32:37Z",
-      "updatedAt": "2025-01-10T20:01:06Z",
+      "updatedAt": "2025-02-26T06:08:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Applied suggested text in PR #82 in addition added some text to try to describe the use of the workload identity credential to bind context to a transaction that it originates. ",
+          "createdAt": "2025-02-26T06:08:37Z",
+          "updatedAt": "2025-02-26T06:08:37Z"
+        }
+      ]
     },
     {
       "number": 61,
@@ -3244,6 +3260,274 @@
           "body": "",
           "createdAt": "2025-02-18T14:19:51Z",
           "updatedAt": "2025-02-18T14:19:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOLPTb0M6MZR21",
+      "title": "add credential theft",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/79",
+      "state": "MERGED",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "resolve #20 ",
+      "createdAt": "2025-02-25T04:58:18Z",
+      "updatedAt": "2025-02-26T15:30:43Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b0a4fc34def0af82a5ce48e5be94370de4d54c00",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "jsalowey-20",
+      "headRefOid": "7b9212b462149a15dfdaeff8215fb71d7ce217ec",
+      "closedAt": "2025-02-26T15:30:43Z",
+      "mergedAt": "2025-02-26T15:30:43Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6dpn7r",
+          "commit": {
+            "abbreviatedOid": "c1f6953"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T15:28:47Z",
+          "updatedAt": "2025-02-26T15:28:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nObservation and interception of network traffic is not the only means of disclosure in these systems. Other vectors of information leakage is through disclosure in log files and other observability and troubleshooting mechanisms. For example, an application may log the contents of HTTP headers containing JWT bearer tokens, user names, email addresses and other sensitive information. The information in these logs may be made available to other systems with less stringent access controls, which may result in this information falling into an attackers hands. This creates privacy risks and potential surface for reconnaissance attacks.\r\n```",
+              "createdAt": "2025-02-26T15:28:48Z",
+              "updatedAt": "2025-02-26T15:28:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6dppRH",
+          "commit": {
+            "abbreviatedOid": "4b9c803"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T15:30:27Z",
+          "updatedAt": "2025-02-26T15:30:27Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nWhen the information disclosed to an attacker is a credential, the attacker may be able to use that credential to escalate their privilege, attack another system via lateral movement within the organization or to impersonate a workload.  Bearer credentials are particularly vulnerable to disclosure since they are communicated between systems and may be revealed in communication channels or application logs. Credentials bound to a cryptographic key are typically less vulnerable because the key is not disclosed in the authentication process. However, care must still be taken to prevent disclosure during key management operations.\r\n```",
+              "createdAt": "2025-02-26T15:30:27Z",
+              "updatedAt": "2025-02-26T15:30:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOLPTb0M6MgvhA",
+      "title": "Trust Domain",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/80",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Re-using the definition from draft-ietf-wimse-s2s-protocol",
+      "createdAt": "2025-02-25T17:51:32Z",
+      "updatedAt": "2025-02-26T15:27:33Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b0a4fc34def0af82a5ce48e5be94370de4d54c00",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-3",
+      "headRefOid": "c183792c83d78bea344adeffe6c0a3bc74128f72",
+      "closedAt": "2025-02-26T15:27:33Z",
+      "mergedAt": "2025-02-26T15:27:33Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "cf9ab5bc1a1d1b42fdecff00de4f56a94b79ca17"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6dpMoC",
+          "commit": {
+            "abbreviatedOid": "eb6a5a0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T14:57:41Z",
+          "updatedAt": "2025-02-26T14:57:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nA token that contains a workload identifier used for service to service authentication. The token is bound to a\r\ncryptographic key and requires that the presenter provide proof of possession of the secret key material. This\r\ntoken is further defined in {{?I-D.ietf-wimse-s2s-protocol}}.\r\n```",
+              "createdAt": "2025-02-26T14:57:41Z",
+              "updatedAt": "2025-02-26T14:57:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6dpM66",
+          "commit": {
+            "abbreviatedOid": "233b2d9"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T14:58:01Z",
+          "updatedAt": "2025-02-26T14:58:01Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n\r\n```",
+              "createdAt": "2025-02-26T14:58:01Z",
+              "updatedAt": "2025-02-26T14:58:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6dpk_V",
+          "commit": {
+            "abbreviatedOid": "ac7f9dc"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T15:25:11Z",
+          "updatedAt": "2025-02-26T15:25:11Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nA trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in {{?I-D.ietf-wimse-s2s-protocol}}, trust domains should be identified by a fully qualified domain name associated with the organization defining the trust domain.\r\n```",
+              "createdAt": "2025-02-26T15:25:11Z",
+              "updatedAt": "2025-02-26T15:25:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6dpmhO",
+          "commit": {
+            "abbreviatedOid": "b8e6072"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T15:26:56Z",
+          "updatedAt": "2025-02-26T15:26:56Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nA token that contains a workload identifier used for service to service authentication. The token is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. This token is further defined in {{?I-D.ietf-wimse-s2s-protocol}}\r\n```",
+              "createdAt": "2025-02-26T15:26:56Z",
+              "updatedAt": "2025-02-26T15:26:56Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "id": "PR_kwDOLPTb0M6Mkloz",
+      "title": "define workload identity Credential",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/81",
+      "state": "MERGED",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes issue #54 ",
+      "createdAt": "2025-02-26T05:47:25Z",
+      "updatedAt": "2025-02-26T15:22:56Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b0a4fc34def0af82a5ce48e5be94370de4d54c00",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "54-wit",
+      "headRefOid": "dd28850b871e69f67e84fa06f9315e825129c175",
+      "closedAt": "2025-02-26T15:22:56Z",
+      "mergedAt": "2025-02-26T15:22:56Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "2f0be213b045253ce0d1b71a68a49976e9580e22"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 82,
+      "id": "PR_kwDOLPTb0M6MkvUX",
+      "title": "address issue 60",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/82",
+      "state": "MERGED",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Resolve issue #60 ",
+      "createdAt": "2025-02-26T06:06:23Z",
+      "updatedAt": "2025-02-26T15:21:26Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b0a4fc34def0af82a5ce48e5be94370de4d54c00",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "60-ctx",
+      "headRefOid": "698c5bf3cb31cf22982dd3b1924296435353bdfa",
+      "closedAt": "2025-02-26T15:21:26Z",
+      "mergedAt": "2025-02-26T15:21:26Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "08df164ff9f146824f389ff10661be840ac05cd9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6dphxr",
+          "commit": {
+            "abbreviatedOid": "75f772c"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-26T15:20:46Z",
+          "updatedAt": "2025-02-26T15:20:46Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nIn a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.\r\n```",
+              "createdAt": "2025-02-26T15:20:46Z",
+              "updatedAt": "2025-02-26T15:20:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6dph2x",
+          "commit": {
+            "abbreviatedOid": "75f772c"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-26T15:20:52Z",
+          "updatedAt": "2025-02-26T15:20:52Z",
           "comments": []
         }
       ]
