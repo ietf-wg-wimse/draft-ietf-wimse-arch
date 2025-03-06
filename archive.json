@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T01:52:31.114580+00:00",
+  "timestamp": "2025-03-06T01:52:32.082916+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -989,7 +989,7 @@
       "id": "I_kwDOLPTb0M6lUktX",
       "title": "Egress Identity Generalization",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/64",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -998,16 +998,24 @@
       "labels": [],
       "body": "It is not entirely clear what \"generalize\" mean in this context. From reading this, I think this is something egress gateways do to hide the workload identities, so it is almost a kind of identity proxy scenario?",
       "createdAt": "2025-01-07T20:00:11Z",
-      "updatedAt": "2025-01-09T21:56:13Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-03-04T15:08:51Z",
+      "closedAt": "2025-03-04T15:08:50Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as addressed",
+          "createdAt": "2025-03-04T15:08:50Z",
+          "updatedAt": "2025-03-04T15:08:50Z"
+        }
+      ]
     },
     {
       "number": 65,
       "id": "I_kwDOLPTb0M6lUljR",
       "title": "Ingress gateways",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/65",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1018,8 +1026,8 @@
       ],
       "body": "Ingress gateways may also include context of the inbound identity via something like transaction tokens. Perhaps worth calling out transaction tokens role at the ingress gateway?",
       "createdAt": "2025-01-07T20:02:18Z",
-      "updatedAt": "2025-01-21T15:18:25Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-04T15:09:15Z",
+      "closedAt": "2025-03-04T15:09:14Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1027,6 +1035,13 @@
           "body": "The document briefly mentios this in section 3.2.2, but in explicitly in the enumerated steps.  This is is an oversight and we should include the use of transaction tokens to carry context as I would expect this to be a main use case.  ",
           "createdAt": "2025-01-09T21:50:16Z",
           "updatedAt": "2025-01-09T21:50:16Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as addressed",
+          "createdAt": "2025-03-04T15:09:14Z",
+          "updatedAt": "2025-03-04T15:09:14Z"
         }
       ]
     },
