@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T01:56:02.184812+00:00",
+  "timestamp": "2025-03-27T01:55:08.544964+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -288,9 +288,17 @@
       ],
       "body": "We should add graphical representation of attestation process to simplify reader understanding",
       "createdAt": "2024-03-20T23:03:33Z",
-      "updatedAt": "2025-01-07T15:25:38Z",
+      "updatedAt": "2025-03-26T18:09:09Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "The two mentions of \"Attestation\" are really confusing to me. \nPieter Kasselman and I discussed mapping to RATS and came up with the following: \nAE = Attesting Environment \nTE = Target Environment \n\nHope this would be helpful. \n\n![Image](https://github.com/user-attachments/assets/7adf511b-7278-4eba-b036-72c64c238c95)\n\n",
+          "createdAt": "2025-03-26T18:09:07Z",
+          "updatedAt": "2025-03-26T18:09:07Z"
+        }
+      ]
     },
     {
       "number": 24,
