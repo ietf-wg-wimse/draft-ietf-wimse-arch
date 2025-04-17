@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-30T02:03:33.204530+00:00",
+  "timestamp": "2025-04-17T01:58:22.402307+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1095,6 +1095,24 @@
       "createdAt": "2025-01-23T12:17:26Z",
       "updatedAt": "2025-02-18T15:35:48Z",
       "closedAt": "2025-02-18T15:35:48Z",
+      "comments": []
+    },
+    {
+      "number": 83,
+      "id": "I_kwDOLPTb0M6ynKWi",
+      "title": "Separate WIMSE identifier as separate document",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/83",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "yaroslavros"
+      ],
+      "labels": [],
+      "body": "the WIMSE identifier is relatively well defined and useful on tis own so let's spin it out of the main document so it can progress separately. ",
+      "createdAt": "2025-04-15T14:19:34Z",
+      "updatedAt": "2025-04-15T14:19:48Z",
+      "closedAt": null,
       "comments": []
     }
   ],
