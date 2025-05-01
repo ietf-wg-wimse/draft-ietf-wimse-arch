@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-17T01:58:22.402307+00:00",
+  "timestamp": "2025-05-01T02:10:13.701269+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -829,12 +829,12 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
-        "jsalowey"
+        "yaroslavros"
       ],
       "labels": [],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-01-21T15:15:40Z",
+      "updatedAt": "2025-04-29T15:45:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -843,6 +843,20 @@
           "body": "Yes the intent is that we are consistent and we should state it.  Can you elaborate on the high bar for consistency? ",
           "createdAt": "2025-01-10T19:54:23Z",
           "updatedAt": "2025-01-10T19:54:23Z"
+        },
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Probably move to identifier document. ",
+          "createdAt": "2025-04-29T15:28:53Z",
+          "updatedAt": "2025-04-29T15:28:53Z"
+        },
+        {
+          "author": "PieterKas",
+          "authorAssociation": "NONE",
+          "body": "High bar = it should be an explicit goal to be consistent.",
+          "createdAt": "2025-04-29T15:45:51Z",
+          "updatedAt": "2025-04-29T15:45:51Z"
         }
       ]
     },
