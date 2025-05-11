@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-06T02:02:28.879001+00:00",
+  "timestamp": "2025-05-11T02:09:18.287918+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -3642,6 +3642,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOLPTb0M6Vi6Wm",
+      "title": "Use term workload identity certificate",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/87",
+      "state": "OPEN",
+      "author": "dagdagdag83",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "* Introduced term \"workload identity certificate\" as explained in #86.\r\n* Changed references to generic X.509 certificate to workload identity certificate, when referring to the specific term.\r\n\r\nResolved #86 ",
+      "createdAt": "2025-05-09T08:17:29Z",
+      "updatedAt": "2025-05-09T08:17:29Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4",
+      "headRepository": "dagdagdag83/draft-ietf-wimse-arch",
+      "headRefName": "use-term-workload-identity-certificate",
+      "headRefOid": "e11a0fcee0558ffb107913b27e984584e202d514",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
