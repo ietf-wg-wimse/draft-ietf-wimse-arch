@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-11T02:09:18.287918+00:00",
+  "timestamp": "2025-05-29T02:05:17.533992+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1135,17 +1135,19 @@
       "title": "Under-communicating \"Workload-Bound\" tokens",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/84",
       "state": "OPEN",
-      "author": "the--dud",
+      "author": "dagdagdag83",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "In my opinion the document (and also draft-ietf-wimse-s2s-protocol) is under-communicating the possibility and advantages of binding tokens to workload identities.\n\nConsider a scenario where you use RFC8705 or RFC9449 to request a token. The resulting token will be bound to either the mTLS certificate or the key in the proof token. The example in https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-option-1-dpop-inspired-auth effectively binds the WIT to the workload, the WIT is workload-bound. The example https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-using-mutual-tls-for-worklo doesn't mention using RFC8705 to get workload-bound tokens.\n\nI think that the architecture document should be much clearer on the possibility of binding tokens to workloads. For instance the recent https://csrc.nist.gov/pubs/sp/800/228/ipd does a very good job at explaining that there is typically at least two factors involved 1) an authentication of the software/workload making the request, 2) some type of token relaying authorization context.\n\nI think we are greatly under-communicating the possibility of using the workload identity authentication to bind tokens (that contains authorization context) to the workload identity itself. This token could be an oauth token or indeed a transaction token (if txn-tokens were extended to support cnf claims). This has big benefit of giving another layer of defense because these tokens could not be stolen or misused by other workloads or systems.\n\nIn general I think that NIST SP 800-228 does a better job at explaining the \"factors\" involved in \"API Protection for Cloud-Native Systems\" -- which is effectively what WIMSE also aims to \"solve\" -- secure workload to workload communication. By authenticating a workload you have actually primed any tokens within your trust domain to be workload-bound which would greatly improve token security without much extra work.\n\nMy main point is that by having valid Workload Identity Credentials as either X.509 certificate or WIT, you have the ability to bind any or all tokens within your trust domain. The WIT/WPT pattern in s2s document actually is a form of workload-bound tokens, but it doesn't make it very clear. However this can easily be extended to binding other tokens via a RFC8705 flow or dPoP-like flows.  ",
       "createdAt": "2025-05-05T21:08:55Z",
-      "updatedAt": "2025-05-05T22:15:10Z",
+      "updatedAt": "2025-05-27T15:44:44Z",
       "closedAt": null,
       "comments": [
         {
-          "author": "the--dud",
+          "author": "dagdagdag83",
           "authorAssociation": "NONE",
           "body": "I notice now in section 3.3.3 the following: \"`A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction`\", but this is as far as I can see the only mention of anything related to \"workload-bound\" tokens. And it's a very tenuous mention.",
           "createdAt": "2025-05-05T22:15:10Z",
@@ -1159,13 +1161,15 @@
       "title": "Workload Identity Credentials key management is understated",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/85",
       "state": "OPEN",
-      "author": "the--dud",
+      "author": "dagdagdag83",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "The document states in section 3.1.3 the following:\n```\nBoth X.509 certificate and workload identity token credentials consist of two parts:\n* a certificate or WIT is a signed data structure that contains a public key and identity information\n* a corresponding private key\n```\nThese Workload Identity Credentials (WIC) are effectively based on a key pair which has to be managed by the workloads themselves or the infrastructure/platform. All key material must be rotated and stored securely, which means that these key pairs have these considerations. The document doesn't mention this.\n\nThe workload could generate a new key pair for each single request but that is suboptimal. The document should provide some mention or guidelines on how often the workload (or platform) should rotate the certificates or the WIT/WPT key pair.\n",
       "createdAt": "2025-05-05T22:09:55Z",
-      "updatedAt": "2025-05-05T22:09:55Z",
+      "updatedAt": "2025-05-27T15:46:18Z",
       "closedAt": null,
       "comments": []
     },
