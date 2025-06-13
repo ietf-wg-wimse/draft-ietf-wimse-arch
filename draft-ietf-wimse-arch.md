@@ -399,7 +399,9 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 ### Service Authentication
 
-One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the request to the service offered by the workload needs to be authorized. Even in this simple case the identity of a workload is often composed of many attributes such as:
+One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in {{authorization}} and generate audit trails as described in {{audit-trails}}.
+
+Authentication mechanisms are used to establish the identity of the peer workload. This identity is composed of many attributes, which may include:
 
 * Trigger Information
 * Service Name
@@ -410,18 +412,13 @@ One of the most basic use cases for workload identity is authentication of one w
 * Software Attestation
 * Hardware Attestation
 
-These attributes are used for various purposes such as:
-
-* ensuring the request is made to the correct service or service instance
-* authorizing access to APIs and resources
-* providing an audit trail of requests within a system
-* providing context for other decisions made within a service
-
-There are several methods defined to perform this authentication.  Some of the most common include:
+There are several methods defined to perform service-to-service authentication. The most common mechanisms include:
 
 * TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.
 * Mutual TLS authentication using X.509 certificate for both client and server.
 * TLS authentication of the server and HTTP request signing using a secret key.
+
+These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.
 
 {{arch-chain}} illustrates the communication between different workloads. Two aspects are important
 to highlight: First, there is a need to consider the interaction with workloads that are external
@@ -454,6 +451,42 @@ take place across intermediate workloads (in an end-to-end style).
 ~~~~
 {: #arch-chain title="Workload-to-Workload Communication."}
 
+### Service Authorization {#authorization}
+
+Once authentication has successfully established the identity of a peer workload, authorization mechanisms determine whether the authenticated identity is permitted to perform the requested action on the target workload.
+
+Authorization specified by WIMSE is context-aware. It relies on attributes carried in the security context, which may originate from upstream systems such as gateways or identity proxies. This context may be derived from end-user attributes, trust domain policies, or deployment-specific metadata (e.g., environment, service role, workload instance).
+
+Authorization decisions typically include:
+
+* Validating the integrity and provenance of the security context.
+* Ensuring the authenticated identity has the correct role and attributes to access the requested API or resource.
+* Applying fine-grained policy rules, which may include path, method, action type, and contextual constraints (e.g., geographic location, time of day).
+
+Authorization checks may also incorporate delegation and impersonation semantics, as described in {{delegation}}, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.
+
+### Audit Trails {#audit-trails}
+
+Auditability is a critical requirement in systems that rely on workload identities and security context. Each authenticated request MUST leave a verifiable and inspectable trace regardless of authentication and authorization decision.
+
+Audit trails are typically generated at multiple points:
+
+* Gateway Services: Log incoming client requests and their authenticated identities, including access tokens or client certificates used.
+* Workloads: Log authenticated peer identities, security context attributes, requested resources, and authorization outcomes.
+* Identity and Token Services: Log issuance and validation events for workload identity credentials and context tokens.
+
+Audit records may include:
+
+* Timestamp of the request
+* Source workload identifier
+* Target workload identifier
+* Authentication method used
+* Decision outcome (authorized/denied)
+* Security context claims
+* Delegation/impersonation metadata (if present)
+
+WIMSE systems SHOULD ensure audit logs are tamper-evident and securely stored. Logs may be forwarded to centralized security information and event management (SIEM) systems to enable compliance, threat detection, and incident response.
+
 ### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.
@@ -462,7 +495,7 @@ In a typical system of workloads additional information is needed in order for t
 
 After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
-### Delegation and Impersonation
+### Delegation and Impersonation {#delegation}
 
 When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.
 
