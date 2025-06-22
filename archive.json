@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T02:23:22.817858+00:00",
+  "timestamp": "2025-06-22T02:23:26.922364+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -3659,7 +3659,7 @@
       "labels": [],
       "body": "* Introduced term \"workload identity certificate\" as explained in #86.\r\n* Changed references to generic X.509 certificate to workload identity certificate, when referring to the specific term.\r\n\r\nResolved #86 ",
       "createdAt": "2025-05-09T08:17:29Z",
-      "updatedAt": "2025-05-09T08:17:29Z",
+      "updatedAt": "2025-06-19T19:23:50Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4",
@@ -3670,8 +3670,30 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "dagdagdag83",
+          "authorAssociation": "NONE",
+          "body": "> I don't see a problem with this change, however we should also update the S2s draft - https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol It uses the term workload certificate, but never defines it. @dagdagdag83 would you be will to open a PR on that document?\r\n\r\n@jsalowey I opened PR https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/132 on the S2S draft as well now.",
+          "createdAt": "2025-06-19T19:23:50Z",
+          "updatedAt": "2025-06-19T19:23:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6vdWam",
+          "commit": {
+            "abbreviatedOid": "e11a0fc"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I don't see a problem with this change, however we should also update the S2s draft - https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol \r\nIt uses the term workload certificate, but never defines it.  @dagdagdag83  would you be will to open a PR on that document? ",
+          "createdAt": "2025-06-19T17:29:58Z",
+          "updatedAt": "2025-06-19T17:29:58Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 88,
@@ -3685,7 +3707,7 @@
       "labels": [],
       "body": "Introduce Service Authorisation and Audit Trail section to address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/18 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/33",
       "createdAt": "2025-06-13T15:24:17Z",
-      "updatedAt": "2025-06-13T15:24:18Z",
+      "updatedAt": "2025-06-19T17:22:26Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4",
@@ -3697,7 +3719,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6vdT42",
+          "commit": {
+            "abbreviatedOid": "bbcad0a"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "We ought to look at the identity composition text and see if it is still relevant. \r\n\r\nAlso should have something about not logging secrets like bearer tokens in the document",
+          "createdAt": "2025-06-19T17:22:26Z",
+          "updatedAt": "2025-06-19T17:22:26Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
