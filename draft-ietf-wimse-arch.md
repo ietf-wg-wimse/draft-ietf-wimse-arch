@@ -18,7 +18,7 @@ author:
  -
     ins: J. Salowey
     name: Joseph Salowey
-    organization: Venafi
+    organization: CyberArk
     email: joe@salowey.net
  -
     ins: Y. Rosomakho
