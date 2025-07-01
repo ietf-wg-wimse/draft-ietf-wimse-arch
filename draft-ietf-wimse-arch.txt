@@ -189,11 +189,11 @@ Table of Contents
    A credential that contains a workload identifier used for service to
    service authentication.  The credential is bound to a cryptographic
    key and requires that the presenter provide proof of possession of
-   the secret key material.  Examples of this credential inlcude X.509
-   certificates and the workload identity token defined in
-   [I-D.ietf-wimse-s2s-protocol].  Deployments may also deploy bearer
-   tokens as workload identity credentials to interoprate with legacy
-   systems that do not support credentials bound to keys.
+   the secret key material.  Examples of this credential inlcude
+   Workload Identity Certificates and the Workload Identity Token
+   defined in [I-D.ietf-wimse-s2s-protocol].  Deployments may also
+   deploy bearer tokens as workload identity credentials to interoprate
+   with legacy systems that do not support credentials bound to keys.
 
    *  Trust Domain
 
@@ -284,18 +284,18 @@ Table of Contents
    defines a workload identity credential that binds a JWT to a
    cryptographic key.
 
-   Both X.509 certificate and workload identity token (WIT) credentials
-   consist of two parts:
+   Both workload identity certificate and workload identity token (WIT)
+   credentials consist of two parts:
 
    *  a certificate or WIT is a signed data structure that contains a
       public key and identity information
 
    *  a corresponding private key
 
-   The certificate or WIT is presented during authentication, however
-   the private key is kept secret and only used in cryptographic
-   computation to prove that the presenter has access to the private key
-   corresponding to the public key.
+   The workload identity certificate or WIT is presented during
+   authentication, however the private key is kept secret and only used
+   in cryptographic computation to prove that the presenter has access
+   to the private key corresponding to the public key.
 
 2.2.  Workload Identity System Scenarios
 
@@ -411,8 +411,8 @@ Table of Contents
    authenticate the identity of workload 3 through the TLS protocol to
    ensure it is making a request of the right party.  Workload 3 will
    authenticate workload 1 using its workload identity credentials.  If
-   the workload identity credentials are X.509 certificates then this
-   can happen through TLS client authentication (mutual TLS).
+   the Workload Identity Credentials are workload identity certificates
+   then this can happen through TLS client authentication (mutual TLS).
    Alternatively, the workloads can use a JWT based authentication
    mechanism to authenticate on another.  Workload three can use the
    authenticated identity of workload 1 to determine which APIs workload
@@ -896,10 +896,10 @@ Table of Contents
    identify the workload as the actor in the actor chain, but may also
    identify other principals that the action is taken on behalf.  To
    mitigate risks associated with long-duration credentials, these
-   credentials should be bound to the workload identity credential such
-   as an X.509 certificate or Workload Identity Token (WIT) of the
-   acting service performing asynchronous computation on the source
-   workload's behalf.
+   credentials should be bound to the Workload Identity Credential such
+   as an workload identity certificate or Workload Identity Token (WIT)
+   of the acting service performing asynchronous computation on the
+   source workload's behalf.
 
 2.3.9.  Cross-boundary Workload Identity
 
@@ -925,7 +925,7 @@ Table of Contents
    deployment structure, scaling strategies, security policies,
    technologies in use, or failover mechanisms, potentially giving them
    a tactical advantage.  In such cases, an identity proxy at the trust
-   boundary can generalize the workload identity by replacing the
+   boundary can generalize the Workload Identity by replacing the
    specific microservice instance name with the name of the overall
    service.  This allows external parties to recognize the service while
    abstracting internal deployment details.
