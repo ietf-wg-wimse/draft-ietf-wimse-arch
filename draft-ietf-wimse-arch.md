@@ -401,18 +401,7 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in {{authorization}} and generate audit trails as described in {{audit-trails}}.
 
-Authentication mechanisms are used to establish the identity of the peer workload. This identity is composed of many attributes, which may include:
-
-* Trigger Information
-* Service Name
-* Instance Name
-* Role
-* Environment
-* Trust Domain
-* Software Attestation
-* Hardware Attestation
-
-There are several methods defined to perform service-to-service authentication. The most common mechanisms include:
+Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:
 
 * TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.
 * Mutual TLS authentication using X.509 certificate for both client and server.
@@ -484,6 +473,8 @@ Audit records may include:
 * Decision outcome (authorized/denied)
 * Security context claims
 * Delegation/impersonation metadata (if present)
+
+To avoid inadvertent disclosure of sensitive information, workloads and services generating audit logs MUST NOT log secrets such as bearer tokens, private keys, or passwords. If logging of credential-related data is necessary for diagnostic or policy purposes, these values MUST be redacted, hashed, or otherwise sanitised to prevent misuse.
 
 WIMSE systems SHOULD ensure audit logs are tamper-evident and securely stored. Logs may be forwarded to centralized security information and event management (SIEM) systems to enable compliance, threat detection, and incident response.
 
