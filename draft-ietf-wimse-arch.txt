@@ -3,7 +3,7 @@
 
 
 Workload Identity in Multi System Environments                J. Salowey
-Internet-Draft                                                    Venafi
+Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
 Expires: 2 January 2026                                          Zscaler
                                                            H. Tschofenig
@@ -1072,7 +1072,7 @@ Acknowledgments
 Authors' Addresses
 
    Joseph Salowey
-   Venafi
+   CyberArk
    Email: joe@salowey.net
 
 
