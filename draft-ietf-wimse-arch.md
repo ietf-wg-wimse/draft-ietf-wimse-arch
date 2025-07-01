@@ -78,7 +78,7 @@ The term "attestation", as defined in {{?RFC9683}}, refers to the process of gen
 
 * Workload Identity Credential
 
-A credential that contains a workload identifier used for service to service authentication. The credential is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. Examples of this credential inlcude X.509 certificates and the workload identity token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoprate with legacy systems that do not support credentials bound to keys.
+A credential that contains a workload identifier used for service to service authentication. The credential is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. Examples of this credential inlcude Workload Identity Certificates and the Workload Identity Token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoprate with legacy systems that do not support credentials bound to keys.
 
 * Trust Domain
 
@@ -115,12 +115,12 @@ An agent provisions the identity credentials to the workload. These credentials 
 
 JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity credential that binds a JWT to a cryptographic key.
 
-Both X.509 certificate and workload identity token (WIT) credentials consist of two parts:
+Both workload identity certificate and workload identity token (WIT) credentials consist of two parts:
 
 - a certificate or WIT is a signed data structure that contains a public key and identity information
 - a corresponding private key
 
-The certificate or WIT is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key corresponding to the public key.
+The workload identity certificate or WIT is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key corresponding to the public key.
 
 
 
@@ -200,7 +200,7 @@ The client request is typically made over HTTPS, but other protocols may be used
 
 * (3) API request to workload 1
 
-The gateway is configured to forward requests to the correct workload.  The gateway often modifies the request to include specific authentication information about the application client and to remove any information that should not be forwarded internally.  The gateway authenticates the workload before forwarding the request.  This authentication usually uses TLS. The target workload may authenticate the gateway using TLS or some other means. As part of servicing the request the workload must make a request to another workload in the system.  In this scenario the workload is making a request to workload 3 over HTTPS.  Workload 1 may be able to authenticate the identity of workload 3 through the TLS protocol to ensure it is making a request of the right party.  Workload 3 will authenticate workload 1 using its workload identity credentials. If the workload identity credentials are X.509 certificates then this can happen through TLS client authentication (mutual TLS). Alternatively, the workloads can use a JWT based authentication mechanism to authenticate on another. Workload three can use the authenticated identity of workload 1 to determine which APIs workload 1 is authorized 2 and to associated the authenticated identity with logs and other audit information.
+The gateway is configured to forward requests to the correct workload.  The gateway often modifies the request to include specific authentication information about the application client and to remove any information that should not be forwarded internally.  The gateway authenticates the workload before forwarding the request.  This authentication usually uses TLS. The target workload may authenticate the gateway using TLS or some other means. As part of servicing the request the workload must make a request to another workload in the system.  In this scenario the workload is making a request to workload 3 over HTTPS.  Workload 1 may be able to authenticate the identity of workload 3 through the TLS protocol to ensure it is making a request of the right party.  Workload 3 will authenticate workload 1 using its workload identity credentials. If the Workload Identity Credentials are workload identity certificates then this can happen through TLS client authentication (mutual TLS). Alternatively, the workloads can use a JWT based authentication mechanism to authenticate on another. Workload three can use the authenticated identity of workload 1 to determine which APIs workload 1 is authorized 2 and to associated the authenticated identity with logs and other audit information.
 
 * (4) API request to workload 2
 
@@ -494,7 +494,7 @@ WIMSE credentials constrain the subjects and actors identified in delegation and
 
 ### Asynchronous and Batch Requests
 
-Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the workload identity credential such as an X.509 certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.
+Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the Workload Identity Credential such as an workload identity certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.
 
 ### Cross-boundary Workload Identity
 
@@ -504,7 +504,7 @@ As workloads often need to communicate across trust boundaries, extra care needs
 
 A workload communicating with a service or another workload located outside the trust boundary may need to provide modified identity information. The detailed identity of an internal workload originating the communication is relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.
 
-For example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the workload identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.
+For example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the Workload Identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.
 
 A security gateway implementing Identity Proxy functionality at the edge of a trust boundary can validate identity information of the workload, perform context-specific authorization of the transaction, and replace workload-specific identity with a generalized one for a given trust domain. This approach ensures that external communications adhere to security and privacy requirements while maintaining interoperability across trust boundaries.
 
