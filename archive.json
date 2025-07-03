@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T02:23:26.922364+00:00",
+  "timestamp": "2025-07-03T02:09:16.675289+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1178,15 +1178,15 @@
       "id": "I_kwDOLPTb0M61Qsgj",
       "title": "Use term workload identity certificate",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/86",
-      "state": "OPEN",
-      "author": "the--dud",
+      "state": "CLOSED",
+      "author": "dagdagdag83",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "In this document it says \"An agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.\". These are the generic terms for workload identity credentials (WIC). \n\nIt then goes on to define a workload identity token:\n\"To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity token that binds a JWT to a cryptographic key.\"\n\nIn my opinion it should also define the term \"workload identity certificate\" as the specific type of X.509 certificate used for a WIC. \n\nThis will unify the two terms for WICs, and avoid this document and the s2s document having to refer to \"WIMSE certificates\". ",
       "createdAt": "2025-05-05T23:18:13Z",
-      "updatedAt": "2025-05-05T23:18:13Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-01T17:14:27Z",
+      "closedAt": "2025-07-01T17:14:27Z",
       "comments": []
     }
   ],
@@ -3652,24 +3652,26 @@
       "id": "PR_kwDOLPTb0M6Vi6Wm",
       "title": "Use term workload identity certificate",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/87",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "dagdagdag83",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "* Introduced term \"workload identity certificate\" as explained in #86.\r\n* Changed references to generic X.509 certificate to workload identity certificate, when referring to the specific term.\r\n\r\nResolved #86 ",
       "createdAt": "2025-05-09T08:17:29Z",
-      "updatedAt": "2025-06-19T19:23:50Z",
+      "updatedAt": "2025-07-01T17:14:27Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4",
       "headRepository": "dagdagdag83/draft-ietf-wimse-arch",
       "headRefName": "use-term-workload-identity-certificate",
       "headRefOid": "e11a0fcee0558ffb107913b27e984584e202d514",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-01T17:14:27Z",
+      "mergedAt": "2025-07-01T17:14:26Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "62574686db359194817058e65bbccfcbb21e7028"
+      },
       "comments": [
         {
           "author": "dagdagdag83",
@@ -3692,6 +3694,19 @@
           "createdAt": "2025-06-19T17:29:58Z",
           "updatedAt": "2025-06-19T17:29:58Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6xZ0fO",
+          "commit": {
+            "abbreviatedOid": "e11a0fc"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T17:14:18Z",
+          "updatedAt": "2025-07-01T17:14:18Z",
+          "comments": []
         }
       ]
     },
@@ -3700,25 +3715,35 @@
       "id": "PR_kwDOLPTb0M6aaUj7",
       "title": "Split Service Authentication",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/88",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Introduce Service Authorisation and Audit Trail section to address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/18 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/33",
       "createdAt": "2025-06-13T15:24:17Z",
-      "updatedAt": "2025-06-19T17:22:26Z",
+      "updatedAt": "2025-07-01T17:12:38Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "76aa5c40b2d2a64b6d660509416278ace8aa58e4",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "main",
-      "headRefOid": "bbcad0af677c31c718aab2d6a404af25130d0c19",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "55e9f032afaf26445690e439b0010610a0767673",
+      "closedAt": "2025-07-01T17:12:38Z",
+      "mergedAt": "2025-07-01T17:12:38Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "d342d0f301227819feb11b1320128b259ecd7def"
+      },
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> We ought to look at the identity composition text and see if it is still relevant.\r\n> \r\n> Also should have something about not logging secrets like bearer tokens in the document\r\n\r\nShould be resolved with the latest update",
+          "createdAt": "2025-07-01T16:16:32Z",
+          "updatedAt": "2025-07-01T16:16:32Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPTb0M6vdT42",
@@ -3731,6 +3756,19 @@
           "body": "We ought to look at the identity composition text and see if it is still relevant. \r\n\r\nAlso should have something about not logging secrets like bearer tokens in the document",
           "createdAt": "2025-06-19T17:22:26Z",
           "updatedAt": "2025-06-19T17:22:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M6xZxq_",
+          "commit": {
+            "abbreviatedOid": "55e9f03"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T17:12:24Z",
+          "updatedAt": "2025-07-01T17:12:24Z",
           "comments": []
         }
       ]
