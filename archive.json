@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T02:09:16.675289+00:00",
+  "timestamp": "2025-07-08T02:10:00.913786+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -201,7 +201,7 @@
       "id": "I_kwDOLPTb0M6Cl8b9",
       "title": "Basic Service Authentication",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -212,9 +212,17 @@
       ],
       "body": "Section focus on authentication, but also talks about authorization, audit trails (typo) and service context (the latter is addressed as its own section). Perhaps also break out authorization and audit trails as their own sections.",
       "createdAt": "2024-03-18T00:21:22Z",
-      "updatedAt": "2025-01-07T15:29:49Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-07-06T16:47:07Z",
+      "closedAt": "2025-07-06T16:47:07Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed by https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/88",
+          "createdAt": "2025-07-06T16:47:07Z",
+          "updatedAt": "2025-07-06T16:47:07Z"
+        }
+      ]
     },
     {
       "number": 19,
@@ -432,7 +440,7 @@
       "id": "I_kwDOLPTb0M6H3kLy",
       "title": "Authorization",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/33",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "NONE",
       "assignees": [
@@ -443,8 +451,8 @@
       ],
       "body": "Sec. 3.2.1 has \"authorization\" in the title, but really focuses on authentication. We should mention that the architecture needs to support authz policies within each trust domain, starting with the basic \"service A is allowed to call service B\". Any workload should be able to include a policy enforcement point (PEP) for incoming requests. There are also cases where a workload needs to be a PEP for outgoing requests, e.g. when calling \"passive\" resources such as data objects.",
       "createdAt": "2024-05-05T11:54:23Z",
-      "updatedAt": "2025-01-07T15:31:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-06T20:32:09Z",
+      "closedAt": "2025-07-06T20:32:09Z",
       "comments": [
         {
           "author": "yaroslavros",
@@ -459,6 +467,20 @@
           "body": "@yaroslavros I'm not very happy with the new text because in a service-to-service call (our core use case), both sides are typically authenticated, and this is very different from accessing a resource. Related to that, the paragraph starts with \"After authentication of the peer\", and I'm not quite clear who the peer is.",
           "createdAt": "2024-10-16T12:02:26Z",
           "updatedAt": "2024-10-16T12:02:26Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@yaronf are you happy with Service Authorization section introduced in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/88 ?",
+          "createdAt": "2025-07-06T16:46:39Z",
+          "updatedAt": "2025-07-06T16:46:39Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "NONE",
+          "body": "Yes I am. Thank you!\n\n(Having said that, I will open an issue re: the Authentication section...)",
+          "createdAt": "2025-07-06T19:04:36Z",
+          "updatedAt": "2025-07-06T19:04:36Z"
         }
       ]
     },
@@ -1125,9 +1147,17 @@
       "labels": [],
       "body": "the WIMSE identifier is relatively well defined and useful on tis own so let's spin it out of the main document so it can progress separately. ",
       "createdAt": "2025-04-15T14:19:34Z",
-      "updatedAt": "2025-04-15T14:19:48Z",
+      "updatedAt": "2025-07-06T16:44:58Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[draft-rosomakho-wimse-identifier](https://datatracker.ietf.org/doc/draft-rosomakho-wimse-identifier/) published. Pending WG feedback.",
+          "createdAt": "2025-07-06T16:44:58Z",
+          "updatedAt": "2025-07-06T16:44:58Z"
+        }
+      ]
     },
     {
       "number": 84,
@@ -1187,6 +1217,24 @@
       "createdAt": "2025-05-05T23:18:13Z",
       "updatedAt": "2025-07-01T17:14:27Z",
       "closedAt": "2025-07-01T17:14:27Z",
+      "comments": []
+    },
+    {
+      "number": 89,
+      "id": "I_kwDOLPTb0M6_JV0c",
+      "title": "More precision on Authentication",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/89",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "NONE",
+      "assignees": [
+        "yaroslavros"
+      ],
+      "labels": [],
+      "body": "For the section:\n\n> Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:\n\nI think we are mixing the fundamental workload authentication with the way this authentication is later conveyed to the S2S security mechanisms.\n\nFundamental auth is very often done with no need for managed secrets (a.k.a. \"bottom turtle\") through infrastructure- or cloud-provided mechanisms. Think: Amazon Role and the way an EC2 instance can access secrets that are physically restricted to be used only by that instance to authenticate to the cloud infra and obtain a short-term credential that proves that authn took place.\n\nThe current section's text is too simplistic, and I would recommend to bring it more in line with Sec. 3.2 of draft-ietf-wimse-workload-identity-practices (Credential Issuance).\n\n(Also related to #59.)",
+      "createdAt": "2025-07-06T19:15:12Z",
+      "updatedAt": "2025-07-06T20:32:36Z",
+      "closedAt": null,
       "comments": []
     }
   ],
