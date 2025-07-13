@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T02:10:00.913786+00:00",
+  "timestamp": "2025-07-13T02:29:23.753925+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1234,6 +1234,22 @@
       "body": "For the section:\n\n> Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:\n\nI think we are mixing the fundamental workload authentication with the way this authentication is later conveyed to the S2S security mechanisms.\n\nFundamental auth is very often done with no need for managed secrets (a.k.a. \"bottom turtle\") through infrastructure- or cloud-provided mechanisms. Think: Amazon Role and the way an EC2 instance can access secrets that are physically restricted to be used only by that instance to authenticate to the cloud infra and obtain a short-term credential that proves that authn took place.\n\nThe current section's text is too simplistic, and I would recommend to bring it more in line with Sec. 3.2 of draft-ietf-wimse-workload-identity-practices (Credential Issuance).\n\n(Also related to #59.)",
       "createdAt": "2025-07-06T19:15:12Z",
       "updatedAt": "2025-07-06T20:32:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 91,
+      "id": "I_kwDOLPTb0M6_2FOb",
+      "title": "Authorization: where does it take place",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/91",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The section \"Service Authorization\" is missing discussion on where authz is performed. Something like:\n\nFor typical workload-to-workload interactions (REST APIs or pub/sub flows) authorization MUST be performed by the callee. However there are cases, such as database access, where evaluation of the access policy may be too complicated for the subject of the operation, and in these cases authorization MAY be done on the client side.",
+      "createdAt": "2025-07-10T09:43:11Z",
+      "updatedAt": "2025-07-10T09:43:11Z",
       "closedAt": null,
       "comments": []
     }
@@ -3820,6 +3836,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 90,
+      "id": "PR_kwDOLPTb0M6eRBNh",
+      "title": "Missing newline breaks section numbering",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/90",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-10T09:31:50Z",
+      "updatedAt": "2025-07-10T09:31:50Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "0fac5432e876d0518775b06d6db1e8b8faba0ec9",
+      "headRepository": "yaronf/draft-ietf-wimse-arch",
+      "headRefName": "yaronf-patch-1",
+      "headRefOid": "b9fbca6c922ace77e8b0cde201b180a3658ff83a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
