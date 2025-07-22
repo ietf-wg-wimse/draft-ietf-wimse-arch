@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-13T02:29:23.753925+00:00",
+  "timestamp": "2025-07-22T02:22:32.832561+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -3849,7 +3849,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-07-10T09:31:50Z",
-      "updatedAt": "2025-07-10T09:31:50Z",
+      "updatedAt": "2025-07-20T14:41:54Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0fac5432e876d0518775b06d6db1e8b8faba0ec9",
@@ -3861,7 +3861,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M609qax",
+          "commit": {
+            "abbreviatedOid": "b9fbca6"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-20T14:41:54Z",
+          "updatedAt": "2025-07-20T14:41:54Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
