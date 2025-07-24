@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-22T02:22:32.832561+00:00",
+  "timestamp": "2025-07-24T02:22:51.241239+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -3876,6 +3876,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOLPTb0M6gAyzM",
+      "title": "fix typos and header structure",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/92",
+      "state": "OPEN",
+      "author": "arndt-s",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes some minor typos and the issue that the entire architecture section is rendered within the \"Conventions and Definitions\" section.",
+      "createdAt": "2025-07-22T08:02:59Z",
+      "updatedAt": "2025-07-22T08:03:00Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "0fac5432e876d0518775b06d6db1e8b8faba0ec9",
+      "headRepository": "arndt-s/draft-ietf-wimse-arch",
+      "headRefName": "arndt/fix-structure",
+      "headRefOid": "741ee728cd7335bfb36bd03771f739e7a34442f2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
