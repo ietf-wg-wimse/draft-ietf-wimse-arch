@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-24T02:22:51.241239+00:00",
+  "timestamp": "2025-09-04T01:52:10.556094+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1244,12 +1244,33 @@
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/91",
       "state": "OPEN",
       "author": "yaronf",
-      "authorAssociation": "NONE",
-      "assignees": [],
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [],
       "body": "The section \"Service Authorization\" is missing discussion on where authz is performed. Something like:\n\nFor typical workload-to-workload interactions (REST APIs or pub/sub flows) authorization MUST be performed by the callee. However there are cases, such as database access, where evaluation of the access policy may be too complicated for the subject of the operation, and in these cases authorization MAY be done on the client side.",
       "createdAt": "2025-07-10T09:43:11Z",
-      "updatedAt": "2025-07-10T09:43:11Z",
+      "updatedAt": "2025-09-02T15:18:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 93,
+      "id": "I_kwDOLPTb0M7JQNTc",
+      "title": "Agentic AI / LLM security context propagation",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/93",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "jsalowey",
+        "yaroslavros"
+      ],
+      "labels": [],
+      "body": "We should have a use case focused on propagation of security context by agentic AI agents and other ML based intermediaries.",
+      "createdAt": "2025-09-02T15:16:40Z",
+      "updatedAt": "2025-09-02T15:16:40Z",
       "closedAt": null,
       "comments": []
     }
@@ -3842,24 +3863,26 @@
       "id": "PR_kwDOLPTb0M6eRBNh",
       "title": "Missing newline breaks section numbering",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/90",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-07-10T09:31:50Z",
-      "updatedAt": "2025-07-20T14:41:54Z",
+      "updatedAt": "2025-09-02T15:12:31Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0fac5432e876d0518775b06d6db1e8b8faba0ec9",
       "headRepository": "yaronf/draft-ietf-wimse-arch",
       "headRefName": "yaronf-patch-1",
       "headRefOid": "b9fbca6c922ace77e8b0cde201b180a3658ff83a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-02T15:12:31Z",
+      "mergedAt": "2025-09-02T15:12:31Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "181ee85615c4eccdb348583f53205be2b20d30b2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3874,6 +3897,19 @@
           "createdAt": "2025-07-20T14:41:54Z",
           "updatedAt": "2025-07-20T14:41:54Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M69XWcU",
+          "commit": {
+            "abbreviatedOid": "b9fbca6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-02T15:12:21Z",
+          "updatedAt": "2025-09-02T15:12:21Z",
+          "comments": []
         }
       ]
     },
@@ -3882,26 +3918,42 @@
       "id": "PR_kwDOLPTb0M6gAyzM",
       "title": "fix typos and header structure",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/92",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "arndt-s",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes some minor typos and the issue that the entire architecture section is rendered within the \"Conventions and Definitions\" section.",
       "createdAt": "2025-07-22T08:02:59Z",
-      "updatedAt": "2025-07-22T08:03:00Z",
+      "updatedAt": "2025-09-02T15:12:00Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0fac5432e876d0518775b06d6db1e8b8faba0ec9",
       "headRepository": "arndt-s/draft-ietf-wimse-arch",
       "headRefName": "arndt/fix-structure",
       "headRefOid": "741ee728cd7335bfb36bd03771f739e7a34442f2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-02T15:12:00Z",
+      "mergedAt": "2025-09-02T15:12:00Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "61d9726bfffc7ba604fdf5efdfad8260dffd8870"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M69XV4C",
+          "commit": {
+            "abbreviatedOid": "741ee72"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-02T15:11:53Z",
+          "updatedAt": "2025-09-02T15:11:53Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
