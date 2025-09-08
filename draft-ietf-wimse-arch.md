@@ -281,26 +281,28 @@ The workload may need to make requests of other workloads. When making these req
 |   App | (1) |  w  | (2)  |            |  (4) |             |  |
 | Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
 +-------+ (a) |  y  | (c)  |            |  (c) |             |  |
-              |     |      +-+---------++      ++--------+---+  |
-              |  S  |        |                  |        |      |
-              |  e  |     (3)|               (5)|(c)     |      |
-              |  r  |        |                  |        |      |
-              |  v  |        |       +-+--------++       |      |
-              |  i  |        |       |   Token   |       |      |
-              |  c  |        |       |           |    (6)|(t)   |
-              |  e  |        |       |  Service  |       |      |
-              |     |        |       +-----------+       |      |
-              +--+--+        |                           |      |
-                 |           |                           |      |
-                 |           |                           |      |
-                 |           |                           |      |
-                 +-----------+---------------------------+------+
-                             |                           |
-                             |                           |
-                             |                           |
-                             |                           |
-                             |                           |
-                     +-------v--------+     +------------v--+
+              |     |      +-+---------++      +^----^----+--+  |
+              |  S  |        |                  |    |    |     |
+              |  e  |     (3)|            (5)(c)|(t) |    |     |
+              |  r  |        |                  |    |    |     |
+              |  v  |        |       +-+--------v+   |    |     |
+              |  i  |        |       |   Token   |   |    |     |
+              |  c  |        |       |           |   | (7)|(a)  |
+              |  e  |        |       |  Service  |   |    |     |
+              |     |        |       +-----------+   |    |     |
+              +--+--+        |                       |    |     |
+                 |           |                       |    |     |
+                 |           |                 (6)(t)|(a) |     |
+                 |           |                       |    |     |
+                 +-----------+-----------------------+----+-----+
+                             |                       |    |
+                             |             +-+-------V-+  |
+                             |             |  External |  |
+                             |             |   Token   |  |
+                             |             |  Service  |  |
+                             |             +-----------+  |
+                             |                            |
+                     +-------v--------+     +-------------v-+
                      | Infrastructure |     |    External   |
                      |                |     |               |
                      |    Service     |     |    Service    |
@@ -309,10 +311,12 @@ The workload may need to make requests of other workloads. When making these req
 ~~~~
 {: #arch-cross title="External request workload application system."}
 
-In many applications workloads must make requests of infrastructure that operates as a different trust domain or external services that are in a separate trust domain. Figure {{arch-cross}} shows this scenario. The scenario shows some new components described below.
+In many applications workloads must make requests of infrastructure or external services that operate as a different trust domain. Steps 5-7 of {{arch-cross}} involve a generic cross domain pattern as described in {{?I-D.draft-ietf-oauth-identity-chaining}}. This document refers to a token service which performs a similar functions with respect to token issuance as the authorization service in {{?I-D.draft-ietf-oauth-identity-chaining}}. The scenario shows some new components described below.
 Components and interactions from previous scenarios are still relevant to this example, but are omitted for simplicity.
 
-* Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external service to gain access to infrastructure or an external service.  Note that in some cases the token service may reside in a different trust domain or there may be token services in multiple trust domains.  In some cases the workload will need to contact token services in various domains in order to gain access to infrastructure or external service.
+* Token Service - the token service is responsible for exchanging information that is internal to the system such as service identity and/or security context information for a token that can be presented to an external token service in another trust domain to gain access to infrastructure or an external service.
+
+* External Token Service - the external token service is part of another trust domain.  Workloads in the originating trust domain contact this service to get an access token to authenticate to external services.
 
 * Infrastructure Service - this service is often part of the application, but it is managed by an infrastructure provider and may require different information to access it.
 
@@ -328,12 +332,13 @@ Some example interactions in this scenario:
 
 * (4) Workload 1 contacts Workload 2 to perform an operation. This request is accompanied by a security context as in the other scenarios.
 
-* (5) Workload 2 determines it needs to communicate with an external service.  In order to gain access to this service it must first obtain a token/credential (t) that it can use externally.  It authenticates to the token service using its workload identity and provides security context information.  The token service determines what type of externally usable token to issue to the workload.
+* (5) Workload 2 determines it needs to communicate with an external service.  In order to gain access to this service it must first obtain a token/credential (t) that it can use externally.  It authenticates to the token service using its workload identity credential (c) and provides security context information.  The token service determines what type of externally usable token to issue to the workload for use with the external token service.
 
-* (6) Workload 2 uses this new token/credential (t) to access the external service.
+* (6) Workload 2 uses this new token/credential (t) to request an access token (a) for the external service from the token service.
 
-* Note that in (3) and (6) the workload may need to authenticate to an external token service to obtain an access token to access the system in the foreign trust domain.
+* (7) Workload 2 uses the access token (a) to access the external service in the other trust domain.
 
+There can be variations on cross domain workflows. For example, in step 3 the workload was able to use its Workload Identity Credentials to directly access an infrastructure service. It also may be possible for an workload to request an access token for an eternal service using its Workload Identity Credentials directly with an external token service.
 
 ## Workload Identity Use Cases
 
