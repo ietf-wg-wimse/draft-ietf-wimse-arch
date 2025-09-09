@@ -403,11 +403,14 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in {{authorization}} and generate audit trails as described in {{audit-trails}}.
 
-Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:
+Authentication mechanisms are used to establish the identity of the peer workload before secure communication can proceed.
 
-* TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.
-* Mutual TLS authentication using X.509 certificate for both client and server.
-* TLS authentication of the server and HTTP request signing using a secret key.
+Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in {{Section 3 of ?I-D.ietf-wimse-workload-identity-practices}}.
+
+Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:
+
+* Mutual TLS authentication using X.509 certificate for both client and server as described in {{Section 4 of I-D.ietf-wimse-s2s-protocol}}.
+* Application level authentication using cryptographic credentials passed within HTTP message as described in {{Section 3 of I-D.ietf-wimse-s2s-protocol}}.
 
 These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.
 
