@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 12 March 2026                                           Zscaler
+Expires: 13 March 2026                                           Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                        8 September 2025
+                                                        9 September 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2026.
+   This Internet-Draft will expire on 13 March 2026.
 
 Copyright Notice
 
@@ -634,7 +634,7 @@ Table of Contents
    There can be variations on cross domain workflows.  For example, in
    step 3 the workload was able to use its Workload Identity Credentials
    to directly access an infrastructure service.  It also may be
-   possible for an workload to request an access token for an eternal
+   possible for an workload to request an access token for an external
    service using its Workload Identity Credentials directly with an
    external token service.
 
