@@ -2063,6 +2063,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 </li>
           </ul>
 <p id="section-3.3.3-5">Authorization checks may also incorporate delegation and impersonation semantics, as described in <a href="#delegation" class="auto internal xref">Section 3.3.7</a>, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-6">A key architectural consideration is where authorization is evaluated. For most workload-to-workload interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization <span class="bcp14">MAY</span> be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.<a href="#section-3.3.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="audit-trails">
