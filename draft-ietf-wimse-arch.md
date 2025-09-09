@@ -404,7 +404,7 @@ One of the most basic use cases for workload identity is authentication of one w
 
 Authentication mechanisms are used to establish the identity of the peer workload before secure communication can proceed.
 
-Workloads often obtain their identity without relying on pre-provisioned long-lived secrets. Instead, identity is established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment and obtain short-lived credentials. Common delivery patterns are described in {{Section 3 of ?I-D.ietf-wimse-workload-identity-practices}}.
+Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in {{Section 3 of ?I-D.ietf-wimse-workload-identity-practices}}.
 
 Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:
 
