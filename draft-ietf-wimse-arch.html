@@ -1960,28 +1960,27 @@ passes them to the workload.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p
 <a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-service-authentication" class="section-name selfRef">Service Authentication</a>
           </h4>
 <p id="section-3.3.2-1">One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.3.3</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.3.4</a>.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-2">Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">Authentication mechanisms are used to establish the identity of the peer workload before secure communication can proceed.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-02#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-4">Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:<a href="#section-3.3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.3.2-3.1">
-              <p id="section-3.3.2-3.1.1">TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.<a href="#section-3.3.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.3.2-5.1">
+              <p id="section-3.3.2-5.1.1">Mutual TLS authentication using X.509 certificate for both client and server as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-06#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>.<a href="#section-3.3.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.3.2-3.2">
-              <p id="section-3.3.2-3.2.1">Mutual TLS authentication using X.509 certificate for both client and server.<a href="#section-3.3.2-3.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-3.3.2-3.3">
-              <p id="section-3.3.2-3.3.1">TLS authentication of the server and HTTP request signing using a secret key.<a href="#section-3.3.2-3.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.3.2-5.2">
+              <p id="section-3.3.2-5.2.1">Application level authentication using cryptographic credentials passed within HTTP message as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-06#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>.<a href="#section-3.3.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.3.2-4">These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.<a href="#section-3.3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-5"><a href="#arch-chain" class="auto internal xref">Figure 5</a> illustrates the communication between different workloads. Two aspects are important
+<p id="section-3.3.2-6">These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.<a href="#section-3.3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-7"><a href="#arch-chain" class="auto internal xref">Figure 5</a> illustrates the communication between different workloads. Two aspects are important
 to highlight: First, there is a need to consider the interaction with workloads that are external
 to the trust domain (sometimes called cross-domain). Second, the interaction does
 not only occur between workloads that directly interact with each other but instead may also
-take place across intermediate workloads (in an end-to-end style).<a href="#section-3.3.2-5" class="pilcrow">¶</a></p>
+take place across intermediate workloads (in an end-to-end style).<a href="#section-3.3.2-7" class="pilcrow">¶</a></p>
 <span id="name-workload-to-workload-commun"></span><div id="arch-chain">
 <figure id="figure-5">
-            <div id="section-3.3.2-6.1">
-              <div class="alignLeft art-svg artwork" id="section-3.3.2-6.1.1">
+            <div id="section-3.3.2-8.1">
+              <div class="alignLeft art-svg artwork" id="section-3.3.2-8.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="520" viewBox="0 0 520 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,32 L 8,96" fill="none" stroke="black"></path>
                   <path d="M 8,144 L 8,352" fill="none" stroke="black"></path>
@@ -2035,7 +2034,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
                     <text x="168" y="308">E2E</text>
                     <text x="352" y="308">E2E</text>
                   </g>
-                </svg><a href="#section-3.3.2-6.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-3.3.2-8.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
@@ -2273,6 +2272,10 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dt id="I-D.ietf-wimse-s2s-protocol">[I-D.ietf-wimse-s2s-protocol]</dt>
         <dd>
 <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Salowey, J. A.</span>, <span class="refAuthor">Schwenkschuster, A.</span>, and <span class="refAuthor">Y. Sheffer</span>, <span class="refTitle">"WIMSE Workload to Workload Authentication"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-s2s-protocol-06</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-06">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-wimse-workload-identity-practices">[I-D.ietf-wimse-workload-identity-practices]</dt>
+        <dd>
+<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-02">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9683">[RFC9683]</dt>
       <dd>

@@ -713,17 +713,25 @@ Table of Contents
    audit trails as described in Section 3.3.4.
 
    Authentication mechanisms are used to establish the identity of the
-   peer workload.  There are several methods defined to perform service-
-   to-service authentication.  The most common mechanisms include:
+   peer workload before secure communication can proceed.
 
-   *  TLS authentication of the server using X.509 certificates and
-      client bearer token, encoded as JWTs.
+   Workloads often obtain their credentials without relying on pre-
+   provisioned long-lived secrets.  Instead, short-lived credentials are
+   established through mechanisms provided by the infrastructure that
+   allow a workload to prove it is running in a given environment.
+   Common delivery patterns are described in Section 3 of
+   [I-D.ietf-wimse-workload-identity-practices].
+
+   Once credentials are issued, they are conveyed to peers using common
+   security protocols.  Typical mechanisms include:
 
    *  Mutual TLS authentication using X.509 certificate for both client
-      and server.
+      and server as described in Section 4 of
+      [I-D.ietf-wimse-s2s-protocol].
 
-   *  TLS authentication of the server and HTTP request signing using a
-      secret key.
+   *  Application level authentication using cryptographic credentials
+      passed within HTTP message as described in Section 3 of
+      [I-D.ietf-wimse-s2s-protocol].
 
    These authentication mechanisms establish a cryptographically
    verifiable identity for the communicating party, which can then be
@@ -1062,6 +1070,13 @@ Table of Contents
               protocol-06, 4 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
               s2s-protocol-06>.
+
+   [I-D.ietf-wimse-workload-identity-practices]
+              Schwenkschuster, A. and Y. Rosomakho, "Workload Identity
+              Practices", Work in Progress, Internet-Draft, draft-ietf-
+              wimse-workload-identity-practices-02, 7 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
+              workload-identity-practices-02>.
 
    [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
               "Remote Integrity Verification of Network Devices
