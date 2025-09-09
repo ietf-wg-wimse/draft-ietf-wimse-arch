@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-04T01:52:10.556094+00:00",
+  "timestamp": "2025-09-09T01:56:38.629069+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -229,7 +229,7 @@
       "id": "I_kwDOLPTb0M6Cl9Ff",
       "title": "Cross-boundary Workload Identity",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -240,8 +240,8 @@
       ],
       "body": "Perhaps consider using similar terminology as in the OAuth cross-domain authorization draft? Also worth cosnidering using languagge like \"Trust boundary\" instead of \"administrative boudnary\" as different trust domains may be administered by the same entities, but trust is segmented on purpose to minimise blast radius in cases of compromise etc.",
       "createdAt": "2024-03-18T00:23:43Z",
-      "updatedAt": "2025-02-25T04:03:24Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-08T03:32:05Z",
+      "closedAt": "2025-09-08T03:32:05Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -709,9 +709,17 @@
       ],
       "body": "The cross domain section only shows one token service.  There may be an additional token service external to the trust boundary. \r\n\r\nAlso should reference Identity chaining work. ",
       "createdAt": "2025-01-07T15:45:25Z",
-      "updatedAt": "2025-01-21T15:12:31Z",
+      "updatedAt": "2025-09-08T03:29:21Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR #95 ",
+          "createdAt": "2025-09-08T03:29:21Z",
+          "updatedAt": "2025-09-08T03:29:21Z"
+        }
+      ]
     },
     {
       "number": 51,
@@ -856,7 +864,7 @@
       "labels": [],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-04-29T15:45:52Z",
+      "updatedAt": "2025-09-08T22:24:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -879,6 +887,13 @@
           "body": "High bar = it should be an explicit goal to be consistent.",
           "createdAt": "2025-04-29T15:45:51Z",
           "updatedAt": "2025-04-29T15:45:51Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe it is addressed in the identifier document.",
+          "createdAt": "2025-09-08T22:24:53Z",
+          "updatedAt": "2025-09-08T22:24:53Z"
         }
       ]
     },
@@ -905,7 +920,7 @@
       "id": "I_kwDOLPTb0M6lTvYq",
       "title": "What is \"Trigger Information\"",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/58",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -915,9 +930,17 @@
       "labels": [],
       "body": "This may just be terminology I am not familiar with - perhaps for each element, list an example as a sub-bullet?",
       "createdAt": "2025-01-07T17:47:55Z",
-      "updatedAt": "2025-01-10T19:56:27Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-08T03:36:23Z",
+      "closedAt": "2025-09-08T03:36:23Z",
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The \"trigger information\" has been removed since it didn't really fit with what was being discussed. ",
+          "createdAt": "2025-09-08T03:36:23Z",
+          "updatedAt": "2025-09-08T03:36:23Z"
+        }
+      ]
     },
     {
       "number": 59,
@@ -1016,7 +1039,7 @@
       ],
       "body": "Consider casting this as cross domain chaining - should make it easier to align with the cross domain identity chaining and authorization spec.",
       "createdAt": "2025-01-07T19:56:53Z",
-      "updatedAt": "2025-01-21T15:18:02Z",
+      "updatedAt": "2025-09-08T03:30:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -1025,6 +1048,13 @@
           "body": "Yes I realize that there needs to be some alignment here.  I need to catch up on the Identity chaining since I wasn't sure of the direction after the last IETF meeting.  ",
           "createdAt": "2025-01-09T21:58:20Z",
           "updatedAt": "2025-01-09T21:58:20Z"
+        },
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@PieterKas see PR #95 ",
+          "createdAt": "2025-09-08T03:30:14Z",
+          "updatedAt": "2025-09-08T03:30:14Z"
         }
       ]
     },
@@ -1271,6 +1301,22 @@
       "body": "We should have a use case focused on propagation of security context by agentic AI agents and other ML based intermediaries.",
       "createdAt": "2025-09-02T15:16:40Z",
       "updatedAt": "2025-09-02T15:16:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOLPTb0M7KMgfJ",
+      "title": "External Endpoint vs. Gateway Service / Identity proxy",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/94",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Transaction Tokens uses the term External Endpoint:\n: A published interface to a Trust Domain that results in the invocation of a workload within the Trust Domain.\n\nWhich performs a similar function as the gateway service and identity proxy defined in this document.\n\nWe should provide some alignment or mapping of the terminology",
+      "createdAt": "2025-09-08T01:36:20Z",
+      "updatedAt": "2025-09-08T01:36:20Z",
       "closedAt": null,
       "comments": []
     }
@@ -3954,6 +4000,136 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 95,
+      "id": "PR_kwDOLPTb0M6nStbK",
+      "title": "revising cross domain section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/95",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is to address issue #63  and issue #50 ",
+      "createdAt": "2025-09-08T03:28:51Z",
+      "updatedAt": "2025-09-08T03:28:52Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "cross-domain",
+      "headRefOid": "20a217ee607cda76f57ac1257567dc22a631bcd7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 96,
+      "id": "PR_kwDOLPTb0M6neXjD",
+      "title": "Clarified workload definition",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/96",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
+      "createdAt": "2025-09-08T22:07:02Z",
+      "updatedAt": "2025-09-08T22:07:03Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "3f837c631dcbbf321d16f2bb3393d79686174567",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 97,
+      "id": "PR_kwDOLPTb0M6nefec",
+      "title": "Multiple gateway instances",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/97",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Gateway service can consist of multiple instances. Should address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/49",
+      "createdAt": "2025-09-08T22:22:57Z",
+      "updatedAt": "2025-09-08T22:22:58Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "many-gateways",
+      "headRefOid": "4fbf11123e07203575b1a9a96a5f0f1fe8551a78",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 98,
+      "id": "PR_kwDOLPTb0M6nerV1",
+      "title": "Improved authentication wording",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/98",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/59 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/89",
+      "createdAt": "2025-09-08T22:55:01Z",
+      "updatedAt": "2025-09-08T22:55:02Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "authentication-fix",
+      "headRefOid": "8908224b79c6ae7c94a27836b856ffc54ccf1e7e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 99,
+      "id": "PR_kwDOLPTb0M6nes2I",
+      "title": "Added considerations for authorization location",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/99",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/91",
+      "createdAt": "2025-09-08T23:00:45Z",
+      "updatedAt": "2025-09-08T23:00:46Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "authorization-place",
+      "headRefOid": "7e31dfe7f6f32a665bcd77025a084e6e5136a50d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
