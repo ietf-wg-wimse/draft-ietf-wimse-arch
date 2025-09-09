@@ -459,6 +459,8 @@ Authorization decisions typically include:
 
 Authorization checks may also incorporate delegation and impersonation semantics, as described in {{delegation}}, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.
 
+A key architectural consideration is where authorization is evaluated. For most workload-to-workload interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization MAY be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.
+
 ### Audit Trails {#audit-trails}
 
 Auditability is a critical requirement in systems that rely on workload identities and security context. Each authenticated request MUST leave a verifiable and inspectable trace regardless of authentication and authorization decision.
