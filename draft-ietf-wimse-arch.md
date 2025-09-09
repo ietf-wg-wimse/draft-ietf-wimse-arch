@@ -338,7 +338,7 @@ Some example interactions in this scenario:
 
 * (7) Workload 2 uses the access token (a) to access the external service in the other trust domain.
 
-There can be variations on cross domain workflows. For example, in step 3 the workload was able to use its Workload Identity Credentials to directly access an infrastructure service. It also may be possible for an workload to request an access token for an eternal service using its Workload Identity Credentials directly with an external token service.
+There can be variations on cross domain workflows. For example, in step 3 the workload was able to use its Workload Identity Credentials to directly access an infrastructure service. It also may be possible for an workload to request an access token for an external service using its Workload Identity Credentials directly with an external token service.
 
 ## Workload Identity Use Cases
 
