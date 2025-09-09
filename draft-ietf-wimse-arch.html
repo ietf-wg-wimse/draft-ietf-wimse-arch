@@ -11,21 +11,21 @@
 <meta content="
        The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.30.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-wimse-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
+  xml2rfc 3.30.1
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
+    requests 2.32.5
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 6 March 2026</td>
+<td class="center">Expires 13 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-02" class="published">2 September 2025</time>
+<time datetime="2025-09-09" class="published">9 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-06">6 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-13">13 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1395,97 +1395,101 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <figure id="figure-1">
             <div id="section-3.2.1-1.1">
               <div class="alignLeft art-svg artwork" id="section-3.2.1-1.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="688" viewBox="0 0 688 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="704" viewBox="0 0 704 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,176 L 8,240" fill="none" stroke="black"></path>
                   <path d="M 112,176 L 112,240" fill="none" stroke="black"></path>
-                  <path d="M 168,80 L 168,416" fill="none" stroke="black"></path>
-                  <path d="M 192,32 L 192,72" fill="none" stroke="black"></path>
-                  <path d="M 192,424 L 192,480" fill="none" stroke="black"></path>
-                  <path d="M 216,80 L 216,416" fill="none" stroke="black"></path>
-                  <path d="M 264,112 L 264,208" fill="none" stroke="black"></path>
-                  <path d="M 264,240 L 264,384" fill="none" stroke="black"></path>
-                  <path d="M 296,80 L 296,96" fill="none" stroke="black"></path>
-                  <path d="M 296,128 L 296,144" fill="none" stroke="black"></path>
-                  <path d="M 296,208 L 296,288" fill="none" stroke="black"></path>
-                  <path d="M 296,352 L 296,368" fill="none" stroke="black"></path>
-                  <path d="M 296,400 L 296,416" fill="none" stroke="black"></path>
-                  <path d="M 360,144 L 360,208" fill="none" stroke="black"></path>
-                  <path d="M 360,288 L 360,352" fill="none" stroke="black"></path>
-                  <path d="M 416,80 L 416,144" fill="none" stroke="black"></path>
-                  <path d="M 416,352 L 416,416" fill="none" stroke="black"></path>
-                  <path d="M 424,208 L 424,288" fill="none" stroke="black"></path>
-                  <path d="M 512,224 L 512,240" fill="none" stroke="black"></path>
-                  <path d="M 512,272 L 512,288" fill="none" stroke="black"></path>
-                  <path d="M 576,112 L 576,224" fill="none" stroke="black"></path>
-                  <path d="M 576,288 L 576,384" fill="none" stroke="black"></path>
-                  <path d="M 632,224 L 632,288" fill="none" stroke="black"></path>
-                  <path d="M 680,32 L 680,480" fill="none" stroke="black"></path>
-                  <path d="M 192,32 L 440,32" fill="none" stroke="black"></path>
-                  <path d="M 560,32 L 680,32" fill="none" stroke="black"></path>
-                  <path d="M 168,80 L 216,80" fill="none" stroke="black"></path>
-                  <path d="M 296,80 L 416,80" fill="none" stroke="black"></path>
-                  <path d="M 264,112 L 296,112" fill="none" stroke="black"></path>
-                  <path d="M 416,112 L 576,112" fill="none" stroke="black"></path>
-                  <path d="M 296,144 L 352,144" fill="none" stroke="black"></path>
-                  <path d="M 368,144 L 416,144" fill="none" stroke="black"></path>
+                  <path d="M 168,64 L 168,400" fill="none" stroke="black"></path>
+                  <path d="M 184,80 L 184,416" fill="none" stroke="black"></path>
+                  <path d="M 200,32 L 200,64" fill="none" stroke="black"></path>
+                  <path d="M 200,416 L 200,480" fill="none" stroke="black"></path>
+                  <path d="M 216,64 L 216,80" fill="none" stroke="black"></path>
+                  <path d="M 232,80 L 232,416" fill="none" stroke="black"></path>
+                  <path d="M 280,112 L 280,208" fill="none" stroke="black"></path>
+                  <path d="M 280,240 L 280,384" fill="none" stroke="black"></path>
+                  <path d="M 312,80 L 312,96" fill="none" stroke="black"></path>
+                  <path d="M 312,128 L 312,144" fill="none" stroke="black"></path>
+                  <path d="M 312,208 L 312,288" fill="none" stroke="black"></path>
+                  <path d="M 312,352 L 312,368" fill="none" stroke="black"></path>
+                  <path d="M 312,400 L 312,416" fill="none" stroke="black"></path>
+                  <path d="M 376,144 L 376,208" fill="none" stroke="black"></path>
+                  <path d="M 376,288 L 376,352" fill="none" stroke="black"></path>
+                  <path d="M 432,80 L 432,144" fill="none" stroke="black"></path>
+                  <path d="M 432,352 L 432,416" fill="none" stroke="black"></path>
+                  <path d="M 440,208 L 440,288" fill="none" stroke="black"></path>
+                  <path d="M 528,224 L 528,240" fill="none" stroke="black"></path>
+                  <path d="M 528,272 L 528,288" fill="none" stroke="black"></path>
+                  <path d="M 592,112 L 592,224" fill="none" stroke="black"></path>
+                  <path d="M 592,288 L 592,384" fill="none" stroke="black"></path>
+                  <path d="M 648,224 L 648,288" fill="none" stroke="black"></path>
+                  <path d="M 696,32 L 696,480" fill="none" stroke="black"></path>
+                  <path d="M 200,32 L 456,32" fill="none" stroke="black"></path>
+                  <path d="M 576,32 L 696,32" fill="none" stroke="black"></path>
+                  <path d="M 168,64 L 216,64" fill="none" stroke="black"></path>
+                  <path d="M 184,80 L 232,80" fill="none" stroke="black"></path>
+                  <path d="M 312,80 L 432,80" fill="none" stroke="black"></path>
+                  <path d="M 280,112 L 312,112" fill="none" stroke="black"></path>
+                  <path d="M 432,112 L 592,112" fill="none" stroke="black"></path>
+                  <path d="M 312,144 L 368,144" fill="none" stroke="black"></path>
+                  <path d="M 384,144 L 432,144" fill="none" stroke="black"></path>
                   <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
                   <path d="M 112,208 L 160,208" fill="none" stroke="black"></path>
-                  <path d="M 216,208 L 264,208" fill="none" stroke="black"></path>
-                  <path d="M 296,208 L 424,208" fill="none" stroke="black"></path>
-                  <path d="M 512,224 L 632,224" fill="none" stroke="black"></path>
+                  <path d="M 232,208 L 280,208" fill="none" stroke="black"></path>
+                  <path d="M 312,208 L 440,208" fill="none" stroke="black"></path>
+                  <path d="M 528,224 L 648,224" fill="none" stroke="black"></path>
                   <path d="M 8,240 L 112,240" fill="none" stroke="black"></path>
-                  <path d="M 216,240 L 264,240" fill="none" stroke="black"></path>
-                  <path d="M 424,256 L 512,256" fill="none" stroke="black"></path>
-                  <path d="M 296,288 L 424,288" fill="none" stroke="black"></path>
-                  <path d="M 512,288 L 632,288" fill="none" stroke="black"></path>
-                  <path d="M 296,352 L 352,352" fill="none" stroke="black"></path>
-                  <path d="M 368,352 L 416,352" fill="none" stroke="black"></path>
-                  <path d="M 264,384 L 296,384" fill="none" stroke="black"></path>
-                  <path d="M 416,384 L 576,384" fill="none" stroke="black"></path>
-                  <path d="M 168,416 L 216,416" fill="none" stroke="black"></path>
-                  <path d="M 296,416 L 416,416" fill="none" stroke="black"></path>
-                  <path d="M 192,480 L 680,480" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="520,256 508,250.4 508,261.6" fill="black" transform="rotate(0,512,256)"></polygon>
-                  <polygon class="arrowhead" points="368,352 356,346.4 356,357.6" fill="black" transform="rotate(90,360,352)"></polygon>
-                  <polygon class="arrowhead" points="368,144 356,138.4 356,149.6" fill="black" transform="rotate(270,360,144)"></polygon>
-                  <polygon class="arrowhead" points="304,384 292,378.4 292,389.6" fill="black" transform="rotate(0,296,384)"></polygon>
-                  <polygon class="arrowhead" points="304,112 292,106.4 292,117.6" fill="black" transform="rotate(0,296,112)"></polygon>
+                  <path d="M 232,240 L 280,240" fill="none" stroke="black"></path>
+                  <path d="M 440,256 L 528,256" fill="none" stroke="black"></path>
+                  <path d="M 312,288 L 440,288" fill="none" stroke="black"></path>
+                  <path d="M 528,288 L 648,288" fill="none" stroke="black"></path>
+                  <path d="M 312,352 L 368,352" fill="none" stroke="black"></path>
+                  <path d="M 384,352 L 432,352" fill="none" stroke="black"></path>
+                  <path d="M 280,384 L 312,384" fill="none" stroke="black"></path>
+                  <path d="M 432,384 L 592,384" fill="none" stroke="black"></path>
+                  <path d="M 168,400 L 184,400" fill="none" stroke="black"></path>
+                  <path d="M 184,416 L 232,416" fill="none" stroke="black"></path>
+                  <path d="M 312,416 L 432,416" fill="none" stroke="black"></path>
+                  <path d="M 200,480 L 696,480" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="536,256 524,250.4 524,261.6" fill="black" transform="rotate(0,528,256)"></polygon>
+                  <polygon class="arrowhead" points="384,352 372,346.4 372,357.6" fill="black" transform="rotate(90,376,352)"></polygon>
+                  <polygon class="arrowhead" points="384,144 372,138.4 372,149.6" fill="black" transform="rotate(270,376,144)"></polygon>
+                  <polygon class="arrowhead" points="320,384 308,378.4 308,389.6" fill="black" transform="rotate(0,312,384)"></polygon>
+                  <polygon class="arrowhead" points="320,112 308,106.4 308,117.6" fill="black" transform="rotate(0,312,112)"></polygon>
                   <polygon class="arrowhead" points="168,208 156,202.4 156,213.6" fill="black" transform="rotate(0,160,208)"></polygon>
                   <g class="text">
-                    <text x="464" y="36">Trust</text>
-                    <text x="524" y="36">Boundary</text>
-                    <text x="488" y="100">(3)</text>
-                    <text x="348" y="116">Workload</text>
-                    <text x="392" y="116">1</text>
-                    <text x="192" y="132">G</text>
-                    <text x="192" y="148">a</text>
-                    <text x="192" y="164">t</text>
-                    <text x="192" y="180">e</text>
-                    <text x="384" y="180">(1)</text>
+                    <text x="480" y="36">Trust</text>
+                    <text x="540" y="36">Boundary</text>
+                    <text x="504" y="100">(3)</text>
+                    <text x="364" y="116">Workload</text>
+                    <text x="408" y="116">1</text>
+                    <text x="208" y="132">G</text>
+                    <text x="208" y="148">a</text>
+                    <text x="208" y="164">t</text>
+                    <text x="208" y="180">e</text>
+                    <text x="400" y="180">(1)</text>
                     <text x="136" y="196">(2)</text>
-                    <text x="192" y="196">w</text>
-                    <text x="240" y="196">(3)</text>
+                    <text x="208" y="196">w</text>
+                    <text x="256" y="196">(3)</text>
                     <text x="32" y="212">App</text>
                     <text x="76" y="212">Client</text>
-                    <text x="192" y="212">a</text>
-                    <text x="192" y="228">y</text>
-                    <text x="360" y="244">CA/Credential</text>
-                    <text x="472" y="244">(1)</text>
-                    <text x="192" y="260">S</text>
-                    <text x="240" y="260">(4)</text>
-                    <text x="360" y="260">Service</text>
-                    <text x="572" y="260">Workload</text>
-                    <text x="616" y="260">3</text>
-                    <text x="192" y="276">e</text>
-                    <text x="192" y="292">r</text>
-                    <text x="192" y="308">v</text>
-                    <text x="192" y="324">i</text>
-                    <text x="384" y="324">(1)</text>
-                    <text x="192" y="340">c</text>
-                    <text x="192" y="356">e</text>
-                    <text x="480" y="372">(4)</text>
-                    <text x="348" y="388">Workload</text>
-                    <text x="392" y="388">2</text>
+                    <text x="208" y="212">a</text>
+                    <text x="208" y="228">y</text>
+                    <text x="376" y="244">CA/Credential</text>
+                    <text x="488" y="244">(1)</text>
+                    <text x="208" y="260">S</text>
+                    <text x="256" y="260">(4)</text>
+                    <text x="376" y="260">Service</text>
+                    <text x="588" y="260">Workload</text>
+                    <text x="632" y="260">3</text>
+                    <text x="208" y="276">e</text>
+                    <text x="208" y="292">r</text>
+                    <text x="208" y="308">v</text>
+                    <text x="208" y="324">i</text>
+                    <text x="400" y="324">(1)</text>
+                    <text x="208" y="340">c</text>
+                    <text x="208" y="356">e</text>
+                    <text x="496" y="372">(4)</text>
+                    <text x="364" y="388">Workload</text>
+                    <text x="408" y="388">2</text>
                   </g>
                 </svg><a href="#section-3.2.1-1.1.1" class="pilcrow">¶</a>
 </div>
@@ -1495,7 +1499,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             </figcaption></figure>
 </div>
 <p id="section-3.2.1-2">The above diagram presents a basic workload application system.  The large box represents a trust domain within which the workload application is hosted.  Within this example
-there are three workloads, a gateway, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
+there are three workloads, a gateway service, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
 to the workload application system there is an application client that calls APIs on workloads.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-3">Here is a brief summary of each component<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1516,7 +1520,7 @@ of sending and receiving requests to and from external systems or other internal
               <p id="section-3.2.1-8.1.1">Gateway Service<a href="#section-3.2.1-8.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.2.1-9">A gateway service typically acts as an intermediary between the internal application trust domain and external systems. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
+<p id="section-3.2.1-9">A gateway service typically acts as an intermediary between the internal application trust domain and external systems. It typically consists of multiple resilient instances. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
 The gateway <span class="bcp14">MAY</span> also implement identity proxy functionality including authentication, token exchange, and token transformation.<a href="#section-3.2.1-9" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.1-10.1">
@@ -1562,77 +1566,81 @@ The client request is typically made over HTTPS, but other protocols may be used
 <figure id="figure-2">
             <div id="section-3.2.2-1.1">
               <div class="alignLeft art-svg artwork" id="section-3.2.2-1.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="512" width="528" viewBox="0 0 528 512" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="512" width="544" viewBox="0 0 544 512" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,208 L 8,256" fill="none" stroke="black"></path>
                   <path d="M 72,208 L 72,256" fill="none" stroke="black"></path>
-                  <path d="M 120,80 L 120,416" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 144,80" fill="none" stroke="black"></path>
-                  <path d="M 144,416 L 144,480" fill="none" stroke="black"></path>
-                  <path d="M 168,80 L 168,416" fill="none" stroke="black"></path>
-                  <path d="M 224,208 L 224,272" fill="none" stroke="black"></path>
-                  <path d="M 328,64 L 328,160" fill="none" stroke="black"></path>
-                  <path d="M 328,208 L 328,272" fill="none" stroke="black"></path>
-                  <path d="M 384,208 L 384,272" fill="none" stroke="black"></path>
-                  <path d="M 464,64 L 464,160" fill="none" stroke="black"></path>
-                  <path d="M 496,208 L 496,272" fill="none" stroke="black"></path>
-                  <path d="M 520,32 L 520,480" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 328,32" fill="none" stroke="black"></path>
-                  <path d="M 448,32 L 520,32" fill="none" stroke="black"></path>
-                  <path d="M 328,64 L 464,64" fill="none" stroke="black"></path>
-                  <path d="M 120,80 L 168,80" fill="none" stroke="black"></path>
-                  <path d="M 168,96 L 320,96" fill="none" stroke="black"></path>
-                  <path d="M 176,128 L 328,128" fill="none" stroke="black"></path>
-                  <path d="M 328,160 L 464,160" fill="none" stroke="black"></path>
+                  <path d="M 120,64 L 120,400" fill="none" stroke="black"></path>
+                  <path d="M 136,80 L 136,416" fill="none" stroke="black"></path>
+                  <path d="M 152,32 L 152,64" fill="none" stroke="black"></path>
+                  <path d="M 152,416 L 152,480" fill="none" stroke="black"></path>
+                  <path d="M 168,64 L 168,80" fill="none" stroke="black"></path>
+                  <path d="M 184,80 L 184,416" fill="none" stroke="black"></path>
+                  <path d="M 240,208 L 240,272" fill="none" stroke="black"></path>
+                  <path d="M 344,64 L 344,160" fill="none" stroke="black"></path>
+                  <path d="M 344,208 L 344,272" fill="none" stroke="black"></path>
+                  <path d="M 400,208 L 400,272" fill="none" stroke="black"></path>
+                  <path d="M 480,64 L 480,160" fill="none" stroke="black"></path>
+                  <path d="M 512,208 L 512,272" fill="none" stroke="black"></path>
+                  <path d="M 536,32 L 536,480" fill="none" stroke="black"></path>
+                  <path d="M 152,32 L 344,32" fill="none" stroke="black"></path>
+                  <path d="M 464,32 L 536,32" fill="none" stroke="black"></path>
+                  <path d="M 120,64 L 168,64" fill="none" stroke="black"></path>
+                  <path d="M 344,64 L 480,64" fill="none" stroke="black"></path>
+                  <path d="M 136,80 L 184,80" fill="none" stroke="black"></path>
+                  <path d="M 184,96 L 336,96" fill="none" stroke="black"></path>
+                  <path d="M 192,128 L 344,128" fill="none" stroke="black"></path>
+                  <path d="M 344,160 L 480,160" fill="none" stroke="black"></path>
                   <path d="M 8,208 L 72,208" fill="none" stroke="black"></path>
-                  <path d="M 224,208 L 328,208" fill="none" stroke="black"></path>
-                  <path d="M 384,208 L 496,208" fill="none" stroke="black"></path>
+                  <path d="M 240,208 L 344,208" fill="none" stroke="black"></path>
+                  <path d="M 400,208 L 512,208" fill="none" stroke="black"></path>
                   <path d="M 72,240 L 112,240" fill="none" stroke="black"></path>
-                  <path d="M 168,240 L 216,240" fill="none" stroke="black"></path>
-                  <path d="M 328,240 L 376,240" fill="none" stroke="black"></path>
+                  <path d="M 184,240 L 232,240" fill="none" stroke="black"></path>
+                  <path d="M 344,240 L 392,240" fill="none" stroke="black"></path>
                   <path d="M 8,256 L 72,256" fill="none" stroke="black"></path>
-                  <path d="M 224,272 L 328,272" fill="none" stroke="black"></path>
-                  <path d="M 384,272 L 496,272" fill="none" stroke="black"></path>
-                  <path d="M 120,416 L 168,416" fill="none" stroke="black"></path>
-                  <path d="M 144,480 L 520,480" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="384,240 372,234.4 372,245.6" fill="black" transform="rotate(0,376,240)"></polygon>
-                  <polygon class="arrowhead" points="328,96 316,90.4 316,101.6" fill="black" transform="rotate(0,320,96)"></polygon>
-                  <polygon class="arrowhead" points="224,240 212,234.4 212,245.6" fill="black" transform="rotate(0,216,240)"></polygon>
-                  <polygon class="arrowhead" points="184,128 172,122.4 172,133.6" fill="black" transform="rotate(180,176,128)"></polygon>
+                  <path d="M 240,272 L 344,272" fill="none" stroke="black"></path>
+                  <path d="M 400,272 L 512,272" fill="none" stroke="black"></path>
+                  <path d="M 120,400 L 136,400" fill="none" stroke="black"></path>
+                  <path d="M 136,416 L 184,416" fill="none" stroke="black"></path>
+                  <path d="M 152,480 L 536,480" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="400,240 388,234.4 388,245.6" fill="black" transform="rotate(0,392,240)"></polygon>
+                  <polygon class="arrowhead" points="344,96 332,90.4 332,101.6" fill="black" transform="rotate(0,336,96)"></polygon>
+                  <polygon class="arrowhead" points="240,240 228,234.4 228,245.6" fill="black" transform="rotate(0,232,240)"></polygon>
+                  <polygon class="arrowhead" points="200,128 188,122.4 188,133.6" fill="black" transform="rotate(180,192,128)"></polygon>
                   <polygon class="arrowhead" points="120,240 108,234.4 108,245.6" fill="black" transform="rotate(0,112,240)"></polygon>
                   <g class="text">
-                    <text x="352" y="36">Trust</text>
-                    <text x="412" y="36">Boundary</text>
-                    <text x="392" y="100">Context</text>
-                    <text x="256" y="116">(3)</text>
-                    <text x="392" y="132">Service</text>
-                    <text x="256" y="148">(c)</text>
-                    <text x="144" y="164">G</text>
-                    <text x="144" y="180">a</text>
+                    <text x="368" y="36">Trust</text>
+                    <text x="428" y="36">Boundary</text>
+                    <text x="408" y="100">Context</text>
+                    <text x="272" y="116">(3)</text>
+                    <text x="408" y="132">Service</text>
+                    <text x="272" y="148">(c)</text>
+                    <text x="160" y="164">G</text>
+                    <text x="160" y="180">a</text>
                     <text x="40" y="196">(1)</text>
-                    <text x="144" y="196">t</text>
-                    <text x="144" y="212">e</text>
+                    <text x="160" y="196">t</text>
+                    <text x="160" y="212">e</text>
                     <text x="48" y="228">App</text>
                     <text x="96" y="228">(2)</text>
-                    <text x="144" y="228">w</text>
-                    <text x="192" y="228">(4)</text>
-                    <text x="360" y="228">(5)</text>
+                    <text x="160" y="228">w</text>
+                    <text x="208" y="228">(4)</text>
+                    <text x="376" y="228">(5)</text>
                     <text x="44" y="244">Client</text>
-                    <text x="144" y="244">a</text>
-                    <text x="268" y="244">workload</text>
-                    <text x="312" y="244">1</text>
-                    <text x="436" y="244">workload</text>
-                    <text x="480" y="244">2</text>
+                    <text x="160" y="244">a</text>
+                    <text x="284" y="244">workload</text>
+                    <text x="328" y="244">1</text>
+                    <text x="452" y="244">workload</text>
+                    <text x="496" y="244">2</text>
                     <text x="96" y="260">(a)</text>
-                    <text x="144" y="260">y</text>
-                    <text x="192" y="260">(c)</text>
-                    <text x="360" y="260">(c)</text>
-                    <text x="144" y="292">S</text>
-                    <text x="144" y="308">e</text>
-                    <text x="144" y="324">r</text>
-                    <text x="144" y="340">v</text>
-                    <text x="144" y="356">i</text>
-                    <text x="144" y="372">c</text>
-                    <text x="144" y="388">e</text>
+                    <text x="160" y="260">y</text>
+                    <text x="208" y="260">(c)</text>
+                    <text x="376" y="260">(c)</text>
+                    <text x="160" y="292">S</text>
+                    <text x="160" y="308">e</text>
+                    <text x="160" y="324">r</text>
+                    <text x="160" y="340">v</text>
+                    <text x="160" y="356">i</text>
+                    <text x="160" y="372">c</text>
+                    <text x="160" y="388">e</text>
                   </g>
                 </svg><a href="#section-3.2.2-1.1.1" class="pilcrow">¶</a>
 </div>
@@ -1683,97 +1691,101 @@ The workload may need to make requests of other workloads. When making these req
 <figure id="figure-3">
             <div id="section-3.2.3-1.1">
               <div class="alignLeft art-svg artwork" id="section-3.2.3-1.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="608" width="528" viewBox="0 0 528 608" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,144 L 8,192" fill="none" stroke="black"></path>
-                  <path d="M 72,144 L 72,192" fill="none" stroke="black"></path>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="624" width="544" viewBox="0 0 544 624" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,160 L 8,208" fill="none" stroke="black"></path>
+                  <path d="M 72,160 L 72,208" fill="none" stroke="black"></path>
                   <path d="M 120,64 L 120,352" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 144,64" fill="none" stroke="black"></path>
-                  <path d="M 144,352 L 144,416" fill="none" stroke="black"></path>
-                  <path d="M 168,64 L 168,352" fill="none" stroke="black"></path>
-                  <path d="M 176,512 L 176,576" fill="none" stroke="black"></path>
-                  <path d="M 224,144 L 224,208" fill="none" stroke="black"></path>
-                  <path d="M 240,208 L 240,512" fill="none" stroke="black"></path>
-                  <path d="M 304,272 L 304,336" fill="none" stroke="black"></path>
-                  <path d="M 312,512 L 312,576" fill="none" stroke="black"></path>
-                  <path d="M 328,144 L 328,208" fill="none" stroke="black"></path>
-                  <path d="M 360,512 L 360,576" fill="none" stroke="black"></path>
-                  <path d="M 384,144 L 384,208" fill="none" stroke="black"></path>
-                  <path d="M 392,208 L 392,272" fill="none" stroke="black"></path>
-                  <path d="M 400,272 L 400,336" fill="none" stroke="black"></path>
-                  <path d="M 464,208 L 464,512" fill="none" stroke="black"></path>
-                  <path d="M 488,512 L 488,576" fill="none" stroke="black"></path>
-                  <path d="M 496,144 L 496,208" fill="none" stroke="black"></path>
-                  <path d="M 520,32 L 520,416" fill="none" stroke="black"></path>
-                  <path d="M 144,32 L 352,32" fill="none" stroke="black"></path>
-                  <path d="M 472,32 L 520,32" fill="none" stroke="black"></path>
+                  <path d="M 136,80 L 136,368" fill="none" stroke="black"></path>
+                  <path d="M 152,32 L 152,64" fill="none" stroke="black"></path>
+                  <path d="M 152,368 L 152,432" fill="none" stroke="black"></path>
+                  <path d="M 168,64 L 168,80" fill="none" stroke="black"></path>
+                  <path d="M 184,80 L 184,368" fill="none" stroke="black"></path>
+                  <path d="M 192,528 L 192,592" fill="none" stroke="black"></path>
+                  <path d="M 240,160 L 240,224" fill="none" stroke="black"></path>
+                  <path d="M 256,224 L 256,528" fill="none" stroke="black"></path>
+                  <path d="M 320,288 L 320,352" fill="none" stroke="black"></path>
+                  <path d="M 328,528 L 328,592" fill="none" stroke="black"></path>
+                  <path d="M 344,160 L 344,224" fill="none" stroke="black"></path>
+                  <path d="M 376,528 L 376,592" fill="none" stroke="black"></path>
+                  <path d="M 400,160 L 400,224" fill="none" stroke="black"></path>
+                  <path d="M 408,224 L 408,288" fill="none" stroke="black"></path>
+                  <path d="M 416,288 L 416,352" fill="none" stroke="black"></path>
+                  <path d="M 480,224 L 480,528" fill="none" stroke="black"></path>
+                  <path d="M 504,528 L 504,592" fill="none" stroke="black"></path>
+                  <path d="M 512,160 L 512,224" fill="none" stroke="black"></path>
+                  <path d="M 536,32 L 536,432" fill="none" stroke="black"></path>
+                  <path d="M 152,32 L 368,32" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 536,32" fill="none" stroke="black"></path>
                   <path d="M 120,64 L 168,64" fill="none" stroke="black"></path>
-                  <path d="M 8,144 L 72,144" fill="none" stroke="black"></path>
-                  <path d="M 224,144 L 328,144" fill="none" stroke="black"></path>
-                  <path d="M 384,144 L 496,144" fill="none" stroke="black"></path>
-                  <path d="M 72,176 L 112,176" fill="none" stroke="black"></path>
-                  <path d="M 168,176 L 216,176" fill="none" stroke="black"></path>
-                  <path d="M 328,176 L 376,176" fill="none" stroke="black"></path>
-                  <path d="M 8,192 L 72,192" fill="none" stroke="black"></path>
-                  <path d="M 224,208 L 328,208" fill="none" stroke="black"></path>
-                  <path d="M 384,208 L 496,208" fill="none" stroke="black"></path>
-                  <path d="M 304,272 L 400,272" fill="none" stroke="black"></path>
-                  <path d="M 304,336 L 400,336" fill="none" stroke="black"></path>
-                  <path d="M 120,352 L 168,352" fill="none" stroke="black"></path>
-                  <path d="M 144,416 L 520,416" fill="none" stroke="black"></path>
-                  <path d="M 176,512 L 232,512" fill="none" stroke="black"></path>
-                  <path d="M 248,512 L 312,512" fill="none" stroke="black"></path>
-                  <path d="M 360,512 L 456,512" fill="none" stroke="black"></path>
-                  <path d="M 472,512 L 488,512" fill="none" stroke="black"></path>
-                  <path d="M 176,576 L 312,576" fill="none" stroke="black"></path>
-                  <path d="M 360,576 L 488,576" fill="none" stroke="black"></path>
-                  <path d="M 312,208 C 320.83064,208 328,200.83064 328,192" fill="none" stroke="black"></path>
-                  <path d="M 400,208 C 391.16936,208 384,200.83064 384,192" fill="none" stroke="black"></path>
-                  <path d="M 384,272 C 392.83064,272 400,279.16936 400,288" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="472,512 460,506.4 460,517.6" fill="black" transform="rotate(90,464,512)"></polygon>
-                  <polygon class="arrowhead" points="384,176 372,170.4 372,181.6" fill="black" transform="rotate(0,376,176)"></polygon>
-                  <polygon class="arrowhead" points="248,512 236,506.4 236,517.6" fill="black" transform="rotate(90,240,512)"></polygon>
-                  <polygon class="arrowhead" points="224,176 212,170.4 212,181.6" fill="black" transform="rotate(0,216,176)"></polygon>
-                  <polygon class="arrowhead" points="120,176 108,170.4 108,181.6" fill="black" transform="rotate(0,112,176)"></polygon>
+                  <path d="M 136,80 L 184,80" fill="none" stroke="black"></path>
+                  <path d="M 8,160 L 72,160" fill="none" stroke="black"></path>
+                  <path d="M 240,160 L 344,160" fill="none" stroke="black"></path>
+                  <path d="M 400,160 L 512,160" fill="none" stroke="black"></path>
+                  <path d="M 72,192 L 112,192" fill="none" stroke="black"></path>
+                  <path d="M 184,192 L 232,192" fill="none" stroke="black"></path>
+                  <path d="M 344,192 L 392,192" fill="none" stroke="black"></path>
+                  <path d="M 8,208 L 72,208" fill="none" stroke="black"></path>
+                  <path d="M 240,224 L 344,224" fill="none" stroke="black"></path>
+                  <path d="M 400,224 L 512,224" fill="none" stroke="black"></path>
+                  <path d="M 320,288 L 416,288" fill="none" stroke="black"></path>
+                  <path d="M 120,352 L 136,352" fill="none" stroke="black"></path>
+                  <path d="M 320,352 L 416,352" fill="none" stroke="black"></path>
+                  <path d="M 136,368 L 184,368" fill="none" stroke="black"></path>
+                  <path d="M 152,432 L 536,432" fill="none" stroke="black"></path>
+                  <path d="M 192,528 L 248,528" fill="none" stroke="black"></path>
+                  <path d="M 264,528 L 328,528" fill="none" stroke="black"></path>
+                  <path d="M 376,528 L 472,528" fill="none" stroke="black"></path>
+                  <path d="M 488,528 L 504,528" fill="none" stroke="black"></path>
+                  <path d="M 192,592 L 328,592" fill="none" stroke="black"></path>
+                  <path d="M 376,592 L 504,592" fill="none" stroke="black"></path>
+                  <path d="M 328,224 C 336.83064,224 344,216.83064 344,208" fill="none" stroke="black"></path>
+                  <path d="M 416,224 C 407.16936,224 400,216.83064 400,208" fill="none" stroke="black"></path>
+                  <path d="M 400,288 C 408.83064,288 416,295.16936 416,304" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="488,528 476,522.4 476,533.6" fill="black" transform="rotate(90,480,528)"></polygon>
+                  <polygon class="arrowhead" points="400,192 388,186.4 388,197.6" fill="black" transform="rotate(0,392,192)"></polygon>
+                  <polygon class="arrowhead" points="264,528 252,522.4 252,533.6" fill="black" transform="rotate(90,256,528)"></polygon>
+                  <polygon class="arrowhead" points="240,192 228,186.4 228,197.6" fill="black" transform="rotate(0,232,192)"></polygon>
+                  <polygon class="arrowhead" points="120,192 108,186.4 108,197.6" fill="black" transform="rotate(0,112,192)"></polygon>
                   <g class="text">
-                    <text x="376" y="36">Trust</text>
-                    <text x="436" y="36">Boundary</text>
-                    <text x="144" y="100">G</text>
-                    <text x="144" y="116">a</text>
-                    <text x="144" y="132">t</text>
-                    <text x="144" y="148">e</text>
-                    <text x="48" y="164">App</text>
-                    <text x="96" y="164">(1)</text>
-                    <text x="144" y="164">w</text>
-                    <text x="192" y="164">(2)</text>
-                    <text x="360" y="164">(4)</text>
-                    <text x="44" y="180">Client</text>
-                    <text x="144" y="180">a</text>
-                    <text x="268" y="180">workload</text>
-                    <text x="312" y="180">1</text>
-                    <text x="436" y="180">workload</text>
-                    <text x="480" y="180">2</text>
-                    <text x="96" y="196">(a)</text>
-                    <text x="144" y="196">y</text>
-                    <text x="192" y="196">(c)</text>
-                    <text x="360" y="196">(c)</text>
-                    <text x="144" y="228">S</text>
-                    <text x="144" y="244">e</text>
-                    <text x="224" y="244">(3)</text>
-                    <text x="376" y="244">(5)</text>
-                    <text x="408" y="244">(c)</text>
-                    <text x="144" y="260">r</text>
-                    <text x="144" y="276">v</text>
-                    <text x="144" y="292">i</text>
-                    <text x="352" y="292">Token</text>
-                    <text x="144" y="308">c</text>
-                    <text x="448" y="308">(6)</text>
-                    <text x="480" y="308">(t)</text>
-                    <text x="144" y="324">e</text>
-                    <text x="352" y="324">Service</text>
-                    <text x="244" y="532">Infrastructure</text>
-                    <text x="428" y="532">External</text>
-                    <text x="240" y="564">Service</text>
-                    <text x="424" y="564">Service</text>
+                    <text x="392" y="36">Trust</text>
+                    <text x="452" y="36">Boundary</text>
+                    <text x="160" y="116">G</text>
+                    <text x="160" y="132">a</text>
+                    <text x="160" y="148">t</text>
+                    <text x="160" y="164">e</text>
+                    <text x="48" y="180">App</text>
+                    <text x="96" y="180">(1)</text>
+                    <text x="160" y="180">w</text>
+                    <text x="208" y="180">(2)</text>
+                    <text x="376" y="180">(4)</text>
+                    <text x="44" y="196">Client</text>
+                    <text x="160" y="196">a</text>
+                    <text x="284" y="196">workload</text>
+                    <text x="328" y="196">1</text>
+                    <text x="452" y="196">workload</text>
+                    <text x="496" y="196">2</text>
+                    <text x="96" y="212">(a)</text>
+                    <text x="160" y="212">y</text>
+                    <text x="208" y="212">(c)</text>
+                    <text x="376" y="212">(c)</text>
+                    <text x="160" y="244">S</text>
+                    <text x="160" y="260">e</text>
+                    <text x="240" y="260">(3)</text>
+                    <text x="392" y="260">(5)</text>
+                    <text x="424" y="260">(c)</text>
+                    <text x="160" y="276">r</text>
+                    <text x="160" y="292">v</text>
+                    <text x="160" y="308">i</text>
+                    <text x="368" y="308">Token</text>
+                    <text x="160" y="324">c</text>
+                    <text x="464" y="324">(6)</text>
+                    <text x="496" y="324">(t)</text>
+                    <text x="160" y="340">e</text>
+                    <text x="368" y="340">Service</text>
+                    <text x="260" y="548">Infrastructure</text>
+                    <text x="444" y="548">External</text>
+                    <text x="256" y="580">Service</text>
+                    <text x="440" y="580">Service</text>
                   </g>
                 </svg><a href="#section-3.2.3-1.1.1" class="pilcrow">¶</a>
 </div>

@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 6 March 2026                                            Zscaler
+Expires: 13 March 2026                                           Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                        2 September 2025
+                                                        9 September 2025
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 March 2026.
+   This Internet-Draft will expire on 13 March 2026.
 
 Copyright Notice
 
@@ -304,42 +304,42 @@ Table of Contents
 
 3.2.1.  Basic Workload Identity Scenario
 
-                       +-------------------------------Trust Boundary---------------+
-                       |                                                            |
-                       |                                                            |
-                    +-----+         +--------------+                                |
-                    |     |         |              |       (3)                      |
-                    |     |     +--->  Workload 1  +-------------------+            |
-                    |  G  |     |   |              |                   |            |
-                    |  a  |     |   +-------^------+                   |            |
-                    |  t  |     |           |                          |            |
-+------------+      |  e  |     |           | (1)                      |            |
-|            | (2)  |  w  | (3) |           |                          |            |
-| App Client +----->|  a  +-----+   +-------+-------+                  |            |
-|            |      |  y  |         |               |          +-------+------+     |
-+------------+      |     +-----+   | CA/Credential |    (1)   |              |     |
-                    |  S  | (4) |   |    Service    +---------->   Workload 3 |     |
-                    |  e  |     |   |               |          |              |     |
-                    |  r  |     |   +-------+-------+          +-------+------+     |
-                    |  v  |     |           |                          |            |
-                    |  i  |     |           | (1)                      |            |
-                    |  c  |     |           |                          |            |
-                    |  e  |     |   +-------v------+                   |            |
-                    |     |     |   |              |      (4)          |            |
-                    |     |     +--->  Workload 2  +-------------------+            |
-                    |     |         |              |                                |
-                    +-----+         +--------------+                                |
-                       |                                                            |
-                       |                                                            |
-                       |                                                            |
-                       +------------------------------------------------------------+
+                        +--------------------------------Trust Boundary---------------+
+                        |                                                             |
+                    .---+-.                                                           |
+                    | .---+-.         +--------------+                                |
+                    | |     |         |              |       (3)                      |
+                    | |     |     +--->  Workload 1  +-------------------+            |
+                    | |  G  |     |   |              |                   |            |
+                    | |  a  |     |   +-------^------+                   |            |
+                    | |  t  |     |           |                          |            |
++------------+      | |  e  |     |           | (1)                      |            |
+|            | (2)  | |  w  | (3) |           |                          |            |
+| App Client +----->| |  a  +-----+   +-------+-------+                  |            |
+|            |      | |  y  |         |               |          +-------+------+     |
++------------+      | |     +-----+   | CA/Credential |    (1)   |              |     |
+                    | |  S  | (4) |   |    Service    +---------->   Workload 3 |     |
+                    | |  e  |     |   |               |          |              |     |
+                    | |  r  |     |   +-------+-------+          +-------+------+     |
+                    | |  v  |     |           |                          |            |
+                    | |  i  |     |           | (1)                      |            |
+                    | |  c  |     |           |                          |            |
+                    | |  e  |     |   +-------v------+                   |            |
+                    | |     |     |   |              |      (4)          |            |
+                    | |     |     +--->  Workload 2  +-------------------+            |
+                    '-+     |         |              |                                |
+                      '-+---'         +--------------+                                |
+                        |                                                             |
+                        |                                                             |
+                        |                                                             |
+                        +-------------------------------------------------------------+
 
          Figure 1: Basic example workload application system.
 
    The above diagram presents a basic workload application system.  The
    large box represents a trust domain within which the workload
    application is hosted.  Within this example there are three
-   workloads, a gateway, that accepts external clients and a CA/
+   workloads, a gateway service, that accepts external clients and a CA/
    credential service that issues workload identity credentials for the
    trust domain.  External to the workload application system there is
    an application client that calls APIs on workloads.
@@ -365,12 +365,12 @@ Table of Contents
    *  Gateway Service
 
    A gateway service typically acts as an intermediary between the
-   internal application trust domain and external systems.  The gateway
-   is responsible for ensuring appropriate isolation between external
-   and internal domains.  It also routes incoming requests to the
-   correct workload.  The gateway MAY also implement identity proxy
-   functionality including authentication, token exchange, and token
-   transformation.
+   internal application trust domain and external systems.  It typically
+   consists of multiple resilient instances.  The gateway is responsible
+   for ensuring appropriate isolation between external and internal
+   domains.  It also routes incoming requests to the correct workload.
+   The gateway MAY also implement identity proxy functionality including
+   authentication, token exchange, and token transformation.
 
    *  CA/Credential Service
 
@@ -436,35 +436,35 @@ Table of Contents
 
 3.2.2.  Context and workload Identity
 
-                    +-----------------------Trust Boundary---------+
-                    |                                              |
-                    |                      +----------------+      |
-                 +--+--+                   |                |      |
-                 |     +------------------>|    Context     |      |
-                 |     |         (3)       |                |      |
-                 |     |<------------------+    Service     |      |
-                 |     |         (c)       |                |      |
-                 |  G  |                   +----------------+      |
-                 |  a  |                                           |
-      (1)        |  t  |                                           |
-   +-------+     |  e  |      +------------+      +-------------+  |
-   |   App | (2) |  w  | (4)  |            |  (5) |             |  |
-   | Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
-   +-------+ (a) |  y  | (c)  |            |  (c) |             |  |
-                 |     |      +------------+      +-------------+  |
-                 |  S  |                                           |
-                 |  e  |                                           |
-                 |  r  |                                           |
-                 |  v  |                                           |
-                 |  i  |                                           |
-                 |  c  |                                           |
-                 |  e  |                                           |
-                 |     |                                           |
-                 +--+--+                                           |
-                    |                                              |
-                    |                                              |
-                    |                                              |
-                    +----------------------------------------------+
+                     +------------------------Trust Boundary---------+
+                     |                                               |
+                 .---+-.                     +----------------+      |
+                 | .---+-.                   |                |      |
+                 | |     +------------------>|    Context     |      |
+                 | |     |         (3)       |                |      |
+                 | |     |<------------------+    Service     |      |
+                 | |     |         (c)       |                |      |
+                 | |  G  |                   +----------------+      |
+                 | |  a  |                                           |
+      (1)        | |  t  |                                           |
+   +-------+     | |  e  |      +------------+      +-------------+  |
+   |   App | (2) | |  w  | (4)  |            |  (5) |             |  |
+   | Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
+   +-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
+                 | |     |      +------------+      +-------------+  |
+                 | |  S  |                                           |
+                 | |  e  |                                           |
+                 | |  r  |                                           |
+                 | |  v  |                                           |
+                 | |  i  |                                           |
+                 | |  c  |                                           |
+                 | |  e  |                                           |
+                 '-+     |                                           |
+                   '-+---'                                           |
+                     |                                               |
+                     |                                               |
+                     |                                               |
+                     +-----------------------------------------------+
 
            Figure 2: Context example workload application system.
 
@@ -530,41 +530,42 @@ Table of Contents
 
 3.2.3.  Cross-Domain Communication
 
-                    +--------------------------Trust Boundary------+
-                    |                                              |
-                 +--+--+                                           |
-                 |     |                                           |
-                 |  G  |                                           |
-                 |  a  |                                           |
-                 |  t  |                                           |
-   +-------+     |  e  |      +------------+      +-------------+  |
-   |   App | (1) |  w  | (2)  |            |  (4) |             |  |
-   | Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
-   +-------+ (a) |  y  | (c)  |            |  (c) |             |  |
-                 |     |      +-+---------++      ++--------+---+  |
-                 |  S  |        |                  |        |      |
-                 |  e  |     (3)|               (5)|(c)     |      |
-                 |  r  |        |                  |        |      |
-                 |  v  |        |       +-+--------++       |      |
-                 |  i  |        |       |   Token   |       |      |
-                 |  c  |        |       |           |    (6)|(t)   |
-                 |  e  |        |       |  Service  |       |      |
-                 |     |        |       +-----------+       |      |
-                 +--+--+        |                           |      |
-                    |           |                           |      |
-                    |           |                           |      |
-                    |           |                           |      |
-                    +-----------+---------------------------+------+
-                                |                           |
-                                |                           |
-                                |                           |
-                                |                           |
-                                |                           |
-                        +-------v--------+     +------------v--+
-                        | Infrastructure |     |    External   |
-                        |                |     |               |
-                        |    Service     |     |    Service    |
-                        +----------------+     +---------------+
+                     +---------------------------Trust Boundary------+
+                     |                                               |
+                 .---+-.                                             |
+                 | .---+-.                                           |
+                 | |     |                                           |
+                 | |  G  |                                           |
+                 | |  a  |                                           |
+                 | |  t  |                                           |
+   +-------+     | |  e  |      +------------+      +-------------+  |
+   |   App | (1) | |  w  | (2)  |            |  (4) |             |  |
+   | Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
+   +-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
+                 | |     |      +-+---------++      ++--------+---+  |
+                 | |  S  |        |                  |        |      |
+                 | |  e  |     (3)|               (5)|(c)     |      |
+                 | |  r  |        |                  |        |      |
+                 | |  v  |        |       +-+--------++       |      |
+                 | |  i  |        |       |   Token   |       |      |
+                 | |  c  |        |       |           |    (6)|(t)   |
+                 | |  e  |        |       |  Service  |       |      |
+                 '-+     |        |       +-----------+       |      |
+                   '-+---'        |                           |      |
+                     |            |                           |      |
+                     |            |                           |      |
+                     |            |                           |      |
+                     +------------+---------------------------+------+
+                                  |                           |
+                                  |                           |
+                                  |                           |
+                                  |                           |
+                                  |                           |
+                          +-------v--------+     +------------v--+
+                          | Infrastructure |     |    External   |
+                          |                |     |               |
+                          |    Service     |     |    Service    |
+                          +----------------+     +---------------+
 
           Figure 3: External request workload application system.
 
