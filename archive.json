@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T01:56:38.629069+00:00",
+  "timestamp": "2025-09-11T01:55:48.408846+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -77,6 +77,11 @@
       "name": "editorial",
       "description": "",
       "color": "02BA53"
+    },
+    {
+      "name": "Interim-topic",
+      "description": "",
+      "color": "81063A"
     }
   ],
   "issues": [
@@ -678,7 +683,7 @@
       "id": "I_kwDOLPTb0M6lSvZ7",
       "title": "Positioning of the gateway",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/49",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -689,9 +694,17 @@
       ],
       "body": "Current scenarios show a single instance of gateway.  Actual deployments may have multiple gateways perhaps in front of each service.  Is the current depiction ok as a concept or do we need to cover other topologies. ",
       "createdAt": "2025-01-07T15:42:56Z",
-      "updatedAt": "2025-01-21T15:12:05Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-09T15:54:55Z",
+      "closedAt": "2025-09-09T15:54:55Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing with https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/97",
+          "createdAt": "2025-09-09T15:54:55Z",
+          "updatedAt": "2025-09-09T15:54:55Z"
+        }
+      ]
     },
     {
       "number": 50,
@@ -947,7 +960,7 @@
       "id": "I_kwDOLPTb0M6lTxSE",
       "title": "Add additional authentication methods",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -957,9 +970,17 @@
       "labels": [],
       "body": " Not sure if the list in section 3.2.1 is meant to be exhaustive or just illustrative. Some others to consider:\r\n \r\n   *  Mutual TLS authentication using X.509 certificate for both client\r\n      and server and and client bearer token, encoded as JWTs at the application layer\r\n\r\nAlso might be worth adding some reference to the mechanisms defined in the S2S auth spec - or perhaps that is all that needs to be done?",
       "createdAt": "2025-01-07T17:52:35Z",
-      "updatedAt": "2025-01-10T19:59:15Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-09T15:55:17Z",
+      "closedAt": "2025-09-09T15:55:17Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing with https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/98",
+          "createdAt": "2025-09-09T15:55:17Z",
+          "updatedAt": "2025-09-09T15:55:17Z"
+        }
+      ]
     },
     {
       "number": 60,
@@ -1254,25 +1275,33 @@
       "id": "I_kwDOLPTb0M6_JV0c",
       "title": "More precision on Authentication",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/89",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "yaroslavros"
       ],
       "labels": [],
       "body": "For the section:\n\n> Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:\n\nI think we are mixing the fundamental workload authentication with the way this authentication is later conveyed to the S2S security mechanisms.\n\nFundamental auth is very often done with no need for managed secrets (a.k.a. \"bottom turtle\") through infrastructure- or cloud-provided mechanisms. Think: Amazon Role and the way an EC2 instance can access secrets that are physically restricted to be used only by that instance to authenticate to the cloud infra and obtain a short-term credential that proves that authn took place.\n\nThe current section's text is too simplistic, and I would recommend to bring it more in line with Sec. 3.2 of draft-ietf-wimse-workload-identity-practices (Credential Issuance).\n\n(Also related to #59.)",
       "createdAt": "2025-07-06T19:15:12Z",
-      "updatedAt": "2025-07-06T20:32:36Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-09T15:55:39Z",
+      "closedAt": "2025-09-09T15:55:39Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing with https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/98",
+          "createdAt": "2025-09-09T15:55:39Z",
+          "updatedAt": "2025-09-09T15:55:39Z"
+        }
+      ]
     },
     {
       "number": 91,
       "id": "I_kwDOLPTb0M6_2FOb",
       "title": "Authorization: where does it take place",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/91",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1281,9 +1310,17 @@
       "labels": [],
       "body": "The section \"Service Authorization\" is missing discussion on where authz is performed. Something like:\n\nFor typical workload-to-workload interactions (REST APIs or pub/sub flows) authorization MUST be performed by the callee. However there are cases, such as database access, where evaluation of the access policy may be too complicated for the subject of the operation, and in these cases authorization MAY be done on the client side.",
       "createdAt": "2025-07-10T09:43:11Z",
-      "updatedAt": "2025-09-02T15:18:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-09T15:55:59Z",
+      "closedAt": "2025-09-09T15:55:59Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing with https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/99",
+          "createdAt": "2025-09-09T15:55:59Z",
+          "updatedAt": "2025-09-09T15:55:59Z"
+        }
+      ]
     },
     {
       "number": 93,
@@ -4013,19 +4050,40 @@
       "labels": [],
       "body": "This is to address issue #63  and issue #50 ",
       "createdAt": "2025-09-08T03:28:51Z",
-      "updatedAt": "2025-09-08T03:28:52Z",
+      "updatedAt": "2025-09-09T15:16:55Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "cross-domain",
-      "headRefOid": "20a217ee607cda76f57ac1257567dc22a631bcd7",
+      "headRefOid": "1e8b312588e1f8a8dc3767073cb34447262cc4c0",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6-3Cu1",
+          "commit": {
+            "abbreviatedOid": "20a217e"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-09T15:12:36Z",
+          "updatedAt": "2025-09-09T15:16:46Z",
+          "comments": [
+            {
+              "originalPosition": 77,
+              "body": "```suggestion\r\nThere can be variations on cross domain workflows. For example, in step 3 the workload was able to use its Workload Identity Credentials to directly access an infrastructure service. It also may be possible for an workload to request an access token for an external service using its Workload Identity Credentials directly with an external token service.\r\n```",
+              "createdAt": "2025-09-09T15:12:36Z",
+              "updatedAt": "2025-09-09T15:16:46Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 96,
@@ -4036,10 +4094,12 @@
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
       "createdAt": "2025-09-08T22:07:02Z",
-      "updatedAt": "2025-09-08T22:07:03Z",
+      "updatedAt": "2025-09-09T15:21:44Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
@@ -4050,7 +4110,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Transaction tokens defines workload. \r\n\r\n\"Workload:\r\nAn independent computational unit that can autonomously receive and process invocations, and can generate invocations of other workloads. Examples of workloads include containerized microservices, monolithic services and infrastructure services such as managed databases.\"",
+          "createdAt": "2025-09-09T15:21:11Z",
+          "updatedAt": "2025-09-09T15:21:11Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -4058,24 +4126,26 @@
       "id": "PR_kwDOLPTb0M6nefec",
       "title": "Multiple gateway instances",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/97",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Gateway service can consist of multiple instances. Should address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/49",
       "createdAt": "2025-09-08T22:22:57Z",
-      "updatedAt": "2025-09-08T22:22:58Z",
+      "updatedAt": "2025-09-09T15:27:31Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "many-gateways",
       "headRefOid": "4fbf11123e07203575b1a9a96a5f0f1fe8551a78",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-09T15:27:31Z",
+      "mergedAt": "2025-09-09T15:27:31Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "d7c9176312be4f029a7b8acc806410ea05817e19"
+      },
       "comments": [],
       "reviews": []
     },
@@ -4084,46 +4154,99 @@
       "id": "PR_kwDOLPTb0M6nerV1",
       "title": "Improved authentication wording",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/98",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/59 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/89",
       "createdAt": "2025-09-08T22:55:01Z",
-      "updatedAt": "2025-09-08T22:55:02Z",
+      "updatedAt": "2025-09-09T15:34:48Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "authentication-fix",
-      "headRefOid": "8908224b79c6ae7c94a27836b856ffc54ccf1e7e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8c748c52bfd162306a5f561ff3296a6f353c90e8",
+      "closedAt": "2025-09-09T15:34:48Z",
+      "mergedAt": "2025-09-09T15:34:48Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "5184c045c349c57c1a56292321acf3825fef71f9"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M6-3VCZ",
+          "commit": {
+            "abbreviatedOid": "8908224"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-09T15:30:21Z",
+          "updatedAt": "2025-09-09T15:30:21Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nWorkloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in {{Section 3 of ?I-D.ietf-wimse-workload-identity-practices}}.\r\n```",
+              "createdAt": "2025-09-09T15:30:21Z",
+              "updatedAt": "2025-09-09T15:31:58Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 99,
       "id": "PR_kwDOLPTb0M6nes2I",
       "title": "Added considerations for authorization location",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/99",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/91",
       "createdAt": "2025-09-08T23:00:45Z",
-      "updatedAt": "2025-09-08T23:00:46Z",
+      "updatedAt": "2025-09-09T15:36:32Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "authorization-place",
       "headRefOid": "7e31dfe7f6f32a665bcd77025a084e6e5136a50d",
+      "closedAt": "2025-09-09T15:36:32Z",
+      "mergedAt": "2025-09-09T15:36:32Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "5fa7f3f439c28ff5ec618e891954f35c19ef8e1b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOLPTb0M6njqVw",
+      "title": "Initial AI and ML-Based Intermediaries text",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/100",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Interim-topic"
+      ],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/93",
+      "createdAt": "2025-09-09T09:15:32Z",
+      "updatedAt": "2025-09-09T15:38:38Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "ai-ai",
+      "headRefOid": "4dd749a03cf2d97f9b4d4c584f160975eb06396c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
