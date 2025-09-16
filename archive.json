@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-11T01:55:48.408846+00:00",
+  "timestamp": "2025-09-16T01:52:42.497594+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -590,7 +590,7 @@
       "id": "I_kwDOLPTb0M6aU8Ov",
       "title": "Consider Delegation and Impersonation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -601,9 +601,17 @@
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L184\r\n\r\nA third scenario is when a workload operates on behalf of another entity (e.g. a user). There is an (empty) \"Delegation and Impersonation\" section a bit later, however it should be called out here as well. ",
       "createdAt": "2024-10-15T15:40:45Z",
-      "updatedAt": "2025-01-21T15:10:19Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-15T14:20:56Z",
+      "closedAt": "2025-09-15T14:20:56Z",
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Section is no longer empty. ",
+          "createdAt": "2025-09-15T14:20:56Z",
+          "updatedAt": "2025-09-15T14:20:56Z"
+        }
+      ]
     },
     {
       "number": 45,
@@ -805,7 +813,7 @@
       "id": "I_kwDOLPTb0M6lTlA7",
       "title": "Workload Identity Token",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -816,8 +824,8 @@
       ],
       "body": "Perhaps this section can be renamed as Workload Identity Credentials (the cert vs token terminology)\r\n\r\nThe definition seems very narrow and excludes JWT bearer tokens (as much as we don't like them) - would we preclude the use of bearer tokens in the architecture document, or should we allow them for backwards compatibility reasons (e.g. cloud service providers expect JWT bearer tokens to be exchanged for OAuth Access tokens). ",
       "createdAt": "2025-01-07T17:22:52Z",
-      "updatedAt": "2025-01-21T15:15:01Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-15T14:16:32Z",
+      "closedAt": "2025-09-15T14:16:32Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -832,6 +840,13 @@
           "body": "https://mailarchive.ietf.org/arch/msg/wimse/Qhi6JDXFfh9B6_bsrIXJQ3qteNk/",
           "createdAt": "2025-01-21T15:14:58Z",
           "updatedAt": "2025-01-21T15:14:58Z"
+        },
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Applied change to workload Identity Credential section header ",
+          "createdAt": "2025-09-15T14:16:32Z",
+          "updatedAt": "2025-09-15T14:16:32Z"
         }
       ]
     },
@@ -987,7 +1002,7 @@
       "id": "I_kwDOLPTb0M6lUZPe",
       "title": "Workload constrained security context",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/60",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -996,8 +1011,8 @@
       "labels": [],
       "body": "I struggled a little bit with this sentence. Perhaps introduce the concept of \"workload constrained security context\" to communicate the idea that it is necessary to prove that a security context originated from a specific workload or may only be used by a specific workload.\r\n\r\nFrom:  \"Workload identity comes into play to ensure that the information in the context can only be used by an authorized workload and that the context information originated from an authorized workload.\"\r\n\r\nTo: \"A security context may be constrained to a workload by including the workload identifier as part of the context. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context\"\r\n\r\nAfter reading the above, I think there are two ways of constraining the context, one to the originator and one to the recipient. These are probably different mechanisms/claims in a token - not sure how specific we should be in the architecture document.",
       "createdAt": "2025-01-07T19:32:37Z",
-      "updatedAt": "2025-02-26T06:08:38Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-15T14:13:25Z",
+      "closedAt": "2025-09-15T14:13:25Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1005,6 +1020,13 @@
           "body": "Applied suggested text in PR #82 in addition added some text to try to describe the use of the workload identity credential to bind context to a transaction that it originates. ",
           "createdAt": "2025-02-26T06:08:37Z",
           "updatedAt": "2025-02-26T06:08:37Z"
+        },
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR has been applied. ",
+          "createdAt": "2025-09-15T14:13:24Z",
+          "updatedAt": "2025-09-15T14:13:24Z"
         }
       ]
     },
@@ -1195,10 +1217,12 @@
       "assignees": [
         "yaroslavros"
       ],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "the WIMSE identifier is relatively well defined and useful on tis own so let's spin it out of the main document so it can progress separately. ",
       "createdAt": "2025-04-15T14:19:34Z",
-      "updatedAt": "2025-07-06T16:44:58Z",
+      "updatedAt": "2025-09-15T14:11:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -1221,10 +1245,12 @@
       "assignees": [
         "jsalowey"
       ],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "In my opinion the document (and also draft-ietf-wimse-s2s-protocol) is under-communicating the possibility and advantages of binding tokens to workload identities.\n\nConsider a scenario where you use RFC8705 or RFC9449 to request a token. The resulting token will be bound to either the mTLS certificate or the key in the proof token. The example in https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-option-1-dpop-inspired-auth effectively binds the WIT to the workload, the WIT is workload-bound. The example https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-using-mutual-tls-for-worklo doesn't mention using RFC8705 to get workload-bound tokens.\n\nI think that the architecture document should be much clearer on the possibility of binding tokens to workloads. For instance the recent https://csrc.nist.gov/pubs/sp/800/228/ipd does a very good job at explaining that there is typically at least two factors involved 1) an authentication of the software/workload making the request, 2) some type of token relaying authorization context.\n\nI think we are greatly under-communicating the possibility of using the workload identity authentication to bind tokens (that contains authorization context) to the workload identity itself. This token could be an oauth token or indeed a transaction token (if txn-tokens were extended to support cnf claims). This has big benefit of giving another layer of defense because these tokens could not be stolen or misused by other workloads or systems.\n\nIn general I think that NIST SP 800-228 does a better job at explaining the \"factors\" involved in \"API Protection for Cloud-Native Systems\" -- which is effectively what WIMSE also aims to \"solve\" -- secure workload to workload communication. By authenticating a workload you have actually primed any tokens within your trust domain to be workload-bound which would greatly improve token security without much extra work.\n\nMy main point is that by having valid Workload Identity Credentials as either X.509 certificate or WIT, you have the ability to bind any or all tokens within your trust domain. The WIT/WPT pattern in s2s document actually is a form of workload-bound tokens, but it doesn't make it very clear. However this can easily be extended to binding other tokens via a RFC8705 flow or dPoP-like flows.  ",
       "createdAt": "2025-05-05T21:08:55Z",
-      "updatedAt": "2025-05-27T15:44:44Z",
+      "updatedAt": "2025-09-15T14:29:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -1349,13 +1375,23 @@
       "state": "OPEN",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "Transaction Tokens uses the term External Endpoint:\n: A published interface to a Trust Domain that results in the invocation of a workload within the Trust Domain.\n\nWhich performs a similar function as the gateway service and identity proxy defined in this document.\n\nWe should provide some alignment or mapping of the terminology",
       "createdAt": "2025-09-08T01:36:20Z",
-      "updatedAt": "2025-09-08T01:36:20Z",
+      "updatedAt": "2025-09-15T14:33:34Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "A gateway in the architecture draft sense provides an external endpoint.  ",
+          "createdAt": "2025-09-15T14:32:53Z",
+          "updatedAt": "2025-09-15T14:32:53Z"
+        }
+      ]
     }
   ],
   "pulls": [
