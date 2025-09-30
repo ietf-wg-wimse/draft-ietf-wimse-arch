@@ -519,6 +519,28 @@ A security gateway implementing Identity Proxy functionality at the edge of a tr
 
 Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification of inbound requests should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.
 
+### AI and ML-Based Intermediaries
+
+Emerging agentic AI systems and other ML-based intermediaries introduce new considerations for workload identity and security context propagation. These systems often act as autonomous agents that perform tasks on behalf of an upstream principal (such as a user or service) and then invoke downstream workloads as part of multi-step workflows.
+
+From WIMSE perspective, AI intermediaries are a special case of delegated workloads (see {{delegation}}). They inherit the upstream principal's security context and are expected to operate strictly within the constraints of that delegation. When invoking downstream workloads, the agent SHOULD propagate the upstream security context, unless it has been explicitly authorized to translate or reduce its scope.
+
+In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes. Because AI intermediaries may chain requests across multiple services, there is an elevated risk of privilege escalation if security context is propagated beyond the intended trust domain. Mechanisms such as cryptographic binding of delegation tokens or attestation of intermediary behavior can help mitigate these risks.
+
+A further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain MUST explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.
+
+~~~aasvg
+   +---------+        +-------------+        +-------------+        +-------------+
+   |  User / +------->|  AI Agent   +------->|  AI Agent   +------->|  Workload   |
+   | Service |        |  (Agent A)  |        |  (Agent B)  |        |  Downstream |
+   +---------+        +-------------+        +-------------+        +-------------+
+        |                    |                      |                      |
+        |     Initial        |  Delegated / Scoped  |  Delegated / Scoped  |
+        | Security Context   |   Security context   |   Security context   |
+        +------------------->+--------------------->+--------------------->|
+~~~~
+{: #arch-ai title="AI agent communication"}
+
 # Security Considerations
 
 ## Traffic Interception
