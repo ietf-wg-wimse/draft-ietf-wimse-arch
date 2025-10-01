@@ -130,41 +130,41 @@ The workload identity certificate or WIT is presented during authentication, how
 ### Basic Workload Identity Scenario
 
 ~~~aasvg
-                       +-------------------------------Trust Boundary---------------+
-                       |                                                            |
-                       |                                                            |
-                    +-----+         +--------------+                                |
-                    |     |         |              |       (3)                      |
-                    |     |     +--->  Workload 1  +-------------------+            |
-                    |  G  |     |   |              |                   |            |
-                    |  a  |     |   +-------^------+                   |            |
-                    |  t  |     |           |                          |            |
-+------------+      |  e  |     |           | (1)                      |            |
-|            | (2)  |  w  | (3) |           |                          |            |
-| App Client +----->|  a  +-----+   +-------+-------+                  |            |
-|            |      |  y  |         |               |          +-------+------+     |
-+------------+      |     +-----+   | CA/Credential |    (1)   |              |     |
-                    |  S  | (4) |   |    Service    +---------->   Workload 3 |     |
-                    |  e  |     |   |               |          |              |     |
-                    |  r  |     |   +-------+-------+          +-------+------+     |
-                    |  v  |     |           |                          |            |
-                    |  i  |     |           | (1)                      |            |
-                    |  c  |     |           |                          |            |
-                    |  e  |     |   +-------v------+                   |            |
-                    |     |     |   |              |      (4)          |            |
-                    |     |     +--->  Workload 2  +-------------------+            |
-                    |     |         |              |                                |
-                    +-----+         +--------------+                                |
-                       |                                                            |
-                       |                                                            |
-                       |                                                            |
-                       +------------------------------------------------------------+
+                        +--------------------------------Trust Boundary---------------+
+                        |                                                             |
+                    .---+-.                                                           |
+                    | .---+-.         +--------------+                                |
+                    | |     |         |              |       (3)                      |
+                    | |     |     +--->  Workload 1  +-------------------+            |
+                    | |  G  |     |   |              |                   |            |
+                    | |  a  |     |   +-------^------+                   |            |
+                    | |  t  |     |           |                          |            |
++------------+      | |  e  |     |           | (1)                      |            |
+|            | (2)  | |  w  | (3) |           |                          |            |
+| App Client +----->| |  a  +-----+   +-------+-------+                  |            |
+|            |      | |  y  |         |               |          +-------+------+     |
++------------+      | |     +-----+   | CA/Credential |    (1)   |              |     |
+                    | |  S  | (4) |   |    Service    +---------->   Workload 3 |     |
+                    | |  e  |     |   |               |          |              |     |
+                    | |  r  |     |   +-------+-------+          +-------+------+     |
+                    | |  v  |     |           |                          |            |
+                    | |  i  |     |           | (1)                      |            |
+                    | |  c  |     |           |                          |            |
+                    | |  e  |     |   +-------v------+                   |            |
+                    | |     |     |   |              |      (4)          |            |
+                    | |     |     +--->  Workload 2  +-------------------+            |
+                    '-+     |         |              |                                |
+                      '-+---'         +--------------+                                |
+                        |                                                             |
+                        |                                                             |
+                        |                                                             |
+                        +-------------------------------------------------------------+
 ~~~~
 {: #arch-basic title="Basic example workload application system."}
 
 
 The above diagram presents a basic workload application system.  The large box represents a trust domain within which the workload application is hosted.  Within this example
-there are three workloads, a gateway, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
+there are three workloads, a gateway service, that accepts external clients and a CA/credential service that issues workload identity credentials for the trust domain.  External
 to the workload application system there is an application client that calls APIs on workloads.
 
 Here is a brief summary of each component
@@ -180,7 +180,7 @@ of sending and receiving requests to and from external systems or other internal
 
 * Gateway Service
 
-A gateway service typically acts as an intermediary between the internal application trust domain and external systems. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
+A gateway service typically acts as an intermediary between the internal application trust domain and external systems. It typically consists of multiple resilient instances. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
 The gateway MAY also implement identity proxy functionality including authentication, token exchange, and token transformation.
 
 * CA/Credential Service
@@ -210,35 +210,35 @@ Similarly to the previous flow, the gateway may determine that for another API c
 ### Context and workload Identity
 
 ~~~aasvg
-                 +-----------------------Trust Boundary---------+
-                 |                                              |
-                 |                      +----------------+      |
-              +--+--+                   |                |      |
-              |     +------------------>|    Context     |      |
-              |     |         (3)       |                |      |
-              |     |<------------------+    Service     |      |
-              |     |         (c)       |                |      |
-              |  G  |                   +----------------+      |
-              |  a  |                                           |
-   (1)        |  t  |                                           |
-+-------+     |  e  |      +------------+      +-------------+  |
-|   App | (2) |  w  | (4)  |            |  (5) |             |  |
-| Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
-+-------+ (a) |  y  | (c)  |            |  (c) |             |  |
-              |     |      +------------+      +-------------+  |
-              |  S  |                                           |
-              |  e  |                                           |
-              |  r  |                                           |
-              |  v  |                                           |
-              |  i  |                                           |
-              |  c  |                                           |
-              |  e  |                                           |
-              |     |                                           |
-              +--+--+                                           |
-                 |                                              |
-                 |                                              |
-                 |                                              |
-                 +----------------------------------------------+
+                  +------------------------Trust Boundary---------+
+                  |                                               |
+              .---+-.                     +----------------+      |
+              | .---+-.                   |                |      |
+              | |     +------------------>|    Context     |      |
+              | |     |         (3)       |                |      |
+              | |     |<------------------+    Service     |      |
+              | |     |         (c)       |                |      |
+              | |  G  |                   +----------------+      |
+              | |  a  |                                           |
+   (1)        | |  t  |                                           |
++-------+     | |  e  |      +------------+      +-------------+  |
+|   App | (2) | |  w  | (4)  |            |  (5) |             |  |
+| Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
++-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
+              | |     |      +------------+      +-------------+  |
+              | |  S  |                                           |
+              | |  e  |                                           |
+              | |  r  |                                           |
+              | |  v  |                                           |
+              | |  i  |                                           |
+              | |  c  |                                           |
+              | |  e  |                                           |
+              '-+     |                                           |
+                '-+---'                                           |
+                  |                                               |
+                  |                                               |
+                  |                                               |
+                  +-----------------------------------------------+
 
 ~~~~
 {: #arch-context title="Context example workload application system."}
@@ -270,44 +270,44 @@ The workload may need to make requests of other workloads. When making these req
 
 ### Cross-Domain Communication
 ~~~aasvg
-                 +--------------------------Trust Boundary------+
-                 |                                              |
-              +--+--+                                           |
-              |     |                                           |
-              |  G  |                                           |
-              |  a  |                                           |
-              |  t  |                                           |
-+-------+     |  e  |      +------------+      +-------------+  |
-|   App | (1) |  w  | (2)  |            |  (4) |             |  |
-| Client+---->|  a  +----->| workload 1 +----->|  workload 2 |  |
-+-------+ (a) |  y  | (c)  |            |  (c) |             |  |
-              |     |      +-+---------++      +^----^----+--+  |
-              |  S  |        |                  |    |    |     |
-              |  e  |     (3)|            (5)(c)|(t) |    |     |
-              |  r  |        |                  |    |    |     |
-              |  v  |        |       +-+--------v+   |    |     |
-              |  i  |        |       |   Token   |   |    |     |
-              |  c  |        |       |           |   | (7)|(a)  |
-              |  e  |        |       |  Service  |   |    |     |
-              |     |        |       +-----------+   |    |     |
-              +--+--+        |                       |    |     |
-                 |           |                       |    |     |
-                 |           |                 (6)(t)|(a) |     |
-                 |           |                       |    |     |
-                 +-----------+-----------------------+----+-----+
-                             |                       |    |
-                             |             +-+-------V-+  |
-                             |             |  External |  |
-                             |             |   Token   |  |
-                             |             |  Service  |  |
-                             |             +-----------+  |
-                             |                            |
-                     +-------v--------+     +-------------v-+
-                     | Infrastructure |     |    External   |
-                     |                |     |               |
-                     |    Service     |     |    Service    |
-                     +----------------+     +---------------+
-
+                  +---------------------------Trust Boundary------+
+                  |                                               |
+              .---+-.                                             |
+              | .---+-.                                           |
+              | |     |                                           |
+              | |  G  |                                           |
+              | |  a  |                                           |
+              | |  t  |                                           |
++-------+     | |  e  |      +------------+      +-------------+  |
+|   App | (1) | |  w  | (2)  |            |  (4) |             |  |
+| Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
++-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
+              | |     |      +-+---------++      +^----^-------+  |
+              | |  S  |        |                  |    |    |     |
+              | |  e  |     (3)|            (5)(c)|(t) |    |     |
+              | |  r  |        |                  |    |    |     |
+              | |  v  |        |       +-+--------v+   |    |     |
+              | |  i  |        |       |   Token   |   |    |     |
+              | |  c  |        |       |           |   | (7)|(a)  |
+              | |  e  |        |       |  Service  |   |    |     |
+              '-+     |        |       +-----------+   |    |     |
+                '-+---'        |                       |    |     |
+                  |            |                       |    |     |
+                  |            |                 (6)(t)|(a) |     |
+                  |            |                       |    |     |
+                  +------------+-----------------------+----+-----+
+                               |                       |    |
+                               |             +-+-------V-+  |
+                               |             |  External |  |
+                               |             |   Token   |  |
+                               |             |  Service  |  |
+                               |             +-----------+  |
+                               |                            |
+                     +---------v------+     +---------------v-+
+                     | Infrastructure |     |     External    |
+                     |                |     |                 |
+                     |    Service     |     |     Service     |
+                     +----------------+     +-----------------+
 ~~~~
 {: #arch-cross title="External request workload application system."}
 
@@ -407,11 +407,14 @@ How the workload obtains its identity credentials and interacts with the agent i
 
 One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in {{authorization}} and generate audit trails as described in {{audit-trails}}.
 
-Authentication mechanisms are used to establish the identity of the peer workload. There are several methods defined to perform service-to-service authentication. The most common mechanisms include:
+Authentication mechanisms are used to establish the identity of the peer workload before secure communication can proceed.
 
-* TLS authentication of the server using X.509 certificates and client bearer token, encoded as JWTs.
-* Mutual TLS authentication using X.509 certificate for both client and server.
-* TLS authentication of the server and HTTP request signing using a secret key.
+Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in {{Section 3 of ?I-D.ietf-wimse-workload-identity-practices}}.
+
+Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:
+
+* Mutual TLS authentication using X.509 certificate for both client and server as described in {{Section 4 of I-D.ietf-wimse-s2s-protocol}}.
+* Application level authentication using cryptographic credentials passed within HTTP message as described in {{Section 3 of I-D.ietf-wimse-s2s-protocol}}.
 
 These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.
 
@@ -459,6 +462,8 @@ Authorization decisions typically include:
 * Applying fine-grained policy rules, which may include path, method, action type, and contextual constraints (e.g., geographic location, time of day).
 
 Authorization checks may also incorporate delegation and impersonation semantics, as described in {{delegation}}, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.
+
+A key architectural consideration is where authorization is evaluated. For most workload-to-workload interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization MAY be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.
 
 ### Audit Trails {#audit-trails}
 
@@ -517,6 +522,28 @@ A security gateway implementing Identity Proxy functionality at the edge of a tr
 #### Inbound Gateway Identity Validation
 
 Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification of inbound requests should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.
+
+### AI and ML-Based Intermediaries
+
+Emerging agentic AI systems and other ML-based intermediaries introduce new considerations for workload identity and security context propagation. These systems often act as autonomous agents that perform tasks on behalf of an upstream principal (such as a user or service) and then invoke downstream workloads as part of multi-step workflows.
+
+From WIMSE perspective, AI intermediaries are a special case of delegated workloads (see {{delegation}}). They inherit the upstream principal's security context and are expected to operate strictly within the constraints of that delegation. When invoking downstream workloads, the agent SHOULD propagate the upstream security context, unless it has been explicitly authorized to translate or reduce its scope.
+
+In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes. Because AI intermediaries may chain requests across multiple services, there is an elevated risk of privilege escalation if security context is propagated beyond the intended trust domain. Mechanisms such as cryptographic binding of delegation tokens or attestation of intermediary behavior can help mitigate these risks.
+
+A further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain MUST explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.
+
+~~~aasvg
+   +---------+        +-------------+        +-------------+        +-------------+
+   |  User / +------->|  AI Agent   +------->|  AI Agent   +------->|  Workload   |
+   | Service |        |  (Agent A)  |        |  (Agent B)  |        |  Downstream |
+   +---------+        +-------------+        +-------------+        +-------------+
+        |                    |                      |                      |
+        |     Initial        |  Delegated / Scoped  |  Delegated / Scoped  |
+        | Security Context   |   Security context   |   Security context   |
+        +------------------->+--------------------->+--------------------->|
+~~~~
+{: #arch-ai title="AI agent communication"}
 
 # Security Considerations
 
