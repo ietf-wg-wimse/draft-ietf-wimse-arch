@@ -282,7 +282,7 @@ The workload may need to make requests of other workloads. When making these req
 |   App | (1) | |  w  | (2)  |            |  (4) |             |  |
 | Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
 +-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
-              | |     |      +-+---------++      +^----^-------+  |
+              | |     |      +-+----------+      +^----^----+--+  |
               | |  S  |        |                  |    |    |     |
               | |  e  |     (3)|            (5)(c)|(t) |    |     |
               | |  r  |        |                  |    |    |     |
@@ -573,3 +573,12 @@ This document has no IANA actions.
 {:numbered="false"}
 
 Todo: Add your name here.
+
+# Changes since draft -05
+{:numbered="false"}
+
+* Update to gateway service definition and diagram
+* alignment of cross-domain scenario with OAUTH cross-domain chaining
+* rework of authentication section
+* added audit section
+* added AI use case
