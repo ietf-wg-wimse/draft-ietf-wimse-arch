@@ -101,6 +101,7 @@ Table of Contents
      6.1.  Normative References
      6.2.  Informative References
    Acknowledgments
+   Changes since draft -05
    Authors' Addresses
 
 1.  Introduction
@@ -543,7 +544,7 @@ Table of Contents
    |   App | (1) | |  w  | (2)  |            |  (4) |             |  |
    | Client+---->| |  a  +----->| workload 1 +----->|  workload 2 |  |
    +-------+ (a) | |  y  | (c)  |            |  (c) |             |  |
-                 | |     |      +-+---------++      +^----^-------+  |
+                 | |     |      +-+----------+      +^----^----+--+  |
                  | |  S  |        |                  |    |    |     |
                  | |  e  |     (3)|            (5)(c)|(t) |    |     |
                  | |  r  |        |                  |    |    |     |
@@ -1167,6 +1168,19 @@ Table of Contents
 Acknowledgments
 
    Todo: Add your name here.
+
+Changes since draft -05
+
+   *  Update to gateway service definition and diagram
+
+   *  alignment of cross-domain scenario with OAUTH cross-domain
+      chaining
+
+   *  rework of authentication section
+
+   *  added audit section
+
+   *  added AI use case
 
 Authors' Addresses
 
