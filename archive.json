@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-16T01:52:42.497594+00:00",
+  "timestamp": "2025-10-02T01:53:14.954089+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -889,10 +889,12 @@
       "assignees": [
         "yaroslavros"
       ],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-09-08T22:24:53Z",
+      "updatedAt": "2025-09-30T15:13:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -1273,10 +1275,12 @@
       "assignees": [
         "jsalowey"
       ],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "The document states in section 3.1.3 the following:\n```\nBoth X.509 certificate and workload identity token credentials consist of two parts:\n* a certificate or WIT is a signed data structure that contains a public key and identity information\n* a corresponding private key\n```\nThese Workload Identity Credentials (WIC) are effectively based on a key pair which has to be managed by the workloads themselves or the infrastructure/platform. All key material must be rotated and stored securely, which means that these key pairs have these considerations. The document doesn't mention this.\n\nThe workload could generate a new key pair for each single request but that is suboptimal. The document should provide some mention or guidelines on how often the workload (or platform) should rotate the certificates or the WIT/WPT key pair.\n",
       "createdAt": "2025-05-05T22:09:55Z",
-      "updatedAt": "2025-05-27T15:46:18Z",
+      "updatedAt": "2025-09-30T15:12:42Z",
       "closedAt": null,
       "comments": []
     },
@@ -1353,7 +1357,7 @@
       "id": "I_kwDOLPTb0M7JQNTc",
       "title": "Agentic AI / LLM security context propagation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/93",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1363,8 +1367,8 @@
       "labels": [],
       "body": "We should have a use case focused on propagation of security context by agentic AI agents and other ML based intermediaries.",
       "createdAt": "2025-09-02T15:16:40Z",
-      "updatedAt": "2025-09-02T15:16:40Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-30T15:08:16Z",
+      "closedAt": "2025-09-30T15:08:16Z",
       "comments": []
     },
     {
@@ -1378,10 +1382,12 @@
       "assignees": [
         "jsalowey"
       ],
-      "labels": [],
+      "labels": [
+        "Interim-topic"
+      ],
       "body": "Transaction Tokens uses the term External Endpoint:\n: A published interface to a Trust Domain that results in the invocation of a workload within the Trust Domain.\n\nWhich performs a similar function as the gateway service and identity proxy defined in this document.\n\nWe should provide some alignment or mapping of the terminology",
       "createdAt": "2025-09-08T01:36:20Z",
-      "updatedAt": "2025-09-15T14:33:34Z",
+      "updatedAt": "2025-09-30T15:12:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -4079,24 +4085,26 @@
       "id": "PR_kwDOLPTb0M6nStbK",
       "title": "revising cross domain section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/95",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is to address issue #63  and issue #50 ",
       "createdAt": "2025-09-08T03:28:51Z",
-      "updatedAt": "2025-09-09T15:16:55Z",
+      "updatedAt": "2025-10-01T01:28:31Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
+      "baseRefOid": "519717f70d15e41bd83988fe471dc285b079c66b",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "cross-domain",
-      "headRefOid": "1e8b312588e1f8a8dc3767073cb34447262cc4c0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "31a06e1b20f2d24c995ba6580edf0e55156b6650",
+      "closedAt": "2025-10-01T01:28:31Z",
+      "mergedAt": "2025-10-01T01:28:31Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "bee588ca986923370698ec24c6286434883679a8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4267,7 +4275,7 @@
       "id": "PR_kwDOLPTb0M6njqVw",
       "title": "Initial AI and ML-Based Intermediaries text",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/100",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -4276,17 +4284,19 @@
       ],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/93",
       "createdAt": "2025-09-09T09:15:32Z",
-      "updatedAt": "2025-09-09T15:38:38Z",
+      "updatedAt": "2025-09-30T15:06:54Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "181ee85615c4eccdb348583f53205be2b20d30b2",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "ai-ai",
       "headRefOid": "4dd749a03cf2d97f9b4d4c584f160975eb06396c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-30T15:06:54Z",
+      "mergedAt": "2025-09-30T15:06:54Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "519717f70d15e41bd83988fe471dc285b079c66b"
+      },
       "comments": [],
       "reviews": []
     }
