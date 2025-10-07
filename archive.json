@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T01:53:14.954089+00:00",
+  "timestamp": "2025-10-07T01:53:50.912233+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -719,7 +719,7 @@
       "id": "I_kwDOLPTb0M6lSwvQ",
       "title": "Cross domain",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -730,8 +730,8 @@
       ],
       "body": "The cross domain section only shows one token service.  There may be an additional token service external to the trust boundary. \r\n\r\nAlso should reference Identity chaining work. ",
       "createdAt": "2025-01-07T15:45:25Z",
-      "updatedAt": "2025-09-08T03:29:21Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-05T20:30:35Z",
+      "closedAt": "2025-10-05T20:30:35Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1073,7 +1073,7 @@
       "id": "I_kwDOLPTb0M6lUjM3",
       "title": "Cross-boundary Workload Identity -> Cross-Domain Workload Identity and Authorization Chaining",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/63",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1084,8 +1084,8 @@
       ],
       "body": "Consider casting this as cross domain chaining - should make it easier to align with the cross domain identity chaining and authorization spec.",
       "createdAt": "2025-01-07T19:56:53Z",
-      "updatedAt": "2025-09-08T03:30:15Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-05T20:30:02Z",
+      "closedAt": "2025-10-05T20:30:02Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1398,6 +1398,86 @@
           "updatedAt": "2025-09-15T14:32:53Z"
         }
       ]
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOLPTb0M7P_nsq",
+      "title": "Should workload identifier only have meaning within scope of a specific issuer ?",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/101",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L111\n\nI'm not sure I agree with this. If you trust both issuers, then they should refer to the same workload. Conversely, if you don't trust both, then you should only accept the identity claimed by the one you trust. Regardless, I'm not clear on whether the intent here is to allow for a third-party issuer to provide identity credentials for a given trust domain. I believe this should be allowed. Either way, the text should clarify this. ",
+      "createdAt": "2025-10-07T00:43:14Z",
+      "updatedAt": "2025-10-07T00:43:14Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 102,
+      "id": "I_kwDOLPTb0M7P_sk2",
+      "title": "Clarify workload instances, services and applications throughout",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/102",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is related to #42 \n\nThe document explicitly defines workloads as \"a running instance of software...\". This is probably ok as long as it is understood that there is also a need to refer to more than one such instance in some cases. The document alludes to this concept in several places, e.g. \n- Section 3.2.1, refers to an \"application system\" and \"workload application\", however this is never defined further\n- Section 3.2.2 mentions a \"service identity\" \n- Section 3.3.2 and 3.3.3 talk about \"Service Authentication\" and \"Service Authorization\"\n- Section 3.3.4 mentions \"workloads and services\"\n\nThere is a need to clearly articulate the difference between referring to a single workload instance versus multiple instances of a given service. The service authentication and authorization sections in particular need to be clear on this distinction. \n\nIf there is general agreement on this need, then I'll be happy to provide a PR with suggested updates. \n\n\n",
+      "createdAt": "2025-10-07T01:00:35Z",
+      "updatedAt": "2025-10-07T01:00:35Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 103,
+      "id": "I_kwDOLPTb0M7P_t3L",
+      "title": "Infrastructure service inside or outside of trust domain ?",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/103",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L331\n\nShouldn't the infrastructure service then be shown inside the Trust Boundary in \"Figure 3: External request workload application system\" ? ",
+      "createdAt": "2025-10-07T01:04:19Z",
+      "updatedAt": "2025-10-07T01:04:19Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 104,
+      "id": "I_kwDOLPTb0M7P_vdc",
+      "title": "Log access tokens ?",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/104",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L474\n\nIt says Gateway Services log access tokens, but later in the section, it says that \"logs MUST NOT log secrets such as bearer tokens...\" (which seems correct). To avoid confusion, we should not list access tokens as being logged in Gateway Services. ",
+      "createdAt": "2025-10-07T01:09:25Z",
+      "updatedAt": "2025-10-07T01:09:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 105,
+      "id": "I_kwDOLPTb0M7P_w2d",
+      "title": "Duplicate Service Authorization section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/105",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L496\n\nSection 3.3.6 (Service Authorization) seems like it effectively duplicates Section 3.3.3 (Service Authorization) and hence can be removed. If so, Section 3.3.5 (Security Context Establishment and Propagation) should be moved up as well (between Service Authentication and Service Authorization) ",
+      "createdAt": "2025-10-07T01:13:26Z",
+      "updatedAt": "2025-10-07T01:13:26Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
