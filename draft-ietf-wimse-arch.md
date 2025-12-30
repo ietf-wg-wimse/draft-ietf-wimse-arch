@@ -72,9 +72,9 @@ A security context provides information needed for a workload to perform its fun
 
 Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. Identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
 
-* Remote Attestation
+* Attestation
 
-The term "attestation", as defined in {{?RFC9683}}, refers to the process of generating and evaluating remote attestation Evidence. {{!RFC9334}} describes Evidence and the different communication patterns.
+The term "attestation" refers to the process of one peer in a communication (known as an "attester") generating attestation evidence, and providing that to a communication peer -- the "relying party", who may request verification of the supplied evidence from a "verifier". {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while compatible with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation, or any specific communication protocol.
 
 * Workload Identity Credential
 
