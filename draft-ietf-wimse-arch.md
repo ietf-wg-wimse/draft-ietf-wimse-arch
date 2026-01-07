@@ -74,7 +74,7 @@ Identity proxy is an intermediary that can inspect, replace or augment workload 
 
 * Attestation
 
-The term "attestation" refers to the process of one peer in a communication (known as an "attester") generating attestation evidence, and providing that to a communication peer -- the "relying party", who may request verification of the supplied evidence from a "verifier". {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while compatible with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation, or any specific communication protocol.
+The term "attestation" refers to the process of one peer in a communication (known as an "attester") generating attestation evidence, and providing that to a communication peer -- the "relying party", who may request verification of the supplied evidence from a "verifier". {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while aligned with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation, or any specific communication protocol.
 
 * Workload Identity Credential
 
