@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-11T02:32:03.528993+00:00",
+  "timestamp": "2026-01-18T02:30:30.165425+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -4606,13 +4606,13 @@
       "labels": [],
       "body": "See discussion in https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/",
       "createdAt": "2025-12-30T19:29:13Z",
-      "updatedAt": "2026-01-08T12:20:50Z",
+      "updatedAt": "2026-01-16T18:29:52Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
       "headRepository": "frumioj/wimse-arch",
       "headRefName": "patch-2",
-      "headRefOid": "8121e19b469a74008104500af7efe86b993ca06a",
+      "headRefOid": "c353fe094e422fa746b2669c93d6f5b2c9fa4ccc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4772,6 +4772,126 @@
               "updatedAt": "2026-01-08T12:24:08Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7aYwdK",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T04:31:01Z",
+          "updatedAt": "2026-01-15T04:31:01Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I think this is going in the right direction.  There are a lot of similarities between the two ideas.  I think it would be useful to reference SPIRE's idea of attestation here because there will be a portion of the readers of the document that are familiar with the concept. \r\nLike saying something like:\r\nSPIRE [https://spiffe.io/docs/latest/spire-about/spire-concepts/] provides an example outside the RATS protocol work where an attestation process resulting in credentials being provisioned to workloads and the nodes that host them.  ",
+              "createdAt": "2026-01-15T04:31:01Z",
+              "updatedAt": "2026-01-15T04:31:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7aov1u",
+          "commit": {
+            "abbreviatedOid": "8121e19"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T23:40:22Z",
+          "updatedAt": "2026-01-15T23:40:23Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nThe term \"attestation\" refers to the process of one peer in a communication (known as an \"attester\") generating attestation evidence, and providing that to a communication peer -- the \"relying party\", who may request verification of the supplied evidence from a \"verifier\". {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while aligned with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation. Specifically, in WIMSE, it can be software-based attestation as well.\r\n```",
+              "createdAt": "2026-01-15T23:40:22Z",
+              "updatedAt": "2026-01-16T00:26:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7a4BaY",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "frumioj",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-16T18:09:01Z",
+          "updatedAt": "2026-01-16T18:09:01Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Thanks for the additional information @arndt-s. In later sections of the document we describe the use of workload and node attestation, which aligns with the SPIRE concepts you describe. Based on this discussion though, I'm not seeing that I need to make further changes to _this_ PR? Would you agree?",
+              "createdAt": "2026-01-16T18:09:01Z",
+              "updatedAt": "2026-01-16T18:09:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7a4HDa",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "frumioj",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-16T18:15:56Z",
+          "updatedAt": "2026-01-16T18:15:56Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Thanks @jsalowey that is helpful, and I've committed a slightly-edited version of your suggestion in this PR.",
+              "createdAt": "2026-01-16T18:15:56Z",
+              "updatedAt": "2026-01-16T18:15:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7a4Ksw",
+          "commit": {
+            "abbreviatedOid": "8121e19"
+          },
+          "author": "frumioj",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-16T18:20:09Z",
+          "updatedAt": "2026-01-16T18:20:09Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Thanks @muhammad-usama-sardar. I'm happy to remove \", or any specific communication protocol\" since I can see that might be redundant. \r\n\r\nCan you explain why this specific callout to allow \"software-based attestation\" is needed, when my original text already didn't preclude it? ",
+              "createdAt": "2026-01-16T18:20:09Z",
+              "updatedAt": "2026-01-16T18:20:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7a4SMT",
+          "commit": {
+            "abbreviatedOid": "8121e19"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-16T18:29:52Z",
+          "updatedAt": "2026-01-16T18:29:52Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I don't see why my email did not land in WIMSE, but here is a copy explaining the change https://mailarchive.ietf.org/arch/msg/seat/aYX5gcPvOjwDBXvankYyaf9KFm4/",
+              "createdAt": "2026-01-16T18:29:52Z",
+              "updatedAt": "2026-01-16T18:29:52Z"
+            }
+          ]
         }
       ]
     },
@@ -4800,6 +4920,54 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 113,
+      "id": "PR_kwDOLPTb0M69fY9F",
+      "title": "Security Consideration for Attestation",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/113",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "- Sec consideration of attestation\r\n- Sec consideration of attestation with TLS\r\n\r\nBackground: https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/\r\n\r\nAdditional background:https://datatracker.ietf.org/doc/draft-usama-seat-intra-vs-post/\r\n\r\nTechnical details: https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS",
+      "createdAt": "2026-01-15T23:02:54Z",
+      "updatedAt": "2026-01-16T23:41:06Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
+      "headRepository": "muhammad-usama-sardar/draft-ietf-wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "c022bd858a5bc61f76627710c17948790e435212",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "With due respect, I don't believe there is any hyping. It has been evaluated at a top security conference. [TEE.fail](https://tee.fail/), [Wiretap.fail](https://wiretap.fail/), and [BadRAM](https://badram.eu/) have practically exploited and demostrated identity crisis.",
+          "createdAt": "2026-01-16T23:41:06Z",
+          "updatedAt": "2026-01-16T23:41:06Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7a16rV",
+          "commit": {
+            "abbreviatedOid": "c022bd8"
+          },
+          "author": "paulwouters",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "I do not believe this PR should be merged, especially with the hyping of there being an \"identity crises\" and with respect to pre-empting the SEAT WG work here by laying down various claims about the different types of attestation solutions that do not have consensus in the SEAT WG.",
+          "createdAt": "2026-01-16T15:55:28Z",
+          "updatedAt": "2026-01-16T15:55:28Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
