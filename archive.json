@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-18T02:30:30.165425+00:00",
+  "timestamp": "2026-01-20T02:22:43.142294+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -4606,7 +4606,7 @@
       "labels": [],
       "body": "See discussion in https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/",
       "createdAt": "2025-12-30T19:29:13Z",
-      "updatedAt": "2026-01-16T18:29:52Z",
+      "updatedAt": "2026-01-19T14:09:38Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
@@ -4892,6 +4892,46 @@
               "updatedAt": "2026-01-16T18:29:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7bLlzk",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "arndt-s",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-19T09:57:03Z",
+          "updatedAt": "2026-01-19T09:57:03Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I'm still unsure about the first sentence. \r\n\r\n> \"The term \"attestation\" refers to the process of one peer in a communication (known as an \"attester\") generating attestation evidence, and providing that to a communication peer\"\r\n\r\nThat's not the case in SPIFFE and only the case in SPIRE node attestation. If we want to cover SPIFFE we need to rephrase it in a way that doesn't require the workload to provide evidence to SPIFFE.",
+              "createdAt": "2026-01-19T09:57:03Z",
+              "updatedAt": "2026-01-19T09:57:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7bPfs4",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "frumioj",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-19T14:09:37Z",
+          "updatedAt": "2026-01-19T14:09:38Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Yes, I think I see your point - that the process is different for what is called \"workload attestation\"?\r\n\r\nOne peer (the underlying platform) generates attestation evidence (PID, process tree etc) and provides that to the agent, which uses that evidence to evaluate whether it should trust the workload. \r\n\r\nI still feel like attestation is going on, exactly as written (one peer generating attestation evidence, etc.) but \"workload attestation\" is not the correct way to describe that, because the workload is not attesting in this way, it is simply making a request, which the agent asks the underlying platform to attest. \r\n\r\nIs that a fair summary of your concern here @arndt-s ?\r\n",
+              "createdAt": "2026-01-19T14:09:37Z",
+              "updatedAt": "2026-01-19T14:09:38Z"
+            }
+          ]
         }
       ]
     },
@@ -4933,7 +4973,7 @@
       "labels": [],
       "body": "- Sec consideration of attestation\r\n- Sec consideration of attestation with TLS\r\n\r\nBackground: https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/\r\n\r\nAdditional background:https://datatracker.ietf.org/doc/draft-usama-seat-intra-vs-post/\r\n\r\nTechnical details: https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS",
       "createdAt": "2026-01-15T23:02:54Z",
-      "updatedAt": "2026-01-16T23:41:06Z",
+      "updatedAt": "2026-01-19T10:04:03Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
@@ -4965,6 +5005,19 @@
           "body": "I do not believe this PR should be merged, especially with the hyping of there being an \"identity crises\" and with respect to pre-empting the SEAT WG work here by laying down various claims about the different types of attestation solutions that do not have consensus in the SEAT WG.",
           "createdAt": "2026-01-16T15:55:28Z",
           "updatedAt": "2026-01-16T15:55:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7bLtQi",
+          "commit": {
+            "abbreviatedOid": "c022bd8"
+          },
+          "author": "arndt-s",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I believe this to be too detailed for a high-level architecture. If we're worried about security considerations of TLS I think we should add generic wording like \"Security considerations of TLS apply\" - but not reference specifics.",
+          "createdAt": "2026-01-19T10:03:48Z",
+          "updatedAt": "2026-01-19T10:04:03Z",
           "comments": []
         }
       ]
