@@ -35,6 +35,17 @@ author:
 
 normative:
 informative:
+   SPIFFE:
+     title: Secure Production Identity Framework for Everyone (SPIFFE)
+     target: https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE.md
+     date: 10 May 2023
+   SPIFFE-ID:
+     title: The SPIFFE Identity and Verifiable Identity Document
+     target: https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md
+     date: 21 May 2025
+   SPIRE:
+     title: SPIRE Concepts
+     target: https://spiffe.io/docs/latest/spire-about/spire-concepts/
 
 --- abstract
 
@@ -104,7 +115,7 @@ The WIMSE architecture defines a workload identifier as a URI {{!RFC3986}}. This
 >   encoding rules specified in {{!RFC3986}}.  The name MUST include both a
 >   scheme and a scheme-specific-part.
 
-In addition the URI MUST include an authority that identifies the trust domain within which the identifier is scoped. The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is [SPIFFE ID](https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
+In addition the URI MUST include an authority that identifies the trust domain within which the identifier is scoped. The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is {{SPIFFE-ID}}.
 
 While IP addresses are allowed as host names in the URI encoding rules, they MUST NOT be used to represent trust domains except in the case where they are needed for compatibility with legacy naming schemes.
 
@@ -344,27 +355,19 @@ There can be variations on cross domain workflows. For example, in step 3 the wo
 
 ### Bootstrapping Workload Identifiers and Credentials
 
-A workload needs to obtain its identifier and associated credentials early in its lifecycle. It also needs to learn what trust domain it belongs to. The identifier, trust domain and credentials forms the basis from which further credentials, attributes, identifiers and security context are derived.
+Workloads need to obtain credentials before they can fully participate in the WIMSE architecture. The architecture does not specify a particular method for credential provisioning, but this section outlines some concepts involved in this process. WIMSE focuses on credentials that consist of a public token and a private key such as X.509 certificate and Workload Identity Token (WIT). This list is not exhaustive of all the ways provisioning can happen.
 
-Identifier and credential bootstrapping often utilizes attribute information
-provisioned through mechanisms specific to hosting platforms and
-orchestration services. This initial bootstrapping information is
-used to issue specific credentials for a workload. This
-process may use attestation to ensure the workload receives the
-correct identity credentials. An example of a bootstrapping process
-follows.
+* Direct Provisioning - A workload may receive its WIMSE credential when it is initially created. This is typically done using a deployment-specific mechanism that configures both the private and public portions of the credential for the workload. In direct provisioning the workload does not need to go through additional processes to obtain credentials and the credentials can be used immediately, whereas in the other cases more interactions are needed to obtain usable credentials.
 
-{{arch-fig}} provides an example of software layering at a host running
-workloads. During startup, workloads bootstrap their identifiers and credentials with
-the help of an agent. The agent may be associated with one or more
-workloads to help ensure that workloads are provisioned with the
-correct identifiers and credentials. The agent provides attestation evidence and other
-relevant information to a server. The server validates this
-information and provides the agent with identifiers and credentials for the
-workloads it is associated with. The server can use a variety of
-internal and external means to validate the request against policy.
-After obtaining credentials from the server, the agent
-passes them to the workload.
+* Bootstrap Credentials - A workload may receive a set of bootstrap credentials specific to its deployment mechanism, which are then used by the workload through another process to obtain WIMSE credentials. The workload may use the bootstrap credentials to obtain the private and public parts of the WIMSE credentials, or the workload may generate a private key pair and use the bootstrap credential to authorize an enrollment process to obtain the public credential (X.509 certificate or WIT). {{I-D.ietf-wimse-workload-identity-practices}} describes some ways workloads can be initially providioned with bootstrap credentials.
+
+* Attestation - A workload credential provisioning process may use attestation in addition to or instead of bootstrap credentials. Attestation refers to the process of one peer in a communication (known as an "attester") generating attestation evidence, and providing that to a communication peer -- the "relying party", who may request verification of the supplied evidence from a "verifier". The Remote ATtestation procedureS (RATS) Architecture {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while aligned with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation, or any specific communication protocol.  {{SPIRE}} provides an example outside of the RATS protocol work where attestation processes result in credentials being provisioned both to workloads, and the nodes that host them.
+
+* Agent Assisted Provisioning - In some architectures, several workloads run on the same node that hosts an agent that assists in the credential provisioning process. The example below illustrates one way in which an agent can participate in the process, reflecting some concepts in the SPIFFE architecture. There are other ways an agent may participate. For example, the agent may not receive direct access to the workload private key but it may be the conduit for providing an encrypted private key which the workload can decrypt through a process that may involve attestation.
+
+#### Agent Assisted Provisioning Example
+
+{{arch-fig}} illustrates software layering at a host running workloads. During startup, workloads bootstrap their identifiers and credentials with the help of an agent. The agent may be associated with one or more workloads to help ensure that workloads are provisioned with the correct identifiers and credentials. The agent provides attestation evidence and other relevant information to a server. The server validates this information and provides the agent with identifiers and credentials for the workloads it is associated with. The server can use a variety of internal and external means to validate the request against policy. After obtaining credentials from the server, the agent passes them to the workload.
 
 ~~~aasvg
   +-----------------+
@@ -397,11 +400,12 @@ passes them to the workload.
 ~~~~
 {: #arch-fig title="Host Software Layering in a Workload Identity Architecture."}
 
+
 How the workload obtains its identity credentials and interacts with the agent is subject to different implementations. Some common mechanisms for obtaining this initial identity include:
 
-* File System - in this mechanism the identity credential is provisioned to the workload via the filesystem.
-* Local API - the identity credential is provided through an API, such as a local domain socket (for example SPIFFE or QEMU guest agent) or network API (for example Cloud Provider Metadata Server).
-* Environment Variables - identity credential may also be injected into workloads using operating system environment variables.
+* File System - In this mechanism, the identity credential is provisioned to the workload via the filesystem.
+* Local API - The identity credential is provided through an API, such as a local domain socket (for example, SPIFFE or QEMU guest agent) or network API (for example, Cloud Provider Metadata Server).
+* Environment Variables - Identity credentials may also be injected into workloads using operating system environment variables.
 
 ### Service Authentication
 
