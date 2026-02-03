@@ -422,10 +422,10 @@ Table of Contents
    the Workload Identity Credentials are workload identity certificates
    then this can happen through TLS client authentication (mutual TLS).
    Alternatively, the workloads can use a JWT based authentication
-   mechanism to authenticate on another.  Workload three can use the
+   mechanism to authenticate one another.  Workload 3 can use the
    authenticated identity of workload 1 to determine which APIs workload
-   1 is authorized 2 and to associated the authenticated identity with
-   logs and other audit information.
+   1 is authorized to invoke, and to associated the authenticated
+   identity with logs and other audit information.
 
    *  (4) API request to workload 2
 
