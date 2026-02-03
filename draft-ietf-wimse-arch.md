@@ -62,7 +62,7 @@ This document uses the following terms:
 
 * Workload
 
-A workload is a running instance of software executing for a specific purpose. Workload typically interacts with other parts of a larger system. A workload may exist for a very short duration of time (fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs.
+A workload is an independently addressable and executable software entity. This may include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. Workload typically interacts with other parts of a larger system. A workload may exist for a very short duration of time (fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs.
 
 * Security Context
 
