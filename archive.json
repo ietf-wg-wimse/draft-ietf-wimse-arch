@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-20T02:22:43.142294+00:00",
+  "timestamp": "2026-02-03T02:48:56.448936+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -4606,7 +4606,7 @@
       "labels": [],
       "body": "See discussion in https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/",
       "createdAt": "2025-12-30T19:29:13Z",
-      "updatedAt": "2026-01-19T14:09:38Z",
+      "updatedAt": "2026-02-01T23:26:57Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
@@ -4932,6 +4932,26 @@
               "updatedAt": "2026-01-19T14:09:38Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7eu2qx",
+          "commit": {
+            "abbreviatedOid": "8862c83"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-01T23:26:57Z",
+          "updatedAt": "2026-02-01T23:26:57Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I created a PR #114 that incorporates the prosed text and some other concepts to the bootstrap section. ",
+              "createdAt": "2026-02-01T23:26:57Z",
+              "updatedAt": "2026-02-01T23:26:57Z"
+            }
+          ]
         }
       ]
     },
@@ -5021,6 +5041,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 114,
+      "id": "PR_kwDOLPTb0M7AxpGC",
+      "title": "Update to Bootstrapping Workload Identifiers and Credentials section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/114",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "jsalowey"
+      ],
+      "labels": [],
+      "body": "The PR provides a little more background to discuss several concepts involved in provisioning credentials to the workload.  It incorporates the suggestion from attestation in #111 and add a bit more. \r\n\r\n@arndt-s @frumioj ",
+      "createdAt": "2026-02-01T23:23:12Z",
+      "updatedAt": "2026-02-01T23:25:18Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "cred-provisioning",
+      "headRefOid": "93b925ce40a780688d21e3b48ff835437ef80316",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
