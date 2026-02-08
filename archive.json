@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-05T02:45:56.933321+00:00",
+  "timestamp": "2026-02-08T03:25:51.325913+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -5062,7 +5062,7 @@
       "labels": [],
       "body": "The PR provides a little more background to discuss several concepts involved in provisioning credentials to the workload.  It incorporates the suggestion from attestation in #111 and add a bit more. \r\n\r\n@arndt-s @frumioj ",
       "createdAt": "2026-02-01T23:23:12Z",
-      "updatedAt": "2026-02-01T23:25:18Z",
+      "updatedAt": "2026-02-05T20:40:39Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
@@ -5074,7 +5074,81 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7gD4ic",
+          "commit": {
+            "abbreviatedOid": "93b925c"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T19:52:38Z",
+          "updatedAt": "2026-02-05T19:52:39Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Is it wise to conflate configuration (who you trust) with credential acquisition (how a workload goes about figuring out which credentials to use)?",
+              "createdAt": "2026-02-05T19:52:38Z",
+              "updatedAt": "2026-02-05T19:52:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7gEAjT",
+          "commit": {
+            "abbreviatedOid": "93b925c"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T19:58:15Z",
+          "updatedAt": "2026-02-05T19:58:15Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "This paragraph appears to conflate \"credential\" (public) with \"proof of possession key\" of the credential (the only thing that must be encrypted).",
+              "createdAt": "2026-02-05T19:58:15Z",
+              "updatedAt": "2026-02-05T19:58:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7gEEF1",
+          "commit": {
+            "abbreviatedOid": "93b925c"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T20:01:20Z",
+          "updatedAt": "2026-02-05T20:01:20Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "Here you might want to mention the key distinction between this mechanism and the one that follows: when the credentials are given to the workload, it starts using them right away. In the next mechanism the workload needs to perform some tasks first.",
+              "createdAt": "2026-02-05T20:01:20Z",
+              "updatedAt": "2026-02-05T20:01:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7gEvqe",
+          "commit": {
+            "abbreviatedOid": "93b925c"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Much needed write-up!",
+          "createdAt": "2026-02-05T20:40:39Z",
+          "updatedAt": "2026-02-05T20:40:39Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
