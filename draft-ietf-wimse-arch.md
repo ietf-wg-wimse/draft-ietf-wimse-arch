@@ -471,7 +471,7 @@ Auditability is a critical requirement in systems that rely on workload identiti
 
 Audit trails are typically generated at multiple points:
 
-* Gateway Services: Log incoming client requests and their authenticated identities, including access tokens or client certificates used.
+* Gateway Services: Log incoming client requests, their authenticated identities and relevant context.
 * Workloads: Log authenticated peer identities, security context attributes, requested resources, and authorization outcomes.
 * Identity and Token Services: Log issuance and validation events for workload identity credentials and context tokens.
 
