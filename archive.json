@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-22T02:52:34.853200+00:00",
+  "timestamp": "2026-02-24T02:49:31.152627+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -5062,7 +5062,7 @@
       "labels": [],
       "body": "The PR provides a little more background to discuss several concepts involved in provisioning credentials to the workload.  It incorporates the suggestion from attestation in #111 and add a bit more. \r\n\r\n@arndt-s @frumioj ",
       "createdAt": "2026-02-01T23:23:12Z",
-      "updatedAt": "2026-02-22T02:40:28Z",
+      "updatedAt": "2026-02-23T14:23:10Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
@@ -5207,6 +5207,38 @@
               "updatedAt": "2026-02-22T02:40:28Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7k9bgr",
+          "commit": {
+            "abbreviatedOid": "d85247b"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "A few more comments on the write-up.",
+          "createdAt": "2026-02-23T14:17:15Z",
+          "updatedAt": "2026-02-23T14:23:10Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "Typo: proviDioned -> proviSioned",
+              "createdAt": "2026-02-23T14:17:15Z",
+              "updatedAt": "2026-02-23T14:23:10Z"
+            },
+            {
+              "originalPosition": 140,
+              "body": "Attestation is a term that often refers to an entity attesting some statements about itself. Here I think a better term to use is Remote Attestation, which would (appropriately) tie it more closely to RATS. In either case, (self-)attestation and remote attestation should be covered separately as they share little in common.",
+              "createdAt": "2026-02-23T14:18:38Z",
+              "updatedAt": "2026-02-23T14:23:10Z"
+            },
+            {
+              "originalPosition": 140,
+              "body": "Additionally the way you describe attestation here is the RATS background check model. While it has its place, all evidence points to the other model -- Passport -- being more widely used. Under the background check model, the workload sends evidence to relying party, and since the relying party checks the evidence on its behalf, there is no need for a workload to have its own credentials in the WIT/x.509 form. So if you are going to describe just one model, I think Passport model (evidence sent to Verifier, results from Verifier used to procure credentials) is perhaps a better one to cover.",
+              "createdAt": "2026-02-23T14:21:23Z",
+              "updatedAt": "2026-02-23T14:23:10Z"
+            }
+          ]
         }
       ]
     },
@@ -5222,7 +5254,7 @@
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
       "createdAt": "2026-02-19T16:57:40Z",
-      "updatedAt": "2026-02-19T16:57:41Z",
+      "updatedAt": "2026-02-23T05:43:55Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
@@ -5234,7 +5266,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7k1hsq",
+          "commit": {
+            "abbreviatedOid": "b1f0bdf"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I like formalizing the concept of a workload instance.  Now the question is what does the workload identifier refer to?  I think this at least needs to be touched on in the architecture draft although the details of how things are conveyed are in the identity draft. \nMaybe a workload can have more than one workload identifier, one that is used when you  don't care about the instance, and one where addressing the specific instance is needed. Or since most of the time we we seem to think of the identity as a client the instance is an attribute associated with the workload identity through the workload credential?",
+          "createdAt": "2026-02-23T05:43:55Z",
+          "updatedAt": "2026-02-23T05:43:55Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 116,
@@ -5248,7 +5294,7 @@
       "labels": [],
       "body": "Closes https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/56 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/83",
       "createdAt": "2026-02-19T17:51:06Z",
-      "updatedAt": "2026-02-19T17:51:07Z",
+      "updatedAt": "2026-02-23T05:36:56Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
@@ -5260,7 +5306,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7k1esp",
+          "commit": {
+            "abbreviatedOid": "344c0f8"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T05:36:56Z",
+          "updatedAt": "2026-02-23T05:36:56Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 117,
@@ -5274,7 +5334,7 @@
       "labels": [],
       "body": "Resolves https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/104",
       "createdAt": "2026-02-19T17:54:13Z",
-      "updatedAt": "2026-02-19T17:54:14Z",
+      "updatedAt": "2026-02-23T05:35:40Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
@@ -5286,7 +5346,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7k1d4l",
+          "commit": {
+            "abbreviatedOid": "ee451c4"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T05:35:40Z",
+          "updatedAt": "2026-02-23T05:35:40Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 118,
@@ -5300,7 +5374,7 @@
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/107",
       "createdAt": "2026-02-19T17:57:15Z",
-      "updatedAt": "2026-02-19T17:57:16Z",
+      "updatedAt": "2026-02-23T05:34:30Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
@@ -5312,7 +5386,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M7k1cmQ",
+          "commit": {
+            "abbreviatedOid": "44bf4d6"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T05:34:30Z",
+          "updatedAt": "2026-02-23T05:34:30Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
