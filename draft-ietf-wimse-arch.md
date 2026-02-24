@@ -72,9 +72,9 @@ A security context provides information needed for a workload to perform its fun
 
 The identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. A transparent network service such as a security gateway may act as an identity proxy, or the role can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. The identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
 
-* Remote Attestation
+* Attestation
 
-The term "attestation", as defined in {{?RFC9683}}, refers to the process of generating and evaluating remote attestation Evidence. {{!RFC9334}} describes Evidence and the different communication patterns.
+The term "attestation" refers to the process of one peer in a communication (known as an "attester") generating attestation evidence, and providing that to a communication peer -- the "relying party", who may request verification of the supplied evidence from a "verifier". {{!RFC9334}} describes evidence and some of the different communication patterns. Attestation in WIMSE is intentionally defined quite broadly, as it may be implemented in several ways that, while aligned with the definitions and architectures described in {{!RFC9334}}, and here, do not rely on any specific implementation, or any specific communication protocol. [SPIRE](https://spiffe.io/docs/latest/spire-about/spire-concepts/) provides an example outside of the RATS protocol work where attestation processes result in credentials being provisioned both to workloads, and the nodes that host them.
 
 * Workload Identity Credential
 
