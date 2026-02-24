@@ -35,6 +35,25 @@ author:
 
 normative:
 informative:
+  ID-Crisis:
+    title: "Identity Crisis in Confidential Computing: Formal Analysis of Attested TLS"
+    date: November 2025,
+    target: https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS
+    author:
+      - ins: M. U. Sardar
+      - ins: M. Moustafa
+      - ins: T. Aura
+  Intel-RA-TLS:
+    title: "Integrating Remote Attestation with Transport Layer Security"
+    date: July 2019,
+    target: https://arxiv.org/pdf/1801.05863
+    author:
+      - ins: Thomas Knauth
+      - ins: Michael Steiner
+      - ins: Somnath Chakrabarti
+      - ins: Li Lei
+      - ins: Cedric Xing
+      - ins: Mona Vij
 
 --- abstract
 
@@ -556,6 +575,10 @@ When the information disclosed to an attacker is a credential, the attacker may 
 ## Workload Compromise
 
 Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.
+
+## Attestation
+When attestation is used in the sense of {{!RFC9334}}, the security considerations of {{!RFC9334}} apply. When TLS is used as the transport protocol in pre-handshake attestation, such as {{!Intel-RA-TLS}}, it may be vulnerable to replay attacks {{!ID-Crisis}}. When TLS is used as the transport protocol in intra-handshake attestation, such as {{!I-D.fossati-tls-attestation}}, it may be vulnerable to diversion attacks {{!ID-Crisis}}. These risks can be mitigated by using post-handshake attestation {{!ID-Crisis}}.
+
 
 # IANA Considerations
 
