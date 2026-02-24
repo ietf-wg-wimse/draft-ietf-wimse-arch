@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 7 August 2026                                           Zscaler
+Expires: 28 August 2026                                          Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                         3 February 2026
+                                                        24 February 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2026.
+   This Internet-Draft will expire on 28 August 2026.
 
 Copyright Notice
 
@@ -102,6 +102,7 @@ Table of Contents
      6.2.  Informative References
    Acknowledgments
    Changes since draft -05
+   Changes since draft -06
    Authors' Addresses
 
 1.  Introduction
@@ -193,14 +194,15 @@ Table of Contents
 
    *  Workload Identity Credential
 
-   A credential that contains a workload identifier used for service to
-   service authentication.  The credential may be bound to a
-   cryptographic key and may require that the presenter provide proof of
-   possession of the secret key material.  Examples of such credentials
-   include Workload Identity Certificates and the Workload Identity
-   Token defined in [I-D.ietf-wimse-s2s-protocol].  Deployments may also
-   deploy bearer tokens as workload identity credentials to interoperate
-   with legacy systems that do not support credentials bound to keys.
+   A credential that contains a workload identifier ([WIMSE-ID]) used
+   for service to service authentication.  The credential may be bound
+   to a cryptographic key and may require that the presenter provide
+   proof of possession of the secret key material.  Examples of such
+   credentials include Workload Identity Certificates and the Workload
+   Identity Token defined in [I-D.ietf-wimse-s2s-protocol].  Deployments
+   may also deploy bearer tokens as workload identity credentials to
+   interoperate with legacy systems that do not support credentials
+   bound to keys.
 
    *  Trust Domain
 
@@ -239,45 +241,31 @@ Table of Contents
    A single organization may define multiple trust domains for different
    purposes such as different departments or environments.  Each trust
    domain must have a unique domain identifier.  Workload identifiers
-   are scoped within a trust domain.  If two identifiers differ only by
-   trust domain they still refer to two different entities.
+   are scoped within a trust domain as specified in Section 4.3 of
+   [WIMSE-ID].  If two identifiers differ only by trust domain they
+   still refer to two different entities.
 
 3.1.2.  Workload Identifier
 
-   The WIMSE architecture defines a workload identifier as a URI
-   [RFC3986].  This URI is used in the subject fields in the
-   certificates and tokens defined later in this document.  The URI MUST
-   meet the criteria for the URI type of Subject Alternative Name
-   defined in Section 4.2.1.6 of [RFC5280].
+   A workload identifier uniquely names a workload within a trust domain
+   and is carried in workload identity credentials.
 
-      The name MUST NOT be a relative URI, and it MUST follow the URI
-      syntax and encoding rules specified in [RFC3986].  The name MUST
-      include both a scheme and a scheme-specific-part.
+   The format, syntax, comparison rules, and validation requirements for
+   workload identifiers are defined in [WIMSE-ID].
 
-   In addition the URI MUST include an authority that identifies the
-   trust domain within which the identifier is scoped.  The trust domain
-   SHOULD be a fully qualified domain name belonging to the organization
-   defining the trust domain to help provide uniqueness for the trust
-   domain identifier.  The scheme and scheme specific part are not
-   defined by this specification.  An example of an identifier format
-   that conforms to this definition is SPIFFE ID
-   (https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
+   A workload identifier identifies the authenticated peer in service-
+   to-service communication.  It is used as the primary input to
+   authorization decisions and recorded in audit events.  Workload
+   identifier MAY be bound to security context information.
 
-   While IP addresses are allowed as host names in the URI encoding
-   rules, they MUST NOT be used to represent trust domains except in the
-   case where they are needed for compatibility with legacy naming
-   schemes.
+   Two credentials containing the same workload identifier value
+   represent the same workload only when validated under the same trust
+   domain and issuer trust configuration.
 
-   A workload identifier only has a meaning within the scope of a
-   specific issuer.  Two identities of the same value signed by
-   different issuers may or may not refer to the same workload.  In
-   order to avoid collisions, identity URIs SHOULD specify, in the URI's
-   "authority" field, the trust domain associated with an issuer that is
-   selected from a global name space such as host domains.  However, the
-   validator of an identity credential MUST make sure that they are
-   using the correct issuer credential to verify the identity credential
-   and that the issuer is trusted to issue tokens for the defined trust
-   domain.
+   A workload identifier MAY represent either a logical workload or a
+   specific workload instance depending on deployment policy.  Relying
+   parties MUST interpret the identifier according to identity semantics
+   to the trust domain.
 
 3.1.3.  Workload Identity Credentials
 
@@ -1108,17 +1096,6 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
-              Resource Identifier (URI): Generic Syntax", STD 66,
-              RFC 3986, DOI 10.17487/RFC3986, January 2005,
-              <https://www.rfc-editor.org/rfc/rfc3986>.
-
-   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-              Housley, R., and W. Polk, "Internet X.509 Public Key
-              Infrastructure Certificate and Certificate Revocation List
-              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5280>.
-
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7517>.
@@ -1132,15 +1109,21 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
+   [WIMSE-ID] Rosomakho, Y. and J. A. Salowey, "Workload Identifier",
+              Work in Progress, Internet-Draft, draft-ietf-wimse-
+              identifier-01, 29 December 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
+              identifier-01>.
+
 6.2.  Informative References
 
    [I-D.draft-ietf-oauth-identity-chaining]
               Schwenkschuster, A., Kasselman, P., Burgin, K., Jenkins,
               M. J., and B. Campbell, "OAuth Identity and Authorization
               Chaining Across Domains", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-identity-chaining-06, 12 September
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-identity-chaining-06>.
+              Draft, draft-ietf-oauth-identity-chaining-08, 9 February
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-identity-chaining-08>.
 
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
@@ -1186,6 +1169,10 @@ Changes since draft -05
    *  added audit section
 
    *  added AI use case
+
+Changes since draft -06
+
+   *  Moved workload identifier definition to a separate draft
 
 Authors' Addresses
 
