@@ -86,11 +86,10 @@ Table of Contents
        3.3.3.  Service Authorization
        3.3.4.  Audit Trails
        3.3.5.  Security Context Establishment and Propagation
-       3.3.6.  Service Authorization
-       3.3.7.  Delegation and Impersonation
-       3.3.8.  Asynchronous and Batch Requests
-       3.3.9.  Cross-boundary Workload Identity
-       3.3.10. AI and ML-Based Intermediaries
+       3.3.6.  Delegation and Impersonation
+       3.3.7.  Asynchronous and Batch Requests
+       3.3.8.  Cross-boundary Workload Identity
+       3.3.9.  AI and ML-Based Intermediaries
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
@@ -802,7 +801,7 @@ Table of Contents
       location, time of day).
 
    Authorization checks may also incorporate delegation and
-   impersonation semantics, as described in Section 3.3.7, where
+   impersonation semantics, as described in Section 3.3.6, where
    upstream workloads are authorized to act on behalf of end-users or
    other services, within the scope of their issued credentials and
    policy.
@@ -885,17 +884,7 @@ Table of Contents
    the receiver can verify which workload initiated the transaction and
    the context that was intended for the transaction.
 
-3.3.6.  Service Authorization
-
-   After authentication of the peer, a workload can perform
-   authorization by verifying that the authenticated identity has the
-   appropriate permissions to access the requested resources and perform
-   required actions.  This process involves evaluating the security
-   context described previously.  The workload validates the security
-   context, and checks the validity of permissions against its security
-   policies to ensure that only authorized actions are allowed.
-
-3.3.7.  Delegation and Impersonation
+3.3.6.  Delegation and Impersonation
 
    When source workloads send authenticated requests to destination
    workloads, those destination workloads may rely on upstream
@@ -913,7 +902,7 @@ Table of Contents
    and/or impersonation tokens within and across trust domains, when
    arriving at authorization decisions.
 
-3.3.8.  Asynchronous and Batch Requests
+3.3.7.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
    requests to destination workloads.  A destination workload may need
@@ -931,14 +920,14 @@ Table of Contents
    of the acting service performing asynchronous computation on the
    source workload's behalf.
 
-3.3.9.  Cross-boundary Workload Identity
+3.3.8.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.3.9.1.  Egress Identity Generalization
+3.3.8.1.  Egress Identity Generalization
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
@@ -968,7 +957,7 @@ Table of Contents
    communications adhere to security and privacy requirements while
    maintaining interoperability across trust boundaries.
 
-3.3.9.2.  Inbound Gateway Identity Validation
+3.3.8.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -979,7 +968,7 @@ Table of Contents
    it unmodified or replace it with its own identity to be validated by
    the destination.
 
-3.3.10.  AI and ML-Based Intermediaries
+3.3.9.  AI and ML-Based Intermediaries
 
    Emerging agentic AI systems and other ML-based intermediaries
    introduce new considerations for workload identity and security
@@ -989,7 +978,7 @@ Table of Contents
    step workflows.
 
    From WIMSE perspective, AI intermediaries are a special case of
-   delegated workloads (see Section 3.3.7).  They inherit the upstream
+   delegated workloads (see Section 3.3.6).  They inherit the upstream
    principal's security context and are expected to operate strictly
    within the constraints of that delegation.  When invoking downstream
    workloads, the agent SHOULD propagate the upstream security context,

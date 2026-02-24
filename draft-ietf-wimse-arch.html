@@ -1207,19 +1207,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.3.2.3.2.5.1"><a href="#section-3.3.5" class="auto internal xref">3.3.5</a>.  <a href="#name-security-context-establishm" class="internal xref">Security Context Establishment and Propagation</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.6">
-                    <p id="section-toc.1-1.3.2.3.2.6.1"><a href="#section-3.3.6" class="auto internal xref">3.3.6</a>.  <a href="#name-service-authorization-2" class="internal xref">Service Authorization</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.6.1"><a href="#section-3.3.6" class="auto internal xref">3.3.6</a>.  <a href="#name-delegation-and-impersonatio" class="internal xref">Delegation and Impersonation</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.7">
-                    <p id="section-toc.1-1.3.2.3.2.7.1"><a href="#section-3.3.7" class="auto internal xref">3.3.7</a>.  <a href="#name-delegation-and-impersonatio" class="internal xref">Delegation and Impersonation</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.7.1"><a href="#section-3.3.7" class="auto internal xref">3.3.7</a>.  <a href="#name-asynchronous-and-batch-requ" class="internal xref">Asynchronous and Batch Requests</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.8">
-                    <p id="section-toc.1-1.3.2.3.2.8.1"><a href="#section-3.3.8" class="auto internal xref">3.3.8</a>.  <a href="#name-asynchronous-and-batch-requ" class="internal xref">Asynchronous and Batch Requests</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.8.1"><a href="#section-3.3.8" class="auto internal xref">3.3.8</a>.  <a href="#name-cross-boundary-workload-ide" class="internal xref">Cross-boundary Workload Identity</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.9">
-                    <p id="section-toc.1-1.3.2.3.2.9.1"><a href="#section-3.3.9" class="auto internal xref">3.3.9</a>.  <a href="#name-cross-boundary-workload-ide" class="internal xref">Cross-boundary Workload Identity</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.10">
-                    <p id="section-toc.1-1.3.2.3.2.10.1"><a href="#section-3.3.10" class="auto internal xref">3.3.10</a>. <a href="#name-ai-and-ml-based-intermediar" class="internal xref">AI and ML-Based Intermediaries</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.9.1"><a href="#section-3.3.9" class="auto internal xref">3.3.9</a>.  <a href="#name-ai-and-ml-based-intermediar" class="internal xref">AI and ML-Based Intermediaries</a></p>
 </li>
                 </ul>
 </li>
@@ -2083,7 +2080,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
               <p id="section-3.3.3-4.3.1">Applying fine-grained policy rules, which may include path, method, action type, and contextual constraints (e.g., geographic location, time of day).<a href="#section-3.3.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.3.3-5">Authorization checks may also incorporate delegation and impersonation semantics, as described in <a href="#delegation" class="auto internal xref">Section 3.3.7</a>, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-5">Authorization checks may also incorporate delegation and impersonation semantics, as described in <a href="#delegation" class="auto internal xref">Section 3.3.6</a>, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.3-6">A key architectural consideration is where authorization is evaluated. For most workload-to-workload interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization <span class="bcp14">MAY</span> be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.<a href="#section-3.3.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2141,70 +2138,62 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <p id="section-3.3.5-1">In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.<a href="#section-3.3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="service-authorization">
-<section id="section-3.3.6">
-          <h4 id="name-service-authorization-2">
-<a href="#section-3.3.6" class="section-number selfRef">3.3.6. </a><a href="#name-service-authorization-2" class="section-name selfRef">Service Authorization</a>
-          </h4>
-<p id="section-3.3.6-1">After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.<a href="#section-3.3.6-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="delegation">
-<section id="section-3.3.7">
+<section id="section-3.3.6">
           <h4 id="name-delegation-and-impersonatio">
-<a href="#section-3.3.7" class="section-number selfRef">3.3.7. </a><a href="#name-delegation-and-impersonatio" class="section-name selfRef">Delegation and Impersonation</a>
+<a href="#section-3.3.6" class="section-number selfRef">3.3.6. </a><a href="#name-delegation-and-impersonatio" class="section-name selfRef">Delegation and Impersonation</a>
           </h4>
-<p id="section-3.3.7-1">When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.<a href="#section-3.3.7-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.7-2">WIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by a trust domain, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across trust domains, when arriving at authorization decisions.<a href="#section-3.3.7-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.6-1">When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.<a href="#section-3.3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.6-2">WIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by a trust domain, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across trust domains, when arriving at authorization decisions.<a href="#section-3.3.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="asynchronous-and-batch-requests">
-<section id="section-3.3.8">
+<section id="section-3.3.7">
           <h4 id="name-asynchronous-and-batch-requ">
-<a href="#section-3.3.8" class="section-number selfRef">3.3.8. </a><a href="#name-asynchronous-and-batch-requ" class="section-name selfRef">Asynchronous and Batch Requests</a>
+<a href="#section-3.3.7" class="section-number selfRef">3.3.7. </a><a href="#name-asynchronous-and-batch-requ" class="section-name selfRef">Asynchronous and Batch Requests</a>
           </h4>
-<p id="section-3.3.8-1">Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the Workload Identity Credential such as a workload identity certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.<a href="#section-3.3.8-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.7-1">Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the Workload Identity Credential such as a workload identity certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.<a href="#section-3.3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cross-boundary-workload-identity">
-<section id="section-3.3.9">
+<section id="section-3.3.8">
           <h4 id="name-cross-boundary-workload-ide">
-<a href="#section-3.3.9" class="section-number selfRef">3.3.9. </a><a href="#name-cross-boundary-workload-ide" class="section-name selfRef">Cross-boundary Workload Identity</a>
+<a href="#section-3.3.8" class="section-number selfRef">3.3.8. </a><a href="#name-cross-boundary-workload-ide" class="section-name selfRef">Cross-boundary Workload Identity</a>
           </h4>
-<p id="section-3.3.9-1">As workloads often need to communicate across trust boundaries, extra care needs to be taken when it comes to identity communication to ensure scalability and privacy. (TODO: align with OAuth cross domain identity and authorization)<a href="#section-3.3.9-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.8-1">As workloads often need to communicate across trust boundaries, extra care needs to be taken when it comes to identity communication to ensure scalability and privacy. (TODO: align with OAuth cross domain identity and authorization)<a href="#section-3.3.8-1" class="pilcrow">¶</a></p>
 <div id="egress-identity-generalization">
-<section id="section-3.3.9.1">
+<section id="section-3.3.8.1">
             <h5 id="name-egress-identity-generalizat">
-<a href="#section-3.3.9.1" class="section-number selfRef">3.3.9.1. </a><a href="#name-egress-identity-generalizat" class="section-name selfRef">Egress Identity Generalization</a>
+<a href="#section-3.3.8.1" class="section-number selfRef">3.3.8.1. </a><a href="#name-egress-identity-generalizat" class="section-name selfRef">Egress Identity Generalization</a>
             </h5>
-<p id="section-3.3.9.1-1">A workload communicating with a service or another workload located outside the trust boundary may need to provide modified identity information. The detailed identity of an internal workload originating the communication is relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.<a href="#section-3.3.9.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.9.1-2">For example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the Workload Identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.<a href="#section-3.3.9.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.3.9.1-3">A security gateway implementing Identity Proxy functionality at the edge of a trust boundary can validate identity information of the workload, perform context-specific authorization of the transaction, and replace workload-specific identity with a generalized one for a given trust domain. This approach ensures that external communications adhere to security and privacy requirements while maintaining interoperability across trust boundaries.<a href="#section-3.3.9.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.8.1-1">A workload communicating with a service or another workload located outside the trust boundary may need to provide modified identity information. The detailed identity of an internal workload originating the communication is relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.<a href="#section-3.3.8.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.8.1-2">For example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the Workload Identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.<a href="#section-3.3.8.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.8.1-3">A security gateway implementing Identity Proxy functionality at the edge of a trust boundary can validate identity information of the workload, perform context-specific authorization of the transaction, and replace workload-specific identity with a generalized one for a given trust domain. This approach ensures that external communications adhere to security and privacy requirements while maintaining interoperability across trust boundaries.<a href="#section-3.3.8.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="inbound-gateway-identity-validation">
-<section id="section-3.3.9.2">
+<section id="section-3.3.8.2">
             <h5 id="name-inbound-gateway-identity-va">
-<a href="#section-3.3.9.2" class="section-number selfRef">3.3.9.2. </a><a href="#name-inbound-gateway-identity-va" class="section-name selfRef">Inbound Gateway Identity Validation</a>
+<a href="#section-3.3.8.2" class="section-number selfRef">3.3.8.2. </a><a href="#name-inbound-gateway-identity-va" class="section-name selfRef">Inbound Gateway Identity Validation</a>
             </h5>
-<p id="section-3.3.9.2-1">Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification of inbound requests should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.<a href="#section-3.3.9.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.8.2-1">Inbound security gateway is a common design pattern for service protection. This functionality is often found in CDN services, API gateways, load balancers, Web Application Firewalls (WAFs) and other security solutions. Workload identity verification of inbound requests should be performed as a part of these security services. After validation of workload identity, the gateway may either leave it unmodified or replace it with its own identity to be validated by the destination.<a href="#section-3.3.8.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="ai-and-ml-based-intermediaries">
-<section id="section-3.3.10">
+<section id="section-3.3.9">
           <h4 id="name-ai-and-ml-based-intermediar">
-<a href="#section-3.3.10" class="section-number selfRef">3.3.10. </a><a href="#name-ai-and-ml-based-intermediar" class="section-name selfRef">AI and ML-Based Intermediaries</a>
+<a href="#section-3.3.9" class="section-number selfRef">3.3.9. </a><a href="#name-ai-and-ml-based-intermediar" class="section-name selfRef">AI and ML-Based Intermediaries</a>
           </h4>
-<p id="section-3.3.10-1">Emerging agentic AI systems and other ML-based intermediaries introduce new considerations for workload identity and security context propagation. These systems often act as autonomous agents that perform tasks on behalf of an upstream principal (such as a user or service) and then invoke downstream workloads as part of multi-step workflows.<a href="#section-3.3.10-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.10-2">From WIMSE perspective, AI intermediaries are a special case of delegated workloads (see <a href="#delegation" class="auto internal xref">Section 3.3.7</a>). They inherit the upstream principal's security context and are expected to operate strictly within the constraints of that delegation. When invoking downstream workloads, the agent <span class="bcp14">SHOULD</span> propagate the upstream security context, unless it has been explicitly authorized to translate or reduce its scope.<a href="#section-3.3.10-2" class="pilcrow">¶</a></p>
-<p id="section-3.3.10-3">In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions <span class="bcp14">MUST</span> be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes. Because AI intermediaries may chain requests across multiple services, there is an elevated risk of privilege escalation if security context is propagated beyond the intended trust domain. Mechanisms such as cryptographic binding of delegation tokens or attestation of intermediary behavior can help mitigate these risks.<a href="#section-3.3.10-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.10-4">A further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain <span class="bcp14">MUST</span> explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.<a href="#section-3.3.10-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-1">Emerging agentic AI systems and other ML-based intermediaries introduce new considerations for workload identity and security context propagation. These systems often act as autonomous agents that perform tasks on behalf of an upstream principal (such as a user or service) and then invoke downstream workloads as part of multi-step workflows.<a href="#section-3.3.9-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-2">From WIMSE perspective, AI intermediaries are a special case of delegated workloads (see <a href="#delegation" class="auto internal xref">Section 3.3.6</a>). They inherit the upstream principal's security context and are expected to operate strictly within the constraints of that delegation. When invoking downstream workloads, the agent <span class="bcp14">SHOULD</span> propagate the upstream security context, unless it has been explicitly authorized to translate or reduce its scope.<a href="#section-3.3.9-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-3">In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions <span class="bcp14">MUST</span> be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes. Because AI intermediaries may chain requests across multiple services, there is an elevated risk of privilege escalation if security context is propagated beyond the intended trust domain. Mechanisms such as cryptographic binding of delegation tokens or attestation of intermediary behavior can help mitigate these risks.<a href="#section-3.3.9-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-4">A further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain <span class="bcp14">MUST</span> explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.<a href="#section-3.3.9-4" class="pilcrow">¶</a></p>
 <span id="name-ai-agent-communication"></span><div id="arch-ai">
 <figure id="figure-6">
-            <div id="section-3.3.10-5.1">
-              <div class="alignLeft art-svg artwork" id="section-3.3.10-5.1.1">
+            <div id="section-3.3.9-5.1">
+              <div class="alignLeft art-svg artwork" id="section-3.3.9-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="648" viewBox="0 0 648 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 8,32 L 8,80" fill="none" stroke="black"></path>
                   <path d="M 48,88 L 48,144" fill="none" stroke="black"></path>
@@ -2264,7 +2253,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
                     <text x="460" y="132">Security</text>
                     <text x="528" y="132">context</text>
                   </g>
-                </svg><a href="#section-3.3.10-5.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-3.3.9-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
