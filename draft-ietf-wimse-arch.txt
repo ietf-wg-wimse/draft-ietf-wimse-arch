@@ -826,9 +826,8 @@ Table of Contents
 
    Audit trails are typically generated at multiple points:
 
-   *  Gateway Services: Log incoming client requests and their
-      authenticated identities, including access tokens or client
-      certificates used.
+   *  Gateway Services: Log incoming client requests, their
+      authenticated identities and relevant context.
 
    *  Workloads: Log authenticated peer identities, security context
       attributes, requested resources, and authorization outcomes.
