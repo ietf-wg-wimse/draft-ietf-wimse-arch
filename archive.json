@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T02:49:31.152627+00:00",
+  "timestamp": "2026-02-26T02:45:43.607055+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -890,7 +890,7 @@
       "id": "I_kwDOLPTb0M6lTpDy",
       "title": "Consistency with SPIFFE",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/56",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -901,8 +901,8 @@
       ],
       "body": "It may be good to point out that the workload identity identifier format is consistent with the SPIFFE format (or at least, point out when it is not). We should have a high bar for consistency here.",
       "createdAt": "2025-01-07T17:32:32Z",
-      "updatedAt": "2025-09-30T15:13:05Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-24T16:07:46Z",
+      "closedAt": "2026-02-24T16:07:46Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1220,7 +1220,7 @@
       "id": "I_kwDOLPTb0M6ynKWi",
       "title": "Separate WIMSE identifier as separate document",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/83",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1231,8 +1231,8 @@
       ],
       "body": "the WIMSE identifier is relatively well defined and useful on tis own so let's spin it out of the main document so it can progress separately. ",
       "createdAt": "2025-04-15T14:19:34Z",
-      "updatedAt": "2025-09-15T14:11:18Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-24T16:21:02Z",
+      "closedAt": "2026-02-24T16:21:02Z",
       "comments": [
         {
           "author": "yaroslavros",
@@ -1415,12 +1415,12 @@
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
-        "jsalowey"
+        "yaroslavros"
       ],
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L111\n\nI'm not sure I agree with this. If you trust both issuers, then they should refer to the same workload. Conversely, if you don't trust both, then you should only accept the identity claimed by the one you trust. Regardless, I'm not clear on whether the intent here is to allow for a third-party issuer to provide identity credentials for a given trust domain. I believe this should be allowed. Either way, the text should clarify this. ",
       "createdAt": "2025-10-07T00:43:14Z",
-      "updatedAt": "2025-10-14T15:16:39Z",
+      "updatedAt": "2026-02-24T16:23:38Z",
       "closedAt": null,
       "comments": []
     },
@@ -1433,12 +1433,12 @@
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
-        "jsalowey"
+        "yaroslavros"
       ],
       "labels": [],
       "body": "This is related to #42 \n\nThe document explicitly defines workloads as \"a running instance of software...\". This is probably ok as long as it is understood that there is also a need to refer to more than one such instance in some cases. The document alludes to this concept in several places, e.g. \n- Section 3.2.1, refers to an \"application system\" and \"workload application\", however this is never defined further\n- Section 3.2.2 mentions a \"service identity\" \n- Section 3.3.2 and 3.3.3 talk about \"Service Authentication\" and \"Service Authorization\"\n- Section 3.3.4 mentions \"workloads and services\"\n\nThere is a need to clearly articulate the difference between referring to a single workload instance versus multiple instances of a given service. The service authentication and authorization sections in particular need to be clear on this distinction. \n\nIf there is general agreement on this need, then I'll be happy to provide a PR with suggested updates. \n\n\n",
       "createdAt": "2025-10-07T01:00:35Z",
-      "updatedAt": "2025-11-25T17:37:56Z",
+      "updatedAt": "2026-02-24T16:23:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1495,7 +1495,7 @@
       "id": "I_kwDOLPTb0M7P_vdc",
       "title": "Log access tokens ?",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/104",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1504,8 +1504,8 @@
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L474\n\nIt says Gateway Services log access tokens, but later in the section, it says that \"logs MUST NOT log secrets such as bearer tokens...\" (which seems correct). To avoid confusion, we should not list access tokens as being logged in Gateway Services. ",
       "createdAt": "2025-10-07T01:09:25Z",
-      "updatedAt": "2025-10-14T20:15:48Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-24T16:08:29Z",
+      "closedAt": "2026-02-24T16:08:29Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1580,7 +1580,7 @@
       "id": "I_kwDOLPTb0M7WbZpX",
       "title": "\"Service Authorization\" section is present twice under Use Cases",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/107",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thibmeu",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1589,8 +1589,8 @@
       "labels": [],
       "body": "There are two sections named \"Service Authorization\". I believe the one identified as \"#authorization\" is the one to keep, but that's to be checked.\n\nFirst: https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md#service-authorization-authorization\nSecond: https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md#service-authorization",
       "createdAt": "2025-11-06T20:27:54Z",
-      "updatedAt": "2025-11-25T17:36:15Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-24T16:20:54Z",
+      "closedAt": "2026-02-24T16:20:54Z",
       "comments": []
     },
     {
@@ -5287,24 +5287,26 @@
       "id": "PR_kwDOLPTb0M7E8geq",
       "title": "Moved WIMSE identifier to a separate draft",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/116",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/56 and https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/83",
       "createdAt": "2026-02-19T17:51:06Z",
-      "updatedAt": "2026-02-23T05:36:56Z",
+      "updatedAt": "2026-02-24T16:07:45Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "wimse-identifier",
       "headRefOid": "344c0f840f8774b888fd8b02e9d1fcb222f38ce5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-24T16:07:44Z",
+      "mergedAt": "2026-02-24T16:07:44Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "66bc22001068205073e6cf8bb93f1041a7b8b5a1"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5327,24 +5329,26 @@
       "id": "PR_kwDOLPTb0M7E8jHb",
       "title": "We should not suggest logging access tokens",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/117",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/104",
       "createdAt": "2026-02-19T17:54:13Z",
-      "updatedAt": "2026-02-23T05:35:40Z",
+      "updatedAt": "2026-02-24T16:08:28Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "log-tokens",
       "headRefOid": "ee451c4e8e5cc4ac73fe9839faeed8c51da18cd9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-24T16:08:27Z",
+      "mergedAt": "2026-02-24T16:08:27Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "2ef870ddfc05038c8fb8ebbacb0a153da5bbbd75"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5367,24 +5371,26 @@
       "id": "PR_kwDOLPTb0M7E8lyi",
       "title": "Removed double authorization",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/118",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/107",
       "createdAt": "2026-02-19T17:57:15Z",
-      "updatedAt": "2026-02-23T05:34:30Z",
+      "updatedAt": "2026-02-24T16:08:18Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "double-authorisation",
       "headRefOid": "44bf4d6b08c771777e3431e9f17f8c4c9f8a1b3c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-24T16:08:18Z",
+      "mergedAt": "2026-02-24T16:08:18Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "bb4df9bcb398f132842b2ab9c9081166cd76fe4c"
+      },
       "comments": [],
       "reviews": [
         {
