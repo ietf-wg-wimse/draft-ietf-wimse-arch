@@ -590,3 +590,4 @@ Todo: Add your name here.
 
 * Separated Workload from Workload Instance
 * Moved workload identifier definition to a separate draft
+* Update credential provisioning section
