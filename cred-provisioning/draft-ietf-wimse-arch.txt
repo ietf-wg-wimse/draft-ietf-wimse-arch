@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 5 August 2026                                           Zscaler
+Expires: 3 September 2026                                        Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                         1 February 2026
+                                                            2 March 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -18,11 +18,11 @@ Abstract
 
    The increasing prevalence of cloud computing and micro service
    architectures has led to the rise of complex software functions being
-   built and deployed as workloads, where a workload is defined as a
-   running instance of software executing for a specific purpose.  This
-   document discusses an architecture for designing and standardizing
-   protocols and payloads for conveying workload identity and security
-   context information.
+   built and deployed as workloads, where a workload is defined as
+   software executing for a specific purpose, potentially comprising one
+   or more running instances.  This document discusses an architecture
+   for designing and standardizing protocols and payloads for conveying
+   workload identity and security context information.
 
 Discussion Venues
 
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 August 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -86,11 +86,10 @@ Table of Contents
        3.3.3.  Service Authorization
        3.3.4.  Audit Trails
        3.3.5.  Security Context Establishment and Propagation
-       3.3.6.  Service Authorization
-       3.3.7.  Delegation and Impersonation
-       3.3.8.  Asynchronous and Batch Requests
-       3.3.9.  Cross-boundary Workload Identity
-       3.3.10. AI and ML-Based Intermediaries
+       3.3.6.  Delegation and Impersonation
+       3.3.7.  Asynchronous and Batch Requests
+       3.3.8.  Cross-boundary Workload Identity
+       3.3.9.  AI and ML-Based Intermediaries
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
@@ -102,6 +101,7 @@ Table of Contents
      6.2.  Informative References
    Acknowledgments
    Changes since draft -05
+   Changes since draft -06
    Authors' Addresses
 
 1.  Introduction
@@ -109,8 +109,8 @@ Table of Contents
    The increasing prevalence of cloud computing and micro service
    architectures has led to the rise of complex software functions being
    built and deployed as systems composed of workloads, where a workload
-   is defined as a running instance of software executing for a specific
-   purpose.
+   is defined as a software that consists of one or more running
+   instances executing for a specific purpose.
 
    Workloads need to be provisioned with an identity when they are
    started.  Often, additional information needs to be provided, such as
@@ -120,22 +120,23 @@ Table of Contents
    used to authenticate communications between workloads.
 
    This architecture considers two ways to express identity information:
-   X.509 certificates often used in the TLS layer and JSON Web Tokens
-   (JWTs) used at the application layer.  The applicability of given
-   token format depends on application and security context and will be
-   explored in later sections.
+   X.509 certificates, which are often used in the TLS layer, and JSON
+   Web Tokens (JWTs) used at the application layer.  The applicability
+   of given token format depends on application and security context and
+   will be explored in later sections.
 
    Once the workload is started and has obtained identity information,
-   it can start performing its functions.  Once the workload is invoked
+   it can start performing its functions.  When the workload is invoked
    it may require interaction with other workloads.  An example of such
    interaction is shown in [I-D.ietf-oauth-transaction-tokens] where an
    externally-facing endpoint is invoked using conventional
    authorization mechanism, such as an OAuth 2.0 access token.  The
-   interaction with other workload may require the security context
+   interaction with another workload may require the security context
    associated with the authorization to be passed along the call chain.
 
    In the rest of the document we describe terminology and use cases,
-   discuss details of the architecture, and discuss threats.
+   discuss details of the architecture, and describe security
+   considerations for this architecture.
 
 2.  Conventions and Definitions
 
@@ -149,13 +150,23 @@ Table of Contents
 
    *  Workload
 
-   A workload is a running instance of software executing for a specific
-   purpose.  Workload typically interacts with other parts of a larger
-   system.  A workload may exist for a very short duration of time
-   (fraction of a second) and run for a specific purpose such as to
-   provide a response to an API request.  Other kinds of workloads may
-   execute for a very long duration, such as months or years.  Examples
-   include database services and machine learning training jobs.
+   A workload is an independently addressable and executable software
+   entity.  This may include microservices, containers, virtual
+   machines, serverless functions, or similar components that initiate
+   or receive network communications.  A workload typically interacts
+   with other parts of a larger system.
+
+   *  Workload Instance
+
+   A workload instance is a single running instantiation of a workload
+   at a point in time such as a container, a VM, or a serverless
+   invocation.  Workload instances may exist for a very short duration
+   of time (a fraction of a second) and run for a specific purpose such
+   as to provide a response to an API request.  Other kinds of workload
+   instances may execute for a very long duration, such as months or
+   years.  Examples include database services and machine learning
+   training jobs.  The number of instances for a workload may vary over
+   time due to scaling, failover, or orchestration behavior.
 
    *  Security Context
 
@@ -169,15 +180,15 @@ Table of Contents
 
    *  Identity Proxy
 
-   Identity proxy is an intermediary that can inspect, replace or
-   augment workload identity and security context information.  Identity
-   proxy can be a capability of a transparent network service, such as a
-   security gateway, or it can be implemented in a service performing
-   explicit connection processing, such as an ingress gateway or a
-   Content Delivery Network (CDN) service.  Identity proxy MAY introduce
-   additional context based on source identifier, communication
-   properties and administrative policy.  This context MAY be
-   communicated as a transaction token
+   The identity proxy is an intermediary that can inspect, replace or
+   augment workload identity and security context information.  A
+   transparent network service such as a security gateway may act as an
+   identity proxy, or the role can be implemented in a service
+   performing explicit connection processing, such as an ingress gateway
+   or a Content Delivery Network (CDN) service.  The identity proxy MAY
+   introduce additional context based on source identifier,
+   communication properties and administrative policy.  This context MAY
+   be communicated as a transaction token
    [I-D.ietf-oauth-transaction-tokens].
 
    *  Remote Attestation
@@ -189,14 +200,15 @@ Table of Contents
 
    *  Workload Identity Credential
 
-   A credential that contains a workload identifier used for service to
-   service authentication.  The credential is bound to a cryptographic
-   key and requires that the presenter provide proof of possession of
-   the secret key material.  Examples of this credential include
-   Workload Identity Certificates and the Workload Identity Token
-   defined in [I-D.ietf-wimse-s2s-protocol].  Deployments may also
-   deploy bearer tokens as workload identity credentials to interoperate
-   with legacy systems that do not support credentials bound to keys.
+   A credential that contains a workload identifier ([WIMSE-ID]) used
+   for service to service authentication.  The credential may be bound
+   to a cryptographic key and may require that the presenter provide
+   proof of possession of the secret key material.  Examples of such
+   credentials include Workload Identity Certificates and the Workload
+   Identity Token defined in [I-D.ietf-wimse-s2s-protocol].  Deployments
+   may also deploy bearer tokens as workload identity credentials to
+   interoperate with legacy systems that do not support credentials
+   bound to keys.
 
    *  Trust Domain
 
@@ -210,9 +222,9 @@ Table of Contents
 
 3.1.  Workload Identity Concepts
 
-   Workload identity construct consists of three basic building blocks:
-   trust domain, workload identifier and identity credentials.  These
-   components are sufficient for establishing authentication,
+   The Workload identity architecture consists of three basic building
+   blocks: trust domain, workload identifier and identity credentials.
+   These components are sufficient for establishing authentication,
    authorization and accounting processes.  More complex workload
    identity constructs can be created from these basic building blocks.
 
@@ -235,20 +247,17 @@ Table of Contents
    A single organization may define multiple trust domains for different
    purposes such as different departments or environments.  Each trust
    domain must have a unique domain identifier.  Workload identifiers
-   are scoped within a trust domain.  If two identifiers differ only by
-   trust domain they still refer to two different entities.
+   are scoped within a trust domain as specified in Section 4.3 of
+   [WIMSE-ID].  If two identifiers differ only by trust domain they
+   still refer to two different entities.
 
 3.1.2.  Workload Identifier
 
-   The WIMSE architecture defines a workload identifier as a URI
-   [RFC3986].  This URI is used in the subject fields in the
-   certificates and tokens defined later in this document.  The URI MUST
-   meet the criteria for the URI type of Subject Alternative Name
-   defined in Section 4.2.1.6 of [RFC5280].
+   A workload identifier uniquely names a workload within a trust domain
+   and is carried in workload identity credentials.
 
-      The name MUST NOT be a relative URI, and it MUST follow the URI
-      syntax and encoding rules specified in [RFC3986].  The name MUST
-      include both a scheme and a scheme-specific-part.
+   The format, syntax, comparison rules, and validation requirements for
+   workload identifiers are defined in [WIMSE-ID].
 
    In addition the URI MUST include an authority that identifies the
    trust domain within which the identifier is scoped.  The trust domain
@@ -256,33 +265,25 @@ Table of Contents
    defining the trust domain to help provide uniqueness for the trust
    domain identifier.  The scheme and scheme specific part are not
    defined by this specification.  An example of an identifier format
-   that conforms to this definition is SPIFFE ID
-   (https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
+   that conforms to this definition is [SPIFFE-ID].
 
-   While IP addresses are allowed as host names in the URI encoding
-   rules, they MUST NOT be used to represent trust domains except in the
-   case where they are needed for compatibility with legacy naming
-   schemes.
+   Two credentials containing the same workload identifier value
+   represent the same workload only when validated under the same trust
+   domain and issuer trust configuration.
 
-   A workload identifier only has a meaning within the scope of a
-   specific issuer.  Two identities of the same value signed by
-   different issuers may or may not refer to the same workload.  In
-   order to avoid collisions identity URIs SHOULD specify, in the URI's
-   "authority" field, the trust domain associated with an issuer that is
-   selected from a global name space such as host domains.  However, the
-   validator of an identity credential MUST make sure that they are
-   using the correct issuer credential to verify the identity credential
-   and that the issuer is trusted to issue tokens for the defined trust
-   domain.
+   A workload identifier MAY represent either a logical workload or a
+   specific workload instance depending on deployment policy.  Relying
+   parties MUST interpret the identifier according to identity semantics
+   to the trust domain.
 
 3.1.3.  Workload Identity Credentials
 
    An agent provisions the identity credentials to the workload.  These
-   credentials are represented in form of JWT tokens and/or X.509
+   credentials are represented in the form of JWT tokens and/or X.509
    certificates.
 
    JWT bearer tokens are presented to another party as a proof of
-   identity.  They are signed to prevent forgery, however since these
+   identity.  They may be signed to prevent forgery, however since these
    credentials are often not bound to other information it is possible
    that they could be stolen and reused elsewhere.  To mitigate these
    risks and make the token more generally useful the WIMSE architecture
@@ -357,8 +358,9 @@ Table of Contents
 
    *  Workload
 
-   Three workloads are shown.  Each workload is an instance of running
-   software executing for a specific purpose.  Workloads obtain their
+   Three workloads are shown.  Each workload is an independently
+   addressable software entity that may consist of one or more running
+   instances executed for a specific purpose.  Workloads obtain their
    identity credentials from a Credentials Service (1) and use them to
    authenticate to other workloads and systems in the process of sending
    and receiving requests to and from external systems or other internal
@@ -378,7 +380,8 @@ Table of Contents
 
    In this diagram the token/Credential service is a service responsible
    for issuing workload identities to workloads in the same trust
-   domain.  The credentials are often X.509 based or JWT based.
+   domain.  The credentials are often X.509 certificate-based or JWT-
+   based.
 
    High level flows within the diagram
 
@@ -419,10 +422,10 @@ Table of Contents
    the Workload Identity Credentials are workload identity certificates
    then this can happen through TLS client authentication (mutual TLS).
    Alternatively, the workloads can use a JWT based authentication
-   mechanism to authenticate on another.  Workload three can use the
+   mechanism to authenticate one another.  Workload 3 can use the
    authenticated identity of workload 1 to determine which APIs workload
-   1 is authorized 2 and to associated the authenticated identity with
-   logs and other audit information.
+   1 is authorized to invoke, and to associated the authenticated
+   identity with logs and other audit information.
 
    *  (4) API request to workload 2
 
@@ -648,18 +651,19 @@ Table of Contents
    Workloads need to obtain credentials before they can fully
    participate in the WIMSE architecture.  The architecture does not
    specify a particular method for credential provisioning, but this
-   section outlines some concepts involved in the process to obtain
-   them.  The main types of credentials we are focused on are X.509
-   certificate and WIT credentials that consist of a public token and a
-   private key.  In addition, the workload must learn what trust domain
-   it belongs to and how to trust credentials of other workloads it
-   communicates with.  This list is not exhaustive of all the ways
-   provisioning can happen.
+   section outlines some concepts involved in this process.  WIMSE
+   focuses on credentials that consist of a public token and a private
+   key such as X.509 certificate and Workload Identity Token (WIT).
+   This list is not exhaustive of all the ways provisioning can happen.
 
    *  Direct Provisioning - A workload may receive its WIMSE credential
       when it is initially created.  This is typically done using a
       deployment-specific mechanism that configures both the private and
-      public portions of the credential for the workload.
+      public portions of the credential for the workload.  In direct
+      provisioning the workload does not need to go through additional
+      processes to obtain credentials and the credentials can be used
+      immediately, whereas in the other cases more interactions are
+      needed to obtain usable credentials.
 
    *  Bootstrap Credentials - A workload may receive a set of bootstrap
       credentials specific to its deployment mechanism, which are then
@@ -669,6 +673,8 @@ Table of Contents
       the workload may generate a private key pair and use the bootstrap
       credential to authorize an enrollment process to obtain the public
       credential (X.509 certificate or WIT).
+      [I-D.ietf-wimse-workload-identity-practices] describes some ways
+      workloads can be initially providioned with bootstrap credentials.
 
    *  Attestation - A workload credential provisioning process may use
       attestation in addition to or instead of bootstrap credentials.
@@ -676,13 +682,13 @@ Table of Contents
       (known as an "attester") generating attestation evidence, and
       providing that to a communication peer -- the "relying party", who
       may request verification of the supplied evidence from a
-      "verifier".  [RFC9334] describes evidence and some of the
-      different communication patterns.  Attestation in WIMSE is
-      intentionally defined quite broadly, as it may be implemented in
-      several ways that, while aligned with the definitions and
-      architectures described in [RFC9334], and here, do not rely on any
-      specific implementation, or any specific communication protocol.
-      SPIRE (https://spiffe.io/docs/latest/spire-about/spire-concepts/)
+      "verifier".  The Remote ATtestation procedureS (RATS) Architecture
+      [RFC9334] describes evidence and some of the different
+      communication patterns.  Attestation in WIMSE is intentionally
+      defined quite broadly, as it may be implemented in several ways
+      that, while aligned with the definitions and architectures
+      described in [RFC9334], and here, do not rely on any specific
+      implementation, or any specific communication protocol.  [SPIRE]
       provides an example outside of the RATS protocol work where
       attestation processes result in credentials being provisioned both
       to workloads, and the nodes that host them.
@@ -693,11 +699,10 @@ Table of Contents
       illustrates one way in which an agent can participate in the
       process, reflecting some concepts in the SPIFFE architecture.
       There are other ways an agent may participate.  For example, the
-      agent may not receive direct access to the workload credentials,
-      but it may provide encrypted credentials to the workload or a link
-      to obtain credentials from another source.  Also, the workload may
-      perform additional attestation with a relying party during the
-      attestation process.
+      agent may not receive direct access to the workload private key
+      but it may be the conduit for providing an encrypted private key
+      which the workload can decrypt through a process that may involve
+      attestation.
 
 3.3.1.1.  Agent Assisted Provisioning Example
 
@@ -851,7 +856,7 @@ Table of Contents
       location, time of day).
 
    Authorization checks may also incorporate delegation and
-   impersonation semantics, as described in Section 3.3.7, where
+   impersonation semantics, as described in Section 3.3.6, where
    upstream workloads are authorized to act on behalf of end-users or
    other services, within the scope of their issued credentials and
    policy.
@@ -876,9 +881,8 @@ Table of Contents
 
    Audit trails are typically generated at multiple points:
 
-   *  Gateway Services: Log incoming client requests and their
-      authenticated identities, including access tokens or client
-      certificates used.
+   *  Gateway Services: Log incoming client requests, their
+      authenticated identities and relevant context.
 
    *  Workloads: Log authenticated peer identities, security context
       attributes, requested resources, and authorization outcomes.
@@ -934,17 +938,7 @@ Table of Contents
    the receiver can verify which workload initiated the transaction and
    the context that was intended for the transaction.
 
-3.3.6.  Service Authorization
-
-   After authentication of the peer, a workload can perform
-   authorization by verifying that the authenticated identity has the
-   appropriate permissions to access the requested resources and perform
-   required actions.  This process involves evaluating the security
-   context described previously.  The workload validates the security
-   context, and checks the validity of permissions against its security
-   policies to ensure that only authorized actions are allowed.
-
-3.3.7.  Delegation and Impersonation
+3.3.6.  Delegation and Impersonation
 
    When source workloads send authenticated requests to destination
    workloads, those destination workloads may rely on upstream
@@ -962,7 +956,7 @@ Table of Contents
    and/or impersonation tokens within and across trust domains, when
    arriving at authorization decisions.
 
-3.3.8.  Asynchronous and Batch Requests
+3.3.7.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
    requests to destination workloads.  A destination workload may need
@@ -980,14 +974,14 @@ Table of Contents
    of the acting service performing asynchronous computation on the
    source workload's behalf.
 
-3.3.9.  Cross-boundary Workload Identity
+3.3.8.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.3.9.1.  Egress Identity Generalization
+3.3.8.1.  Egress Identity Generalization
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
@@ -1017,7 +1011,7 @@ Table of Contents
    communications adhere to security and privacy requirements while
    maintaining interoperability across trust boundaries.
 
-3.3.9.2.  Inbound Gateway Identity Validation
+3.3.8.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -1028,7 +1022,7 @@ Table of Contents
    it unmodified or replace it with its own identity to be validated by
    the destination.
 
-3.3.10.  AI and ML-Based Intermediaries
+3.3.9.  AI and ML-Based Intermediaries
 
    Emerging agentic AI systems and other ML-based intermediaries
    introduce new considerations for workload identity and security
@@ -1038,7 +1032,7 @@ Table of Contents
    step workflows.
 
    From WIMSE perspective, AI intermediaries are a special case of
-   delegated workloads (see Section 3.3.7).  They inherit the upstream
+   delegated workloads (see Section 3.3.6).  They inherit the upstream
    principal's security context and are expected to operate strictly
    within the constraints of that delegation.  When invoking downstream
    workloads, the agent SHOULD propagate the upstream security context,
@@ -1145,17 +1139,6 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
-              Resource Identifier (URI): Generic Syntax", STD 66,
-              RFC 3986, DOI 10.17487/RFC3986, January 2005,
-              <https://www.rfc-editor.org/rfc/rfc3986>.
-
-   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-              Housley, R., and W. Polk, "Internet X.509 Public Key
-              Infrastructure Certificate and Certificate Revocation List
-              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5280>.
-
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7517>.
@@ -1169,15 +1152,21 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
+   [WIMSE-ID] Rosomakho, Y. and J. A. Salowey, "Workload Identifier",
+              Work in Progress, Internet-Draft, draft-ietf-wimse-
+              identifier-01, 29 December 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
+              identifier-01>.
+
 6.2.  Informative References
 
    [I-D.draft-ietf-oauth-identity-chaining]
               Schwenkschuster, A., Kasselman, P., Burgin, K., Jenkins,
               M. J., and B. Campbell, "OAuth Identity and Authorization
               Chaining Across Domains", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-identity-chaining-06, 12 September
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-identity-chaining-06>.
+              Draft, draft-ietf-oauth-identity-chaining-08, 9 February
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-identity-chaining-08>.
 
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
@@ -1207,6 +1196,20 @@ Table of Contents
               DOI 10.17487/RFC9683, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9683>.
 
+   [SPIFFE]   "Secure Production Identity Framework for Everyone
+              (SPIFFE)", May 2023,
+              <https://github.com/spiffe/spiffe/blob/main/standards/
+              SPIFFE.md>.
+
+   [SPIFFE-ID]
+              "The SPIFFE Identity and Verifiable Identity Document",
+              May 2025,
+              <https://github.com/spiffe/spiffe/blob/main/standards/
+              SPIFFE-ID.md>.
+
+   [SPIRE]    "SPIRE Concepts", n.d., <https://spiffe.io/docs/latest/
+              spire-about/spire-concepts/>.
+
 Acknowledgments
 
    Todo: Add your name here.
@@ -1223,6 +1226,12 @@ Changes since draft -05
    *  added audit section
 
    *  added AI use case
+
+Changes since draft -06
+
+   *  Separated Workload from Workload Instance
+
+   *  Moved workload identifier definition to a separate draft
 
 Authors' Addresses
 
