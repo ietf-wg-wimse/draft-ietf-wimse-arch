@@ -1233,6 +1233,8 @@ Changes since draft -06
 
    *  Moved workload identifier definition to a separate draft
 
+   *  Update credential provisioning section
+
 Authors' Addresses
 
    Joseph Salowey
