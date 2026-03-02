@@ -49,21 +49,21 @@ informative:
 
 --- abstract
 
-The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information.
+The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as software executing for a specific purpose, potentially comprising one or more running instances.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information.
 
 --- middle
 
 # Introduction
 
-The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a running instance of software executing for a specific purpose.
+The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a software that consists of one or more running instances executing for a specific purpose.
 
 Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credentials are used to authenticate communications between workloads.
 
-This architecture considers two ways to express identity information: X.509 certificates often used in the TLS layer and JSON Web Tokens (JWTs) used at the application layer. The applicability of given token format depends on application and security context and will be explored in later sections.
+This architecture considers two ways to express identity information: X.509 certificates, which are often used in the TLS layer, and JSON Web Tokens (JWTs) used at the application layer. The applicability of given token format depends on application and security context and will be explored in later sections.
 
-Once the workload is started and has obtained identity information, it can start performing its functions. Once the workload is invoked it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with other workload may require the security context associated with the authorization to be passed along the call chain.
+Once the workload is started and has obtained identity information, it can start performing its functions. When the workload is invoked it may require interaction with other workloads. An example of such interaction is shown in {{?I-D.ietf-oauth-transaction-tokens}} where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with another workload may require the security context associated with the authorization to be passed along the call chain.
 
-In the rest of the document we describe terminology and use cases, discuss details of the architecture, and discuss threats.
+In the rest of the document we describe terminology and use cases, discuss details of the architecture, and describe security considerations for this architecture.
 
 # Conventions and Definitions
 
@@ -73,7 +73,11 @@ This document uses the following terms:
 
 * Workload
 
-A workload is a running instance of software executing for a specific purpose. Workload typically interacts with other parts of a larger system. A workload may exist for a very short duration of time (fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs.
+A workload is an independently addressable and executable software entity. This may include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. A workload typically interacts with other parts of a larger system.
+
+* Workload Instance
+
+A workload instance is a single running instantiation of a workload at a point in time such as a container, a VM, or a serverless invocation. Workload instances may exist for a very short duration of time (a fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workload instances may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs. The number of instances for a workload may vary over time due to scaling, failover, or orchestration behavior.
 
 * Security Context
 
@@ -81,7 +85,7 @@ A security context provides information needed for a workload to perform its fun
 
 * Identity Proxy
 
-Identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. Identity proxy can be a capability of a transparent network service, such as a security gateway, or it can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. Identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
+The identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. A transparent network service such as a security gateway may act as an identity proxy, or the role can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. The identity proxy MAY introduce additional context based on source identifier, communication properties and administrative policy. This context MAY be communicated as a transaction token {{I-D.ietf-oauth-transaction-tokens}}.
 
 * Remote Attestation
 
@@ -89,7 +93,7 @@ The term "attestation", as defined in {{?RFC9683}}, refers to the process of gen
 
 * Workload Identity Credential
 
-A credential that contains a workload identifier used for service to service authentication. The credential is bound to a cryptographic key and requires that the presenter provide proof of possession of the secret key material. Examples of this credential include Workload Identity Certificates and the Workload Identity Token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.
+A credential that contains a workload identifier ({{!WIMSE-ID=I-D.ietf-wimse-identifier}}) used for service to service authentication. The credential may be bound to a cryptographic key and may require that the presenter provide proof of possession of the secret key material. Examples of such credentials include Workload Identity Certificates and the Workload Identity Token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.
 
 * Trust Domain
 
@@ -99,33 +103,31 @@ A trust domain is a logical grouping of systems that share a common set of secur
 
 ## Workload Identity Concepts {#whimsical-identity}
 
-Workload identity construct consists of three basic building blocks: trust domain, workload identifier and identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes. More complex workload identity constructs can be created from these basic building blocks.
+The Workload identity architecture consists of three basic building blocks: trust domain, workload identifier and identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes. More complex workload identity constructs can be created from these basic building blocks.
 
 ### Trust Domain
 
 A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains SHOULD be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of a trust domain helps to ensure global uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JWK Set {{!RFC7517}} for validating WIMSE WIT tokens. This mapping MUST be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. This secure mechanism is out of scope for this document.
 
-A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain. If two identifiers differ only by trust domain they still refer to two different entities.
+A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in {{Section 4.3 of WIMSE-ID}}. If two identifiers differ only by trust domain they still refer to two different entities.
 
 ### Workload Identifier
 
-The WIMSE architecture defines a workload identifier as a URI {{!RFC3986}}. This URI is used in the subject fields in the certificates and tokens defined later in this document. The URI MUST meet the criteria for the URI type of Subject Alternative Name defined in Section 4.2.1.6 of {{!RFC5280}}.
+A workload identifier uniquely names a workload within a trust domain and is carried in workload identity credentials.
 
->   The name MUST NOT be a relative URI, and it MUST follow the URI syntax and
->   encoding rules specified in {{!RFC3986}}.  The name MUST include both a
->   scheme and a scheme-specific-part.
+The format, syntax, comparison rules, and validation requirements for workload identifiers are defined in {{WIMSE-ID}}.
 
 In addition the URI MUST include an authority that identifies the trust domain within which the identifier is scoped. The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is {{SPIFFE-ID}}.
 
-While IP addresses are allowed as host names in the URI encoding rules, they MUST NOT be used to represent trust domains except in the case where they are needed for compatibility with legacy naming schemes.
+Two credentials containing the same workload identifier value represent the same workload only when validated under the same trust domain and issuer trust configuration.
 
-A workload identifier only has a meaning within the scope of a specific issuer. Two identities of the same value signed by different issuers may or may not refer to the same workload. In order to avoid collisions identity URIs SHOULD specify, in the URI's "authority" field, the trust domain associated with an issuer that is selected from a global name space such as host domains. However, the validator of an identity credential MUST make sure that they are using the correct issuer credential to verify the identity credential and that the issuer is trusted to issue tokens for the defined trust domain.
+A workload identifier MAY represent either a logical workload or a specific workload instance depending on deployment policy. Relying parties MUST interpret the identifier according to identity semantics to the trust domain.
 
 ### Workload Identity Credentials
 
-An agent provisions the identity credentials to the workload. These credentials are represented in form of JWT tokens and/or X.509 certificates.
+An agent provisions the identity credentials to the workload. These credentials are represented in the form of JWT tokens and/or X.509 certificates.
 
-JWT bearer tokens are presented to another party as a proof of identity. They are signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity credential that binds a JWT to a cryptographic key.
+JWT bearer tokens are presented to another party as a proof of identity. They may be signed to prevent forgery, however since these credentials are often not bound to other information it is possible that they could be stolen and reused elsewhere. To mitigate these risks and make the token more generally useful the WIMSE architecture defines a workload identity credential that binds a JWT to a cryptographic key.
 
 Both workload identity certificate and workload identity token (WIT) credentials consist of two parts:
 
@@ -186,7 +188,7 @@ The large box represents a trust domain of the application that is composed of s
 
 * Workload
 
-Three workloads are shown.  Each workload is an instance of running software executing for a specific purpose.  Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
+Three workloads are shown.  Each workload is an independently addressable software entity that may consist of one or more running instances executed for a specific purpose.  Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
 of sending and receiving requests to and from external systems or other internal workloads.
 
 * Gateway Service
@@ -196,7 +198,7 @@ The gateway MAY also implement identity proxy functionality including authentica
 
 * CA/Credential Service
 
-In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the same trust domain. The credentials are often X.509 based or JWT based.
+In this diagram the token/Credential service is a service responsible for issuing workload identities to workloads in the same trust domain. The credentials are often X.509 certificate-based or JWT-based.
 
 High level flows within the diagram
 
@@ -212,7 +214,7 @@ The client request is typically made over HTTPS, but other protocols may be used
 
 * (3) API request to workload 1
 
-The gateway is configured to forward requests to the correct workload.  The gateway often modifies the request to include specific authentication information about the application client and to remove any information that should not be forwarded internally.  The gateway authenticates the workload before forwarding the request.  This authentication usually uses TLS. The target workload may authenticate the gateway using TLS or some other means. As part of servicing the request the workload must make a request to another workload in the system.  In this scenario the workload is making a request to workload 3 over HTTPS.  Workload 1 may be able to authenticate the identity of workload 3 through the TLS protocol to ensure it is making a request of the right party.  Workload 3 will authenticate workload 1 using its workload identity credentials. If the Workload Identity Credentials are workload identity certificates then this can happen through TLS client authentication (mutual TLS). Alternatively, the workloads can use a JWT based authentication mechanism to authenticate on another. Workload three can use the authenticated identity of workload 1 to determine which APIs workload 1 is authorized 2 and to associated the authenticated identity with logs and other audit information.
+The gateway is configured to forward requests to the correct workload.  The gateway often modifies the request to include specific authentication information about the application client and to remove any information that should not be forwarded internally.  The gateway authenticates the workload before forwarding the request.  This authentication usually uses TLS. The target workload may authenticate the gateway using TLS or some other means. As part of servicing the request the workload must make a request to another workload in the system.  In this scenario the workload is making a request to workload 3 over HTTPS.  Workload 1 may be able to authenticate the identity of workload 3 through the TLS protocol to ensure it is making a request of the right party.  Workload 3 will authenticate workload 1 using its workload identity credentials. If the Workload Identity Credentials are workload identity certificates then this can happen through TLS client authentication (mutual TLS). Alternatively, the workloads can use a JWT based authentication mechanism to authenticate one another. Workload 3 can use the authenticated identity of workload 1 to determine which APIs workload 1 is authorized to invoke, and to associated the authenticated identity with logs and other audit information.
 
 * (4) API request to workload 2
 
@@ -475,7 +477,7 @@ Auditability is a critical requirement in systems that rely on workload identiti
 
 Audit trails are typically generated at multiple points:
 
-* Gateway Services: Log incoming client requests and their authenticated identities, including access tokens or client certificates used.
+* Gateway Services: Log incoming client requests, their authenticated identities and relevant context.
 * Workloads: Log authenticated peer identities, security context attributes, requested resources, and authorization outcomes.
 * Identity and Token Services: Log issuance and validation events for workload identity credentials and context tokens.
 
@@ -496,10 +498,6 @@ WIMSE systems SHOULD ensure audit logs are tamper-evident and securely stored. L
 ### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.
-
-###  Service Authorization
-
-After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
 ### Delegation and Impersonation {#delegation}
 
@@ -586,3 +584,9 @@ Todo: Add your name here.
 * rework of authentication section
 * added audit section
 * added AI use case
+
+# Changes since draft -06
+{:numbered="false"}
+
+* Separated Workload from Workload Instance
+* Moved workload identifier definition to a separate draft
