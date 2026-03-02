@@ -38,13 +38,13 @@ informative:
 
 --- abstract
 
-The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as a running instance of software executing for a specific purpose.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information.
+The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as software executing for a specific purpose, potentially comprising one or more running instances.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information.
 
 --- middle
 
 # Introduction
 
-The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a running instance of software executing for a specific purpose.
+The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a software that consists of one or more running instances executing for a specific purpose.
 
 Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credentials are used to authenticate communications between workloads.
 
@@ -62,7 +62,11 @@ This document uses the following terms:
 
 * Workload
 
-A workload is an independently addressable and executable software entity. This may include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. Workload typically interacts with other parts of a larger system. A workload may exist for a very short duration of time (fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workloads may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs.
+A workload is an independently addressable and executable software entity. This may include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. A workload typically interacts with other parts of a larger system.
+
+* Workload Instance
+
+A workload instance is a single running instantiation of a workload at a point in time such as a container, a VM, or a serverless invocation. Workload instances may exist for a very short duration of time (a fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workload instances may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs. The number of instances for a workload may vary over time due to scaling, failover, or orchestration behavior.
 
 * Security Context
 
@@ -173,7 +177,7 @@ The large box represents a trust domain of the application that is composed of s
 
 * Workload
 
-Three workloads are shown.  Each workload is an instance of running software executing for a specific purpose.  Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
+Three workloads are shown.  Each workload is an independently addressable software entity that may consist of one or more running instances executed for a specific purpose.  Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
 of sending and receiving requests to and from external systems or other internal workloads.
 
 * Gateway Service
@@ -580,4 +584,5 @@ Todo: Add your name here.
 # Changes since draft -06
 {:numbered="false"}
 
+* Separated Workload from Workload Instance
 * Moved workload identifier definition to a separate draft
