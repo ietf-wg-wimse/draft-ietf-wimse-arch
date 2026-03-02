@@ -82,7 +82,7 @@ The term "attestation", as defined in {{?RFC9683}}, refers to the process of gen
 
 * Workload Identity Credential
 
-A credential that contains a workload identifier used for service to service authentication. The credential may be bound to a cryptographic key and may require that the presenter provide proof of possession of the secret key material. Examples of such credentials include Workload Identity Certificates and the Workload Identity Token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.
+A credential that contains a workload identifier ({{!WIMSE-ID=I-D.ietf-wimse-identifier}}) used for service to service authentication. The credential may be bound to a cryptographic key and may require that the presenter provide proof of possession of the secret key material. Examples of such credentials include Workload Identity Certificates and the Workload Identity Token defined in {{?I-D.ietf-wimse-s2s-protocol}}. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.
 
 * Trust Domain
 
@@ -98,21 +98,19 @@ The Workload identity architecture consists of three basic building blocks: trus
 
 A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains SHOULD be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of a trust domain helps to ensure global uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JWK Set {{!RFC7517}} for validating WIMSE WIT tokens. This mapping MUST be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. This secure mechanism is out of scope for this document.
 
-A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain. If two identifiers differ only by trust domain they still refer to two different entities.
+A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in {{Section 4.3 of WIMSE-ID}}. If two identifiers differ only by trust domain they still refer to two different entities.
 
 ### Workload Identifier
 
-The WIMSE architecture defines a workload identifier as a URI {{!RFC3986}}. This URI is used in the subject fields in the certificates and tokens defined later in this document. The URI MUST meet the criteria for the URI type of Subject Alternative Name defined in Section 4.2.1.6 of {{!RFC5280}}.
+A workload identifier uniquely names a workload within a trust domain and is carried in workload identity credentials.
 
->   The name MUST NOT be a relative URI, and it MUST follow the URI syntax and
->   encoding rules specified in {{!RFC3986}}.  The name MUST include both a
->   scheme and a scheme-specific-part.
+The format, syntax, comparison rules, and validation requirements for workload identifiers are defined in {{WIMSE-ID}}.
 
-In addition the URI MUST include an authority that identifies the trust domain within which the identifier is scoped. The trust domain SHOULD be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is [SPIFFE ID](https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md).
+A workload identifier identifies the authenticated peer in service-to-service communication. It is used as the primary input to authorization decisions and recorded in audit events. Workload identifier MAY be bound to security context information.
 
-While IP addresses are allowed as host names in the URI encoding rules, they MUST NOT be used to represent trust domains except in the case where they are needed for compatibility with legacy naming schemes.
+Two credentials containing the same workload identifier value represent the same workload only when validated under the same trust domain and issuer trust configuration.
 
-A workload identifier only has a meaning within the scope of a specific issuer. Two identities of the same value signed by different issuers may or may not refer to the same workload. In order to avoid collisions, identity URIs SHOULD specify, in the URI's "authority" field, the trust domain associated with an issuer that is selected from a global name space such as host domains. However, the validator of an identity credential MUST make sure that they are using the correct issuer credential to verify the identity credential and that the issuer is trusted to issue tokens for the defined trust domain.
+A workload identifier MAY represent either a logical workload or a specific workload instance depending on deployment policy. Relying parties MUST interpret the identifier according to identity semantics to the trust domain.
 
 ### Workload Identity Credentials
 
@@ -475,7 +473,7 @@ Auditability is a critical requirement in systems that rely on workload identiti
 
 Audit trails are typically generated at multiple points:
 
-* Gateway Services: Log incoming client requests and their authenticated identities, including access tokens or client certificates used.
+* Gateway Services: Log incoming client requests, their authenticated identities and relevant context.
 * Workloads: Log authenticated peer identities, security context attributes, requested resources, and authorization outcomes.
 * Identity and Token Services: Log issuance and validation events for workload identity credentials and context tokens.
 
@@ -496,10 +494,6 @@ WIMSE systems SHOULD ensure audit logs are tamper-evident and securely stored. L
 ### Security Context Establishment and Propagation
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.
-
-###  Service Authorization
-
-After authentication of the peer, a workload can perform authorization by verifying that the authenticated identity has the appropriate permissions to access the requested resources and perform required actions. This process involves evaluating the security context described previously. The workload validates the security context, and checks the validity of permissions against its security policies to ensure that only authorized actions are allowed.
 
 ### Delegation and Impersonation {#delegation}
 
@@ -591,3 +585,4 @@ Todo: Add your name here.
 {:numbered="false"}
 
 * Separated Workload from Workload Instance
+* Moved workload identifier definition to a separate draft
