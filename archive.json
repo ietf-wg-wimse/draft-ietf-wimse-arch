@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T02:45:43.607055+00:00",
+  "timestamp": "2026-03-03T02:49:43.011717+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1646,6 +1646,22 @@
           "updatedAt": "2026-01-06T21:22:41Z"
         }
       ]
+    },
+    {
+      "number": 119,
+      "id": "I_kwDOLPTb0M7vJ9qn",
+      "title": "Passport vs background check",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/119",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Comment from Credential provisioning PR \n\nAdditionally the way you describe attestation here is the RATS background check model. While it has its place, all evidence points to the other model -- Passport -- being more widely used. Under the background check model, the workload sends evidence to relying party, and since the relying party checks the evidence on its behalf, there is no need for a workload to have its own credentials in the WIT/x.509 form. So if you are going to describe just one model, I think Passport model (evidence sent to Verifier, results from Verifier used to procure credentials) is perhaps a better one to cover.",
+      "createdAt": "2026-03-02T17:16:30Z",
+      "updatedAt": "2026-03-02T17:16:30Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5053,7 +5069,7 @@
       "id": "PR_kwDOLPTb0M7AxpGC",
       "title": "Update to Bootstrapping Workload Identifiers and Credentials section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/114",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -5062,17 +5078,19 @@
       "labels": [],
       "body": "The PR provides a little more background to discuss several concepts involved in provisioning credentials to the workload.  It incorporates the suggestion from attestation in #111 and add a bit more. \r\n\r\n@arndt-s @frumioj ",
       "createdAt": "2026-02-01T23:23:12Z",
-      "updatedAt": "2026-02-23T14:23:10Z",
+      "updatedAt": "2026-03-02T17:19:24Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
+      "baseRefOid": "8156939b2e85d5949da9b371a66a2ca6f37e73c5",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "cred-provisioning",
-      "headRefOid": "d85247b07dd6936844ae5087b594b0ff82df759d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1044520e16a17df063ac6e7732cb2c889a4ac8de",
+      "closedAt": "2026-03-02T17:19:24Z",
+      "mergedAt": "2026-03-02T17:19:24Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "d084686ce2b6c701d94b46067dc266aa09535b50"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5239,6 +5257,26 @@
               "updatedAt": "2026-02-23T14:23:10Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7nHlVk",
+          "commit": {
+            "abbreviatedOid": "d85247b"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T17:13:34Z",
+          "updatedAt": "2026-03-02T17:13:34Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "```suggestion\n* Bootstrap Credentials - A workload may receive a set of bootstrap credentials specific to its deployment mechanism, which are then used by the workload through another process to obtain WIMSE credentials. The workload may use the bootstrap credentials to obtain the private and public parts of the WIMSE credentials, or the workload may generate a private key pair and use the bootstrap credential to authorize an enrollment process to obtain the public credential (X.509 certificate or WIT). {{I-D.ietf-wimse-workload-identity-practices}} describes some ways workloads can be initially provisioned with bootstrap credentials.\n```",
+              "createdAt": "2026-03-02T17:13:34Z",
+              "updatedAt": "2026-03-02T17:13:34Z"
+            }
+          ]
         }
       ]
     },
@@ -5247,24 +5285,26 @@
       "id": "PR_kwDOLPTb0M7E7qwu",
       "title": "Separated workload from workload instance",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/115",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
       "createdAt": "2026-02-19T16:57:40Z",
-      "updatedAt": "2026-02-23T05:43:55Z",
+      "updatedAt": "2026-03-02T17:08:16Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "a14ffd91a6643b7f38fabd2fe77e086396f421ce",
+      "baseRefOid": "2ef870ddfc05038c8fb8ebbacb0a153da5bbbd75",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "many-instances",
-      "headRefOid": "b1f0bdf067a585a0931fb5d0976e23ab0a4a1df2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8ae37a7f05a3049064c0059995fb2047097a429b",
+      "closedAt": "2026-03-02T17:08:15Z",
+      "mergedAt": "2026-03-02T17:08:15Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "8156939b2e85d5949da9b371a66a2ca6f37e73c5"
+      },
       "comments": [],
       "reviews": [
         {
