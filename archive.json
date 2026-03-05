@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T02:49:43.011717+00:00",
+  "timestamp": "2026-03-05T02:45:31.602085+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -5078,7 +5078,7 @@
       "labels": [],
       "body": "The PR provides a little more background to discuss several concepts involved in provisioning credentials to the workload.  It incorporates the suggestion from attestation in #111 and add a bit more. \r\n\r\n@arndt-s @frumioj ",
       "createdAt": "2026-02-01T23:23:12Z",
-      "updatedAt": "2026-03-02T17:19:24Z",
+      "updatedAt": "2026-03-03T15:35:40Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8156939b2e85d5949da9b371a66a2ca6f37e73c5",
@@ -5277,6 +5277,19 @@
               "updatedAt": "2026-03-02T17:13:34Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M7nd9_X",
+          "commit": {
+            "abbreviatedOid": "1044520"
+          },
+          "author": "TheBankster",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "A few issues remain",
+          "createdAt": "2026-03-03T15:35:40Z",
+          "updatedAt": "2026-03-03T15:35:40Z",
+          "comments": []
         }
       ]
     },
