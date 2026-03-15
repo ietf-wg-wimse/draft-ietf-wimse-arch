@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T02:45:31.602085+00:00",
+  "timestamp": "2026-03-15T03:22:17.069840+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1660,6 +1660,22 @@
       "body": "Comment from Credential provisioning PR \n\nAdditionally the way you describe attestation here is the RATS background check model. While it has its place, all evidence points to the other model -- Passport -- being more widely used. Under the background check model, the workload sends evidence to relying party, and since the relying party checks the evidence on its behalf, there is no need for a workload to have its own credentials in the WIT/x.509 form. So if you are going to describe just one model, I think Passport model (evidence sent to Verifier, results from Verifier used to procure credentials) is perhaps a better one to cover.",
       "createdAt": "2026-03-02T17:16:30Z",
       "updatedAt": "2026-03-02T17:16:30Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 120,
+      "id": "I_kwDOLPTb0M7xjT2y",
+      "title": "Simultaneous use of workload credentials",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/120",
+      "state": "OPEN",
+      "author": "arndt-s",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Can workload credentials be used simultaneous in various levels of the stack. E.g. Workload Identity Credentials using TLS in the networking layer and Workload Identity Token in the application layer in parallel. \n\nRelated:\n- How do workload process these identities? \n- Do the identity (WIMSE Identifier) need to match? \n- What are security implications of it.\n\n\nRelated to \n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/87\n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/192",
+      "createdAt": "2026-03-10T15:29:54Z",
+      "updatedAt": "2026-03-10T15:30:15Z",
       "closedAt": null,
       "comments": []
     }
