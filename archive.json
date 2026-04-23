@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-15T03:22:17.069840+00:00",
+  "timestamp": "2026-04-23T03:35:21.364197+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -5476,6 +5476,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOLPTb0M7Uzc5n",
+      "title": "Add message flow and PEP/PDP drill-down to basic scenario",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/121",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adds `#arch-basic-ops` (PEP/PDP drill-down of the basic scenario, aasvg, creds xref, `#basic-workload-identity-scenario`).\n\nRelated: https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/177 \u2014 does not close it; creds draft still needs a follow-up to drop or shorten the overlapping section.",
+      "createdAt": "2026-04-23T00:37:18Z",
+      "updatedAt": "2026-04-23T00:39:10Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "1443d6ce80f2c8393f090ff546b134a3a65b84d1",
+      "headRepository": "yaronf/draft-ietf-wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "43d87b6d3031a9d1879324200713b0265dbfb2c7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
