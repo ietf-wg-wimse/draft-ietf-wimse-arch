@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 3 September 2026                                        Zscaler
+Expires: 16 November 2026                                        Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                            2 March 2026
+                                                             15 May 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2026.
+   This Internet-Draft will expire on 16 November 2026.
 
 Copyright Notice
 
@@ -1154,26 +1154,26 @@ Table of Contents
 
    [WIMSE-ID] Rosomakho, Y. and J. A. Salowey, "Workload Identifier",
               Work in Progress, Internet-Draft, draft-ietf-wimse-
-              identifier-01, 29 December 2025,
+              identifier-02, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              identifier-01>.
+              identifier-02>.
 
 6.2.  Informative References
 
    [I-D.draft-ietf-oauth-identity-chaining]
               Schwenkschuster, A., Kasselman, P., Burgin, K., Jenkins,
-              M. J., and B. Campbell, "OAuth Identity and Authorization
-              Chaining Across Domains", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-identity-chaining-08, 9 February
-              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-identity-chaining-08>.
+              M. J., Campbell, B., and A. Parecki, "OAuth Identity and
+              Authorization Chaining Across Domains", Work in Progress,
+              Internet-Draft, draft-ietf-oauth-identity-chaining-12, 11
+              May 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-oauth-identity-chaining-12>.
 
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
               "Transaction Tokens", Work in Progress, Internet-Draft,
-              draft-ietf-oauth-transaction-tokens-07, 24 January 2026,
+              draft-ietf-oauth-transaction-tokens-08, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              transaction-tokens-07>.
+              transaction-tokens-08>.
 
    [I-D.ietf-wimse-s2s-protocol]
               Campbell, B., Salowey, J. A., Schwenkschuster, A., and Y.
@@ -1186,9 +1186,9 @@ Table of Contents
    [I-D.ietf-wimse-workload-identity-practices]
               Schwenkschuster, A. and Y. Rosomakho, "Workload Identity
               Practices", Work in Progress, Internet-Draft, draft-ietf-
-              wimse-workload-identity-practices-03, 17 October 2025,
+              wimse-workload-identity-practices-04, 10 April 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              workload-identity-practices-03>.
+              workload-identity-practices-04>.
 
    [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
               "Remote Integrity Verification of Network Devices
