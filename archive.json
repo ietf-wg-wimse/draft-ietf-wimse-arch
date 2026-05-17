@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-23T03:35:21.364197+00:00",
+  "timestamp": "2026-05-17T04:09:11.052576+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -527,7 +527,7 @@
       "id": "I_kwDOLPTb0M6aUa0h",
       "title": "Workloads can consist of multiple running instances. ",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -538,8 +538,8 @@
       ],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/8234b6de1e221d19c950b0f564e33e5536278218/draft-ietf-wimse-arch.md?plain=1#L40\r\n\r\nThe current workload definition says it is defined as \"a running instance of software....\". I think this is overly restrictive - workloads can consist of one or more running instances of software. ",
       "createdAt": "2024-10-15T14:56:21Z",
-      "updatedAt": "2025-01-21T15:09:12Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-15T22:21:54Z",
+      "closedAt": "2026-05-15T22:21:54Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -561,6 +561,13 @@
           "body": "Perhaps we should be specific and pedantic about a workload software vs a workload instance ",
           "createdAt": "2024-10-20T17:21:10Z",
           "updatedAt": "2024-10-20T17:21:24Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/115",
+          "createdAt": "2026-05-15T22:21:54Z",
+          "updatedAt": "2026-05-15T22:21:54Z"
         }
       ]
     },
@@ -5489,7 +5496,7 @@
       "labels": [],
       "body": "Adds `#arch-basic-ops` (PEP/PDP drill-down of the basic scenario, aasvg, creds xref, `#basic-workload-identity-scenario`).\n\nRelated: https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/177 \u2014 does not close it; creds draft still needs a follow-up to drop or shorten the overlapping section.",
       "createdAt": "2026-04-23T00:37:18Z",
-      "updatedAt": "2026-04-23T00:39:10Z",
+      "updatedAt": "2026-05-15T22:18:37Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "1443d6ce80f2c8393f090ff546b134a3a65b84d1",
@@ -5500,6 +5507,85 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABAGaprw",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Looks good to me. Just few minor suggestions from my side.",
+          "createdAt": "2026-05-15T22:12:52Z",
+          "updatedAt": "2026-05-15T22:18:37Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nThe basic workload identity scenario described in {{basic-workload-identity-scenario}} and illustrated in {{arch-basic}} already sketches a trust domain, a gateway, a CA/credential service, and how an application client reaches multiple workloads. This section takes the same scenario and adds one level of detail for a single workload-to-workload hop: a caller and a callee, identity established with workload identity credentials, and a separate authorization step that may involve policy components.\n```",
+              "createdAt": "2026-05-15T22:12:52Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\nIn this view, the component enforcing authorization policy acts as a Policy Enforcement Point (PEP): it allows a request to proceed, blocks it, or applies obligations based on the authenticated peer identity and any relevant security context. A deployment may also use a Policy Decision Point (PDP), to which the enforcing component delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.\n```",
+              "createdAt": "2026-05-15T22:14:16Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\nThe diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.\n```",
+              "createdAt": "2026-05-15T22:15:25Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\nThe CA/credential service issues workload identity credentials; workloads obtain them before using those credentials for authentication. Provisioning details vary by deployment. The PEP is shown as a logical function associated with the callee-side request path. It may be implemented inside Workload B, in a sidecar, in a gateway, or in another component on the request path, as in {{arch-basic}}.\n```",
+              "createdAt": "2026-05-15T22:16:21Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\n1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific.\n```",
+              "createdAt": "2026-05-15T22:16:53Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            },
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\n3. Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload A is authenticated to Workload B, or to a component acting on Workload B's request path.\n```",
+              "createdAt": "2026-05-15T22:17:59Z",
+              "updatedAt": "2026-05-15T22:18:37Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 122,
+      "id": "PR_kwDOLPTb0M7cFNPC",
+      "title": "Fix CI",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/122",
+      "state": "MERGED",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-15T21:59:35Z",
+      "updatedAt": "2026-05-15T22:19:04Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "1443d6ce80f2c8393f090ff546b134a3a65b84d1",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "5d61ee213d8c7dd5958a8574a2fc9b6ce223ffe2",
+      "closedAt": "2026-05-15T22:19:04Z",
+      "mergedAt": "2026-05-15T22:19:04Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb"
+      },
       "comments": [],
       "reviews": []
     }
