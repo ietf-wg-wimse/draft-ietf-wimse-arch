@@ -355,11 +355,11 @@ There can be variations on cross domain workflows. For example, in step 3 the wo
 
 ## Message Flow and Policy Enforcement in the Basic Scenario {#arch-basic-ops}
 
-The basic workload identity scenario in {{basic-workload-identity-scenario}} (see {{arch-basic}}) already sketches a trust domain, a gateway, a CA/credential service, and how an application client reaches multiple workloads. This section takes the same scenario and adds one level of detail for a single workload-to-workload hop: a caller and a callee, identity established with workload identity credentials, and a separate authorization step that may involve policy components.
+The basic workload identity scenario described in {{basic-workload-identity-scenario}} and illustrated in {{arch-basic}} already sketches a trust domain, a gateway, a CA/credential service, and how an application client reaches multiple workloads. This section takes the same scenario and adds one level of detail for a single workload-to-workload hop: a caller and a callee, identity established with workload identity credentials, and a separate authorization step that may involve policy components.
 
-In this view, a Policy Enforcement Point (PEP) is the logical function that allows a request to proceed, blocks it, or applies obligations, after (or as part of) authenticating the peer. A Policy Decision Point (PDP) is an optional component to which a PEP delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.
+In this view, the component enforcing authorization policy acts as a Policy Enforcement Point (PEP): it allows a request to proceed, blocks it, or applies obligations based on the authenticated peer identity and any relevant security context. A deployment may also use a Policy Decision Point (PDP), to which the enforcing component delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.
 
-The diagram below is at the same level of abstraction as the flows in the workload credentials document {{?I-D.ietf-wimse-workload-creds}}: it is not a normative description of a single product, but a common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.
+The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.
 
 ~~~aasvg
 +------------+               +------------+
@@ -386,7 +386,7 @@ The diagram below is at the same level of abstraction as the flows in the worklo
 ~~~
 {: #arch-basic-ops-fig title="Logical message flow and policy points (drill-down of the basic scenario)."}
 
-The CA/credential service issues workload identity credentials; workloads obtain them early in the lifecycle (provisioning details vary by deployment). The PEP is shown on the callee (Workload B) path; alternatively it may also sit in a gateway or elsewhere, as in {{arch-basic}}.
+The CA/credential service issues workload identity credentials; workloads obtain them before using those credentials for authentication. Provisioning details vary by deployment. The PEP is shown as a logical function associated with the callee-side request path. It may be implemented inside Workload B, in a sidecar, in a gateway, or in another component on the request path, as in {{arch-basic}}.
 
 The high-level message flow is as follows:
 
