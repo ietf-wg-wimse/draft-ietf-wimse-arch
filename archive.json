@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-17T04:09:11.052576+00:00",
+  "timestamp": "2026-05-19T04:17:04.870174+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -5496,13 +5496,13 @@
       "labels": [],
       "body": "Adds `#arch-basic-ops` (PEP/PDP drill-down of the basic scenario, aasvg, creds xref, `#basic-workload-identity-scenario`).\n\nRelated: https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/177 \u2014 does not close it; creds draft still needs a follow-up to drop or shorten the overlapping section.",
       "createdAt": "2026-04-23T00:37:18Z",
-      "updatedAt": "2026-05-15T22:18:37Z",
+      "updatedAt": "2026-05-18T21:15:17Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "1443d6ce80f2c8393f090ff546b134a3a65b84d1",
       "headRepository": "yaronf/draft-ietf-wimse-arch",
       "headRefName": "main",
-      "headRefOid": "43d87b6d3031a9d1879324200713b0265dbfb2c7",
+      "headRefOid": "82ae36c90ced297b4cacd441725a0249d4067559",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5556,6 +5556,46 @@
               "body": "```suggestion\n3. Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload A is authenticated to Workload B, or to a component acting on Workload B's request path.\n```",
               "createdAt": "2026-05-15T22:17:59Z",
               "updatedAt": "2026-05-15T22:18:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABASHpMg",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaronf",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-18T21:12:34Z",
+          "updatedAt": "2026-05-18T21:12:35Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "I think your proposed text is a bit too general here. Specifically it omits to mention that credentials operate on a slower lifecycle then application requests.",
+              "createdAt": "2026-05-18T21:12:34Z",
+              "updatedAt": "2026-05-18T21:12:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABASI0tQ",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaronf",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-18T21:15:00Z",
+          "updatedAt": "2026-05-18T21:15:00Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "The new text is confusing IMHO. Regardless of where the physical auth work gets done, workload B needs to know that it was successful, so effectively \"Workload A is authenticated to Workload B\" and the second part of that sentence is redundant.",
+              "createdAt": "2026-05-18T21:15:00Z",
+              "updatedAt": "2026-05-18T21:15:00Z"
             }
           ]
         }
