@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-19T04:17:04.870174+00:00",
+  "timestamp": "2026-06-04T04:53:49.244101+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1685,6 +1685,30 @@
       "updatedAt": "2026-03-10T15:30:15Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 123,
+      "id": "I_kwDOLPTb0M8AAAABEIjYDg",
+      "title": "Additional considerations around workload identifiers.",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/123",
+      "state": "OPEN",
+      "author": "fandreas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/blob/41fb87003b43adccd77af7e91ad06e5e3499066f/draft-ietf-wimse-workload-creds.md?plain=1#L163\n\nI'd like to see some considerations around workload identifier uniqueness and at least \"service\" versus \"instance\", i.e. multiple instances of the same workload (software) versus a particular instance (see also the thread in https://mailarchive.ietf.org/arch/msg/wimse/i5xZo84jY9sB-EmbGAD2Ufu0g7s/).\n\nSubsequently, I'd also like to see some explicit mechanisms in the credentials that enable us to indicate one versus the other (as well as both at the same time, and maybe even other \"types\" going forward). ",
+      "createdAt": "2026-01-14T02:38:37Z",
+      "updatedAt": "2026-06-02T14:35:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "arndt-s",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Transferring to architecture repository ..",
+          "createdAt": "2026-06-02T14:34:22Z",
+          "updatedAt": "2026-06-02T14:34:22Z"
+        }
+      ]
     }
   ],
   "pulls": [
