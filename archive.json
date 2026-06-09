@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-04T04:53:49.244101+00:00",
+  "timestamp": "2026-06-09T04:15:05.124353+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -290,7 +290,7 @@
       "id": "I_kwDOLPTb0M6DDjnm",
       "title": "Add attestation process diagram",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -301,8 +301,8 @@
       ],
       "body": "We should add graphical representation of attestation process to simplify reader understanding",
       "createdAt": "2024-03-20T23:03:33Z",
-      "updatedAt": "2025-12-29T15:28:41Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-08T16:16:23Z",
+      "closedAt": "2026-06-08T16:16:23Z",
       "comments": [
         {
           "author": "muhammad-usama-sardar",
@@ -313,10 +313,17 @@
         },
         {
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Adding a link to the related issue about the definition of the term attestation #109 ",
           "createdAt": "2025-12-29T15:28:41Z",
           "updatedAt": "2025-12-29T15:28:41Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as for now in practice attestation is performed only during provisioning as we have that covered.",
+          "createdAt": "2026-06-08T16:16:23Z",
+          "updatedAt": "2026-06-08T16:16:23Z"
         }
       ]
     },
@@ -1621,15 +1628,15 @@
       "id": "I_kwDOLPTb0M7gwRnm",
       "title": "Security considerations for \"Attestation\" (and Attested TLS)",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/110",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "muhammad-usama-sardar",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "As discussed [on list](https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/):\n\nAs I asked in meeting 123 on mic, it is unclear why the architecture document needs to talk about attestation at all. If it does, it has to properly **justify** that and mention the corresponding **security considerations**. Unfortunately, draft-ietf-wimse-arch-06 does neither of those.\n\nIs there any real WIMSE deployment other than SPIRE which actually uses attestation? If so, which one of pre-/intra-/post-handshake attestation is used there? Please point me to protocol specifications.\n\nCould you please point me to concrete WIMSE deployment with some protocol other than TLS?\n\nAmong the security considerations, given that TLS is typical protocol used in WIMSE deployments, it has to mention the [attacks](https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS) in security considerations. For reference, formal proof of insecurity is [here](https://github.com/CCC-Attestation/formal-spec-id-crisis). \n\nFor SPIRE: What is important for security considerations is that: Is \"node (or remote) attestation\" done over the same established connection? or is a new connection established each time?\n\nUltimately, workload may connect to some other workload using another TLS connection (assuming that workload is remote). I believe that from security standpoint, what matters most is which attestation artifact (RATS Conceptual Message) is used in that TLS connection. Since all of this attestation (with Server) is done before doing that TLS connection, this is clearly pre-handshake attestation.\n\nIn the Agent - \"Server\" connection, who is the TLS Client and who is the TLS Server? ",
       "createdAt": "2025-12-30T16:58:27Z",
-      "updatedAt": "2026-01-06T21:22:41Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-08T16:12:21Z",
+      "closedAt": "2026-06-08T16:12:21Z",
       "comments": [
         {
           "author": "strideynet",
@@ -1651,6 +1658,13 @@
           "body": "Proposed text: \n\nSection 4.5: Attestation\n\nWhen attestation is used, the security considerations of [RFC9334] apply. When TLS is used as the transport protocol in pre-handshake attestation form, such as [Intel's RA-TLS], it may be vulnerable to replay attacks [2]. When TLS is used as the transport protocol in intra-handshake attestation form, such as [draft-fossati-tls-attestation-09], it may be vulnerable to diversion attacks [2]. These risks can be mitigated by using post-handshake attestation [2].\n\n[2] https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS\n\n[Intel's RA-TLS][ https://arxiv.org/pdf/1801.05863](https://arxiv.org/pdf/1801.05863)",
           "createdAt": "2026-01-06T21:22:41Z",
           "updatedAt": "2026-01-06T21:22:41Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as this detail is not architecture level.",
+          "createdAt": "2026-06-08T16:12:21Z",
+          "updatedAt": "2026-06-08T16:12:21Z"
         }
       ]
     },
@@ -1662,11 +1676,13 @@
       "state": "OPEN",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "Comment from Credential provisioning PR \n\nAdditionally the way you describe attestation here is the RATS background check model. While it has its place, all evidence points to the other model -- Passport -- being more widely used. Under the background check model, the workload sends evidence to relying party, and since the relying party checks the evidence on its behalf, there is no need for a workload to have its own credentials in the WIT/x.509 form. So if you are going to describe just one model, I think Passport model (evidence sent to Verifier, results from Verifier used to procure credentials) is perhaps a better one to cover.",
       "createdAt": "2026-03-02T17:16:30Z",
-      "updatedAt": "2026-03-02T17:16:30Z",
+      "updatedAt": "2026-06-08T16:06:27Z",
       "closedAt": null,
       "comments": []
     },
@@ -1678,11 +1694,13 @@
       "state": "OPEN",
       "author": "arndt-s",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [],
       "body": "Can workload credentials be used simultaneous in various levels of the stack. E.g. Workload Identity Credentials using TLS in the networking layer and Workload Identity Token in the application layer in parallel. \n\nRelated:\n- How do workload process these identities? \n- Do the identity (WIMSE Identifier) need to match? \n- What are security implications of it.\n\n\nRelated to \n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/87\n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/192",
       "createdAt": "2026-03-10T15:29:54Z",
-      "updatedAt": "2026-03-10T15:30:15Z",
+      "updatedAt": "2026-06-08T16:06:02Z",
       "closedAt": null,
       "comments": []
     },
@@ -1694,11 +1712,13 @@
       "state": "OPEN",
       "author": "fandreas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/blob/41fb87003b43adccd77af7e91ad06e5e3499066f/draft-ietf-wimse-workload-creds.md?plain=1#L163\n\nI'd like to see some considerations around workload identifier uniqueness and at least \"service\" versus \"instance\", i.e. multiple instances of the same workload (software) versus a particular instance (see also the thread in https://mailarchive.ietf.org/arch/msg/wimse/i5xZo84jY9sB-EmbGAD2Ufu0g7s/).\n\nSubsequently, I'd also like to see some explicit mechanisms in the credentials that enable us to indicate one versus the other (as well as both at the same time, and maybe even other \"types\" going forward). ",
       "createdAt": "2026-01-14T02:38:37Z",
-      "updatedAt": "2026-06-02T14:35:01Z",
+      "updatedAt": "2026-06-08T16:11:22Z",
       "closedAt": null,
       "comments": [
         {
