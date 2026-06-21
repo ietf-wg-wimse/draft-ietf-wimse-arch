@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-09T04:15:05.124353+00:00",
+  "timestamp": "2026-06-21T05:06:09.919601+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1425,7 +1425,7 @@
       "id": "I_kwDOLPTb0M7P_nsq",
       "title": "Should workload identifier only have meaning within scope of a specific issuer ?",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/101",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1434,9 +1434,17 @@
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L111\n\nI'm not sure I agree with this. If you trust both issuers, then they should refer to the same workload. Conversely, if you don't trust both, then you should only accept the identity claimed by the one you trust. Regardless, I'm not clear on whether the intent here is to allow for a third-party issuer to provide identity credentials for a given trust domain. I believe this should be allowed. Either way, the text should clarify this. ",
       "createdAt": "2025-10-07T00:43:14Z",
-      "updatedAt": "2026-02-24T16:23:38Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-06-20T21:59:51Z",
+      "closedAt": "2026-06-20T21:59:51Z",
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This text is now removed from the architecture doc",
+          "createdAt": "2026-06-20T21:59:51Z",
+          "updatedAt": "2026-06-20T21:59:51Z"
+        }
+      ]
     },
     {
       "number": 102,
@@ -1572,12 +1580,13 @@
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "jsalowey"
+        "jsalowey",
+        "yaroslavros"
       ],
       "labels": [],
       "body": "From the virtual interim meeting in October 2025:\n\n> Yaroslav talked about the terminology of \"Workloads\". There are\n> conflicting definitions in other places.\n> \n> Question to the group: Should workload be defined and what definition\n> should we use?\n> \n> Joe: Flemming had some ideas about the definition.\n> \n> Arndt: In loadbalancer situations they do not look independently\n> addressable.\n> \n> Yaroslav: It depends on how you look at them. From the outside, I agree\n> with you. From the inside, they are independently addressable.\n> \n> The current definition is very vague.\n> \n> Joe citing Flemming \"it's important that we support the notion of a\n> workload instance versus a \"service\" that consists of multiple instances\n> of the same SW image\". We probably need to resolve the issue raised by\n> Arndt in some way.\n> \n> Mark: Could we say it is an \"entity\" or \"group of identities\"? It acts\n> as one - that is the key aspect here.\n> \n> Yaroslav: We can expand the definition. Software entity or group o\n> identities.\n> \n> Justin: I suggest to bikeshed this terminology issues on the list (or on\n> github).",
       "createdAt": "2025-10-28T16:18:35Z",
-      "updatedAt": "2025-11-25T17:37:49Z",
+      "updatedAt": "2026-06-21T00:00:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -1586,6 +1595,13 @@
           "body": "There is also another issue with relevance to the terminology topic: https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/42",
           "createdAt": "2025-10-28T16:26:00Z",
           "updatedAt": "2025-10-28T16:26:00Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Should be addressed by https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/102",
+          "createdAt": "2026-06-21T00:00:33Z",
+          "updatedAt": "2026-06-21T00:00:33Z"
         }
       ]
     },
@@ -5670,6 +5686,58 @@
       "mergeCommit": {
         "oid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 124,
+      "id": "PR_kwDOLPTb0M7ox0WH",
+      "title": "Tighten up terminology: workload, instance and service",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/124",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/102",
+      "createdAt": "2026-06-21T00:00:07Z",
+      "updatedAt": "2026-06-21T00:00:08Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "7cdc5012721f1d1cdc026f3ee8a399bc027e21da",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 125,
+      "id": "PR_kwDOLPTb0M7oyBVU",
+      "title": "Added layered authentication use case",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/120",
+      "createdAt": "2026-06-21T00:30:42Z",
+      "updatedAt": "2026-06-21T00:30:43Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "layered-auth",
+      "headRefOid": "ba5429f72f19aa3fefc1d295224a682a043297cd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
