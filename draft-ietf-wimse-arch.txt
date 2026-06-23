@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 16 November 2026                                        Zscaler
+Expires: 25 December 2026                                        Zscaler
                                                            H. Tschofenig
                                                                    H-BRS
-                                                             15 May 2026
+                                                            23 June 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2026.
+   This Internet-Draft will expire on 25 December 2026.
 
 Copyright Notice
 
@@ -80,16 +80,17 @@ Table of Contents
        3.2.1.  Basic Workload Identity Scenario
        3.2.2.  Context and workload Identity
        3.2.3.  Cross-Domain Communication
-     3.3.  Workload Identity Use Cases
-       3.3.1.  Bootstrapping Workload Identifiers and Credentials
-       3.3.2.  Service Authentication
-       3.3.3.  Service Authorization
-       3.3.4.  Audit Trails
-       3.3.5.  Security Context Establishment and Propagation
-       3.3.6.  Delegation and Impersonation
-       3.3.7.  Asynchronous and Batch Requests
-       3.3.8.  Cross-boundary Workload Identity
-       3.3.9.  AI and ML-Based Intermediaries
+     3.3.  Message Flow and Policy Enforcement in the Basic Scenario
+     3.4.  Workload Identity Use Cases
+       3.4.1.  Bootstrapping Workload Identifiers and Credentials
+       3.4.2.  Service Authentication
+       3.4.3.  Service Authorization
+       3.4.4.  Audit Trails
+       3.4.5.  Security Context Establishment and Propagation
+       3.4.6.  Delegation and Impersonation
+       3.4.7.  Asynchronous and Batch Requests
+       3.4.8.  Cross-boundary Workload Identity
+       3.4.9.  AI and ML-Based Intermediaries
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
@@ -644,9 +645,97 @@ Table of Contents
    service using its Workload Identity Credentials directly with an
    external token service.
 
-3.3.  Workload Identity Use Cases
+3.3.  Message Flow and Policy Enforcement in the Basic Scenario
 
-3.3.1.  Bootstrapping Workload Identifiers and Credentials
+   The basic workload identity scenario described in Section 3.2.1 and
+   illustrated in Figure 1 already sketches a trust domain, a gateway, a
+   CA/credential service, and how an application client reaches multiple
+   workloads.  This section takes the same scenario and adds one level
+   of detail for a single workload-to-workload hop: a caller and a
+   callee, identity established with workload identity credentials, and
+   a separate authorization step that may involve policy components.
+
+   In this view, the component enforcing authorization policy acts as a
+   Policy Enforcement Point (PEP): it allows a request to proceed,
+   blocks it, or applies obligations based on the authenticated peer
+   identity and any relevant security context.  A deployment may also
+   use a Policy Decision Point (PDP), to which the enforcing component
+   delegates policy evaluation.  Deployments may implement PEP and PDP
+   as separate services, co-locate them with a gateway or sidecar, or
+   embed them in the receiving workload.  This document does not define
+   a particular policy language or protocol between PEP and PDP.
+
+   The diagram below is illustrative rather than normative.  It shows
+   one common logical layout for how provisioning, connection setup,
+   application-level authentication, authorization, and response relate
+   when two workloads communicate.
+
+   +------------+               +------------+
+   |            |      (2)      |            |
+   |            |<=============>|            |
+   |            |               |            |
+   | Workload A |      (3)      | Workload B |
+   |            |==============>|            |
+   |            |               |            |
+   |            |      (5)      |   +--------+
+   |            |<==============|   |  PEP   |
+   +------------+               +---+--------+
+         ^                        ^     ^
+         |            (1)         |     |
+     (1) | +----------------------+     | (4)
+         | |                            |
+         v v                            v
+   +------------+               +------------+
+   |            |               |            |
+   |  CA/       |               |    PDP     |
+   |  Credential|               | (optional) |
+   |  Service   |               |            |
+   +------------+               +------------+
+
+      Figure 4: Logical message flow and policy points (drill-down of
+                            the basic scenario).
+
+   The CA/credential service issues workload identity credentials;
+   workloads obtain them before using those credentials for
+   authentication.  Provisioning details vary by deployment.  The PEP is
+   shown as a logical function associated with the callee-side request
+   path.  It may be implemented inside Workload B, in a sidecar, in a
+   gateway, or in another component on the request path, as in Figure 1.
+
+   The high-level message flow is as follows:
+
+   1.  Workload A and Workload B each obtain a workload identity
+       credential from the CA/credential service before using that
+       credential for authentication.  The timing, lifetime, and refresh
+       behavior of these credentials are deployment-specific.  Normally
+       credentials operate on a slower lifecycle than application
+       requests.
+
+   2.  A transport connection is set up for the call.  It may use mutual
+       TLS and workload identity certificates, or another transport
+       security mechanism.
+
+   3.  Workload A sends a request to Workload B.  This may include
+       application-level authentication using a Workload Identity Token
+       and proof of possession, as defined in the credentials and
+       protocol documents.  Workload B authenticates Workload A.
+
+   4.  Workload B authorizes the request.  The PEP enforces the
+       decision, optionally consulting a PDP.  Policy details and
+       message-level authorization formats are out of scope for this
+       architecture.
+
+   5.  Workload B returns a response to Workload A, which may be an
+       error or success.
+
+   Depending on the protocol binding, peer authentication may occur
+   during step (2) at the transport layer, during step (3) at the
+   application layer, or both, as in the other scenarios in this
+   section.
+
+3.4.  Workload Identity Use Cases
+
+3.4.1.  Bootstrapping Workload Identifiers and Credentials
 
    Workloads need to obtain credentials before they can fully
    participate in the WIMSE architecture.  The architecture does not
@@ -704,9 +793,9 @@ Table of Contents
       which the workload can decrypt through a process that may involve
       attestation.
 
-3.3.1.1.  Agent Assisted Provisioning Example
+3.4.1.1.  Agent Assisted Provisioning Example
 
-   Figure 4 illustrates software layering at a host running workloads.
+   Figure 5 illustrates software layering at a host running workloads.
    During startup, workloads bootstrap their identifiers and credentials
    with the help of an agent.  The agent may be associated with one or
    more workloads to help ensure that workloads are provisioned with the
@@ -746,7 +835,7 @@ Table of Contents
      | Host Operating System and Hardware                   |
      +------------------------------------------------------+
 
-   Figure 4: Host Software Layering in a Workload Identity Architecture.
+   Figure 5: Host Software Layering in a Workload Identity Architecture.
 
    How the workload obtains its identity credentials and interacts with
    the agent is subject to different implementations.  Some common
@@ -763,15 +852,15 @@ Table of Contents
    *  Environment Variables - Identity credentials may also be injected
       into workloads using operating system environment variables.
 
-3.3.2.  Service Authentication
+3.4.2.  Service Authentication
 
    One of the most basic use cases for workload identity is
    authentication of one workload to another, such as in the case where
    one service is making a request to another service as part of a
    larger, more complex application.  Following authentication, the
    identity of the peer can be used to enforce fine-grained
-   authorization policies as described in Section 3.3.3 and generate
-   audit trails as described in Section 3.3.4.
+   authorization policies as described in Section 3.4.3 and generate
+   audit trails as described in Section 3.4.4.
 
    Authentication mechanisms are used to establish the identity of the
    peer workload before secure communication can proceed.
@@ -798,7 +887,7 @@ Table of Contents
    verifiable identity for the communicating party, which can then be
    used for further policy enforcement.
 
-   Figure 5 illustrates the communication between different workloads.
+   Figure 6 illustrates the communication between different workloads.
    Two aspects are important to highlight: First, there is a need to
    consider the interaction with workloads that are external to the
    trust domain (sometimes called cross-domain).  Second, the
@@ -828,9 +917,9 @@ Table of Contents
      |                                                              |
      +--------------------------------------------------------------+
 
-               Figure 5: Workload-to-Workload Communication.
+               Figure 6: Workload-to-Workload Communication.
 
-3.3.3.  Service Authorization
+3.4.3.  Service Authorization
 
    Once authentication has successfully established the identity of a
    peer workload, authorization mechanisms determine whether the
@@ -856,7 +945,7 @@ Table of Contents
       location, time of day).
 
    Authorization checks may also incorporate delegation and
-   impersonation semantics, as described in Section 3.3.6, where
+   impersonation semantics, as described in Section 3.4.6, where
    upstream workloads are authorized to act on behalf of end-users or
    other services, within the scope of their issued credentials and
    policy.
@@ -872,7 +961,7 @@ Table of Contents
    performed by the caller, provided that the caller has sufficient
    context and policy information to make a correct decision.
 
-3.3.4.  Audit Trails
+3.4.4.  Audit Trails
 
    Auditability is a critical requirement in systems that rely on
    workload identities and security context.  Each authenticated request
@@ -918,7 +1007,7 @@ Table of Contents
    information and event management (SIEM) systems to enable compliance,
    threat detection, and incident response.
 
-3.3.5.  Security Context Establishment and Propagation
+3.4.5.  Security Context Establishment and Propagation
 
    In a typical system of workloads additional information is needed in
    order for the workload to perform its function.  For example, it is
@@ -938,7 +1027,7 @@ Table of Contents
    the receiver can verify which workload initiated the transaction and
    the context that was intended for the transaction.
 
-3.3.6.  Delegation and Impersonation
+3.4.6.  Delegation and Impersonation
 
    When source workloads send authenticated requests to destination
    workloads, those destination workloads may rely on upstream
@@ -956,7 +1045,7 @@ Table of Contents
    and/or impersonation tokens within and across trust domains, when
    arriving at authorization decisions.
 
-3.3.7.  Asynchronous and Batch Requests
+3.4.7.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
    requests to destination workloads.  A destination workload may need
@@ -974,14 +1063,14 @@ Table of Contents
    of the acting service performing asynchronous computation on the
    source workload's behalf.
 
-3.3.8.  Cross-boundary Workload Identity
+3.4.8.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.3.8.1.  Egress Identity Generalization
+3.4.8.1.  Egress Identity Generalization
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
@@ -1011,7 +1100,7 @@ Table of Contents
    communications adhere to security and privacy requirements while
    maintaining interoperability across trust boundaries.
 
-3.3.8.2.  Inbound Gateway Identity Validation
+3.4.8.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -1022,7 +1111,7 @@ Table of Contents
    it unmodified or replace it with its own identity to be validated by
    the destination.
 
-3.3.9.  AI and ML-Based Intermediaries
+3.4.9.  AI and ML-Based Intermediaries
 
    Emerging agentic AI systems and other ML-based intermediaries
    introduce new considerations for workload identity and security
@@ -1032,7 +1121,7 @@ Table of Contents
    step workflows.
 
    From WIMSE perspective, AI intermediaries are a special case of
-   delegated workloads (see Section 3.3.6).  They inherit the upstream
+   delegated workloads (see Section 3.4.6).  They inherit the upstream
    principal's security context and are expected to operate strictly
    within the constraints of that delegation.  When invoking downstream
    workloads, the agent SHOULD propagate the upstream security context,
@@ -1068,7 +1157,7 @@ Table of Contents
         | Security Context   |   Security context   |   Security context   |
         +------------------->+--------------------->+--------------------->|
 
-                   Figure 6: AI agent communication
+                   Figure 7: AI agent communication
 
 4.  Security Considerations
 
@@ -1164,9 +1253,9 @@ Table of Contents
               Schwenkschuster, A., Kasselman, P., Burgin, K., Jenkins,
               M. J., Campbell, B., and A. Parecki, "OAuth Identity and
               Authorization Chaining Across Domains", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-identity-chaining-12, 11
-              May 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-oauth-identity-chaining-12>.
+              Internet-Draft, draft-ietf-oauth-identity-chaining-15, 19
+              June 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-oauth-identity-chaining-15>.
 
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
@@ -1234,6 +1323,9 @@ Changes since draft -06
    *  Moved workload identifier definition to a separate draft
 
    *  Update credential provisioning section
+
+   *  Add Section 3.3: message flow and PEP/PDP drill-down of the basic
+      scenario, before use cases
 
 Authors' Addresses
 
