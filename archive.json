@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-21T05:06:09.919601+00:00",
+  "timestamp": "2026-06-23T04:12:07.698894+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1194,14 +1194,14 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
-        "hannestschofenig"
+        "yaroslavros"
       ],
       "labels": [
         "security-consideration"
       ],
       "body": "Should we have a security consideration that makes it clear that authentication is not sufficient to determine access control, a seperate authorization decision is required. Authentication only establishes that the issuer collected proof of the workload identity, and that the same workload is now attempting to access a resource. The access control decision depends on a separate authorisation decision.",
       "createdAt": "2025-01-07T20:08:22Z",
-      "updatedAt": "2025-01-21T15:17:16Z",
+      "updatedAt": "2026-06-22T16:28:50Z",
       "closedAt": null,
       "comments": [
         {
@@ -1294,14 +1294,14 @@
       "author": "dagdagdag83",
       "authorAssociation": "NONE",
       "assignees": [
-        "jsalowey"
+        "yaroslavros"
       ],
       "labels": [
         "Interim-topic"
       ],
       "body": "The document states in section 3.1.3 the following:\n```\nBoth X.509 certificate and workload identity token credentials consist of two parts:\n* a certificate or WIT is a signed data structure that contains a public key and identity information\n* a corresponding private key\n```\nThese Workload Identity Credentials (WIC) are effectively based on a key pair which has to be managed by the workloads themselves or the infrastructure/platform. All key material must be rotated and stored securely, which means that these key pairs have these considerations. The document doesn't mention this.\n\nThe workload could generate a new key pair for each single request but that is suboptimal. The document should provide some mention or guidelines on how often the workload (or platform) should rotate the certificates or the WIT/WPT key pair.\n",
       "createdAt": "2025-05-05T22:09:55Z",
-      "updatedAt": "2025-09-30T15:12:42Z",
+      "updatedAt": "2026-06-22T16:30:56Z",
       "closedAt": null,
       "comments": []
     },
@@ -1576,7 +1576,7 @@
       "id": "I_kwDOLPTb0M7UVR-V",
       "title": "Terminology for \"Workloads\"",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/106",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1586,8 +1586,8 @@
       "labels": [],
       "body": "From the virtual interim meeting in October 2025:\n\n> Yaroslav talked about the terminology of \"Workloads\". There are\n> conflicting definitions in other places.\n> \n> Question to the group: Should workload be defined and what definition\n> should we use?\n> \n> Joe: Flemming had some ideas about the definition.\n> \n> Arndt: In loadbalancer situations they do not look independently\n> addressable.\n> \n> Yaroslav: It depends on how you look at them. From the outside, I agree\n> with you. From the inside, they are independently addressable.\n> \n> The current definition is very vague.\n> \n> Joe citing Flemming \"it's important that we support the notion of a\n> workload instance versus a \"service\" that consists of multiple instances\n> of the same SW image\". We probably need to resolve the issue raised by\n> Arndt in some way.\n> \n> Mark: Could we say it is an \"entity\" or \"group of identities\"? It acts\n> as one - that is the key aspect here.\n> \n> Yaroslav: We can expand the definition. Software entity or group o\n> identities.\n> \n> Justin: I suggest to bikeshed this terminology issues on the list (or on\n> github).",
       "createdAt": "2025-10-28T16:18:35Z",
-      "updatedAt": "2026-06-21T00:00:33Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-22T16:23:40Z",
+      "closedAt": "2026-06-22T16:23:39Z",
       "comments": [
         {
           "author": "hannestschofenig",
@@ -1628,15 +1628,15 @@
       "id": "I_kwDOLPTb0M7gjudM",
       "title": "Attestation definition",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/109",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "frumioj",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Reading the attestation reference in the architecture document to RFC 9683, I was wondering whether:\n\na) In my opinion, it would be better NOT to refer to this specific document, which is very specifically about \"Remote Integrity Verification of Network Devices Containing Trusted Platform Modules\" - do we really only mean TPM-related attestation, or could there be different forms? This reference appears inappropriate for the use-case (although having looked for a more appropriate definition and not found it, I do understand why this was chosen).\nb) There appears no broader (even IETF-wide) definition of attestation. RATS itself does not appear to define attestation anywhere. Would it be appropriate to propose a definition be added to https://www.rfc-editor.org/info/rfc4949 and link to that? Would it be appropriate, for now, to define attestation more broadly at least within the WIMSE context?\nc) WIMSE is focused on an \"agent\" attesting on behalf of a \"workload\" - this use-case is certainly not listed in RATS, and RATS also only describes use-cases backed by hardware. Should the specific WIMSE architecture of workload attestation be listed in RATS as a use-case?",
       "createdAt": "2025-12-29T13:48:20Z",
-      "updatedAt": "2025-12-29T13:48:20Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-22T16:23:27Z",
+      "closedAt": "2026-06-22T16:23:27Z",
       "comments": []
     },
     {
@@ -1725,7 +1725,7 @@
       "id": "I_kwDOLPTb0M8AAAABEIjYDg",
       "title": "Additional considerations around workload identifiers.",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/123",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1734,8 +1734,8 @@
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/blob/41fb87003b43adccd77af7e91ad06e5e3499066f/draft-ietf-wimse-workload-creds.md?plain=1#L163\n\nI'd like to see some considerations around workload identifier uniqueness and at least \"service\" versus \"instance\", i.e. multiple instances of the same workload (software) versus a particular instance (see also the thread in https://mailarchive.ietf.org/arch/msg/wimse/i5xZo84jY9sB-EmbGAD2Ufu0g7s/).\n\nSubsequently, I'd also like to see some explicit mechanisms in the credentials that enable us to indicate one versus the other (as well as both at the same time, and maybe even other \"types\" going forward). ",
       "createdAt": "2026-01-14T02:38:37Z",
-      "updatedAt": "2026-06-08T16:11:22Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-22T16:22:14Z",
+      "closedAt": "2026-06-22T16:22:14Z",
       "comments": [
         {
           "author": "arndt-s",
@@ -1743,8 +1743,31 @@
           "body": "Transferring to architecture repository ..",
           "createdAt": "2026-06-02T14:34:22Z",
           "updatedAt": "2026-06-02T14:34:22Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/124 and Workload Identifier draft",
+          "createdAt": "2026-06-22T16:22:14Z",
+          "updatedAt": "2026-06-22T16:22:14Z"
         }
       ]
+    },
+    {
+      "number": 126,
+      "id": "I_kwDOLPTb0M8AAAABGXvkSA",
+      "title": "Identifiers for authorization and audit",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/126",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Will the identity used for authorization and for accounting/auditing be the same? In some instances it may, but the requirements may be different. For example, specific instance information may not be of interest in an authorization case, but it may in audit. While we can just say this is a matter of policy, but our current arrangement may not be flexible enough to meet the needs of both authorization and accounting/audit.\nOne possibility is to say, In the absence of local policy that defined the information used for audit and authorization:\n\nIt is recommended that the WIMSE identifier SHOULD be used for authorization\nIn the identifier draft define an WMISE audit identifier that is used if the requirements for authorization and auditing are different. The audit identifier may be carried in a separate audit identifier attribute in a WIMSE Credential.\nIf the WIMSE audit identifier attribute is included it SHOULD be used for audit records. If it is not present then the WIMSE Identifier should be used.\nThis is something we will need to take to the group, but I think ti may be at part of the discussion around instance vs. service.\n\n",
+      "createdAt": "2026-06-23T04:03:26Z",
+      "updatedAt": "2026-06-23T04:03:26Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2546,21 +2569,21 @@
       "id": "PR_kwDOLPTb0M5y-E-z",
       "title": "Propose to add one use case of security context establishment and propagation ",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Propose to add one use case of security context establishment and propagation.",
       "createdAt": "2024-06-19T14:10:07Z",
-      "updatedAt": "2025-12-20T08:41:10Z",
+      "updatedAt": "2026-06-22T16:20:16Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "a24b63e07b642cd2693dfa075592cbd65c93d26d",
       "headRepository": "maxpassion/draft-ietf-wimse-arch",
       "headRefName": "patch-2",
       "headRefOid": "70ab669ec4a1c8a1ba66541337f67918354d4337",
-      "closedAt": null,
+      "closedAt": "2026-06-22T16:20:15Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2613,6 +2636,13 @@
           "body": "> generalized the use case of security context establishment and propagation.\r\n\r\n@hannestschofenig @yaroslavros Could you please review the updated text? thanks",
           "createdAt": "2024-11-06T05:40:33Z",
           "updatedAt": "2024-11-06T05:40:33Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as this got addressed in \"AI and ML-Based Intermediaries\" section",
+          "createdAt": "2026-06-22T16:20:15Z",
+          "updatedAt": "2026-06-22T16:20:15Z"
         }
       ],
       "reviews": [
@@ -2655,7 +2685,7 @@
             "abbreviatedOid": "70ab669"
           },
           "author": "jkanywhere",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-12-20T08:40:51Z",
@@ -3065,25 +3095,33 @@
       "id": "PR_kwDOLPTb0M54DYoB",
       "title": " Add use case for \"Delegation and Impersonation\"",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/39",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": " Add use case for \"Delegation and Impersonation\"",
       "createdAt": "2024-08-12T03:49:37Z",
-      "updatedAt": "2024-08-12T03:49:37Z",
+      "updatedAt": "2026-06-22T16:19:02Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "8234b6de1e221d19c950b0f564e33e5536278218",
       "headRepository": "maxpassion/draft-ietf-wimse-arch",
       "headRefName": "patch-3",
       "headRefOid": "3d1eccb9b40a45213523e16f710b18f1d103b7ee",
-      "closedAt": null,
+      "closedAt": "2026-06-22T16:19:01Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as Delegation and Impersonation is now filled in",
+          "createdAt": "2026-06-22T16:19:01Z",
+          "updatedAt": "2026-06-22T16:19:01Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -4702,31 +4740,38 @@
       "id": "PR_kwDOLPTb0M67BGMz",
       "title": "Attestation definition proposal",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/111",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "frumioj",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "See discussion in https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/",
       "createdAt": "2025-12-30T19:29:13Z",
-      "updatedAt": "2026-02-01T23:26:57Z",
+      "updatedAt": "2026-06-22T16:18:09Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
       "headRepository": "frumioj/wimse-arch",
       "headRefName": "patch-2",
       "headRefOid": "c353fe094e422fa746b2669c93d6f5b2c9fa4ccc",
-      "closedAt": null,
+      "closedAt": "2026-06-22T16:18:08Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [
         {
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Might resolve #109 ",
           "createdAt": "2025-12-30T19:30:09Z",
           "updatedAt": "2025-12-30T19:30:09Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as implemented in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/114",
+          "createdAt": "2026-06-22T16:18:08Z",
+          "updatedAt": "2026-06-22T16:18:08Z"
         }
       ],
       "reviews": [
@@ -4762,7 +4807,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-06T16:19:05Z",
@@ -4782,7 +4827,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-06T16:21:08Z",
@@ -4842,7 +4887,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-07T18:51:52Z",
@@ -4922,7 +4967,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-16T18:09:01Z",
@@ -4942,7 +4987,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-16T18:15:56Z",
@@ -4962,7 +5007,7 @@
             "abbreviatedOid": "8121e19"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-16T18:20:09Z",
@@ -5022,7 +5067,7 @@
             "abbreviatedOid": "8862c83"
           },
           "author": "frumioj",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-01-19T14:09:37Z",
@@ -5091,21 +5136,21 @@
       "id": "PR_kwDOLPTb0M69fY9F",
       "title": "Security Consideration for Attestation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/113",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "muhammad-usama-sardar",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "- Sec consideration of attestation\r\n- Sec consideration of attestation with TLS\r\n\r\nBackground: https://mailarchive.ietf.org/arch/msg/wimse/W5w6aLBWwwonLaNx2j3Ip1mf49U/\r\n\r\nAdditional background:https://datatracker.ietf.org/doc/draft-usama-seat-intra-vs-post/\r\n\r\nTechnical details: https://www.researchgate.net/publication/398839141_Identity_Crisis_in_Confidential_Computing_Formal_Analysis_of_Attested_TLS",
       "createdAt": "2026-01-15T23:02:54Z",
-      "updatedAt": "2026-01-19T10:04:03Z",
+      "updatedAt": "2026-06-22T16:16:02Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "44fae95d35ff5c42a6f768ba3a5c07a650fac0fe",
       "headRepository": "muhammad-usama-sardar/draft-ietf-wimse-arch",
       "headRefName": "main",
       "headRefOid": "c022bd858a5bc61f76627710c17948790e435212",
-      "closedAt": null,
+      "closedAt": "2026-06-22T16:16:01Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -5116,6 +5161,13 @@
           "body": "With due respect, I don't believe there is any hyping. It has been evaluated at a top security conference. [TEE.fail](https://tee.fail/), [Wiretap.fail](https://wiretap.fail/), and [BadRAM](https://badram.eu/) have practically exploited and demostrated identity crisis.",
           "createdAt": "2026-01-16T23:41:06Z",
           "updatedAt": "2026-01-16T23:41:06Z"
+        },
+        {
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing for now",
+          "createdAt": "2026-06-22T16:16:01Z",
+          "updatedAt": "2026-06-22T16:16:01Z"
         }
       ],
       "reviews": [
@@ -5549,24 +5601,26 @@
       "id": "PR_kwDOLPTb0M7Uzc5n",
       "title": "Add message flow and PEP/PDP drill-down to basic scenario",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/121",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Adds `#arch-basic-ops` (PEP/PDP drill-down of the basic scenario, aasvg, creds xref, `#basic-workload-identity-scenario`).\n\nRelated: https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/177 \u2014 does not close it; creds draft still needs a follow-up to drop or shorten the overlapping section.",
       "createdAt": "2026-04-23T00:37:18Z",
-      "updatedAt": "2026-05-18T21:15:17Z",
+      "updatedAt": "2026-06-23T04:00:25Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "1443d6ce80f2c8393f090ff546b134a3a65b84d1",
       "headRepository": "yaronf/draft-ietf-wimse-arch",
       "headRefName": "main",
-      "headRefOid": "82ae36c90ced297b4cacd441725a0249d4067559",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0195bbaf3c1cca2a092b01cac3d31832d256df5e",
+      "closedAt": "2026-06-23T04:00:25Z",
+      "mergedAt": "2026-06-23T04:00:25Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "e32574dec4180e9e681b40dbce92bc091967f855"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5607,9 +5661,9 @@
             },
             {
               "originalPosition": 50,
-              "body": "```suggestion\n1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific.\n```",
+              "body": "```suggestion\r\n1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific. Normally credentials operate on a slower lifecycle than application requests.\r\n```",
               "createdAt": "2026-05-15T22:16:53Z",
-              "updatedAt": "2026-05-15T22:18:37Z"
+              "updatedAt": "2026-06-21T20:52:09Z"
             },
             {
               "originalPosition": 52,
@@ -5658,6 +5712,66 @@
               "updatedAt": "2026-05-18T21:15:00Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDp79KQ",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-21T20:52:19Z",
+          "updatedAt": "2026-06-21T20:52:19Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "I'd rather avoid specific time guidance here as such things are very much use case specific. How about the updated version?",
+              "createdAt": "2026-06-21T20:52:19Z",
+              "updatedAt": "2026-06-21T20:52:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDp7_Wg",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-21T20:52:57Z",
+          "updatedAt": "2026-06-21T20:52:57Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "Fair enough. Let's drop this suggestion.",
+              "createdAt": "2026-06-21T20:52:57Z",
+              "updatedAt": "2026-06-21T20:52:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDsXzHA",
+          "commit": {
+            "abbreviatedOid": "43d87b6"
+          },
+          "author": "yaronf",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T09:39:15Z",
+          "updatedAt": "2026-06-22T09:39:16Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "Things are use-case specific, but when you say \"hours\" it's clear to people that everything is automated. Otherwise, people might still have the old PKI model in mind.\r\n\r\nIn any case, your draft, your call.",
+              "createdAt": "2026-06-22T09:39:16Z",
+              "updatedAt": "2026-06-22T09:46:43Z"
+            }
+          ]
         }
       ]
     },
@@ -5694,52 +5808,198 @@
       "id": "PR_kwDOLPTb0M7ox0WH",
       "title": "Tighten up terminology: workload, instance and service",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/124",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/102",
       "createdAt": "2026-06-21T00:00:07Z",
-      "updatedAt": "2026-06-21T00:00:08Z",
+      "updatedAt": "2026-06-23T04:06:55Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb",
+      "baseRefOid": "2f86b0b95fb79db959da3d5f5191be3ebdf0f130",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "main",
-      "headRefOid": "7cdc5012721f1d1cdc026f3ee8a399bc027e21da",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ede51399a58a2bc6cbae710d4f3bba5757c364f2",
+      "closedAt": "2026-06-23T04:06:55Z",
+      "mergedAt": "2026-06-23T04:06:55Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "bb955790db6568a916e1efe25d413f412bce6c97"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDqztEg",
+          "commit": {
+            "abbreviatedOid": "7cdc501"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T04:49:10Z",
+          "updatedAt": "2026-06-22T04:49:10Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "Will the identity used for authorization and for accounting/auditing be the same?  In some instances it may, but the requirements may be different.  For example, specific instance information may not be of interest in an authorization case, but it may in audit.   While we can just say this is a matter of policy, but our current arrangement may not be flexible enough to meet the needs of both authorization and accounting/audit.\nOne possibility is to  say, In the absence of local policy that defined the information used for audit and authorization:\n1. It is recommended that the WIMSE identifier SHOULD be used for authorization\n2. In the identifier draft define an WMISE audit identifier that is used if the requirements for authorization and auditing are different.  The audit identifier may be carried in a separate audit identifier  attribute in a WIMSE Credential. \n3.  If the WIMSE audit identifier attribute is included it SHOULD be used for audit records. If it is not present then the WIMSE Identifier should be used. \n\nThis is something we will need to take to the group, but I think ti may be at part of the discussion around instance vs. service. ",
+              "createdAt": "2026-06-22T04:49:10Z",
+              "updatedAt": "2026-06-22T04:49:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDs_IHQ",
+          "commit": {
+            "abbreviatedOid": "7cdc501"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T11:08:27Z",
+          "updatedAt": "2026-06-22T11:08:27Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "I agree, but I am not sure if this changes anything for this PR. Would you mind opening a separate issue to track this? Or do you think something needs to be changed here?",
+              "createdAt": "2026-06-22T11:08:27Z",
+              "updatedAt": "2026-06-22T11:08:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDzIdrQ",
+          "commit": {
+            "abbreviatedOid": "7cdc501"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T04:04:01Z",
+          "updatedAt": "2026-06-23T04:04:02Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "#126 ",
+              "createdAt": "2026-06-23T04:04:01Z",
+              "updatedAt": "2026-06-23T04:04:02Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 125,
       "id": "PR_kwDOLPTb0M7oyBVU",
       "title": "Added layered authentication use case",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/120",
       "createdAt": "2026-06-21T00:30:42Z",
-      "updatedAt": "2026-06-21T00:30:43Z",
+      "updatedAt": "2026-06-23T04:01:19Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "layered-auth",
-      "headRefOid": "ba5429f72f19aa3fefc1d295224a682a043297cd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "dc919a518108abaa37886bed587553bff3cafb19",
+      "closedAt": "2026-06-23T04:01:19Z",
+      "mergedAt": "2026-06-23T04:01:19Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "2f86b0b95fb79db959da3d5f5191be3ebdf0f130"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDqvG0g",
+          "commit": {
+            "abbreviatedOid": "ba5429f"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T04:29:49Z",
+          "updatedAt": "2026-06-22T04:29:49Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "This paragraph and the next paragraph have a lot of redundancy. Perhaps they can be combined. ",
+              "createdAt": "2026-06-22T04:29:49Z",
+              "updatedAt": "2026-06-22T04:29:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDqwwkA",
+          "commit": {
+            "abbreviatedOid": "ba5429f"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T04:34:44Z",
+          "updatedAt": "2026-06-22T04:34:44Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "\"Deployments also need to determine whether the application-layer credential is cryptographically bound to the request, the transport channel, or another proof-of-possession key.\" \nThe above sentence talks about cryptographic binding which we do not really talk about elsewhere.  IF we are going to include this concept then I think we need to have more discussion of it. See also #84 which is related, but not exactly the same. ",
+              "createdAt": "2026-06-22T04:34:44Z",
+              "updatedAt": "2026-06-22T04:34:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDtPkCA",
+          "commit": {
+            "abbreviatedOid": "ba5429f"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T11:52:35Z",
+          "updatedAt": "2026-06-22T11:52:35Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Updated. Please check.",
+              "createdAt": "2026-06-22T11:52:35Z",
+              "updatedAt": "2026-06-22T11:52:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABDtPtIw",
+          "commit": {
+            "abbreviatedOid": "ba5429f"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T11:52:58Z",
+          "updatedAt": "2026-06-22T11:52:58Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "Good call. That's a can of worms we probably don't want to open here. Please check updated PR.",
+              "createdAt": "2026-06-22T11:52:58Z",
+              "updatedAt": "2026-06-22T11:52:58Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
