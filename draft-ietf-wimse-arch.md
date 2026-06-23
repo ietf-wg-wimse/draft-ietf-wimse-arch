@@ -140,7 +140,7 @@ The workload identity certificate or WIT is presented during authentication, how
 
 ## Workload Identity System Scenarios
 
-### Basic Workload Identity Scenario
+### Basic Workload Identity Scenario {#basic-workload-identity-scenario}
 
 ~~~aasvg
                         +--------------------------------Trust Boundary---------------+
@@ -352,6 +352,51 @@ Some example interactions in this scenario:
 * (7) Workload 2 uses the access token (a) to access the external service in the other trust domain.
 
 There can be variations on cross domain workflows. For example, in step 3 the workload was able to use its Workload Identity Credentials to directly access an infrastructure service. It also may be possible for an workload to request an access token for an external service using its Workload Identity Credentials directly with an external token service.
+
+## Message Flow and Policy Enforcement in the Basic Scenario {#arch-basic-ops}
+
+The basic workload identity scenario described in {{basic-workload-identity-scenario}} and illustrated in {{arch-basic}} already sketches a trust domain, a gateway, a CA/credential service, and how an application client reaches multiple workloads. This section takes the same scenario and adds one level of detail for a single workload-to-workload hop: a caller and a callee, identity established with workload identity credentials, and a separate authorization step that may involve policy components.
+
+In this view, the component enforcing authorization policy acts as a Policy Enforcement Point (PEP): it allows a request to proceed, blocks it, or applies obligations based on the authenticated peer identity and any relevant security context. A deployment may also use a Policy Decision Point (PDP), to which the enforcing component delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.
+
+The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.
+
+~~~aasvg
++------------+               +------------+
+|            |      (2)      |            |
+|            |<=============>|            |
+|            |               |            |
+| Workload A |      (3)      | Workload B |
+|            |==============>|            |
+|            |               |            |
+|            |      (5)      |   +--------+
+|            |<==============|   |  PEP   |
++------------+               +---+--------+
+      ^                        ^     ^
+      |            (1)         |     |
+  (1) | +----------------------+     | (4)
+      | |                            |
+      v v                            v
++------------+               +------------+
+|            |               |            |
+|  CA/       |               |    PDP     |
+|  Credential|               | (optional) |
+|  Service   |               |            |
++------------+               +------------+
+~~~
+{: #arch-basic-ops-fig title="Logical message flow and policy points (drill-down of the basic scenario)."}
+
+The CA/credential service issues workload identity credentials; workloads obtain them before using those credentials for authentication. Provisioning details vary by deployment. The PEP is shown as a logical function associated with the callee-side request path. It may be implemented inside Workload B, in a sidecar, in a gateway, or in another component on the request path, as in {{arch-basic}}.
+
+The high-level message flow is as follows:
+
+1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific. Normally credentials operate on a slower lifecycle than application requests.
+2. A transport connection is set up for the call. It may use mutual TLS and workload identity certificates, or another transport security mechanism.
+3. Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.
+4. Workload B authorizes the request. The PEP enforces the decision, optionally consulting a PDP. Policy details and message-level authorization formats are out of scope for this architecture.
+5. Workload B returns a response to Workload A, which may be an error or success.
+
+Depending on the protocol binding, peer authentication may occur during step (2) at the transport layer, during step (3) at the application layer, or both, as in the other scenarios in this section.
 
 ## Workload Identity Use Cases
 
@@ -591,3 +636,4 @@ Todo: Add your name here.
 * Separated Workload from Workload Instance
 * Moved workload identifier definition to a separate draft
 * Update credential provisioning section
+* Add {{arch-basic-ops}}: message flow and PEP/PDP drill-down of the basic scenario, before use cases
