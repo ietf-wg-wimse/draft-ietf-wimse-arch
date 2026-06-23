@@ -1197,7 +1197,7 @@ svg {
                     <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.  <a href="#name-bootstrapping-workload-iden" class="internal xref">Bootstrapping Workload Identifiers and Credentials</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.2">
-                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-service-authentication" class="internal xref">Service Authentication</a></p>
+                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-workload-and-service-authen" class="internal xref">Workload and Service Authentication</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.3">
                     <p id="section-toc.1-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="auto internal xref">3.4.3</a>.  <a href="#name-layered-workload-authentica" class="internal xref">Layered Workload Authentication</a></p>
@@ -1279,7 +1279,7 @@ svg {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a software that consists of one or more running instances executing for a specific purpose.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a logical software entity that executes for a specific purpose and may be represented at runtime by one or more workload instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credentials are used to authenticate communications between workloads.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This architecture considers two ways to express identity information: X.509 certificates, which are often used in the TLS layer, and JSON Web Tokens (JWTs) used at the application layer. The applicability of given token format depends on application and security context and will be explored in later sections.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Once the workload is started and has obtained identity information, it can start performing its functions. When the workload is invoked it may require interaction with other workloads. An example of such interaction is shown in <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span> where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with another workload may require the security context associated with the authorization to be passed along the call chain.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1301,7 +1301,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-2-3.1.1">Workload<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-4">A workload is an independently addressable and executable software entity. This may include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. A workload typically interacts with other parts of a larger system.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">A workload is an independently addressable and executable software entity. A workload is a logical entity rather than necessarily a single running process. It may be implemented by one or more workload instances and may expose, consume, or participate in one or more services. Examples include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. A workload typically interacts with other parts of a larger system.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
           <p id="section-2-5.1.1">Workload Instance<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
@@ -1310,34 +1310,46 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-6">A workload instance is a single running instantiation of a workload at a point in time such as a container, a VM, or a serverless invocation. Workload instances may exist for a very short duration of time (a fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workload instances may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs. The number of instances for a workload may vary over time due to scaling, failover, or orchestration behavior.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-7.1">
-          <p id="section-2-7.1.1">Security Context<a href="#section-2-7.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-7.1.1">Service<a href="#section-2-7.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-8">A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different sources.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<p id="section-2-8">A service is a function, API, or capability exposed to other entities. A service may be implemented by a single workload, by multiple workload instances of the same workload, or by multiple workloads acting together. A service can have a stable identity that is distinct from the identity of any particular workload instance. When this document refers to service authentication or service authorization, it refers to authentication or authorization of the workload identity used to represent that service in a particular deployment.<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-9.1">
-          <p id="section-2-9.1.1">Identity Proxy<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-9.1.1">Application System<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-10">The identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. A transparent network service such as a security gateway may act as an identity proxy, or the role can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. The identity proxy <span class="bcp14">MAY</span> introduce additional context based on source identifier, communication properties and administrative policy. This context <span class="bcp14">MAY</span> be communicated as a transaction token <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span>.<a href="#section-2-10" class="pilcrow">¶</a></p>
+<p id="section-2-10">An application system is a set of workloads, services, gateways, credential services, and related infrastructure that together implement an application or application function. An application system may be contained within a single trust domain or may interact with services in other trust domains.<a href="#section-2-10" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-11.1">
-          <p id="section-2-11.1.1">Remote Attestation<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-11.1.1">Security Context<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-12">The term "attestation", as defined in <span>[<a href="#RFC9683" class="cite xref">RFC9683</a>]</span>, refers to the process of generating and evaluating remote attestation Evidence. <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> describes Evidence and the different communication patterns.<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-12">A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different sources.<a href="#section-2-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-13.1">
-          <p id="section-2-13.1.1">Workload Identity Credential<a href="#section-2-13.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-13.1.1">Identity Proxy<a href="#section-2-13.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-14">A credential that contains a workload identifier (<span>[<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>) used for service to service authentication. The credential may be bound to a cryptographic key and may require that the presenter provide proof of possession of the secret key material. Examples of such credentials include Workload Identity Certificates and the Workload Identity Token defined in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.<a href="#section-2-14" class="pilcrow">¶</a></p>
+<p id="section-2-14">The identity proxy is an intermediary that can inspect, replace or augment workload identity and security context information. A transparent network service such as a security gateway may act as an identity proxy, or the role can be implemented in a service performing explicit connection processing, such as an ingress gateway or a Content Delivery Network (CDN) service. The identity proxy <span class="bcp14">MAY</span> introduce additional context based on source identifier, communication properties and administrative policy. This context <span class="bcp14">MAY</span> be communicated as a transaction token <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span>.<a href="#section-2-14" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-15.1">
-          <p id="section-2-15.1.1">Trust Domain<a href="#section-2-15.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-15.1.1">Remote Attestation<a href="#section-2-15.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-16">A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>, trust domains should be identified by a fully qualified domain name associated with the organization defining the trust domain.<a href="#section-2-16" class="pilcrow">¶</a></p>
+<p id="section-2-16">The term "attestation", as defined in <span>[<a href="#RFC9683" class="cite xref">RFC9683</a>]</span>, refers to the process of generating and evaluating remote attestation Evidence. <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> describes Evidence and the different communication patterns.<a href="#section-2-16" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-17.1">
+          <p id="section-2-17.1.1">Workload Identity Credential<a href="#section-2-17.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-18">A credential that contains a workload identifier (<span>[<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>) used for service to service authentication. The credential may be bound to a cryptographic key and may require that the presenter provide proof of possession of the secret key material. Examples of such credentials include Workload Identity Certificates and the Workload Identity Token defined in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>. Deployments may also deploy bearer tokens as workload identity credentials to interoperate with legacy systems that do not support credentials bound to keys.<a href="#section-2-18" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-19.1">
+          <p id="section-2-19.1.1">Trust Domain<a href="#section-2-19.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-20">A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>, trust domains should be identified by a fully qualified domain name associated with the organization defining the trust domain.<a href="#section-2-20" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="architecture">
@@ -1369,7 +1381,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3.1.2-2">The format, syntax, comparison rules, and validation requirements for workload identifiers are defined in <span>[<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-3">In addition the URI <span class="bcp14">MUST</span> include an authority that identifies the trust domain within which the identifier is scoped. The trust domain <span class="bcp14">SHOULD</span> be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is <span>[<a href="#SPIFFE-ID" class="cite xref">SPIFFE-ID</a>]</span>.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-4">Two credentials containing the same workload identifier value represent the same workload only when validated under the same trust domain and issuer trust configuration.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-5">A workload identifier <span class="bcp14">MAY</span> represent either a logical workload or a specific workload instance depending on deployment policy. Relying parties <span class="bcp14">MUST</span> interpret the identifier according to identity semantics to the trust domain.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-5">A workload identifier <span class="bcp14">MAY</span> represent a logical workload, a service implemented by one or more workloads, or a specific workload instance, depending on deployment policy. Relying parties <span class="bcp14">MUST</span> interpret the identifier according to the identity semantics defined by the issuing trust domain.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="workload-identity-credentials">
@@ -1525,7 +1537,8 @@ to the workload application system there is an application client that calls API
               <p id="section-3.2.1-6.1.1">Workload<a href="#section-3.2.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.2.1-7">Three workloads are shown.  Each workload is an independently addressable software entity that may consist of one or more running instances executed for a specific purpose.  Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
+<p id="section-3.2.1-7">Three workloads are shown. Each workload is an independently addressable software entity that may consist of one or more workload instances at runtime.
+Workloads obtain their identity credentials from a Credentials Service (1) and use them to authenticate to other workloads and systems in the process
 of sending and receiving requests to and from external systems or other internal workloads.<a href="#section-3.2.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.1-8.1">
@@ -2086,13 +2099,13 @@ Components and interactions from previous scenarios are still relevant to this e
 </div>
 </section>
 </div>
-<div id="service-authentication">
+<div id="workload-and-service-authentication">
 <section id="section-3.4.2">
-          <h4 id="name-service-authentication">
-<a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-service-authentication" class="section-name selfRef">Service Authentication</a>
+          <h4 id="name-workload-and-service-authen">
+<a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-workload-and-service-authen" class="section-name selfRef">Workload and Service Authentication</a>
           </h4>
-<p id="section-3.4.2-1">One of the most basic use cases for workload identity is authentication of one workload to another, such as in the case where one service is making a request to another service as part of a larger, more complex application. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.4.4</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.4.5</a>.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-2">Authentication mechanisms are used to establish the identity of the peer workload before secure communication can proceed.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-1">One of the most basic use cases for workload identity is authentication of one workload to another. In many deployments, this is described operationally as one service making a request to another service as part of a larger, more complex application. The identifier in the credentials may identify a logical service, a workload that implements that service, or a specific workload instance, depending on the identity model chosen by the issuing trust domain. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.4.4</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.4.5</a>.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-2">Authentication mechanisms are used to establish the identity of the peer before secure communication can proceed. The peer identity is carried in a workload identity credential, even when the credential represents a service-level identity rather than a particular workload instance.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-4">Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2105,7 +2118,7 @@ Components and interactions from previous scenarios are still relevant to this e
           </ul>
 <p id="section-3.4.2-6">These mechanisms can also be used together. For example, a workload identity certificate can be used for transport-layer authentication to an intermediary, while an application-layer Workload Identity Token is used to authenticate the caller to the destination workload, as described in <a href="#layered-workload-authentication" class="auto internal xref">Section 3.4.3</a>.<a href="#section-3.4.2-6" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-7">These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-8"><a href="#arch-chain" class="auto internal xref">Figure 6</a> illustrates the communication between different workloads. Two aspects are important
+<p id="section-3.4.2-8"><a href="#arch-chain" class="auto internal xref">Figure 6</a> illustrates communication between workloads and services. Two aspects are important
 to highlight: First, there is a need to consider the interaction with workloads that are external
 to the trust domain (sometimes called cross-domain). Second, the interaction does
 not only occur between workloads that directly interact with each other but instead may also
@@ -2256,7 +2269,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
           <h4 id="name-service-authorization">
 <a href="#section-3.4.4" class="section-number selfRef">3.4.4. </a><a href="#name-service-authorization" class="section-name selfRef">Service Authorization</a>
           </h4>
-<p id="section-3.4.4-1">Once authentication has successfully established the identity of a peer workload, authorization mechanisms determine whether the authenticated identity is permitted to perform the requested action on the target workload.<a href="#section-3.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.4-1">Once authentication has successfully established the identity of a peer, authorization mechanisms determine whether the authenticated identity is permitted to perform the requested action on the target workload or service. The authenticated identity may represent a logical service, a workload, or a specific workload instance, and authorization policy needs to be written with this distinction in mind.<a href="#section-3.4.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.4-2">Authorization specified by WIMSE is context-aware. It relies on attributes carried in the security context, which may originate from upstream systems such as gateways or identity proxies. This context may be derived from end-user attributes, trust domain policies, or deployment-specific metadata (e.g., environment, service role, workload instance).<a href="#section-3.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.4-3">Authorization decisions typically include:<a href="#section-3.4.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2271,7 +2284,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 </li>
           </ul>
 <p id="section-3.4.4-5">Authorization checks may also incorporate delegation and impersonation semantics, as described in <a href="#delegation" class="auto internal xref">Section 3.4.7</a>, where upstream workloads are authorized to act on behalf of end-users or other services, within the scope of their issued credentials and policy.<a href="#section-3.4.4-5" class="pilcrow">¶</a></p>
-<p id="section-3.4.4-6">A key architectural consideration is where authorization is evaluated. For most workload-to-workload interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization <span class="bcp14">MAY</span> be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.<a href="#section-3.4.4-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.4-6">A key architectural consideration is where authorization is evaluated. For most workload-to-workload or service-to-service interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization is performed by the callee, ensuring that the target workload or service enforces its own access policies. But in some scenarios, such as database access or operations on complex back-end systems, authorization decisions may be too fine-grained or application-specific to be enforced by the subject of the operation. In these cases, authorization <span class="bcp14">MAY</span> be performed by the caller, provided that the caller has sufficient context and policy information to make a correct decision.<a href="#section-3.4.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="audit-trails">
@@ -2333,7 +2346,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
           <h4 id="name-delegation-and-impersonatio">
 <a href="#section-3.4.7" class="section-number selfRef">3.4.7. </a><a href="#name-delegation-and-impersonatio" class="section-name selfRef">Delegation and Impersonation</a>
           </h4>
-<p id="section-3.4.7-1">When source workloads send authenticated requests to destination workloads, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, such services relying on upstream microservices for answers, may use delegation and/or impersonation semantics as described in RFC 8693 OAuth 2.0 Access Token Exchange.<a href="#section-3.4.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.7-1">When source workloads send authenticated requests to destination workloads or services, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, services that rely on upstream workloads for answers may use delegation and/or impersonation semantics as described in <span>[<a href="#OAUTH-TOKEN-XCHANGE" class="cite xref">OAUTH-TOKEN-XCHANGE</a>]</span>.<a href="#section-3.4.7-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.7-2">WIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by a trust domain, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across trust domains, when arriving at authorization decisions.<a href="#section-3.4.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2342,7 +2355,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
           <h4 id="name-asynchronous-and-batch-requ">
 <a href="#section-3.4.8" class="section-number selfRef">3.4.8. </a><a href="#name-asynchronous-and-batch-requ" class="section-name selfRef">Asynchronous and Batch Requests</a>
           </h4>
-<p id="section-3.4.8-1">Source workloads may send authenticated asynchronous and batch requests to destination workloads. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads, after the source workload credentials have expired. Credentials identifying the original source workload as subject may need to be obtained from the credential issuing authority with appropriately-downscoped context needed access to upstream workloads. These credentials should identify the workload as the actor in the actor chain, but may also identify other principals that the action is taken on behalf. To mitigate risks associated with long-duration credentials, these credentials should be bound to the Workload Identity Credential such as a workload identity certificate or Workload Identity Token (WIT) of the acting service performing asynchronous computation on the source workload's behalf.<a href="#section-3.4.8-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.8-1">Source workloads may send authenticated asynchronous and batch requests to destination workloads or services. A destination workload may need to fulfill such requests with requests to authorized upstream protected resources and workloads after the source workload credentials have expired. Credentials identifying the original source workload or service as subject may need to be obtained from the credential issuing authority with appropriately down-scoped context needed to access upstream workloads. These credentials should identify the workload performing the asynchronous computation as the actor in the actor chain, but may also identify other principals that the action is taken on behalf of. To mitigate risks associated with long-duration credentials, these credentials should be bound to the Workload Identity Credential, such as a workload identity certificate or Workload Identity Token (WIT), of the acting workload or service.<a href="#section-3.4.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cross-boundary-workload-identity">
@@ -2356,7 +2369,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
             <h5 id="name-egress-identity-generalizat">
 <a href="#section-3.4.9.1" class="section-number selfRef">3.4.9.1. </a><a href="#name-egress-identity-generalizat" class="section-name selfRef">Egress Identity Generalization</a>
             </h5>
-<p id="section-3.4.9.1-1">A workload communicating with a service or another workload located outside the trust boundary may need to provide modified identity information. The detailed identity of an internal workload originating the communication is relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.<a href="#section-3.4.9.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.9.1-1">A workload communicating with a service or another workload located outside the trust boundary may need to provide modified identity information. The detailed identity of an internal workload instance, or of the internal workload that originated the communication, is often relevant inside the trust boundary but could be excessive for the outside world and expose potentially sensitive internal topology information.<a href="#section-3.4.9.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.9.1-2">For example, in a microservices architecture, an internal service may use workload-specific identities that include fine-grained details such as instance names or deployment-specific attributes. When interacting with external systems, exposing such details may inadvertently provide attackers with insights into the internal deployment structure, scaling strategies, security policies, technologies in use, or failover mechanisms, potentially giving them a tactical advantage. In such cases, an identity proxy at the trust boundary can generalize the Workload Identity by replacing the specific microservice instance name with the name of the overall service. This allows external parties to recognize the service while abstracting internal deployment details.<a href="#section-3.4.9.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.9.1-3">A security gateway implementing Identity Proxy functionality at the edge of a trust boundary can validate identity information of the workload, perform context-specific authorization of the transaction, and replace workload-specific identity with a generalized one for a given trust domain. This approach ensures that external communications adhere to security and privacy requirements while maintaining interoperability across trust boundaries.<a href="#section-3.4.9.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -2558,6 +2571,10 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dt id="I-D.ietf-wimse-workload-identity-practices">[I-D.ietf-wimse-workload-identity-practices]</dt>
         <dd>
 <span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-04</span>, <time datetime="2026-04-10" class="refDate">10 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OAUTH-TOKEN-XCHANGE">[OAUTH-TOKEN-XCHANGE]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Nadalin, A.</span>, <span class="refAuthor">Campbell, B., Ed.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OAuth 2.0 Token Exchange"</span>, <span class="seriesInfo">RFC 8693</span>, <span class="seriesInfo">DOI 10.17487/RFC8693</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8693">https://www.rfc-editor.org/rfc/rfc8693</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9683">[RFC9683]</dt>
         <dd>

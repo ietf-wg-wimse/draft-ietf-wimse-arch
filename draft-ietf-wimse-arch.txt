@@ -83,7 +83,7 @@ Table of Contents
      3.3.  Message Flow and Policy Enforcement in the Basic Scenario
      3.4.  Workload Identity Use Cases
        3.4.1.  Bootstrapping Workload Identifiers and Credentials
-       3.4.2.  Service Authentication
+       3.4.2.  Workload and Service Authentication
        3.4.3.  Layered Workload Authentication
        3.4.4.  Service Authorization
        3.4.5.  Audit Trails
@@ -111,8 +111,9 @@ Table of Contents
    The increasing prevalence of cloud computing and micro service
    architectures has led to the rise of complex software functions being
    built and deployed as systems composed of workloads, where a workload
-   is defined as a software that consists of one or more running
-   instances executing for a specific purpose.
+   is defined as a logical software entity that executes for a specific
+   purpose and may be represented at runtime by one or more workload
+   instances.
 
    Workloads need to be provisioned with an identity when they are
    started.  Often, additional information needs to be provided, such as
@@ -153,7 +154,10 @@ Table of Contents
    *  Workload
 
    A workload is an independently addressable and executable software
-   entity.  This may include microservices, containers, virtual
+   entity.  A workload is a logical entity rather than necessarily a
+   single running process.  It may be implemented by one or more
+   workload instances and may expose, consume, or participate in one or
+   more services.  Examples include microservices, containers, virtual
    machines, serverless functions, or similar components that initiate
    or receive network communications.  A workload typically interacts
    with other parts of a larger system.
@@ -169,6 +173,26 @@ Table of Contents
    years.  Examples include database services and machine learning
    training jobs.  The number of instances for a workload may vary over
    time due to scaling, failover, or orchestration behavior.
+
+   *  Service
+
+   A service is a function, API, or capability exposed to other
+   entities.  A service may be implemented by a single workload, by
+   multiple workload instances of the same workload, or by multiple
+   workloads acting together.  A service can have a stable identity that
+   is distinct from the identity of any particular workload instance.
+   When this document refers to service authentication or service
+   authorization, it refers to authentication or authorization of the
+   workload identity used to represent that service in a particular
+   deployment.
+
+   *  Application System
+
+   An application system is a set of workloads, services, gateways,
+   credential services, and related infrastructure that together
+   implement an application or application function.  An application
+   system may be contained within a single trust domain or may interact
+   with services in other trust domains.
 
    *  Security Context
 
@@ -273,10 +297,11 @@ Table of Contents
    represent the same workload only when validated under the same trust
    domain and issuer trust configuration.
 
-   A workload identifier MAY represent either a logical workload or a
-   specific workload instance depending on deployment policy.  Relying
-   parties MUST interpret the identifier according to identity semantics
-   to the trust domain.
+   A workload identifier MAY represent a logical workload, a service
+   implemented by one or more workloads, or a specific workload
+   instance, depending on deployment policy.  Relying parties MUST
+   interpret the identifier according to the identity semantics defined
+   by the issuing trust domain.
 
 3.1.3.  Workload Identity Credentials
 
@@ -361,12 +386,11 @@ Table of Contents
    *  Workload
 
    Three workloads are shown.  Each workload is an independently
-   addressable software entity that may consist of one or more running
-   instances executed for a specific purpose.  Workloads obtain their
-   identity credentials from a Credentials Service (1) and use them to
-   authenticate to other workloads and systems in the process of sending
-   and receiving requests to and from external systems or other internal
-   workloads.
+   addressable software entity that may consist of one or more workload
+   instances at runtime.  Workloads obtain their identity credentials
+   from a Credentials Service (1) and use them to authenticate to other
+   workloads and systems in the process of sending and receiving
+   requests to and from external systems or other internal workloads.
 
    *  Gateway Service
 
@@ -853,18 +877,25 @@ Table of Contents
    *  Environment Variables - Identity credentials may also be injected
       into workloads using operating system environment variables.
 
-3.4.2.  Service Authentication
+3.4.2.  Workload and Service Authentication
 
    One of the most basic use cases for workload identity is
-   authentication of one workload to another, such as in the case where
-   one service is making a request to another service as part of a
-   larger, more complex application.  Following authentication, the
-   identity of the peer can be used to enforce fine-grained
-   authorization policies as described in Section 3.4.4 and generate
-   audit trails as described in Section 3.4.5.
+   authentication of one workload to another.  In many deployments, this
+   is described operationally as one service making a request to another
+   service as part of a larger, more complex application.  The
+   identifier in the credentials may identify a logical service, a
+   workload that implements that service, or a specific workload
+   instance, depending on the identity model chosen by the issuing trust
+   domain.  Following authentication, the identity of the peer can be
+   used to enforce fine-grained authorization policies as described in
+   Section 3.4.4 and generate audit trails as described in
+   Section 3.4.5.
 
    Authentication mechanisms are used to establish the identity of the
-   peer workload before secure communication can proceed.
+   peer before secure communication can proceed.  The peer identity is
+   carried in a workload identity credential, even when the credential
+   represents a service-level identity rather than a particular workload
+   instance.
 
    Workloads often obtain their credentials without relying on pre-
    provisioned long-lived secrets.  Instead, short-lived credentials are
@@ -894,7 +925,7 @@ Table of Contents
    verifiable identity for the communicating party, which can then be
    used for further policy enforcement.
 
-   Figure 6 illustrates the communication between different workloads.
+   Figure 6 illustrates communication between workloads and services.
    Two aspects are important to highlight: First, there is a need to
    consider the interaction with workloads that are external to the
    trust domain (sometimes called cross-domain).  Second, the
@@ -1003,9 +1034,12 @@ Table of Contents
 3.4.4.  Service Authorization
 
    Once authentication has successfully established the identity of a
-   peer workload, authorization mechanisms determine whether the
-   authenticated identity is permitted to perform the requested action
-   on the target workload.
+   peer, authorization mechanisms determine whether the authenticated
+   identity is permitted to perform the requested action on the target
+   workload or service.  The authenticated identity may represent a
+   logical service, a workload, or a specific workload instance, and
+   authorization policy needs to be written with this distinction in
+   mind.
 
    Authorization specified by WIMSE is context-aware.  It relies on
    attributes carried in the security context, which may originate from
@@ -1032,15 +1066,16 @@ Table of Contents
    policy.
 
    A key architectural consideration is where authorization is
-   evaluated.  For most workload-to-workload interactions (e.g., REST
-   APIs, gRPC, or pub/sub flows), authorization is performed by the
-   callee, ensuring that the target workload enforces its own access
-   policies.  But in some scenarios, such as database access or
-   operations on complex back-end systems, authorization decisions may
-   be too fine-grained or application-specific to be enforced by the
-   subject of the operation.  In these cases, authorization MAY be
-   performed by the caller, provided that the caller has sufficient
-   context and policy information to make a correct decision.
+   evaluated.  For most workload-to-workload or service-to-service
+   interactions (e.g., REST APIs, gRPC, or pub/sub flows), authorization
+   is performed by the callee, ensuring that the target workload or
+   service enforces its own access policies.  But in some scenarios,
+   such as database access or operations on complex back-end systems,
+   authorization decisions may be too fine-grained or application-
+   specific to be enforced by the subject of the operation.  In these
+   cases, authorization MAY be performed by the caller, provided that
+   the caller has sufficient context and policy information to make a
+   correct decision.
 
 3.4.5.  Audit Trails
 
@@ -1111,13 +1146,12 @@ Table of Contents
 3.4.7.  Delegation and Impersonation
 
    When source workloads send authenticated requests to destination
-   workloads, those destination workloads may rely on upstream
-   dependencies to fulfill such requests.  Such access patterns are
-   increasingly common in a microservices architecture.  While X.509
-   certificates can be used for point-to-point authentication, such
-   services relying on upstream microservices for answers, may use
-   delegation and/or impersonation semantics as described in RFC 8693
-   OAuth 2.0 Access Token Exchange.
+   workloads or services, those destination workloads may rely on
+   upstream dependencies to fulfill such requests.  Such access patterns
+   are increasingly common in a microservices architecture.  While X.509
+   certificates can be used for point-to-point authentication, services
+   that rely on upstream workloads for answers may use delegation and/or
+   impersonation semantics as described in [OAUTH-TOKEN-XCHANGE].
 
    WIMSE credentials constrain the subjects and actors identified in
    delegation and impersonation tokens to be bound by a trust domain,
@@ -1129,20 +1163,20 @@ Table of Contents
 3.4.8.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
-   requests to destination workloads.  A destination workload may need
-   to fulfill such requests with requests to authorized upstream
-   protected resources and workloads, after the source workload
-   credentials have expired.  Credentials identifying the original
-   source workload as subject may need to be obtained from the
-   credential issuing authority with appropriately-downscoped context
-   needed access to upstream workloads.  These credentials should
-   identify the workload as the actor in the actor chain, but may also
-   identify other principals that the action is taken on behalf.  To
-   mitigate risks associated with long-duration credentials, these
-   credentials should be bound to the Workload Identity Credential such
-   as a workload identity certificate or Workload Identity Token (WIT)
-   of the acting service performing asynchronous computation on the
-   source workload's behalf.
+   requests to destination workloads or services.  A destination
+   workload may need to fulfill such requests with requests to
+   authorized upstream protected resources and workloads after the
+   source workload credentials have expired.  Credentials identifying
+   the original source workload or service as subject may need to be
+   obtained from the credential issuing authority with appropriately
+   down-scoped context needed to access upstream workloads.  These
+   credentials should identify the workload performing the asynchronous
+   computation as the actor in the actor chain, but may also identify
+   other principals that the action is taken on behalf of.  To mitigate
+   risks associated with long-duration credentials, these credentials
+   should be bound to the Workload Identity Credential, such as a
+   workload identity certificate or Workload Identity Token (WIT), of
+   the acting workload or service.
 
 3.4.9.  Cross-boundary Workload Identity
 
@@ -1155,10 +1189,11 @@ Table of Contents
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
-   information.  The detailed identity of an internal workload
-   originating the communication is relevant inside the trust boundary
-   but could be excessive for the outside world and expose potentially
-   sensitive internal topology information.
+   information.  The detailed identity of an internal workload instance,
+   or of the internal workload that originated the communication, is
+   often relevant inside the trust boundary but could be excessive for
+   the outside world and expose potentially sensitive internal topology
+   information.
 
    For example, in a microservices architecture, an internal service may
    use workload-specific identities that include fine-grained details
@@ -1359,6 +1394,12 @@ Table of Contents
               wimse-workload-identity-practices-04, 10 April 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
               workload-identity-practices-04>.
+
+   [OAUTH-TOKEN-XCHANGE]
+              Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8693>.
 
    [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
               "Remote Integrity Verification of Network Devices
