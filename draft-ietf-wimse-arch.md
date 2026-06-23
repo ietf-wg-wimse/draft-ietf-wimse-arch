@@ -467,6 +467,8 @@ Once credentials are issued, they are conveyed to peers using common security pr
 * Mutual TLS authentication using X.509 certificate for both client and server as described in {{Section 4 of I-D.ietf-wimse-s2s-protocol}}.
 * Application level authentication using cryptographic credentials passed within HTTP message as described in {{Section 3 of I-D.ietf-wimse-s2s-protocol}}.
 
+These mechanisms can also be used together. For example, a workload identity certificate can be used for transport-layer authentication to an intermediary, while an application-layer Workload Identity Token is used to authenticate the caller to the destination workload, as described in {{layered-workload-authentication}}.
+
 These authentication mechanisms establish a cryptographically verifiable identity for the communicating party, which can then be used for further policy enforcement.
 
 {{arch-chain}} illustrates the communication between different workloads. Two aspects are important
@@ -499,6 +501,36 @@ take place across intermediate workloads (in an end-to-end style).
   +--------------------------------------------------------------+
 ~~~~
 {: #arch-chain title="Workload-to-Workload Communication."}
+
+### Layered Workload Authentication {#layered-workload-authentication}
+
+Some deployments use workload identity credentials at more than one layer of the communication stack. For example, a workload might use a workload identity certificate with TLS to authenticate to a proxy, gateway, load balancer, or service mesh sidecar, while also using an application-layer Workload Identity Token (WIT) or similar credential to authenticate to the destination workload.
+
+This pattern is common when infrastructure components terminate or originate transport connections on behalf of workloads. In such deployments, the transport-layer credential authenticates the workload, proxy, gateway, or sidecar for the purpose of establishing a secure channel across a particular network segment. The application-layer credential authenticates the workload identity that is relevant to the receiving application. These two authentication events may involve different peers, different trust anchors, and different authorization policies.
+
+~~~aasvg
+                 Transport-layer              Transport-layer
+                 authentication               authentication
+ +------------+   (e.g., TLS)    +---------+   (e.g., TLS)    +------------+
+ |            |<---------------->|         |<---------------->|            |
+ | Workload A |                  |  Proxy  |                  | Workload B |
+ |            |                  | Gateway |                  |            |
+ +-----+------+                  +---------+                  +------+-----+
+       ^                                                             ^
+       |                                                             |
+       |        Application-layer authentication and context         |
+       +=============================================================+
+                    (e.g., WIT with proof of possession)
+~~~~
+{: #arch-layered-auth title="Layered workload authentication through an intermediary."}
+
+For example, Workload A may establish a mutually authenticated TLS connection to an egress gateway using a workload identity certificate. The gateway validates that Workload A is permitted to use the gateway and then forwards the request toward Workload B. Because the TLS connection from Workload A is terminated at the gateway, Workload B cannot rely solely on that transport-layer authentication to identify Workload A. Workload A can therefore include an application-layer credential, such as a WIT, allowing Workload B to authenticate the workload identity of the caller at the application layer.
+
+The workload identifiers used at different layers do not necessarily need to be identical. The transport-layer credential might identify a workload instance, node-local proxy, sidecar, or gateway, while the application-layer credential might identify the logical workload or service on whose behalf the request is made. Deployments need to define this relationship in policy, including when identifiers are expected to match, when one authenticated entity is allowed to act on behalf of another, and when the identities represent different roles in the request path. If intermediaries are allowed to inspect, replace, or augment workload identity or security context information, that behavior needs to be explicit and auditable.
+
+Layered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-level caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.
+
+Audit records for layered authentication SHOULD record both the transport-layer identity and the application-layer identity when both are available and relevant. This allows operators to distinguish the workload or infrastructure component that established the secure channel from the workload or service identity used for application-level authorization.
 
 ### Service Authorization {#authorization}
 
