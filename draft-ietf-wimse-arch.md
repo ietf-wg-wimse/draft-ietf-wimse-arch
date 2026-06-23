@@ -390,7 +390,7 @@ The CA/credential service issues workload identity credentials; workloads obtain
 
 The high-level message flow is as follows:
 
-1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service, typically well before a given application request. This may happen on the order of hours between refreshes.
+1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific. Normally credentials operate on a slower lifecycle than application requests.
 2. A transport connection is set up for the call. It may use mutual TLS and workload identity certificates, or another transport security mechanism.
 3. Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.
 4. Workload B authorizes the request. The PEP enforces the decision, optionally consulting a PDP. Policy details and message-level authorization formats are out of scope for this architecture.
