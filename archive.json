@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-23T04:12:07.698894+00:00",
+  "timestamp": "2026-06-25T04:15:21.501145+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1451,7 +1451,7 @@
       "id": "I_kwDOLPTb0M7P_sk2",
       "title": "Clarify workload instances, services and applications throughout",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/102",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1460,8 +1460,8 @@
       "labels": [],
       "body": "This is related to #42 \n\nThe document explicitly defines workloads as \"a running instance of software...\". This is probably ok as long as it is understood that there is also a need to refer to more than one such instance in some cases. The document alludes to this concept in several places, e.g. \n- Section 3.2.1, refers to an \"application system\" and \"workload application\", however this is never defined further\n- Section 3.2.2 mentions a \"service identity\" \n- Section 3.3.2 and 3.3.3 talk about \"Service Authentication\" and \"Service Authorization\"\n- Section 3.3.4 mentions \"workloads and services\"\n\nThere is a need to clearly articulate the difference between referring to a single workload instance versus multiple instances of a given service. The service authentication and authorization sections in particular need to be clear on this distinction. \n\nIf there is general agreement on this need, then I'll be happy to provide a PR with suggested updates. \n\n\n",
       "createdAt": "2025-10-07T01:00:35Z",
-      "updatedAt": "2026-02-24T16:23:20Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-23T23:49:08Z",
+      "closedAt": "2026-06-23T23:49:08Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1707,7 +1707,7 @@
       "id": "I_kwDOLPTb0M7xjT2y",
       "title": "Simultaneous use of workload credentials",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/120",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "arndt-s",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1716,8 +1716,8 @@
       "labels": [],
       "body": "Can workload credentials be used simultaneous in various levels of the stack. E.g. Workload Identity Credentials using TLS in the networking layer and Workload Identity Token in the application layer in parallel. \n\nRelated:\n- How do workload process these identities? \n- Do the identity (WIMSE Identifier) need to match? \n- What are security implications of it.\n\n\nRelated to \n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/issues/87\n- https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/192",
       "createdAt": "2026-03-10T15:29:54Z",
-      "updatedAt": "2026-06-08T16:06:02Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-23T23:48:58Z",
+      "closedAt": "2026-06-23T23:48:58Z",
       "comments": []
     },
     {
@@ -1768,6 +1768,54 @@
       "updatedAt": "2026-06-23T04:03:26Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 127,
+      "id": "I_kwDOLPTb0M8AAAABGccwQA",
+      "title": "to me, \"egress\" suggests an exit point which kinda precludes going to Workload B next as it should be in the same trust/administrative/whatever domain. \"Gateway\" kinda does too but less so so I'm not gonna mess with the many uses of it.",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/127",
+      "state": "OPEN",
+      "author": "bc-pi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "to me, \"egress\" suggests an exit point which kinda precludes going to Workload B next as it should be in the same trust/administrative/whatever domain. \"Gateway\" kinda does too but less so so I'm not gonna mess with the many uses of it.\r\n\r\n```suggestion\r\nFor example, Workload A may establish a mutually authenticated TLS connection to a gateway using a workload identity certificate. The gateway validates that Workload A is permitted to use the gateway and then forwards the request toward Workload B. Because the TLS connection from Workload A is terminated at the gateway, Workload B cannot rely solely on that transport-layer authentication to identify Workload A. Workload A can therefore include an application-layer credential, such as a WIT, allowing Workload B to authenticate the workload identity of the caller at the application layer.\r\n```\r\n\r\n_Originally posted by @bc-pi in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125#discussion_r3460845345_\r\n            ",
+      "createdAt": "2026-06-23T15:57:52Z",
+      "updatedAt": "2026-06-23T16:00:26Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "<img width=\"1020\" height=\"945\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/34595041-0c90-48d2-9552-7391ce75f590\" />",
+          "createdAt": "2026-06-23T16:00:26Z",
+          "updatedAt": "2026-06-23T16:00:26Z"
+        }
+      ]
+    },
+    {
+      "number": 128,
+      "id": "I_kwDOLPTb0M8AAAABGcc9Ag",
+      "title": "what level is your layer?",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/128",
+      "state": "OPEN",
+      "author": "bc-pi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "```suggestion\r\nLayered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-layer caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.\r\n```\r\n\r\n_Originally posted by @bc-pi in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125#discussion_r3460672993_\r\n            ",
+      "createdAt": "2026-06-23T15:58:16Z",
+      "updatedAt": "2026-06-23T16:00:07Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "<img width=\"980\" height=\"687\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/83b358c4-08ac-49e7-9edf-d23b84cf104b\" />",
+          "createdAt": "2026-06-23T16:00:07Z",
+          "updatedAt": "2026-06-23T16:00:07Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5904,7 +5952,7 @@
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/120",
       "createdAt": "2026-06-21T00:30:42Z",
-      "updatedAt": "2026-06-23T04:01:19Z",
+      "updatedAt": "2026-06-23T15:19:05Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b270fd991b782a4dab7382fd9337d2c0c2ba6cbb",
@@ -5917,7 +5965,15 @@
       "mergeCommit": {
         "oid": "2f86b0b95fb79db959da3d5f5191be3ebdf0f130"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "I made two small suggested changes but otherwise would be happy to see this incorporated into the arch draft. ",
+          "createdAt": "2026-06-23T15:19:05Z",
+          "updatedAt": "2026-06-23T15:19:05Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPTb0M8AAAABDqvG0g",
@@ -5998,8 +6054,100 @@
               "updatedAt": "2026-06-22T11:52:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABD3ap3A",
+          "commit": {
+            "abbreviatedOid": "dc919a5"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T14:49:10Z",
+          "updatedAt": "2026-06-23T14:49:10Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\nLayered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-layer caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.\n```",
+              "createdAt": "2026-06-23T14:49:10Z",
+              "updatedAt": "2026-06-23T14:49:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABD3nZ3g",
+          "commit": {
+            "abbreviatedOid": "dc919a5"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T15:16:45Z",
+          "updatedAt": "2026-06-23T15:16:46Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "to me, \"egress\" suggests an exit point which kinda precludes going to Workload B next as it should be in the same trust/administrative/whatever domain. \"Gateway\" kinda does too but less so so I'm not gonna mess with the many uses of it.\n\n```suggestion\nFor example, Workload A may establish a mutually authenticated TLS connection to a gateway using a workload identity certificate. The gateway validates that Workload A is permitted to use the gateway and then forwards the request toward Workload B. Because the TLS connection from Workload A is terminated at the gateway, Workload B cannot rely solely on that transport-layer authentication to identify Workload A. Workload A can therefore include an application-layer credential, such as a WIT, allowing Workload B to authenticate the workload identity of the caller at the application layer.\n```",
+              "createdAt": "2026-06-23T15:16:45Z",
+              "updatedAt": "2026-06-23T15:16:46Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOLPTb0M7p4Se7",
+      "title": "Layered the level",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/129",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/128",
+      "createdAt": "2026-06-23T23:46:25Z",
+      "updatedAt": "2026-06-23T23:46:26Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "bb955790db6568a916e1efe25d413f412bce6c97",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "layel",
+      "headRefOid": "c94d6b54c02b19d9dea1da8d437c7b488e239f8a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 130,
+      "id": "PR_kwDOLPTb0M7p4U1M",
+      "title": "Cleaned up egress",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/130",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/127",
+      "createdAt": "2026-06-23T23:48:42Z",
+      "updatedAt": "2026-06-23T23:48:43Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "bb955790db6568a916e1efe25d413f412bce6c97",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "no-egress",
+      "headRefOid": "1be09726f3708adfc8f747564006a75053d40e99",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
