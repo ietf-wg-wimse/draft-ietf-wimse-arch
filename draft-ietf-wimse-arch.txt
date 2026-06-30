@@ -992,15 +992,14 @@ Table of Contents
   Figure 7: Layered workload authentication through an intermediary.
 
    For example, Workload A may establish a mutually authenticated TLS
-   connection to an egress gateway using a workload identity
-   certificate.  The gateway validates that Workload A is permitted to
-   use the gateway and then forwards the request toward Workload B.
-   Because the TLS connection from Workload A is terminated at the
-   gateway, Workload B cannot rely solely on that transport-layer
-   authentication to identify Workload A.  Workload A can therefore
-   include an application-layer credential, such as a WIT, allowing
-   Workload B to authenticate the workload identity of the caller at the
-   application layer.
+   connection to a gateway using a workload identity certificate.  The
+   gateway validates that Workload A is permitted to use the gateway and
+   then forwards the request toward Workload B.  Because the TLS
+   connection from Workload A is terminated at the gateway, Workload B
+   cannot rely solely on that transport-layer authentication to identify
+   Workload A.  Workload A can therefore include an application-layer
+   credential, such as a WIT, allowing Workload B to authenticate the
+   workload identity of the caller at the application layer.
 
    The workload identifiers used at different layers do not necessarily
    need to be identical.  The transport-layer credential might identify
