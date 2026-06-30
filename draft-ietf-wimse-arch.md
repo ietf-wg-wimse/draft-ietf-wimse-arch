@@ -368,7 +368,7 @@ The basic workload identity scenario described in {{basic-workload-identity-scen
 
 In this view, the component enforcing authorization policy acts as a Policy Enforcement Point (PEP): it allows a request to proceed, blocks it, or applies obligations based on the authenticated peer identity and any relevant security context. A deployment may also use a Policy Decision Point (PDP), to which the enforcing component delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.
 
-The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.
+The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-layer authentication, authorization, and response relate when two workloads communicate.
 
 ~~~aasvg
 +------------+               +------------+
@@ -401,7 +401,7 @@ The high-level message flow is as follows:
 
 1. Workload A and Workload B each obtain a workload identity credential from the CA/credential service before using that credential for authentication. The timing, lifetime, and refresh behavior of these credentials are deployment-specific. Normally credentials operate on a slower lifecycle than application requests.
 2. A transport connection is set up for the call. It may use mutual TLS and workload identity certificates, or another transport security mechanism.
-3. Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.
+3. Workload A sends a request to Workload B. This may include application-layer authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.
 4. Workload B authorizes the request. The PEP enforces the decision, optionally consulting a PDP. Policy details and message-level authorization formats are out of scope for this architecture.
 5. Workload B returns a response to Workload A, which may be an error or success.
 
@@ -474,7 +474,7 @@ Workloads often obtain their credentials without relying on pre-provisioned long
 Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:
 
 * Mutual TLS authentication using X.509 certificate for both client and server as described in {{Section 4 of I-D.ietf-wimse-s2s-protocol}}.
-* Application level authentication using cryptographic credentials passed within HTTP message as described in {{Section 3 of I-D.ietf-wimse-s2s-protocol}}.
+* Application-layer authentication using cryptographic credentials passed within HTTP message as described in {{Section 3 of I-D.ietf-wimse-s2s-protocol}}.
 
 These mechanisms can also be used together. For example, a workload identity certificate can be used for transport-layer authentication to an intermediary, while an application-layer Workload Identity Token is used to authenticate the caller to the destination workload, as described in {{layered-workload-authentication}}.
 
@@ -537,9 +537,9 @@ For example, Workload A may establish a mutually authenticated TLS connection to
 
 The workload identifiers used at different layers do not necessarily need to be identical. The transport-layer credential might identify a workload instance, node-local proxy, sidecar, or gateway, while the application-layer credential might identify the logical workload or service on whose behalf the request is made. Deployments need to define this relationship in policy, including when identifiers are expected to match, when one authenticated entity is allowed to act on behalf of another, and when the identities represent different roles in the request path. If intermediaries are allowed to inspect, replace, or augment workload identity or security context information, that behavior needs to be explicit and auditable.
 
-Layered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-level caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.
+Layered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-layer caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.
 
-Audit records for layered authentication SHOULD record both the transport-layer identity and the application-layer identity when both are available and relevant. This allows operators to distinguish the workload or infrastructure component that established the secure channel from the workload or service identity used for application-level authorization.
+Audit records for layered authentication SHOULD record both the transport-layer identity and the application-layer identity when both are available and relevant. This allows operators to distinguish the workload or infrastructure component that established the secure channel from the workload or service identity used for application-layer authorization.
 
 ### Service Authorization {#authorization}
 
