@@ -1050,7 +1050,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 25 December 2026</td>
+<td class="center">Expires 1 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-23" class="published">23 June 2026</time>
+<time datetime="2026-06-30" class="published">30 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-25">25 December 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-01">1 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1884,7 +1884,7 @@ Components and interactions from previous scenarios are still relevant to this e
         </h3>
 <p id="section-3.3-1">The basic workload identity scenario described in <a href="#basic-workload-identity-scenario" class="auto internal xref">Section 3.2.1</a> and illustrated in <a href="#arch-basic" class="auto internal xref">Figure 1</a> already sketches a trust domain, a gateway, a CA/credential service, and how an application client reaches multiple workloads. This section takes the same scenario and adds one level of detail for a single workload-to-workload hop: a caller and a callee, identity established with workload identity credentials, and a separate authorization step that may involve policy components.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">In this view, the component enforcing authorization policy acts as a Policy Enforcement Point (PEP): it allows a request to proceed, blocks it, or applies obligations based on the authenticated peer identity and any relevant security context. A deployment may also use a Policy Decision Point (PDP), to which the enforcing component delegates policy evaluation. Deployments may implement PEP and PDP as separate services, co-locate them with a gateway or sidecar, or embed them in the receiving workload. This document does not define a particular policy language or protocol between PEP and PDP.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-level authentication, authorization, and response relate when two workloads communicate.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">The diagram below is illustrative rather than normative. It shows one common logical layout for how provisioning, connection setup, application-layer authentication, authorization, and response relate when two workloads communicate.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <span id="name-logical-message-flow-and-po"></span><div id="arch-basic-ops-fig">
 <figure id="figure-4">
           <div id="section-3.3-4.1">
@@ -1964,7 +1964,7 @@ Components and interactions from previous scenarios are still relevant to this e
             <p id="section-3.3-7.2.1">A transport connection is set up for the call. It may use mutual TLS and workload identity certificates, or another transport security mechanism.<a href="#section-3.3-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.3-7.3">
-            <p id="section-3.3-7.3.1">Workload A sends a request to Workload B. This may include application-level authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.<a href="#section-3.3-7.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-7.3.1">Workload A sends a request to Workload B. This may include application-layer authentication using a Workload Identity Token and proof of possession, as defined in the credentials and protocol documents. Workload B authenticates Workload A.<a href="#section-3.3-7.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.3-7.4">
             <p id="section-3.3-7.4.1">Workload B authorizes the request. The PEP enforces the decision, optionally consulting a PDP. Policy details and message-level authorization formats are out of scope for this architecture.<a href="#section-3.3-7.4.1" class="pilcrow">¶</a></p>
@@ -2106,14 +2106,14 @@ Components and interactions from previous scenarios are still relevant to this e
           </h4>
 <p id="section-3.4.2-1">One of the most basic use cases for workload identity is authentication of one workload to another. In many deployments, this is described operationally as one service making a request to another service as part of a larger, more complex application. The identifier in the credentials may identify a logical service, a workload that implements that service, or a specific workload instance, depending on the identity model chosen by the issuing trust domain. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.4.4</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.4.5</a>.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">Authentication mechanisms are used to establish the identity of the peer before secure communication can proceed. The peer identity is carried in a workload identity credential, even when the credential represents a service-level identity rather than a particular workload instance.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-4">Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.2-5.1">
               <p id="section-3.4.2-5.1.1">Mutual TLS authentication using X.509 certificate for both client and server as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-07#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>.<a href="#section-3.4.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.4.2-5.2">
-              <p id="section-3.4.2-5.2.1">Application level authentication using cryptographic credentials passed within HTTP message as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-07#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>.<a href="#section-3.4.2-5.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.2-5.2.1">Application-layer authentication using cryptographic credentials passed within HTTP message as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-s2s-protocol-07#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>.<a href="#section-3.4.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.4.2-6">These mechanisms can also be used together. For example, a workload identity certificate can be used for transport-layer authentication to an intermediary, while an application-layer Workload Identity Token is used to authenticate the caller to the destination workload, as described in <a href="#layered-workload-authentication" class="auto internal xref">Section 3.4.3</a>.<a href="#section-3.4.2-6" class="pilcrow">¶</a></p>
@@ -2260,8 +2260,8 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 </div>
 <p id="section-3.4.3-4">For example, Workload A may establish a mutually authenticated TLS connection to an egress gateway using a workload identity certificate. The gateway validates that Workload A is permitted to use the gateway and then forwards the request toward Workload B. Because the TLS connection from Workload A is terminated at the gateway, Workload B cannot rely solely on that transport-layer authentication to identify Workload A. Workload A can therefore include an application-layer credential, such as a WIT, allowing Workload B to authenticate the workload identity of the caller at the application layer.<a href="#section-3.4.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.4.3-5">The workload identifiers used at different layers do not necessarily need to be identical. The transport-layer credential might identify a workload instance, node-local proxy, sidecar, or gateway, while the application-layer credential might identify the logical workload or service on whose behalf the request is made. Deployments need to define this relationship in policy, including when identifiers are expected to match, when one authenticated entity is allowed to act on behalf of another, and when the identities represent different roles in the request path. If intermediaries are allowed to inspect, replace, or augment workload identity or security context information, that behavior needs to be explicit and auditable.<a href="#section-3.4.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.4.3-6">Layered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-level caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload <span class="bcp14">MUST NOT</span> assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.<a href="#section-3.4.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.4.3-7">Audit records for layered authentication <span class="bcp14">SHOULD</span> record both the transport-layer identity and the application-layer identity when both are available and relevant. This allows operators to distinguish the workload or infrastructure component that established the secure channel from the workload or service identity used for application-level authorization.<a href="#section-3.4.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.4.3-6">Layered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-layer caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload <span class="bcp14">MUST NOT</span> assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.<a href="#section-3.4.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.3-7">Audit records for layered authentication <span class="bcp14">SHOULD</span> record both the transport-layer identity and the application-layer identity when both are available and relevant. This allows operators to distinguish the workload or infrastructure component that established the secure channel from the workload or service identity used for application-layer authorization.<a href="#section-3.4.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authorization">
@@ -2558,7 +2558,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dl class="references">
 <dt id="I-D.draft-ietf-oauth-identity-chaining">[I-D.draft-ietf-oauth-identity-chaining]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-15</span>, <time datetime="2026-06-19" class="refDate">19 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-15">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-16</span>, <time datetime="2026-06-26" class="refDate">26 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-oauth-transaction-tokens">[I-D.ietf-oauth-transaction-tokens]</dt>
         <dd>
@@ -2570,7 +2570,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dd class="break"></dd>
 <dt id="I-D.ietf-wimse-workload-identity-practices">[I-D.ietf-wimse-workload-identity-practices]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-04</span>, <time datetime="2026-04-10" class="refDate">10 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-05</span>, <time datetime="2026-06-30" class="refDate">30 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OAUTH-TOKEN-XCHANGE">[OAUTH-TOKEN-XCHANGE]</dt>
         <dd>
