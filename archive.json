@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-25T04:15:21.501145+00:00",
+  "timestamp": "2026-07-02T04:11:54.392059+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1774,15 +1774,15 @@
       "id": "I_kwDOLPTb0M8AAAABGccwQA",
       "title": "to me, \"egress\" suggests an exit point which kinda precludes going to Workload B next as it should be in the same trust/administrative/whatever domain. \"Gateway\" kinda does too but less so so I'm not gonna mess with the many uses of it.",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/127",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bc-pi",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "to me, \"egress\" suggests an exit point which kinda precludes going to Workload B next as it should be in the same trust/administrative/whatever domain. \"Gateway\" kinda does too but less so so I'm not gonna mess with the many uses of it.\r\n\r\n```suggestion\r\nFor example, Workload A may establish a mutually authenticated TLS connection to a gateway using a workload identity certificate. The gateway validates that Workload A is permitted to use the gateway and then forwards the request toward Workload B. Because the TLS connection from Workload A is terminated at the gateway, Workload B cannot rely solely on that transport-layer authentication to identify Workload A. Workload A can therefore include an application-layer credential, such as a WIT, allowing Workload B to authenticate the workload identity of the caller at the application layer.\r\n```\r\n\r\n_Originally posted by @bc-pi in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125#discussion_r3460845345_\r\n            ",
       "createdAt": "2026-06-23T15:57:52Z",
-      "updatedAt": "2026-06-23T16:00:26Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-30T20:45:52Z",
+      "closedAt": "2026-06-30T20:45:52Z",
       "comments": [
         {
           "author": "bc-pi",
@@ -1798,15 +1798,15 @@
       "id": "I_kwDOLPTb0M8AAAABGcc9Ag",
       "title": "what level is your layer?",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/128",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bc-pi",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "```suggestion\r\nLayered authentication can improve security by allowing infrastructure components to authenticate and authorize use of the network path while allowing destination workloads to authenticate and authorize the application-layer caller. However, it can also introduce ambiguity if the identities are interpreted incorrectly. In particular, a destination workload MUST NOT assume that a transport-layer identity authenticated by an intermediary is the same as the application-layer caller identity unless that relationship is explicitly established by protocol or deployment policy.\r\n```\r\n\r\n_Originally posted by @bc-pi in https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/125#discussion_r3460672993_\r\n            ",
       "createdAt": "2026-06-23T15:58:16Z",
-      "updatedAt": "2026-06-23T16:00:07Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-30T20:45:44Z",
+      "closedAt": "2026-06-30T20:45:44Z",
       "comments": [
         {
           "author": "bc-pi",
@@ -6102,52 +6102,84 @@
       "id": "PR_kwDOLPTb0M7p4Se7",
       "title": "Layered the level",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/129",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/128",
       "createdAt": "2026-06-23T23:46:25Z",
-      "updatedAt": "2026-06-23T23:46:26Z",
+      "updatedAt": "2026-06-30T20:45:15Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "bb955790db6568a916e1efe25d413f412bce6c97",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "layel",
       "headRefOid": "c94d6b54c02b19d9dea1da8d437c7b488e239f8a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-30T20:45:15Z",
+      "mergedAt": "2026-06-30T20:45:15Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "e462fa350982317c58b6680342236c8efd7dd252"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABEgmgtg",
+          "commit": {
+            "abbreviatedOid": "c94d6b5"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-30T05:39:53Z",
+          "updatedAt": "2026-06-30T05:39:53Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 130,
       "id": "PR_kwDOLPTb0M7p4U1M",
       "title": "Cleaned up egress",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/130",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/127",
       "createdAt": "2026-06-23T23:48:42Z",
-      "updatedAt": "2026-06-23T23:48:43Z",
+      "updatedAt": "2026-06-30T20:45:34Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "bb955790db6568a916e1efe25d413f412bce6c97",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "no-egress",
       "headRefOid": "1be09726f3708adfc8f747564006a75053d40e99",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-30T20:45:34Z",
+      "mergedAt": "2026-06-30T20:45:34Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "9caa2031b8413c2ea6223ca708bd908c19495b2c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABEgmpUQ",
+          "commit": {
+            "abbreviatedOid": "1be0972"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-30T05:40:21Z",
+          "updatedAt": "2026-06-30T05:40:21Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
