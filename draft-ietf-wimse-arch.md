@@ -28,10 +28,13 @@ author:
  -
     ins: H. Tschofenig
     name: Hannes Tschofenig
-    abbrev: H-BRS
-    organization: University of Applied Sciences Bonn-Rhein-Sieg
+    organization: University of the Bundeswehr Munich
+    abbrev: UniBw M.
+    city: Neubiberg
+    region: Bavaria
     country: Germany
-    email: Hannes.Tschofenig@gmx.net
+    code: 85577
+    email: hannes.tschofenig@gmx.net
 
 normative:
 informative:
