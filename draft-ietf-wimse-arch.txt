@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                                  CyberArk
 Intended status: Informational                              Y. Rosomakho
-Expires: 1 January 2027                                          Zscaler
+Expires: 5 January 2027                                          Zscaler
                                                            H. Tschofenig
-                                                                   H-BRS
-                                                            30 June 2026
+                                                                UniBw M.
+                                                             4 July 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2027.
+   This Internet-Draft will expire on 5 January 2027.
 
 Copyright Notice
 
@@ -1461,6 +1461,7 @@ Authors' Addresses
 
 
    Hannes Tschofenig
-   University of Applied Sciences Bonn-Rhein-Sieg
+   University of the Bundeswehr Munich
+   85577 Neubiberg
    Germany
-   Email: Hannes.Tschofenig@gmx.net
+   Email: hannes.tschofenig@gmx.net
