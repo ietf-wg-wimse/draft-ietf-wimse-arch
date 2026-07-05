@@ -1310,11 +1310,10 @@ Table of Contents
    Section 3.4.6 describes that one or more workload identities may be
    incorporated into a security context token to constrain the use of
    that token.  This workload identity binding may restrict which
-   workloads can present the token or restrict which workloads should
-   consume the token or both.  Workload identity binding can also be
-   used with types of tokens other than security context tokens.
-   Workload identity binding helps to reduce the impact of a stolen
-   token or compromised workload.
+   workloads can present the token or which workloads may consume the
+   token.  Workload identity binding can also be used with types of
+   tokens other than security context tokens.  Workload identity binding
+   reduces the impact of a stolen token or compromised workload.
 
 4.4.  Credential Theft
 
