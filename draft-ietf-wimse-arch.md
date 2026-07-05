@@ -355,7 +355,7 @@ Some example interactions in this scenario:
 
 * (2) The gateway forwards the request to the appropriate workload with the security context information
 
-* (3) The workload needs to access an infrastructure service and, because it is managed by the same organization, it authenticates to the service directly using its workload credentials.
+* (3) The workload needs to access an infrastructure service and, because there is an established trust relationship, it authenticates to the service directly using its workload credentials.
 
 * (4) Workload 1 contacts Workload 2 to perform an operation. This request is accompanied by a security context as in the other scenarios.
 
