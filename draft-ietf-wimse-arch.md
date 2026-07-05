@@ -147,7 +147,9 @@ Both workload identity certificate and workload identity token (WIT) credentials
 
 The workload identity certificate or WIT is presented during authentication, however the private key is kept secret and only used in cryptographic computation to prove that the presenter has access to the private key corresponding to the public key.
 
+The private key associated with a workload identity credential is security-sensitive key material. It may be generated and managed by the workload itself, by an agent, or by the surrounding platform or infrastructure. In all cases, the key material needs to be generated with sufficient entropy, stored securely, protected from unauthorized access, and rotated according to deployment policy.
 
+The appropriate lifetime of a workload identity credential and its associated key pair depends on the deployment model, the sensitivity of the workload, the strength of the key protection mechanism, and the expected lifetime of the workload instance. Generating a new key pair for every request is not generally required and may be impractical. However, deployments SHOULD use bounded credential lifetimes and automated renewal so that workload identity credentials and associated key pairs are periodically replaced and can be retired after suspected compromise.
 
 ## Workload Identity System Scenarios
 
@@ -649,6 +651,8 @@ Observation and interception of network traffic is not the only means of disclos
 ## Credential Theft
 
 When the information disclosed to an attacker is a credential, the attacker may be able to use that credential to escalate their privilege, attack another system via lateral movement within the organization or to impersonate a workload.  Bearer credentials are particularly vulnerable to disclosure since they are communicated between systems and may be revealed in communication channels or application logs. Credentials bound to a cryptographic key are typically less vulnerable because the key is not disclosed in the authentication process. However, care must still be taken to prevent disclosure during key management operations.
+
+Private keys associated with workload identity credentials require appropriate lifecycle management. Deployments should protect these keys using platform mechanisms appropriate to the environment, limit the lifetime of credentials associated with the keys, rotate or replace key pairs periodically, and revoke or stop accepting credentials associated with keys that are suspected to be compromised. Long-running workload instances need a renewal mechanism that allows credentials and keys to be replaced without relying on long-lived static secrets.
 
 ## Workload Compromise
 
