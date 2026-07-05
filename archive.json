@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-02T04:11:54.392059+00:00",
+  "timestamp": "2026-07-05T04:10:59.520179+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -6109,7 +6109,7 @@
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/128",
       "createdAt": "2026-06-23T23:46:25Z",
-      "updatedAt": "2026-06-30T20:45:15Z",
+      "updatedAt": "2026-07-02T11:38:33Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "bb955790db6568a916e1efe25d413f412bce6c97",
@@ -6122,7 +6122,15 @@
       "mergeCommit": {
         "oid": "e462fa350982317c58b6680342236c8efd7dd252"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "solid title for this PR, well done ",
+          "createdAt": "2026-07-02T11:38:33Z",
+          "updatedAt": "2026-07-02T11:38:33Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPTb0M8AAAABEgmgtg",
@@ -6180,6 +6188,192 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 131,
+      "id": "PR_kwDOLPTb0M7t3jnE",
+      "title": "Updated Contact Info",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/131",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-04T13:57:35Z",
+      "updatedAt": "2026-07-04T21:16:38Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9caa2031b8413c2ea6223ca708bd908c19495b2c",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "hannestschofenig-patch-4",
+      "headRefOid": "3184ee02e55741cba2319993a1f64f3d5a254261",
+      "closedAt": "2026-07-04T21:16:38Z",
+      "mergedAt": "2026-07-04T21:16:37Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "b15811c2565283a1ac277457d4785ae90d6072dc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 132,
+      "id": "PR_kwDOLPTb0M7t7vMg",
+      "title": "Key management and rotation",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/132",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/85",
+      "createdAt": "2026-07-04T21:29:48Z",
+      "updatedAt": "2026-07-05T00:50:25Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "main",
+      "headRefOid": "b53afc830e475c46764f15832f506c8e2a644a46",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABE_978w",
+          "commit": {
+            "abbreviatedOid": "b53afc8"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-05T00:50:25Z",
+          "updatedAt": "2026-07-05T00:50:25Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 133,
+      "id": "PR_kwDOLPTb0M7t7y1P",
+      "title": "Authentication and Authorization security consideration",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/133",
+      "state": "OPEN",
+      "author": "yaroslavros",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/66",
+      "createdAt": "2026-07-04T21:37:28Z",
+      "updatedAt": "2026-07-05T00:48:14Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "headRepository": "yaroslavros/wimse-arch",
+      "headRefName": "authn-authz",
+      "headRefOid": "7b63408736509a72cb5a777d8ab7216312e08b3d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABE_9y9g",
+          "commit": {
+            "abbreviatedOid": "7b63408"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-05T00:48:14Z",
+          "updatedAt": "2026-07-05T00:48:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 134,
+      "id": "PR_kwDOLPTb0M7t9I0i",
+      "title": "infrastructure service edit",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/134",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "closes issue #103 ",
+      "createdAt": "2026-07-05T00:47:03Z",
+      "updatedAt": "2026-07-05T00:47:03Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "infrastructure-service",
+      "headRefOid": "11a87a3b17346b0eb04bb8ca7d0ebeb2edb51a4a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 135,
+      "id": "PR_kwDOLPTb0M7t9OPA",
+      "title": "external endpoint on gateway",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/135",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "closes issue #94 ",
+      "createdAt": "2026-07-05T00:57:41Z",
+      "updatedAt": "2026-07-05T00:57:42Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "external-endpoint",
+      "headRefOid": "a99e9c6006171756523513fe10dac79981d51c20",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 136,
+      "id": "PR_kwDOLPTb0M7t9b0R",
+      "title": "workload identity binding",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/136",
+      "state": "OPEN",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "closes issue #84 ",
+      "createdAt": "2026-07-05T01:24:15Z",
+      "updatedAt": "2026-07-05T01:24:16Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "token-binding",
+      "headRefOid": "d5a40fa34354e89fe33ff8495078629c6dfc5e7e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
