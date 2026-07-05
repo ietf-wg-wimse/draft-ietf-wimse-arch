@@ -584,7 +584,7 @@ To avoid inadvertent disclosure of sensitive information, workloads and services
 
 WIMSE systems SHOULD ensure audit logs are tamper-evident and securely stored. Logs may be forwarded to centralized security information and event management (SIEM) systems to enable compliance, threat detection, and incident response.
 
-### Security Context Establishment and Propagation
+### Security Context Establishment and Propagation {#seccontext}
 
 In a typical system of workloads additional information is needed in order for the workload to perform its function. For example, it is common for a workload to require information about a user or other entity that originated the request. Other types of information may include information about the hardware or software that the workload is running or information about what processing and validation has already been done to the request. This type of information is part of the security context that the workload uses during authorization, accounting and auditing. This context is propagated and possibly augmented from workload to workload using tokens. The context may be associated with a specific source or target workload by binding it to a specific workload identifier. This may indicate that the context originated from a specific workload, or that only a specific workload may make use of the context. A workload may also use a workload identity credential to bind a context to one or more transaction so the receiver can verify which workload initiated the transaction and the context that was intended for the transaction.
 
@@ -645,6 +645,10 @@ Workloads communicating with applications may face different threats to traffic 
 ## Information Disclosure
 
 Observation and interception of network traffic is not the only means of disclosure in these systems. Other vectors of information leakage is through disclosure in log files and other observability and troubleshooting mechanisms. For example, an application may log the contents of HTTP headers containing JWT bearer tokens, user names, email addresses and other sensitive information. The information in these logs may be made available to other systems with less stringent access controls, which may result in this information falling into an attackers hands. This creates privacy risks and potential surface for reconnaissance attacks.
+
+## Workload Identity Binding to Tokens
+
+{{seccontext}} describes that one or more workload identities may be incorporated into a security context token to constrain the use of that token.  This workload identity binding may restrict which workloads can present the token or restrict which workloads should consume the token or both. Workload identity binding can also be used with types of tokens other than security context tokens. Workload identity binding helps to reduce the impact of a stolen token or compromised workload.
 
 ## Credential Theft
 
