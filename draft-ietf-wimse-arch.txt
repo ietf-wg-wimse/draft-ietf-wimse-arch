@@ -3,12 +3,12 @@
 
 
 Workload Identity in Multi System Environments                J. Salowey
-Internet-Draft                                                  CyberArk
+Internet-Draft                                        Palo Alto Networks
 Intended status: Informational                              Y. Rosomakho
-Expires: 5 January 2027                                          Zscaler
+Expires: 6 January 2027                                          Zscaler
                                                            H. Tschofenig
                                                                 UniBw M.
-                                                             4 July 2026
+                                                             5 July 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2027.
+   This Internet-Draft will expire on 6 January 2027.
 
 Copyright Notice
 
@@ -1451,7 +1451,7 @@ Changes since draft -06
 Authors' Addresses
 
    Joseph Salowey
-   CyberArk
+   Palo Alto Networks
    Email: joe@salowey.net
 
 
