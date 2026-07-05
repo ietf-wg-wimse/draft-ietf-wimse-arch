@@ -95,9 +95,10 @@ Table of Contents
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
-     4.3.  Credential Theft
-     4.4.  Authentication and Authorization
-     4.5.  Workload Compromise
+     4.3.  Workload Identity Binding to Tokens
+     4.4.  Credential Theft
+     4.5.  Authentication and Authorization
+     4.6.  Workload Compromise
    5.  IANA Considerations
    6.  References
      6.1.  Normative References
@@ -1323,7 +1324,17 @@ Table of Contents
    attackers hands.  This creates privacy risks and potential surface
    for reconnaissance attacks.
 
-4.3.  Credential Theft
+4.3.  Workload Identity Binding to Tokens
+
+   Section 3.4.6 describes that one or more workload identities may be
+   incorporated into a security context token to constrain the use of
+   that token.  This workload identity binding may restrict which
+   workloads can present the token or which workloads may consume the
+   token.  Workload identity binding can also be used with types of
+   tokens other than security context tokens.  Workload identity binding
+   reduces the impact of a stolen token or compromised workload.
+
+4.4.  Credential Theft
 
    When the information disclosed to an attacker is a credential, the
    attacker may be able to use that credential to escalate their
@@ -1346,7 +1357,7 @@ Table of Contents
    mechanism that allows credentials and keys to be replaced without
    relying on long-lived static secrets.
 
-4.4.  Authentication and Authorization
+4.5.  Authentication and Authorization
 
    Authentication of a workload establishes that the presenter controls
    the key material associated with the credential and that the
@@ -1364,7 +1375,7 @@ Table of Contents
    Issuers, relying parties, gateways, and workloads need to avoid
    treating successful authentication as implicit authorization.
 
-4.5.  Workload Compromise
+4.6.  Workload Compromise
 
    Even the most well-designed and implemented workloads may contain
    security flaws that allow an attacker to gain limited or full
