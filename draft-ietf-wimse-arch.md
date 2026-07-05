@@ -205,7 +205,7 @@ of sending and receiving requests to and from external systems or other internal
 
 * Gateway Service
 
-A gateway service typically acts as an intermediary between the internal application trust domain and external systems. It typically consists of multiple resilient instances. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It also routes incoming requests to the correct workload.
+A gateway service typically acts as an intermediary between the internal application trust domain and external systems. It typically consists of multiple resilient instances. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It routes incoming requests to external endpoints to the correct workload.
 The gateway MAY also implement identity proxy functionality including authentication, token exchange, and token transformation.
 
 * CA/Credential Service
