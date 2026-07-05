@@ -648,7 +648,7 @@ Observation and interception of network traffic is not the only means of disclos
 
 ## Workload Identity Binding to Tokens
 
-{{seccontext}} describes that one or more workload identities may be incorporated into a security context token to constrain the use of that token.  This workload identity binding may restrict which workloads can present the token or restrict which workloads should consume the token or both. Workload identity binding can also be used with types of tokens other than security context tokens. Workload identity binding helps to reduce the impact of a stolen token or compromised workload.
+{{seccontext}} describes that one or more workload identities may be incorporated into a security context token to constrain the use of that token.  This workload identity binding may restrict which workloads can present the token or which workloads may consume the token. Workload identity binding can also be used with types of tokens other than security context tokens. Workload identity binding reduces the impact of a stolen token or compromised workload.
 
 ## Credential Theft
 
