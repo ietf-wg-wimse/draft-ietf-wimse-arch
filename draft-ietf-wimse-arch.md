@@ -18,7 +18,7 @@ author:
  -
     ins: J. Salowey
     name: Joseph Salowey
-    organization: CyberArk
+    organization: Palo Alto Networks
     email: joe@salowey.net
  -
     ins: Y. Rosomakho
