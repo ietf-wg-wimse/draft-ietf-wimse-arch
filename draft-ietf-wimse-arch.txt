@@ -96,7 +96,8 @@ Table of Contents
      4.1.  Traffic Interception
      4.2.  Information Disclosure
      4.3.  Credential Theft
-     4.4.  Workload Compromise
+     4.4.  Authentication and Authorization
+     4.5.  Workload Compromise
    5.  IANA Considerations
    6.  References
      6.1.  Normative References
@@ -1344,7 +1345,25 @@ Table of Contents
    mechanism that allows credentials and keys to be replaced without
    relying on long-lived static secrets.
 
-4.4.  Workload Compromise
+4.4.  Authentication and Authorization
+
+   Authentication of a workload establishes that the presenter controls
+   the key material associated with the credential and that the
+   credential was issued under the authority of a trusted issuer.  This
+   is not sufficient, by itself, to determine whether the workload is
+   permitted to access a resource or perform a requested action.
+
+   Access control requires a separate authorization decision.  That
+   decision needs to take into account the authenticated workload
+   identity, the requested resource or operation, the applicable policy,
+   and any relevant security context.  The fact that a workload has a
+   valid credential does not imply that it is authorized for all
+   resources in the trust domain.
+
+   Issuers, relying parties, gateways, and workloads need to avoid
+   treating successful authentication as implicit authorization.
+
+4.5.  Workload Compromise
 
    Even the most well-designed and implemented workloads may contain
    security flaws that allow an attacker to gain limited or full
