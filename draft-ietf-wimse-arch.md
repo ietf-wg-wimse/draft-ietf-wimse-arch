@@ -654,6 +654,14 @@ When the information disclosed to an attacker is a credential, the attacker may 
 
 Private keys associated with workload identity credentials require appropriate lifecycle management. Deployments should protect these keys using platform mechanisms appropriate to the environment, limit the lifetime of credentials associated with the keys, rotate or replace key pairs periodically, and revoke or stop accepting credentials associated with keys that are suspected to be compromised. Long-running workload instances need a renewal mechanism that allows credentials and keys to be replaced without relying on long-lived static secrets.
 
+## Authentication and Authorization
+
+Authentication of a workload establishes that the presenter controls the key material associated with the credential and that the credential was issued under the authority of a trusted issuer. This is not sufficient, by itself, to determine whether the workload is permitted to access a resource or perform a requested action.
+
+Access control requires a separate authorization decision. That decision needs to take into account the authenticated workload identity, the requested resource or operation, the applicable policy, and any relevant security context. The fact that a workload has a valid credential does not imply that it is authorized for all resources in the trust domain.
+
+Issuers, relying parties, gateways, and workloads need to avoid treating successful authentication as implicit authorization.
+
 ## Workload Compromise
 
 Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.
