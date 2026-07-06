@@ -592,6 +592,10 @@ In a typical system of workloads additional information is needed in order for t
 
 ### Delegation and Impersonation {#delegation}
 
+Workloads may need to impersonate or act on behalf of another principal in the system. In these scenarios, the workload typically authenticates using its workload identity to a token service, as described in {{?OAUTH-TOKEN-XCHANGE=RFC8693}}. The token service then issues a token that can be used for delegation and impersonation. In many cases, this will not be an identity credential, but rather an authorization or context credential that delegates authority or permits impersonation for specific actions. This token may be bound to a workload identity as described in {{binding}}.
+
+### Accessing Resources in Other Trust Domains
+
 When source workloads send authenticated requests to destination workloads or services, those destination workloads may rely on upstream dependencies to fulfill such requests. Such access patterns are increasingly common in a microservices architecture. While X.509 certificates can be used for point-to-point authentication, services that rely on upstream workloads for answers may use delegation and/or impersonation semantics as described in {{?OAUTH-TOKEN-XCHANGE=RFC8693}}.
 
 WIMSE credentials constrain the subjects and actors identified in delegation and impersonation tokens to be bound by a trust domain, and to follow their issuing authorities' trust configurations. Upstream workloads should consider the security context of delegation and/or impersonation tokens within and across trust domains, when arriving at authorization decisions.
@@ -648,7 +652,7 @@ Workloads communicating with applications may face different threats to traffic 
 
 Observation and interception of network traffic is not the only means of disclosure in these systems. Other vectors of information leakage is through disclosure in log files and other observability and troubleshooting mechanisms. For example, an application may log the contents of HTTP headers containing JWT bearer tokens, user names, email addresses and other sensitive information. The information in these logs may be made available to other systems with less stringent access controls, which may result in this information falling into an attackers hands. This creates privacy risks and potential surface for reconnaissance attacks.
 
-## Workload Identity Binding to Tokens
+## Workload Identity Binding to Tokens {#binding}
 
 {{seccontext}} describes that one or more workload identities may be incorporated into a security context token to constrain the use of that token.  This workload identity binding may restrict which workloads can present the token or which workloads may consume the token. Workload identity binding can also be used with types of tokens other than security context tokens. Workload identity binding reduces the impact of a stolen token or compromised workload.
 
