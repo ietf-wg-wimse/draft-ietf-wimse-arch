@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                        Palo Alto Networks
 Intended status: Informational                              Y. Rosomakho
-Expires: 6 January 2027                                          Zscaler
+Expires: 7 January 2027                                          Zscaler
                                                            H. Tschofenig
                                                                 UniBw M.
-                                                             5 July 2026
+                                                             6 July 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 January 2027.
+   This Internet-Draft will expire on 7 January 2027.
 
 Copyright Notice
 
@@ -89,9 +89,10 @@ Table of Contents
        3.4.5.  Audit Trails
        3.4.6.  Security Context Establishment and Propagation
        3.4.7.  Delegation and Impersonation
-       3.4.8.  Asynchronous and Batch Requests
-       3.4.9.  Cross-boundary Workload Identity
-       3.4.10. AI and ML-Based Intermediaries
+       3.4.8.  Accessing Resources in Other Trust Domains
+       3.4.9.  Asynchronous and Batch Requests
+       3.4.10. Cross-boundary Workload Identity
+       3.4.11. AI and ML-Based Intermediaries
    4.  Security Considerations
      4.1.  Traffic Interception
      4.2.  Information Disclosure
@@ -1165,6 +1166,18 @@ Table of Contents
 
 3.4.7.  Delegation and Impersonation
 
+   Workloads may need to impersonate or act on behalf of another
+   principal in the system.  In these scenarios, the workload typically
+   authenticates using its workload identity to a token service, as
+   described in [OAUTH-TOKEN-XCHANGE].  The token service then issues a
+   token that can be used for delegation and impersonation.  In many
+   cases, this will not be an identity credential, but rather an
+   authorization or context credential that delegates authority or
+   permits impersonation for specific actions.  This token may be bound
+   to a workload identity as described in Section 4.3.
+
+3.4.8.  Accessing Resources in Other Trust Domains
+
    When source workloads send authenticated requests to destination
    workloads or services, those destination workloads may rely on
    upstream dependencies to fulfill such requests.  Such access patterns
@@ -1180,7 +1193,7 @@ Table of Contents
    and/or impersonation tokens within and across trust domains, when
    arriving at authorization decisions.
 
-3.4.8.  Asynchronous and Batch Requests
+3.4.9.  Asynchronous and Batch Requests
 
    Source workloads may send authenticated asynchronous and batch
    requests to destination workloads or services.  A destination
@@ -1198,14 +1211,14 @@ Table of Contents
    workload identity certificate or Workload Identity Token (WIT), of
    the acting workload or service.
 
-3.4.9.  Cross-boundary Workload Identity
+3.4.10.  Cross-boundary Workload Identity
 
    As workloads often need to communicate across trust boundaries, extra
    care needs to be taken when it comes to identity communication to
    ensure scalability and privacy.  (TODO: align with OAuth cross domain
    identity and authorization)
 
-3.4.9.1.  Egress Identity Generalization
+3.4.10.1.  Egress Identity Generalization
 
    A workload communicating with a service or another workload located
    outside the trust boundary may need to provide modified identity
@@ -1236,7 +1249,7 @@ Table of Contents
    communications adhere to security and privacy requirements while
    maintaining interoperability across trust boundaries.
 
-3.4.9.2.  Inbound Gateway Identity Validation
+3.4.10.2.  Inbound Gateway Identity Validation
 
    Inbound security gateway is a common design pattern for service
    protection.  This functionality is often found in CDN services, API
@@ -1247,7 +1260,7 @@ Table of Contents
    it unmodified or replace it with its own identity to be validated by
    the destination.
 
-3.4.10.  AI and ML-Based Intermediaries
+3.4.11.  AI and ML-Based Intermediaries
 
    Emerging agentic AI systems and other ML-based intermediaries
    introduce new considerations for workload identity and security
@@ -1417,9 +1430,9 @@ Table of Contents
 
    [WIMSE-ID] Rosomakho, Y. and J. A. Salowey, "Workload Identifier",
               Work in Progress, Internet-Draft, draft-ietf-wimse-
-              identifier-02, 2 March 2026,
+              identifier-03, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              identifier-02>.
+              identifier-03>.
 
 6.2.  Informative References
 
@@ -1434,9 +1447,9 @@ Table of Contents
    [I-D.ietf-oauth-transaction-tokens]
               Tulshibagwale, A., Fletcher, G., and P. Kasselman,
               "Transaction Tokens", Work in Progress, Internet-Draft,
-              draft-ietf-oauth-transaction-tokens-08, 2 March 2026,
+              draft-ietf-oauth-transaction-tokens-09, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              transaction-tokens-08>.
+              transaction-tokens-09>.
 
    [I-D.ietf-wimse-s2s-protocol]
               Campbell, B., Salowey, J. A., Schwenkschuster, A., and Y.
