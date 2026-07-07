@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-05T04:10:59.520179+00:00",
+  "timestamp": "2026-07-07T04:07:35.434586+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1076,7 +1076,7 @@
       "id": "I_kwDOLPTb0M6lUenz",
       "title": "Delegation and Impersonation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/62",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1085,8 +1085,8 @@
       "labels": [],
       "body": "I think everything in section 3.2.4 is correct, but I wonder if this is really about delegation and impersonation or whether this is more about obtaining a credential from another \"logical trust domain\" using the credential obtained from the current trust domain. Workloads are not so much delegating or impersonating in this case as they are requesting a credential from another issuer than their own trust domain. Perhaps this is more about \"Obtaining Credentials from other Issuers\"? \r\n\r\nI do think there are use cases around delegation and impersonation where platforms may request credentials on-behalf of workloads and may even use them on their behalf (e.g. egress gateways or service meshes). So perhaps there is a separate section on those \"brokered\" scenarios where workloads are impersonating or delegating to a platform to present their credentials on their behalf?",
       "createdAt": "2025-01-07T19:46:13Z",
-      "updatedAt": "2025-01-10T20:02:23Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-06T20:46:48Z",
+      "closedAt": "2026-07-06T20:46:48Z",
       "comments": []
     },
     {
@@ -1190,7 +1190,7 @@
       "id": "I_kwDOLPTb0M6lUn8D",
       "title": "Security Consideration: Authn != AuthZ",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1201,8 +1201,8 @@
       ],
       "body": "Should we have a security consideration that makes it clear that authentication is not sufficient to determine access control, a seperate authorization decision is required. Authentication only establishes that the issuer collected proof of the workload identity, and that the same workload is now attempting to access a resource. The access control decision depends on a separate authorisation decision.",
       "createdAt": "2025-01-07T20:08:22Z",
-      "updatedAt": "2026-06-22T16:28:50Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-05T14:20:30Z",
+      "closedAt": "2026-07-05T14:20:30Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1262,7 +1262,7 @@
       "id": "I_kwDOLPTb0M61P3gF",
       "title": "Under-communicating \"Workload-Bound\" tokens",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/84",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dagdagdag83",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1273,8 +1273,8 @@
       ],
       "body": "In my opinion the document (and also draft-ietf-wimse-s2s-protocol) is under-communicating the possibility and advantages of binding tokens to workload identities.\n\nConsider a scenario where you use RFC8705 or RFC9449 to request a token. The resulting token will be bound to either the mTLS certificate or the key in the proof token. The example in https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-option-1-dpop-inspired-auth effectively binds the WIT to the workload, the WIT is workload-bound. The example https://www.ietf.org/archive/id/draft-ietf-wimse-s2s-protocol-03.html#name-using-mutual-tls-for-worklo doesn't mention using RFC8705 to get workload-bound tokens.\n\nI think that the architecture document should be much clearer on the possibility of binding tokens to workloads. For instance the recent https://csrc.nist.gov/pubs/sp/800/228/ipd does a very good job at explaining that there is typically at least two factors involved 1) an authentication of the software/workload making the request, 2) some type of token relaying authorization context.\n\nI think we are greatly under-communicating the possibility of using the workload identity authentication to bind tokens (that contains authorization context) to the workload identity itself. This token could be an oauth token or indeed a transaction token (if txn-tokens were extended to support cnf claims). This has big benefit of giving another layer of defense because these tokens could not be stolen or misused by other workloads or systems.\n\nIn general I think that NIST SP 800-228 does a better job at explaining the \"factors\" involved in \"API Protection for Cloud-Native Systems\" -- which is effectively what WIMSE also aims to \"solve\" -- secure workload to workload communication. By authenticating a workload you have actually primed any tokens within your trust domain to be workload-bound which would greatly improve token security without much extra work.\n\nMy main point is that by having valid Workload Identity Credentials as either X.509 certificate or WIT, you have the ability to bind any or all tokens within your trust domain. The WIT/WPT pattern in s2s document actually is a form of workload-bound tokens, but it doesn't make it very clear. However this can easily be extended to binding other tokens via a RFC8705 flow or dPoP-like flows.  ",
       "createdAt": "2025-05-05T21:08:55Z",
-      "updatedAt": "2025-09-15T14:29:01Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-05T16:54:06Z",
+      "closedAt": "2026-07-05T16:54:06Z",
       "comments": [
         {
           "author": "dagdagdag83",
@@ -1290,7 +1290,7 @@
       "id": "I_kwDOLPTb0M61QRzD",
       "title": "Workload Identity Credentials key management is understated",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/85",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dagdagdag83",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1301,8 +1301,8 @@
       ],
       "body": "The document states in section 3.1.3 the following:\n```\nBoth X.509 certificate and workload identity token credentials consist of two parts:\n* a certificate or WIT is a signed data structure that contains a public key and identity information\n* a corresponding private key\n```\nThese Workload Identity Credentials (WIC) are effectively based on a key pair which has to be managed by the workloads themselves or the infrastructure/platform. All key material must be rotated and stored securely, which means that these key pairs have these considerations. The document doesn't mention this.\n\nThe workload could generate a new key pair for each single request but that is suboptimal. The document should provide some mention or guidelines on how often the workload (or platform) should rotate the certificates or the WIT/WPT key pair.\n",
       "createdAt": "2025-05-05T22:09:55Z",
-      "updatedAt": "2026-06-22T16:30:56Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-05T14:20:48Z",
+      "closedAt": "2026-07-05T14:20:48Z",
       "comments": []
     },
     {
@@ -1397,7 +1397,7 @@
       "id": "I_kwDOLPTb0M7KMgfJ",
       "title": "External Endpoint vs. Gateway Service / Identity proxy",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/94",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1408,8 +1408,8 @@
       ],
       "body": "Transaction Tokens uses the term External Endpoint:\n: A published interface to a Trust Domain that results in the invocation of a workload within the Trust Domain.\n\nWhich performs a similar function as the gateway service and identity proxy defined in this document.\n\nWe should provide some alignment or mapping of the terminology",
       "createdAt": "2025-09-08T01:36:20Z",
-      "updatedAt": "2025-09-30T15:12:27Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-05T23:28:50Z",
+      "closedAt": "2026-07-05T23:28:50Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1484,7 +1484,7 @@
       "id": "I_kwDOLPTb0M7P_t3L",
       "title": "Infrastructure service inside or outside of trust domain ?",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/103",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fandreas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1493,8 +1493,8 @@
       "labels": [],
       "body": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/blob/44fae95d35ff5c42a6f768ba3a5c07a650fac0fe/draft-ietf-wimse-arch.md?plain=1#L331\n\nShouldn't the infrastructure service then be shown inside the Trust Boundary in \"Figure 3: External request workload application system\" ? ",
       "createdAt": "2025-10-07T01:04:19Z",
-      "updatedAt": "2025-11-25T17:38:35Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-05T14:21:01Z",
+      "closedAt": "2026-07-05T14:21:01Z",
       "comments": [
         {
           "author": "jsalowey",
@@ -1689,18 +1689,28 @@
       "id": "I_kwDOLPTb0M7vJ9qn",
       "title": "Passport vs background check",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/119",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
         "jsalowey"
       ],
-      "labels": [],
+      "labels": [
+        "question"
+      ],
       "body": "Comment from Credential provisioning PR \n\nAdditionally the way you describe attestation here is the RATS background check model. While it has its place, all evidence points to the other model -- Passport -- being more widely used. Under the background check model, the workload sends evidence to relying party, and since the relying party checks the evidence on its behalf, there is no need for a workload to have its own credentials in the WIT/x.509 form. So if you are going to describe just one model, I think Passport model (evidence sent to Verifier, results from Verifier used to procure credentials) is perhaps a better one to cover.",
       "createdAt": "2026-03-02T17:16:30Z",
-      "updatedAt": "2026-06-08T16:06:27Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-06T16:20:46Z",
+      "closedAt": "2026-07-06T16:20:46Z",
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In looking at the section it appears that what is described is closer to the passport issue as I understand it.  Perhaps it can be clarified that workload is authenticating with workload identity credentials and directly providing attestation to other workloads.  We would need more information on how the passport model should be represented.  In any case this is just an example.\nI think we can probably close this one out. ",
+          "createdAt": "2026-07-05T23:55:50Z",
+          "updatedAt": "2026-07-05T23:55:50Z"
+        }
+      ]
     },
     {
       "number": 120,
@@ -1758,16 +1768,24 @@
       "id": "I_kwDOLPTb0M8AAAABGXvkSA",
       "title": "Identifiers for authorization and audit",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/126",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Will the identity used for authorization and for accounting/auditing be the same? In some instances it may, but the requirements may be different. For example, specific instance information may not be of interest in an authorization case, but it may in audit. While we can just say this is a matter of policy, but our current arrangement may not be flexible enough to meet the needs of both authorization and accounting/audit.\nOne possibility is to say, In the absence of local policy that defined the information used for audit and authorization:\n\nIt is recommended that the WIMSE identifier SHOULD be used for authorization\nIn the identifier draft define an WMISE audit identifier that is used if the requirements for authorization and auditing are different. The audit identifier may be carried in a separate audit identifier attribute in a WIMSE Credential.\nIf the WIMSE audit identifier attribute is included it SHOULD be used for audit records. If it is not present then the WIMSE Identifier should be used.\nThis is something we will need to take to the group, but I think ti may be at part of the discussion around instance vs. service.\n\n",
       "createdAt": "2026-06-23T04:03:26Z",
-      "updatedAt": "2026-06-23T04:03:26Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-06T16:20:34Z",
+      "closedAt": "2026-07-06T16:20:34Z",
+      "comments": [
+        {
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "body": "A cleaner way to deal with this would be the definition of multiple identifiers for external and internal consumption.  This can be accommodated with service versus instance identifiers. ",
+          "createdAt": "2026-07-06T16:18:41Z",
+          "updatedAt": "2026-07-06T16:20:22Z"
+        }
+      ]
     },
     {
       "number": 127,
@@ -6222,24 +6240,26 @@
       "id": "PR_kwDOLPTb0M7t7vMg",
       "title": "Key management and rotation",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/132",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/85",
       "createdAt": "2026-07-04T21:29:48Z",
-      "updatedAt": "2026-07-05T00:50:25Z",
+      "updatedAt": "2026-07-05T14:14:31Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "main",
       "headRefOid": "b53afc830e475c46764f15832f506c8e2a644a46",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-05T14:14:31Z",
+      "mergedAt": "2026-07-05T14:14:31Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "d1e3f8a2033492342dc8cc13984c2c7c987891a0"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6262,24 +6282,26 @@
       "id": "PR_kwDOLPTb0M7t7y1P",
       "title": "Authentication and Authorization security consideration",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/133",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/66",
       "createdAt": "2026-07-04T21:37:28Z",
-      "updatedAt": "2026-07-05T00:48:14Z",
+      "updatedAt": "2026-07-05T14:15:54Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
-      "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
+      "baseRefOid": "d1e3f8a2033492342dc8cc13984c2c7c987891a0",
       "headRepository": "yaroslavros/wimse-arch",
       "headRefName": "authn-authz",
-      "headRefOid": "7b63408736509a72cb5a777d8ab7216312e08b3d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "14061ddbc22149a64df7974a6d77ffe80de51b70",
+      "closedAt": "2026-07-05T14:15:53Z",
+      "mergedAt": "2026-07-05T14:15:53Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "aa1a72b84bb324ac8e63a8095051d0876ff1ce4f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6302,78 +6324,222 @@
       "id": "PR_kwDOLPTb0M7t9I0i",
       "title": "infrastructure service edit",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/134",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "closes issue #103 ",
       "createdAt": "2026-07-05T00:47:03Z",
-      "updatedAt": "2026-07-05T00:47:03Z",
+      "updatedAt": "2026-07-05T14:16:22Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "infrastructure-service",
       "headRefOid": "11a87a3b17346b0eb04bb8ca7d0ebeb2edb51a4a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-05T14:16:22Z",
+      "mergedAt": "2026-07-05T14:16:22Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "55b49f1e2ccdd6bf40b9d2065e12d97fa61763e6"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFA5MAQ",
+          "commit": {
+            "abbreviatedOid": "11a87a3"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-05T14:16:17Z",
+          "updatedAt": "2026-07-05T14:16:17Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 135,
       "id": "PR_kwDOLPTb0M7t9OPA",
       "title": "external endpoint on gateway",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/135",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "closes issue #94 ",
       "createdAt": "2026-07-05T00:57:41Z",
-      "updatedAt": "2026-07-05T00:57:42Z",
+      "updatedAt": "2026-07-05T23:28:31Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "external-endpoint",
-      "headRefOid": "a99e9c6006171756523513fe10dac79981d51c20",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fd738523e5cf235c26fe685013a43c28d6b8ad3c",
+      "closedAt": "2026-07-05T23:28:31Z",
+      "mergedAt": "2026-07-05T23:28:31Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "63072d5200600a7d3f831ef6077a4ff64e86def2"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFA5Vag",
+          "commit": {
+            "abbreviatedOid": "a99e9c6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-05T14:18:18Z",
+          "updatedAt": "2026-07-05T14:18:18Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nA gateway service typically acts as an intermediary between the internal application trust domain and external systems. It typically consists of multiple resilient instances. The gateway is responsible for ensuring appropriate isolation between external and internal domains. It routes incoming external requests to the correct internal workloads.\n```\n\nMaybe this is a bit more clear? Otherwise it reads otherwise me as if it is routing some requests to external endpoints of \"the correct workload\"",
+              "createdAt": "2026-07-05T14:18:18Z",
+              "updatedAt": "2026-07-05T14:18:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFBFPBQ",
+          "commit": {
+            "abbreviatedOid": "a99e9c6"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-05T16:52:32Z",
+          "updatedAt": "2026-07-05T16:52:32Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I wanted to include the term \"external endpoint\", but I agree the text is not ideal, how about this\r\n```suggestion\r\nA gateway service acts as an intermediary between the internal application trust domain and external systems. By exposing external endpoints, it routes incoming requests to the correct internal workloads while ensuring appropriate isolation between the external and internal domains. To ensure high availability, a gateway usually consists of multiple resilient instances.\r\n```",
+              "createdAt": "2026-07-05T16:52:32Z",
+              "updatedAt": "2026-07-05T16:52:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFBhXCA",
+          "commit": {
+            "abbreviatedOid": "a99e9c6"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-05T22:34:25Z",
+          "updatedAt": "2026-07-05T22:34:25Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Much better. One final suggestion to eliminate double \"ensure\" - \"ensure\" -> \"provide\"\r\n```suggestion\r\nA gateway service acts as an intermediary between the internal application trust domain and external systems. By exposing external endpoints, it routes incoming requests to the correct internal workloads while ensuring appropriate isolation between the external and internal domains. To provide high availability, a gateway usually consists of multiple resilient instances.\r\n```",
+              "createdAt": "2026-07-05T22:34:25Z",
+              "updatedAt": "2026-07-05T22:34:26Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 136,
       "id": "PR_kwDOLPTb0M7t9b0R",
       "title": "workload identity binding",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/136",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jsalowey",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "closes issue #84 ",
       "createdAt": "2026-07-05T01:24:15Z",
-      "updatedAt": "2026-07-05T01:24:16Z",
+      "updatedAt": "2026-07-05T16:38:32Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "b15811c2565283a1ac277457d4785ae90d6072dc",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "token-binding",
-      "headRefOid": "d5a40fa34354e89fe33ff8495078629c6dfc5e7e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "138f81e0cc6179e333b4410929db70185bf3b2b7",
+      "closedAt": "2026-07-05T16:38:32Z",
+      "mergedAt": "2026-07-05T16:38:32Z",
+      "mergedBy": "jsalowey",
+      "mergeCommit": {
+        "oid": "db8b4a63ad7e6b704df72fe320b1105bf7c6d44b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFA5eGA",
+          "commit": {
+            "abbreviatedOid": "d5a40fa"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-05T14:20:07Z",
+          "updatedAt": "2026-07-05T14:20:07Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\n{{seccontext}} describes that one or more workload identities may be incorporated into a security context token to constrain the use of that token.  This workload identity binding may restrict which workloads can present the token or which workloads may consume the token. Workload identity binding can also be used with types of tokens other than security context tokens. Workload identity binding reduces the impact of a stolen token or compromised workload.\n```\n\nI think this is easier to read.",
+              "createdAt": "2026-07-05T14:20:07Z",
+              "updatedAt": "2026-07-05T14:20:07Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 137,
+      "id": "PR_kwDOLPTb0M7ueeQ6",
+      "title": "new text on delegation",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/137",
+      "state": "MERGED",
+      "author": "jsalowey",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #62 ",
+      "createdAt": "2026-07-06T17:54:25Z",
+      "updatedAt": "2026-07-06T20:46:47Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "63072d5200600a7d3f831ef6077a4ff64e86def2",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "jas-delegation",
+      "headRefOid": "3097f3dd5d19348987d35d9e6b829075666fc57c",
+      "closedAt": "2026-07-06T20:46:47Z",
+      "mergedAt": "2026-07-06T20:46:47Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "0196009551afe60ae6c23509b56adabf75a15203"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABFIsUuA",
+          "commit": {
+            "abbreviatedOid": "3097f3d"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-06T20:44:55Z",
+          "updatedAt": "2026-07-06T20:44:55Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
