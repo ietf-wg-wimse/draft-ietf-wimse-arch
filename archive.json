@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-07T04:07:35.434586+00:00",
+  "timestamp": "2026-07-28T03:22:05.623835+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -6540,6 +6540,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 138,
+      "id": "PR_kwDOLPTb0M72yfXf",
+      "title": "Some initial editorial comments about the intro section",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/138",
+      "state": "OPEN",
+      "author": "elear",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Gents, I needed to read this document and found that it was not succinct.  I've tried to help.  The intent is not to make any changes in the architecture, but I may have made a mistake.  Feel free to cherry pick any of this.  I may come back to the rest of the document later, time permitting.",
+      "createdAt": "2026-07-27T07:51:25Z",
+      "updatedAt": "2026-07-27T07:51:26Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
+      "headRepository": "elear/draft-ietf-wimse-arch",
+      "headRefName": "eliot-editorial-pass",
+      "headRefOid": "736a2d9f77dcf01aa2b7f26721ee51e75ce8b5ba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
