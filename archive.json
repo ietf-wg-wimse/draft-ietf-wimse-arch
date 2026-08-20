@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-06T03:23:23.438369+00:00",
+  "timestamp": "2026-08-20T01:42:01.363128+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1843,11 +1843,13 @@
       "state": "OPEN",
       "author": "szh",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "jsalowey"
+      ],
       "labels": [],
       "body": "### Problem\n\nThe \"AI and ML-Based Intermediaries\" section (under \"Cross-boundary Workload Identity\") states:\n\n> \"Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities **or** token scopes.\"\n\nMany managed agent platforms assign one IAM execution role or service account to multiple logically distinct agents. On these platforms, a deployment can satisfy this MUST using token scopes \u2014 but this does not make agents distinguishable in the ways that matter:\n\n- **Audit logs** record the authenticated identity (the shared role). Actions by ten different agents look identical.\n- **Revocation** targets the identity. Cutting off one agent cuts off all of them.\n- **Per-agent policy** at downstream services requires parsing scope strings rather than verifying a per-agent identity.\n\nToken scopes restrict what a token is *authorized* to do. They do not change what identity was *authenticated*. The shared role remains the authenticated principal; the individual agent is invisible behind it.\n\nAWS Bedrock illustrates the gap: agents are typically assigned a shared IAM execution role across an account. A Bedrock deployment relying on token scopes satisfies the letter of this requirement but not its intent.\n\nGemini (Google Agent Identity) shows what correct behavior looks like: each deployed Gemini agent receives a unique SPIFFE-based identity, with a `sub` claim encoding the specific agent resource. Agents are distinguishable by identity alone, without relying on scopes.\n\n### Proposed change\n\nIn the \"AI and ML-Based Intermediaries\" section, replace:\n\n> \"Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes.\"\n\nWith:\n\n> Such autonomous actions MUST be clearly distinguished from delegated ones using separate workload identities. Token scopes alone do not satisfy this requirement: scopes restrict what a token is authorized to do, but they do not change the authenticated identity. When multiple agents share a workload credential, they remain indistinguishable in audit logs, revocation systems, and per-agent policy \u2014 regardless of scope.\n>\n> Managed agent platforms that host multiple logically distinct agents SHOULD assign each agent a unique workload identifier. Where a platform uses a shared execution credential, it MUST supplement that credential with a per-agent identifier \u2014 such as a SPIFFE URI uniquely assigned to that agent \u2014 carried in a dedicated claim. This per-agent identifier MUST be the stable identifier used for policy, audit, and revocation.\n\n**Informative note:**\n\n> Cloud IAM execution roles, Kubernetes ServiceAccounts, and managed identity principals are shared across all agents running under them. When such a credential is the only workload identity available, individual agents are indistinguishable by identity. A per-agent identifier is required \u2014 one that is unique to a single logical agent and stable across requests. Gemini (Google Agent Identity) provides an example: each deployed Gemini agent receives a unique SPIFFE-based identity tied to its specific agent resource.\n\n### References\n\n- [ODIS #6](https://github.com/cosai-oasis/ws4-odis/issues/6) \u2014 the ODIS data model analog: a Core requirement that `agent_id` must be unique per logical agent and must not be a shared execution role.\n- [AIMS #145](https://github.com/PieterKas/agent2agent-auth-framework/issues/145) \u2014 the authentication-layer analog in draft-klrc-aiagent-auth.\n- [CSA Agent Identity Governance Framework v1](https://labs.cloudsecurityalliance.org/agentic/agentic-identity-governance-framework-v1/) \u00a73 \u2014 recommends per-agent unique identity for all five agent identity categories.\n- [`draft-sweeney-wimse-credential-delegation-00`](https://datatracker.ietf.org/doc/draft-sweeney-wimse-credential-delegation/) \u2014 proposes ephemeral per-agent `did:key` identity; requires a stable per-agent anchor identity to bind the ephemeral key to, which shared roles cannot provide.",
       "createdAt": "2026-08-04T15:25:23Z",
-      "updatedAt": "2026-08-04T15:25:23Z",
+      "updatedAt": "2026-08-19T15:03:26Z",
       "closedAt": null,
       "comments": []
     }
