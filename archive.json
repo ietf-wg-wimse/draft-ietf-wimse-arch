@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-20T01:42:01.363128+00:00",
+  "timestamp": "2026-09-27T05:03:45.521479+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1849,9 +1849,31 @@
       "labels": [],
       "body": "### Problem\n\nThe \"AI and ML-Based Intermediaries\" section (under \"Cross-boundary Workload Identity\") states:\n\n> \"Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities **or** token scopes.\"\n\nMany managed agent platforms assign one IAM execution role or service account to multiple logically distinct agents. On these platforms, a deployment can satisfy this MUST using token scopes \u2014 but this does not make agents distinguishable in the ways that matter:\n\n- **Audit logs** record the authenticated identity (the shared role). Actions by ten different agents look identical.\n- **Revocation** targets the identity. Cutting off one agent cuts off all of them.\n- **Per-agent policy** at downstream services requires parsing scope strings rather than verifying a per-agent identity.\n\nToken scopes restrict what a token is *authorized* to do. They do not change what identity was *authenticated*. The shared role remains the authenticated principal; the individual agent is invisible behind it.\n\nAWS Bedrock illustrates the gap: agents are typically assigned a shared IAM execution role across an account. A Bedrock deployment relying on token scopes satisfies the letter of this requirement but not its intent.\n\nGemini (Google Agent Identity) shows what correct behavior looks like: each deployed Gemini agent receives a unique SPIFFE-based identity, with a `sub` claim encoding the specific agent resource. Agents are distinguishable by identity alone, without relying on scopes.\n\n### Proposed change\n\nIn the \"AI and ML-Based Intermediaries\" section, replace:\n\n> \"Such autonomous actions MUST be clearly distinguished from delegated ones, for example by using separate workload identities or token scopes.\"\n\nWith:\n\n> Such autonomous actions MUST be clearly distinguished from delegated ones using separate workload identities. Token scopes alone do not satisfy this requirement: scopes restrict what a token is authorized to do, but they do not change the authenticated identity. When multiple agents share a workload credential, they remain indistinguishable in audit logs, revocation systems, and per-agent policy \u2014 regardless of scope.\n>\n> Managed agent platforms that host multiple logically distinct agents SHOULD assign each agent a unique workload identifier. Where a platform uses a shared execution credential, it MUST supplement that credential with a per-agent identifier \u2014 such as a SPIFFE URI uniquely assigned to that agent \u2014 carried in a dedicated claim. This per-agent identifier MUST be the stable identifier used for policy, audit, and revocation.\n\n**Informative note:**\n\n> Cloud IAM execution roles, Kubernetes ServiceAccounts, and managed identity principals are shared across all agents running under them. When such a credential is the only workload identity available, individual agents are indistinguishable by identity. A per-agent identifier is required \u2014 one that is unique to a single logical agent and stable across requests. Gemini (Google Agent Identity) provides an example: each deployed Gemini agent receives a unique SPIFFE-based identity tied to its specific agent resource.\n\n### References\n\n- [ODIS #6](https://github.com/cosai-oasis/ws4-odis/issues/6) \u2014 the ODIS data model analog: a Core requirement that `agent_id` must be unique per logical agent and must not be a shared execution role.\n- [AIMS #145](https://github.com/PieterKas/agent2agent-auth-framework/issues/145) \u2014 the authentication-layer analog in draft-klrc-aiagent-auth.\n- [CSA Agent Identity Governance Framework v1](https://labs.cloudsecurityalliance.org/agentic/agentic-identity-governance-framework-v1/) \u00a73 \u2014 recommends per-agent unique identity for all five agent identity categories.\n- [`draft-sweeney-wimse-credential-delegation-00`](https://datatracker.ietf.org/doc/draft-sweeney-wimse-credential-delegation/) \u2014 proposes ephemeral per-agent `did:key` identity; requires a stable per-agent anchor identity to bind the ephemeral key to, which shared roles cannot provide.",
       "createdAt": "2026-08-04T15:25:23Z",
-      "updatedAt": "2026-08-19T15:03:26Z",
+      "updatedAt": "2026-09-25T20:42:22Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "arjun2075",
+          "authorAssociation": "NONE",
+          "body": "I went through the current architecture text and I think the core distinction here can be tightened without introducing a new identity mechanism.\n\nThe important point seems to be that a token scope can constrain an agent\u2019s authority, but it does not make that agent a distinct authenticated workload identity. That matters independently for audit, targeted revocation, and downstream per-agent policy.\n\nI\u2019d be happy to prepare a small text PR that:\n\n* removes token scopes as an alternative to distinct workload identity for this requirement;\n* explains explicitly that scopes constrain authority rather than establish authenticated identity; and\n* ties the guidance back to the draft\u2019s existing workload-identifier, audit, and revocation concepts.\n\nI\u2019d keep SPIFFE or other concrete identifier mechanisms informative rather than mandating a new dedicated claim unless the WG wants to go further.\n\nWould that be a useful scope for a PR?\n",
+          "createdAt": "2026-09-25T16:03:12Z",
+          "updatedAt": "2026-09-25T16:03:12Z"
+        },
+        {
+          "author": "szh",
+          "authorAssociation": "NONE",
+          "body": "Yes, that scope is right from my perspective, I'd be happy for you to submit a PR.\n\nTwo things worth naming explicitly in the PR text:\n\n- The three concrete harms: Scopes don't fix audit indistinguishability (the shared role is the authenticated principal in the log, not the agent), don't enable targeted revocation of a single agent, and don't support per-agent policy without out-of-band scope parsing. The authority/identity principle lands harder when those three are named rather than implied.\n\n- The platform contrast, informatively. Bedrock (shared IAM execution role, scopes as the only differentiator) vs. Gemini (per-agent SPIFFE URI) is worth keeping as a non-normative note. It makes the gap concrete for readers who haven't encountered the multi-agent shared-role pattern.\n\nOne more thing: I'm working on a related individual draft, [draft-heigh-wimse-agent-identity-metadata](https://szh.github.io/draft-agent-identity-metadata/draft-heigh-wimse-agent-identity-metadata.html) with @jsalowey and @yaroslavros, that explicitly separates agent attributes from grants such as scopes and makes identifier uniqueness a stated requirement. Might be useful background for the informative text.\n\nThank you so much!",
+          "createdAt": "2026-09-25T18:37:19Z",
+          "updatedAt": "2026-09-25T18:37:19Z"
+        },
+        {
+          "author": "arjun2075",
+          "authorAssociation": "NONE",
+          "body": "Thanks \u2014 I opened the focused architecture clarification as PR #140: https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/140\n\nIt incorporates the three concrete harms you called out \u2014 audit indistinguishability, lack of targeted per-agent revocation, and limits on per-agent downstream policy \u2014 and keeps the Bedrock/Gemini comparison explicitly informative.\n\nThe PR remains mechanism-neutral and does not mandate SPIFFE, a particular claim, or a credential format. I kept it intentionally narrow so any stronger identifier requirements can be shaped through WG review.\n\nThanks again for the guidance.",
+          "createdAt": "2026-09-25T20:42:22Z",
+          "updatedAt": "2026-09-25T20:42:22Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6578,6 +6600,32 @@
       "headRepository": "elear/draft-ietf-wimse-arch",
       "headRefName": "eliot-editorial-pass",
       "headRefOid": "736a2d9f77dcf01aa2b7f26721ee51e75ce8b5ba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 140,
+      "id": "PR_kwDOLPTb0M8AAAABFLH-9w",
+      "title": "Clarify identity requirements for AI intermediaries",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/140",
+      "state": "OPEN",
+      "author": "arjun2075",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "## Summary\n\nClarifies the distinction between authenticated workload identity and authorization scope for AI/ML-based intermediaries.\n\nThis follows the discussion in #139. In particular, the change makes explicit that scopes can constrain what an authenticated workload is authorized to do, but do not by themselves establish a distinct authenticated identity for each logical agent.\n\n## Changes\n\n- Removes token scopes as an alternative to separate workload identities in the existing requirement, because scopes constrain authorization but do not establish a distinct authenticated identity.\n- Clarifies that autonomous or delegated agents that need to be independently distinguishable require distinct authenticated workload identities rather than relying on scopes alone.\n- Makes the operational consequences explicit:\n  - Audit: shared authenticated roles make individual logical agents indistinguishable in downstream audit records.\n  - Targeted revocation: a shared identity does not support independently disabling or revoking one logical agent.\n  - Per-agent policy: downstream policy cannot rely on a separately authenticated per-agent identity if differentiation exists only in scopes or out-of-band conventions.\n- Adds an informative shared-role-versus-per-agent-identity platform contrast (AWS Bedrock and Gemini Agent Identity), explicitly marked non-normative.\n- Keeps the architecture guidance mechanism-neutral.\n\n## Scope\n\nThis PR does not mandate:\n\n- SPIFFE;\n- a specific JWT claim;\n- a particular credential format; or\n- a new workload-identity mechanism.\n\nConcrete platform mechanisms are included only informatively to make the identity-versus-authority distinction clearer.\n\nThe related draft-heigh-wimse-agent-identity-metadata work was reviewed as useful background, particularly its separation of agent identity/attributes from authorization grants such as scopes. This PR does not make the architecture dependent on that individual draft.\n\n## Validation\n\nValidated with:\n\n- make\n- make lint\n- make check\n- git diff --check\n\nThe `idnits` findings reported by `make check` (2 errors, 2 warnings, 1 comment) are also present on clean `main` and are baseline rather than regressions introduced by this change.\n\n## Related issue\n\nRelated to #139.\n",
+      "createdAt": "2026-09-25T20:05:42Z",
+      "updatedAt": "2026-09-25T20:05:43Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
+      "headRepository": "arjun2075/draft-ietf-wimse-arch",
+      "headRefName": "clarify-ai-intermediary-workload-identity",
+      "headRefOid": "c7d5b85ff3d2a78fa50fe18f1c5a1817608a59f5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
