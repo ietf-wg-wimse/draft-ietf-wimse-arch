@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-29T05:29:38.722366+00:00",
+  "timestamp": "2026-10-01T05:32:43.175944+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -6617,21 +6617,69 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "## Summary\n\nClarifies the distinction between authenticated workload identity and authorization scope for AI/ML-based intermediaries.\n\nThis follows the discussion in #139. In particular, the change makes explicit that scopes can constrain what an authenticated workload is authorized to do, but do not by themselves establish a distinct authenticated identity for each logical agent.\n\n## Changes\n\n- Removes token scopes as an alternative to separate workload identities in the existing requirement, because scopes constrain authorization but do not establish a distinct authenticated identity.\n- Clarifies that autonomous or delegated agents that need to be independently distinguishable require distinct authenticated workload identities rather than relying on scopes alone.\n- Makes the operational consequences explicit:\n  - Audit: shared authenticated roles make individual logical agents indistinguishable in downstream audit records.\n  - Targeted revocation: a shared identity does not support independently disabling or revoking one logical agent.\n  - Per-agent policy: downstream policy cannot rely on a separately authenticated per-agent identity if differentiation exists only in scopes or out-of-band conventions.\n- Adds an informative shared-role-versus-per-agent-identity platform contrast (AWS Bedrock and Gemini Agent Identity), explicitly marked non-normative.\n- Keeps the architecture guidance mechanism-neutral.\n\n## Scope\n\nThis PR does not mandate:\n\n- SPIFFE;\n- a specific JWT claim;\n- a particular credential format; or\n- a new workload-identity mechanism.\n\nConcrete platform mechanisms are included only informatively to make the identity-versus-authority distinction clearer.\n\nThe related draft-heigh-wimse-agent-identity-metadata work was reviewed as useful background, particularly its separation of agent identity/attributes from authorization grants such as scopes. This PR does not make the architecture dependent on that individual draft.\n\n## Validation\n\nValidated with:\n\n- make\n- make lint\n- make check\n- git diff --check\n\nThe `idnits` findings reported by `make check` (2 errors, 2 warnings, 1 comment) are also present on clean `main` and are baseline rather than regressions introduced by this change.\n\n## Related issue\n\nRelated to #139.\n",
+      "body": "## Summary\n\nClarifies the distinction between authenticated workload identity, delegation context, and authorization scope for AI/ML-based intermediaries.\n\nThis follows the discussion in #139. It separates two distinctions that the previous wording conflated:\n\n- **Autonomous vs. delegated execution** is distinguishable through workload identity and/or the delegation context carried with the request (see the draft's existing Delegation and Impersonation model), where the acting workload keeps its own identity.\n- **One logical agent vs. another** is where distinct workload identities matter: logically distinct agents that need to be independently audited, revoked, or subjected to policy should not share a workload identity.\n\nAuthorization scopes constrain what an authenticated workload may do, but do not establish a separate authenticated identity.\n\n## Changes\n\n- Keeps the existing requirement that autonomous actions be clearly distinguishable from delegated ones, and recognizes delegation context, not only separate workload identities, as a way to meet it.\n- Adds a SHOULD NOT that logically distinct agents needing independent audit, revocation, or policy treatment share a workload identity, and states that token scopes do not satisfy this.\n- Makes the operational consequences of a shared identity explicit:\n  - Audit: audit records attribute requests to the shared authenticated principal, so distinct agents are indistinguishable.\n  - Targeted revocation: a shared identity cannot be revoked for one agent without affecting the others.\n  - Per-agent policy: downstream policy cannot rely on a separately authenticated per-agent identity if differentiation exists only in scopes or out-of-band conventions.\n- Adds a short vendor-neutral example contrasting a shared execution role with per-agent workload identifiers.\n- Keeps the architecture guidance mechanism-neutral.\n\n## Scope\n\nThis PR does not mandate:\n\n- SPIFFE;\n- a specific JWT claim;\n- a particular credential format; or\n- a new workload-identity mechanism.\n\nThe related draft-heigh-wimse-agent-identity-metadata work was reviewed as useful background, particularly its separation of agent identity/attributes from authorization grants such as scopes. This PR does not make the architecture dependent on that individual draft.\n\n## Validation\n\nValidated with:\n\n- make\n- make lint\n- make check\n- git diff --check\n\nThe `idnits` findings reported by `make check` (2 errors, 2 warnings, 1 comment) are also present on clean `main` and are baseline rather than regressions introduced by this change.\n\n## Related issue\n\nRelated to #139.\n",
       "createdAt": "2026-09-25T20:05:42Z",
-      "updatedAt": "2026-09-25T20:05:43Z",
+      "updatedAt": "2026-09-29T16:32:42Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
       "headRepository": "arjun2075/draft-ietf-wimse-arch",
       "headRefName": "clarify-ai-intermediary-workload-identity",
-      "headRefOid": "c7d5b85ff3d2a78fa50fe18f1c5a1817608a59f5",
+      "headRefOid": "a9c6e4834ea5c91a21aff00e4038093090ce2bea",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "arjun2075",
+          "authorAssociation": "NONE",
+          "body": "Thanks, agreed. Updated in a9c6e48:\n\n- Autonomous vs. delegated execution is now separate from one-agent-vs-another identity. The existing MUST stays on the autonomous/delegated sentence, and it now recognizes the delegation context carried with the request (see {{delegation}}) as a way to meet it, alongside separate workload identities.\n- The separate-identity guidance now applies to logically distinct agents that need independent audit, revocation, or policy treatment. I used SHOULD NOT instead of a new MUST NOT. The three consequences follow unchanged.\n- Replaced the Bedrock/Gemini example with your vendor-neutral wording.\n\n`make`, `make lint`, `make check`, and `git diff --check` pass. The 5 idnits findings are identical to clean `main` (pre-existing).\n",
+          "createdAt": "2026-09-29T16:13:49Z",
+          "updatedAt": "2026-09-29T16:13:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABPyOXnw",
+          "commit": {
+            "abbreviatedOid": "c7d5b85"
+          },
+          "author": "szh",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-29T14:46:49Z",
+          "updatedAt": "2026-09-29T14:46:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABPyS0oQ",
+          "commit": {
+            "abbreviatedOid": "c7d5b85"
+          },
+          "author": "szh",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks for turning this around so quickly \u2014 the three consequences read well, and keeping the text mechanism-neutral is the right call.\n\nOne substantive issue, which I think originates in the wording I proposed in #139 rather than in your edit:\n\n**The MUST now attaches to the wrong distinction.** The sentence being changed is about distinguishing an agent's *autonomous* actions from its *delegated* ones. As revised, it requires separate workload identities for that, which read literally means one agent needs two identities. That conflicts with the delegation model elsewhere in this draft ({{delegation}}), where the acting workload keeps its own identity and the on-behalf-of relationship travels in the delegation context. Autonomous vs. delegated is distinguishable from that context; it does not need a second identity. For the same reason, \"token scopes alone do not satisfy this requirement\" is arguably not true of *that* requirement.\n\nWhat scopes cannot do is distinguish *one agent from another* \u2014 and that is exactly what the three consequences in the next paragraph describe. I'd suggest separating the two statements, e.g.:\n\n> In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguishable from delegated ones, for example through separate workload identities or through the delegation context carried with the request (see {{delegation}}).\n>\n> Logically distinct agents that need to be independently audited, revoked, or subjected to policy MUST NOT share a workload identity. Token scopes do not satisfy this requirement: a scope constrains what an authenticated workload is authorized to do; it does not change which identity was authenticated. Where several logically distinct agents present the same workload credential, the authenticated principal remains the shared identity and the individual agent is not independently authenticated.\n\nThe \"This distinction has three operational consequences\u2026\" paragraph can then follow unchanged. If a new MUST NOT is more than you want to put in front of the WG in this PR, a SHOULD NOT or a lowercase statement would still fix the conflation \u2014 the important part is not attaching the requirement to the autonomous/delegated sentence.\n\n**Optional: vendor names.** I suggested the Bedrock/Gemini contrast in #139, but on reflection naming products in the architecture document may draw pushback and will age. A generic version keeps the point:\n\n> For example, a platform may assign a single execution role to several logically distinct agents, so that all of them authenticate as the same workload; another may issue each deployed agent its own workload identifier.\n\nHappy to leave that one to you and the chairs.",
+          "createdAt": "2026-09-29T14:52:49Z",
+          "updatedAt": "2026-09-29T14:52:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABPzcvhg",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "szh",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks, LGTM!",
+          "createdAt": "2026-09-29T16:32:42Z",
+          "updatedAt": "2026-09-29T16:32:42Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
