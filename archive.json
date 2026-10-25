@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-01T05:32:43.175944+00:00",
+  "timestamp": "2026-10-25T04:22:45.481682+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1874,6 +1874,22 @@
           "updatedAt": "2026-09-28T23:05:39Z"
         }
       ]
+    },
+    {
+      "number": 141,
+      "id": "I_kwDOLPTb0M8AAAABZJFs9g",
+      "title": "Define issuer, trust anchor, and trust domain, and how they relate",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/141",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The Trust Domain section maps a trust domain to one or more trust anchors, and says credentials are issued under the authority of a trust domain. Issuer, trust anchor, and trust domain are not defined as three entities, and the relationships among them are left implicit. In particular, the draft does not say whether one issuer or one trust anchor may serve more than one trust domain.\n\nThe credentials draft only requires validation against the anchors bound to the trust domain named in the Workload Identifier ([s2s #403](https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/403)).\n\nThis draft should define the three entities and state the relationships among them.",
+      "createdAt": "2026-10-22T15:21:33Z",
+      "updatedAt": "2026-10-22T15:21:33Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
