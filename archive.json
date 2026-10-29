@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-25T04:22:45.481682+00:00",
+  "timestamp": "2026-10-29T05:29:45.769540+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1883,11 +1883,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [],
       "body": "The Trust Domain section maps a trust domain to one or more trust anchors, and says credentials are issued under the authority of a trust domain. Issuer, trust anchor, and trust domain are not defined as three entities, and the relationships among them are left implicit. In particular, the draft does not say whether one issuer or one trust anchor may serve more than one trust domain.\n\nThe credentials draft only requires validation against the anchors bound to the trust domain named in the Workload Identifier ([s2s #403](https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/403)).\n\nThis draft should define the three entities and state the relationships among them.",
       "createdAt": "2026-10-22T15:21:33Z",
-      "updatedAt": "2026-10-22T15:21:33Z",
+      "updatedAt": "2026-10-27T17:32:31Z",
       "closedAt": null,
       "comments": []
     }
@@ -6605,11 +6607,13 @@
       "state": "OPEN",
       "author": "elear",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "hannestschofenig"
+      ],
       "labels": [],
       "body": "Gents, I needed to read this document and found that it was not succinct.  I've tried to help.  The intent is not to make any changes in the architecture, but I may have made a mistake.  Feel free to cherry pick any of this.  I may come back to the rest of the document later, time permitting.",
       "createdAt": "2026-07-27T07:51:25Z",
-      "updatedAt": "2026-07-27T07:51:26Z",
+      "updatedAt": "2026-10-27T17:10:54Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
@@ -6631,11 +6635,13 @@
       "state": "OPEN",
       "author": "arjun2075",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "yaroslavros"
+      ],
       "labels": [],
       "body": "## Summary\n\nClarifies the distinction between authenticated workload identity, delegation context, and authorization scope for AI/ML-based intermediaries.\n\nThis follows the discussion in #139. It separates two distinctions that the previous wording conflated:\n\n- **Autonomous vs. delegated execution** is distinguishable through workload identity and/or the delegation context carried with the request (see the draft's existing Delegation and Impersonation model), where the acting workload keeps its own identity.\n- **One logical agent vs. another** is where distinct workload identities matter: logically distinct agents that need to be independently audited, revoked, or subjected to policy should not share a workload identity.\n\nAuthorization scopes constrain what an authenticated workload may do, but do not establish a separate authenticated identity.\n\n## Changes\n\n- Keeps the existing requirement that autonomous actions be clearly distinguishable from delegated ones, and recognizes delegation context, not only separate workload identities, as a way to meet it.\n- Adds a SHOULD NOT that logically distinct agents needing independent audit, revocation, or policy treatment share a workload identity, and states that token scopes do not satisfy this.\n- Makes the operational consequences of a shared identity explicit:\n  - Audit: audit records attribute requests to the shared authenticated principal, so distinct agents are indistinguishable.\n  - Targeted revocation: a shared identity cannot be revoked for one agent without affecting the others.\n  - Per-agent policy: downstream policy cannot rely on a separately authenticated per-agent identity if differentiation exists only in scopes or out-of-band conventions.\n- Adds a short vendor-neutral example contrasting a shared execution role with per-agent workload identifiers.\n- Keeps the architecture guidance mechanism-neutral.\n\n## Scope\n\nThis PR does not mandate:\n\n- SPIFFE;\n- a specific JWT claim;\n- a particular credential format; or\n- a new workload-identity mechanism.\n\nThe related draft-heigh-wimse-agent-identity-metadata work was reviewed as useful background, particularly its separation of agent identity/attributes from authorization grants such as scopes. This PR does not make the architecture dependent on that individual draft.\n\n## Validation\n\nValidated with:\n\n- make\n- make lint\n- make check\n- git diff --check\n\nThe `idnits` findings reported by `make check` (2 errors, 2 warnings, 1 comment) are also present on clean `main` and are baseline rather than regressions introduced by this change.\n\n## Related issue\n\nRelated to #139.\n",
       "createdAt": "2026-09-25T20:05:42Z",
-      "updatedAt": "2026-09-29T16:32:42Z",
+      "updatedAt": "2026-10-27T17:09:23Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
