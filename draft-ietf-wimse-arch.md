@@ -134,15 +134,15 @@ The Workload identity architecture consists of three basic building blocks: trus
 
 Trust domain identifiers SHOULD be fully qualified domain names associated with the organization administering the trust domain. This naming convention helps to avoid identifier collisions; a domain name alone does not establish trust.
 
-Each relying party MUST associate a trust domain with the issuers authorized to issue credentials for that domain and with the corresponding trust anchors and constraints. For Workload Identity Tokens, trusted public keys can be represented as a JWK Set {{!RFC7517}}. For Workload Identity Certificates, trust anchors are used to validate X.509 certification paths. A credential MUST be validated using only the trust anchors associated with the trust domain named in its workload identifier, subject to the configured scope of each issuer and key. This mapping and any updates MUST be obtained through a secure mechanism that provides authenticity, integrity, and freshness. This document does not specify that mechanism.
+Each relying party MUST associate a trust domain with the issuers authorized to issue credentials for that domain and with the corresponding trust anchors and constraints. For Workload Identity Tokens, trusted public keys can be represented as a JWK Set {{!RFC7517}}. For Workload Identity Certificates, trust anchors are used to validate X.509 certification paths. A credential MUST be validated using only the trust anchors associated with the trust domain named in its workload identifier, subject to the configured scope of each issuer and key. This mapping and any updates MUST be obtained through a secure mechanism that provides authenticity, integrity, and freshness.
 
-A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in {{Section 4.3 of WIMSE-ID}}. Identifiers that differ by trust domain represent distinct workload identities, even if the same underlying workload holds credentials in both domains.
+A single organization may define multiple trust domains for different purposes. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in {{Section 4.3 of WIMSE-ID}}. Identifiers that differ by trust domain represent distinct workload identities, even if the same underlying workload holds credentials in both domains.
 
 #### Relationships among Trust Domains, Issuers, and Trust Anchors
 
-The following table summarizes deployment variants supported by these definitions. Each association describes configured authority for credential validation; it does not by itself imply an independent cryptographic security boundary.
+The following table summarizes deployment variants supported by these definitions. Each association describes configured authority for credential validation. It does not by itself imply an independent cryptographic security boundary.
 
-| Relationship | Cardinality | Deployment example or rationale |
+| Relationship | Cardinality | Deployment Rationale |
 |--------------|-------------|---------------------------------|
 | Trust domain to issuers | One or more | Separate issuers for certificates and tokens, or multiple authorized credential services. |
 | Issuer to trust domains | One or more | A central credential service issues credentials for several domains, with explicit authorization for each domain. |
@@ -152,9 +152,9 @@ The following table summarizes deployment variants supported by these definition
 | Trust anchor to trust domains | One or more | A common CA trust anchor serves several domains, subject to the applicable constraints. |
 {: #trust-relationships title="Trust domain, issuer, and trust anchor relationships."}
 
-For example, an issuer can use an elliptic-curve signing key and a separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA) signing key. If both public keys are directly configured as trust anchors, that issuer is associated with two trust anchors, each with its own scope and algorithm policy. Algorithm support is determined by the applicable credential specifications; this example does not require support for either algorithm.
+For example, an issuer can use an elliptic-curve signing key and a separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA) signing key. If both public keys are directly configured as trust anchors, that issuer is associated with two trust anchors, each with its own scope and algorithm policy. 
 
-Conversely, several issuing CAs can use distinct signing keys while their certificate paths terminate at a common trust anchor {{?RFC5280}}. Thus, multiple issuers or signing keys do not necessarily imply multiple trust anchors. Sharing a CA trust anchor is different from sharing a private signing key. The security consequences of shared keys and trust anchors are discussed in {{trust-domain-separation}}.
+Conversely, several issuing CAs can use distinct signing keys while their certificate paths terminate at a common trust anchor {{?RFC5280}}. Thus, multiple issuers or signing keys do not necessarily imply multiple trust anchors. The security consequences of shared keys and trust anchors are discussed in {{trust-domain-separation}}.
 
 #### Signing Key Deployment Variants {#issuer-key-deployments}
 
