@@ -11,23 +11,23 @@
 <meta content="
        The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as software executing for a specific purpose, potentially comprising one or more running instances.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-wimse-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.5
-    ConfigArgParse 1.7.5
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.9.2
 -->
 <link href="draft-ietf-wimse-arch.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -63,7 +63,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -112,7 +111,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -177,7 +175,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1046,11 +1043,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">WIMSE Architecture</td>
-<td class="right">July 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="center">Expires 4 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1060,12 @@ svg {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-10-31" class="published">31 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-04">4 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1118,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1289,9 +1286,9 @@ svg {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as systems composed of workloads, where a workload is defined as a logical software entity that executes for a specific purpose and may be represented at runtime by one or more workload instances.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Workloads need to be provisioned with an identity when they are started. Often, additional information needs to be provided, such as trust anchors and security context details. Workloads make use of identity information and additional context information to perform authentication and authorization. Workload identity credentials are used to authenticate communications between workloads.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This architecture considers two ways to express identity information: X.509 certificates, which are often used in the TLS layer, and JSON Web Tokens (JWTs) used at the application layer. The applicability of given token format depends on application and security context and will be explored in later sections.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">Once the workload is started and has obtained identity information, it can start performing its functions. When the workload is invoked it may require interaction with other workloads. An example of such interaction is shown in <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span> where an externally-facing endpoint is invoked using conventional authorization mechanism, such as an OAuth 2.0 access token. The interaction with another workload may require the security context associated with the authorization to be passed along the call chain.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-2">Workloads are provisioned with identity credentials when they start and may also receive trust anchors and security context information. They use these credentials to authenticate communications and use identity and context information to make authorization decisions.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This architecture considers two credential formats: X.509 certificates, commonly used with Transport Layer Security (TLS), and JSON Web Tokens (JWTs), used at the application layer. The choice depends on the application and security context.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">When invoked, a workload may need to interact with other workloads. <span>[<a href="#I-D.ietf-oauth-transaction-tokens" class="cite xref">I-D.ietf-oauth-transaction-tokens</a>]</span> illustrates an externally facing endpoint invoked using a conventional authorization mechanism, such as an OAuth 2.0 access token. Security context associated with that authorization may need to be passed along the call chain.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">In the rest of the document we describe terminology and use cases, discuss details of the architecture, and describe security considerations for this architecture.<a href="#section-1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1310,13 +1307,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-2-3.1.1">Workload<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-4">A workload is an independently addressable and executable software entity. A workload is a logical entity rather than necessarily a single running process. It may be implemented by one or more workload instances and may expose, consume, or participate in one or more services. Examples include microservices, containers, virtual machines, serverless functions, or similar components that initiate or receive network communications. A workload typically interacts with other parts of a larger system.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">A workload is an independently addressable and executable software entity that typically interacts with other parts of a larger system. It is a logical entity and need not correspond to a single running process. It may be implemented by one or more workload instances and may expose, consume, or participate in one or more services. Examples include microservices, containers, virtual machines (VMs), or serverless functions.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
           <p id="section-2-5.1.1">Workload Instance<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-6">A workload instance is a single running instantiation of a workload at a point in time such as a container, a VM, or a serverless invocation. Workload instances may exist for a very short duration of time (a fraction of a second) and run for a specific purpose such as to provide a response to an API request. Other kinds of workload instances may execute for a very long duration, such as months or years. Examples include database services and machine learning training jobs. The number of instances for a workload may vary over time due to scaling, failover, or orchestration behavior.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-6">A workload instance is a single running instantiation of a workload, such as a container, a VM, or a serverless invocation. Its lifetime can range from a fraction of a second to handle a single request to months or years for database services or machine learning training jobs. The number of instances of a workload may vary over time due to scaling, failover, or orchestration.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-7.1">
           <p id="section-2-7.1.1">Service<a href="#section-2-7.1.1" class="pilcrow">¶</a></p>
@@ -1334,7 +1331,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-2-11.1.1">Security Context<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-12">A security context provides information needed for a workload to perform its function. This information is often used for authorization, accounting and auditing purposes and often contains information about the request being made. Some examples include user information, software and hardware information or information about what processing has already happened for the request. Different pieces of context information may originate from different sources.<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-12">A security context provides information needed for a workload to perform its function, often for authorization, accounting, or auditing. It may include user information, software and hardware information, or information about the request and its prior processing. Different pieces of context information may originate from different sources.<a href="#section-2-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-13.1">
           <p id="section-2-13.1.1">Identity Proxy<a href="#section-2-13.1.1" class="pilcrow">¶</a></p>
@@ -1371,14 +1368,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-workload-identity-concepts">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-workload-identity-concepts" class="section-name selfRef">Workload Identity Concepts</a>
         </h3>
-<p id="section-3.1-1">The Workload identity architecture consists of three basic building blocks: trust domain, workload identifier and identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes. More complex workload identity constructs can be created from these basic building blocks.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">The workload identity architecture consists of three basic building blocks: a trust domain, a workload identifier, and identity credentials. These components are sufficient for establishing authentication, authorization and accounting processes. More complex workload identity constructs can be created from these basic building blocks.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <div id="trust-domain">
 <section id="section-3.1.1">
           <h4 id="name-trust-domain">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-trust-domain" class="section-name selfRef">Trust Domain</a>
           </h4>
-<p id="section-3.1.1-1">A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains <span class="bcp14">SHOULD</span> be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of a trust domain helps to ensure global uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JWK Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> for validating WIMSE WIT tokens. This mapping <span class="bcp14">MUST</span> be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. This secure mechanism is out of scope for this document.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03#section-4.3" class="relref">Section 4.3</a> of [<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>. If two identifiers differ only by trust domain they still refer to two different entities.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains <span class="bcp14">SHOULD</span> be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of a trust domain helps to ensure global uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JSON Web Key (JWK) Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> for validating WIMSE WIT tokens. This mapping <span class="bcp14">MUST</span> be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. That mechanism is out of scope for this document.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04#section-4.3" class="relref">Section 4.3</a> of [<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>. If two identifiers differ only by trust domain they still refer to two different entities.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="workload-identifier">
@@ -1386,11 +1383,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-workload-identifier">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-workload-identifier" class="section-name selfRef">Workload Identifier</a>
           </h4>
-<p id="section-3.1.2-1">A workload identifier uniquely names a workload within a trust domain and is carried in workload identity credentials.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-2">The format, syntax, comparison rules, and validation requirements for workload identifiers are defined in <span>[<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-3">In addition the URI <span class="bcp14">MUST</span> include an authority that identifies the trust domain within which the identifier is scoped. The trust domain <span class="bcp14">SHOULD</span> be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition is <span>[<a href="#SPIFFE-ID" class="cite xref">SPIFFE-ID</a>]</span>.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-4">Two credentials containing the same workload identifier value represent the same workload only when validated under the same trust domain and issuer trust configuration.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-5">A workload identifier <span class="bcp14">MAY</span> represent a logical workload, a service implemented by one or more workloads, or a specific workload instance, depending on deployment policy. Relying parties <span class="bcp14">MUST</span> interpret the identifier according to the identity semantics defined by the issuing trust domain.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">A workload identifier is a Uniform Resource Identifier (URI) that uniquely names a workload within a trust domain and is carried in workload identity credentials. Its format, syntax, comparison rules, and validation requirements are defined in <span>[<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">In addition the URI <span class="bcp14">MUST</span> include an authority that identifies the trust domain within which the identifier is scoped. The trust domain <span class="bcp14">SHOULD</span> be a fully qualified domain name belonging to the organization defining the trust domain to help provide uniqueness for the trust domain identifier. The scheme and scheme specific part are not defined by this specification. An example of an identifier format that conforms to this definition can be found in <span>[<a href="#SPIFFE-ID" class="cite xref">SPIFFE-ID</a>]</span>.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3">Two credentials containing the same workload identifier value represent the same workload only when validated under the same trust domain and issuer trust configuration.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-4">A workload identifier <span class="bcp14">MAY</span> represent a logical workload, a service implemented by one or more workloads, or a specific workload instance, depending on deployment policy. Relying parties <span class="bcp14">MUST</span> interpret the identifier according to the identity semantics defined by the issuing trust domain.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="workload-identity-credentials">
@@ -2117,7 +2113,7 @@ Components and interactions from previous scenarios are still relevant to this e
           </h4>
 <p id="section-3.4.2-1">One of the most basic use cases for workload identity is authentication of one workload to another. In many deployments, this is described operationally as one service making a request to another service as part of a larger, more complex application. The identifier in the credentials may identify a logical service, a workload that implements that service, or a specific workload instance, depending on the identity model chosen by the issuing trust domain. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.4.4</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.4.5</a>.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">Authentication mechanisms are used to establish the identity of the peer before secure communication can proceed. The peer identity is carried in a workload identity credential, even when the credential represents a service-level identity rather than a particular workload instance.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-4">Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.2-5.1">
@@ -2583,7 +2579,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dd class="break"></dd>
 <dt id="WIMSE-ID">[WIMSE-ID]</dt>
       <dd>
-<span class="refAuthor">Rosomakho, Y.</span> and <span class="refAuthor">J. A. Salowey</span>, <span class="refTitle">"Workload Identifier"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-identifier-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Rosomakho, Y.</span> and <span class="refAuthor">J. A. Salowey</span>, <span class="refTitle">"Workload Identifier"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-identifier-04</span>, <time datetime="2026-10-23" class="refDate">23 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2596,11 +2592,11 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dl class="references">
 <dt id="I-D.draft-ietf-oauth-identity-chaining">[I-D.draft-ietf-oauth-identity-chaining]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-16</span>, <time datetime="2026-06-26" class="refDate">26 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-17</span>, <time datetime="2026-07-19" class="refDate">19 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-17">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-oauth-transaction-tokens">[I-D.ietf-oauth-transaction-tokens]</dt>
         <dd>
-<span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-09</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-09">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-11</span>, <time datetime="2026-07-30" class="refDate">30 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-11">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-wimse-s2s-protocol">[I-D.ietf-wimse-s2s-protocol]</dt>
         <dd>
@@ -2608,7 +2604,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dd class="break"></dd>
 <dt id="I-D.ietf-wimse-workload-identity-practices">[I-D.ietf-wimse-workload-identity-practices]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-05</span>, <time datetime="2026-06-30" class="refDate">30 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-08</span>, <time datetime="2026-10-30" class="refDate">30 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OAUTH-TOKEN-XCHANGE">[OAUTH-TOKEN-XCHANGE]</dt>
         <dd>
