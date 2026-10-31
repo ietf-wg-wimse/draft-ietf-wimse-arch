@@ -1351,7 +1351,7 @@ Table of Contents
    and any binding to the executing workload are evaluated separately
    from validation of the WIC or WIT.  Refreshing an identity credential
    does not, by itself, renew delegated authority.  Deployments need to
-   bound the lifetime of delegated authority and define how renewal,
+   bind the lifetime of delegated authority and define how renewal,
    expiry, and revocation affect queued work.
 
 3.4.10.  Cross-boundary Workload Identity
