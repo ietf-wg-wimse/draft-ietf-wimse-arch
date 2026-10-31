@@ -98,8 +98,9 @@ Table of Contents
      4.2.  Information Disclosure
      4.3.  Workload Identity Binding to Tokens
      4.4.  Credential Theft
-     4.5.  Authentication and Authorization
-     4.6.  Workload Compromise
+     4.5.  Trust Domain Separation
+     4.6.  Authentication and Authorization
+     4.7.  Workload Compromise
    5.  IANA Considerations
    6.  References
      6.1.  Normative References
@@ -230,11 +231,51 @@ Table of Contents
 
    *  Trust Domain
 
-   A trust domain is a logical grouping of systems that share a common
-   set of security controls and policies.  As described in
-   [I-D.ietf-wimse-s2s-protocol], trust domains should be identified by
-   a fully qualified domain name associated with the organization
-   defining the trust domain.
+   A trust domain is an administrative scope for workload identities.
+   It defines an identity namespace and common policies for issuing and
+   validating workload identity credentials.  Credential issuance within
+   a trust domain is managed by one or more authorized issuers.  This
+   scope is analogous to a Kerberos realm [RFC4120], but does not
+   require a particular credential format or a single issuer.  Trust
+   domain identifiers are described in Section 3.1.1.
+
+   *  Issuer
+
+   An issuer is an entity that issues workload identity credentials,
+   such as Workload Identity Tokens or Workload Identity Certificates,
+   on behalf of one or more trust domains.  For JWT-based credentials,
+   this corresponds to the issuer role described in [RFC9901].  An
+   issuer is a logical entity that may be implemented by multiple
+   service instances and may use multiple signing keys.  Its signing
+   keys are distinct from the workload keys used to prove possession of
+   workload identity credentials.
+
+   *  Trust Anchor
+
+   A trust anchor is a public key and associated data that a relying
+   party explicitly accepts as authoritative for validating credentials
+   within a defined scope, following the terminology in [RFC9397] and
+   [RFC6024].  It can be used to verify credential signatures directly
+   or to validate certificate paths.  The associated data constrains the
+   purposes and identity namespaces for which the key is authoritative.
+
+   Trust anchor information can be represented by an X.509 certificate,
+   including a self-signed certificate, or by a raw public key with
+   associated metadata.  A securely provisioned cryptographic hash can
+   identify the trusted certificate or public key.  In that case, the
+   relying party also needs to obtain the complete certificate or public
+   key and verify it against the hash before using it for signature
+   validation.  A key, certificate, or hash does not establish trust by
+   itself: its use for the intended trust domain and purpose must be
+   explicitly authorized through trusted configuration.  A certificate's
+   self-signature does not provide that authorization.
+
+   *  Relying Party
+
+   A relying party is an entity that validates a workload identity
+   credential and relies on the resulting authenticated identity.  This
+   role can be performed by a workload, a gateway, or another component
+   acting on behalf of a workload.
 
 3.  Architecture
 
@@ -249,26 +290,123 @@ Table of Contents
 
 3.1.1.  Trust Domain
 
-   A trust domain is a logical grouping of systems that share a common
-   set of security controls and policies.  Workload certificates and
-   tokens are issued under the authority of a trust domain.  Trust
-   domains SHOULD be identified by a fully qualified domain name
-   associated with the organization defining the trust domain.  The FQDN
-   format of a trust domain helps to ensure global uniqueness of the
-   trust domain identifier.  A trust domain maps to one or more trust
-   anchors for validating X.509 certificates and a mechanism to securely
-   obtain a JSON Web Key (JWK) Set [RFC7517] for validating WIMSE WIT
-   tokens.  This mapping MUST be obtained through a secure mechanism
-   that ensures the authenticity and integrity of the mapping is fresh
-   and not compromised.  That mechanism is out of scope for this
-   document.
+   Trust domain identifiers SHOULD be fully qualified domain names
+   associated with the organization administering the trust domain.
+   This naming convention helps to avoid identifier collisions; a domain
+   name alone does not establish trust.
+
+   Each relying party MUST associate a trust domain with the issuers
+   authorized to issue credentials for that domain and with the
+   corresponding trust anchors and constraints.  For Workload Identity
+   Tokens, trusted public keys can be represented as a JWK Set
+   [RFC7517].  For Workload Identity Certificates, trust anchors are
+   used to validate X.509 certification paths.  A credential MUST be
+   validated using only the trust anchors associated with the trust
+   domain named in its workload identifier, subject to the configured
+   scope of each issuer and key.  This mapping and any updates MUST be
+   obtained through a secure mechanism that provides authenticity,
+   integrity, and freshness.
 
    A single organization may define multiple trust domains for different
-   purposes such as different departments or environments.  Each trust
-   domain must have a unique domain identifier.  Workload identifiers
-   are scoped within a trust domain as specified in Section 4.3 of
-   [WIMSE-ID].  If two identifiers differ only by trust domain they
-   still refer to two different entities.
+   purposes.  Each trust domain must have a unique domain identifier.
+   Workload identifiers are scoped within a trust domain as specified in
+   Section 4.3 of [WIMSE-ID].  Identifiers that differ by trust domain
+   represent distinct workload identities, even if the same underlying
+   workload holds credentials in both domains.
+
+3.1.1.1.  Relationships among Trust Domains, Issuers, and Trust Anchors
+
+   The following table summarizes deployment variants supported by these
+   definitions.  Each association describes configured authority for
+   credential validation.  It does not by itself imply an independent
+   cryptographic security boundary.
+
+    +==============+=============+===================================+
+    | Relationship | Cardinality | Deployment Rationale              |
+    +==============+=============+===================================+
+    | Trust domain | One or more | Separate issuers for certificates |
+    | to issuers   |             | and tokens, or multiple           |
+    |              |             | authorized credential services.   |
+    +--------------+-------------+-----------------------------------+
+    | Issuer to    | One or more | A central credential service      |
+    | trust        |             | issues credentials for several    |
+    | domains      |             | domains, with explicit            |
+    |              |             | authorization for each domain.    |
+    +--------------+-------------+-----------------------------------+
+    | Issuer to    | One or more | Key rotation or support for       |
+    | signing keys |             | different signature algorithms.   |
+    +--------------+-------------+-----------------------------------+
+    | Issuer to    | One or more | Credentials are validated using   |
+    | trust        |             | directly trusted issuer keys or   |
+    | anchors      |             | certificate paths to CA trust     |
+    |              |             | anchors.                          |
+    +--------------+-------------+-----------------------------------+
+    | Trust domain | One or more | Multiple issuers, algorithm       |
+    | to trust     |             | choices, or trust anchor          |
+    | anchors      |             | rollover.                         |
+    +--------------+-------------+-----------------------------------+
+    | Trust anchor | One or more | A common CA trust anchor serves   |
+    | to trust     |             | several domains, subject to the   |
+    | domains      |             | applicable constraints.           |
+    +--------------+-------------+-----------------------------------+
+
+      Table 1: Trust domain, issuer, and trust anchor relationships.
+
+   For example, an issuer can use an elliptic-curve signing key and a
+   separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
+   signing key.  If both public keys are directly configured as trust
+   anchors, that issuer is associated with two trust anchors, each with
+   its own scope and algorithm policy.
+
+   Conversely, several issuing CAs can use distinct signing keys while
+   their certificate paths terminate at a common trust anchor [RFC5280].
+   Thus, multiple issuers or signing keys do not necessarily imply
+   multiple trust anchors.  The security consequences of shared keys and
+   trust anchors are discussed in Section 4.5.
+
+3.1.1.2.  Signing Key Deployment Variants
+
+   The following cases distinguish the logical issuer, the trust domains
+   it serves, and the entities authorized to use a signing key.  Each
+   variant offers operational benefits and introduces dependencies that
+   deployments need to consider.
+
+   +================+====================+=============================+
+   | Deployment     | Benefits           | Operational and security    |
+   | variant        |                    | implications                |
+   +================+====================+=============================+
+   | Multiple       | Simplifies         | Requires coordinated key    |
+   | instances of   | verification-key   | protection and rotation.    |
+   | one issuer     | configuration for  | Compromise of signing       |
+   | share a        | replicated issuer  | access at an instance can   |
+   | signing key.   | instances.         | affect the issuer's full    |
+   |                |                    | scope.                      |
+   +----------------+--------------------+-----------------------------+
+   | One issuer     | Reduces the        | Domain separation relies on |
+   | uses a signing | number of signing  | issuance policies and       |
+   | key across     | keys and           | relying-party checks.  Key  |
+   | multiple trust | associated         | compromise affects every    |
+   | domains.       | lifecycle          | domain for which the key is |
+   |                | operations.        | trusted.                    |
+   +----------------+--------------------+-----------------------------+
+   | Separately     | Can ease           | Requires coordination       |
+   | administered   | migration or       | across administrators for   |
+   | issuers share  | administrative     | key protection, rotation,   |
+   | a signing key. | handover by        | and compromise response.    |
+   |                | retaining an       | The shared key alone cannot |
+   |                | existing public    | distinguish which issuer    |
+   |                | verification key.  | produced a signature.       |
+   +----------------+--------------------+-----------------------------+
+
+        Table 2: Benefits and implications of signing key deployment
+                                 variants.
+
+   Shared use of a signing key can be provided by a common signing
+   service or by distributing the key to authorized instances.  These
+   approaches differ in where key material is held and how access is
+   controlled.  Sharing a CA trust anchor while retaining separate
+   issuer signing keys is a further deployment choice, discussed in
+   Section 4.5.
 
 3.1.2.  Workload Identifier
 
@@ -1360,7 +1498,34 @@ Table of Contents
    mechanism that allows credentials and keys to be replaced without
    relying on long-lived static secrets.
 
-4.5.  Authentication and Authorization
+4.5.  Trust Domain Separation
+
+   Trust domain names identify separate identity namespaces.  The
+   deployment variants in Section 3.1.1.2 differ in whether signing
+   authority is also separated.  If the same private signing key is
+   authorized to issue credentials for multiple trust domains,
+   compromise of that key permits forgery of credentials for all of
+   those domains.  Selecting trust anchors according to the trust domain
+   in the workload identifier does not prevent this when the same key is
+   trusted for each domain.  Different issuer names do not restore
+   cryptographic separation when their signing key is shared.
+
+   A common X.509 CA trust anchor does not necessarily imply shared
+   issuer signing keys.  Separate intermediate CAs with domain-specific
+   constraints, such as applicable name constraints, can restrict their
+   issuing authority if relying parties enforce those constraints
+   [RFC5280].  However, the common root authority remains a shared trust
+   dependency, and compromise of its private key can affect every domain
+   that trusts it.
+
+   The choice among these variants depends on the required availability,
+   administrative independence, and key-management effort.  Deployments
+   requiring isolation against compromise of another domain's issuing
+   key need separate signing keys and enforceable domain-specific limits
+   on issuing authority.  Their choice of trust anchors also determines
+   which root authorities remain shared dependencies.
+
+4.6.  Authentication and Authorization
 
    Authentication of a workload establishes that the presenter controls
    the key material associated with the credential and that the
@@ -1378,7 +1543,7 @@ Table of Contents
    Issuers, relying parties, gateways, and workloads need to avoid
    treating successful authentication as implicit authorization.
 
-4.6.  Workload Compromise
+4.7.  Workload Compromise
 
    Even the most well-designed and implemented workloads may contain
    security flaws that allow an attacker to gain limited or full
@@ -1461,11 +1626,36 @@ Table of Contents
               DOI 10.17487/RFC8693, January 2020,
               <https://www.rfc-editor.org/rfc/rfc8693>.
 
+   [RFC4120]  Neuman, C., Yu, T., Hartman, S., and K. Raeburn, "The
+              Kerberos Network Authentication Service (V5)", RFC 4120,
+              DOI 10.17487/RFC4120, July 2005,
+              <https://www.rfc-editor.org/rfc/rfc4120>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC6024]  Reddy, R. and C. Wallace, "Trust Anchor Management
+              Requirements", RFC 6024, DOI 10.17487/RFC6024, October
+              2010, <https://www.rfc-editor.org/rfc/rfc6024>.
+
+   [RFC9397]  Pei, M., Tschofenig, H., Thaler, D., and D. Wheeler,
+              "Trusted Execution Environment Provisioning (TEEP)
+              Architecture", RFC 9397, DOI 10.17487/RFC9397, July 2023,
+              <https://www.rfc-editor.org/rfc/rfc9397>.
+
    [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
               "Remote Integrity Verification of Network Devices
               Containing Trusted Platform Modules", RFC 9683,
               DOI 10.17487/RFC9683, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9683>.
+
+   [RFC9901]  Fett, D., Yasuda, K., and B. Campbell, "Selective
+              Disclosure for JSON Web Tokens", RFC 9901,
+              DOI 10.17487/RFC9901, November 2025,
+              <https://www.rfc-editor.org/rfc/rfc9901>.
 
    [SPIFFE]   "Secure Production Identity Framework for Everyone
               (SPIFFE)", May 2023,
