@@ -1162,12 +1162,11 @@ Table of Contents
    and accompanying authorization or context tokens as specified in
    [WIMSE-WPT], but does not provide general HTTP message integrity.
    HTTP Message Signatures protect the components specified by their
-   profile; changes to a covered component invalidate the signature
+   profile and changes to a covered component invalidate the signature
    [WIMSE-HTTPSIG].  If an intermediary uses its own credential and
    produces a new proof, the destination authenticates that
    intermediary.  Any asserted relationship to the original caller
-   requires separate validation under the applicable delegation or
-   context policy.
+   requires separate validation under the applicable policy.
 
    The workload identifiers used at different layers do not necessarily
    need to be identical.  The transport-layer credential might identify
