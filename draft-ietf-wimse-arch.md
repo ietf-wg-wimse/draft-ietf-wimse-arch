@@ -400,7 +400,7 @@ Some example interactions in this scenario:
 
 * (4) Workload 1 contacts Workload 2 to perform an operation. This request is accompanied by a security context as in the other scenarios.
 
-* (5) Workload 2 determines it needs to communicate with an external service. In order to gain access to this service it must first obtain a token/credential (t) that it can use externally. It authenticates to the token service using its workload identity credential and provides the security context (c). The token service determines what type of externally usable token to issue to the workload for use with the external token service. Workload authentication is omitted from the diagram for simplicity; (c) consistently denotes security context.
+* (5) Workload 2 determines it needs to communicate with an external service. In order to gain access to this service it must first obtain a token/credential (t) that it can use externally. It authenticates to the token service using its workload identity credential and provides the security context (c). The token service determines what type of externally usable token to issue to the workload for use with the external token service. Workload authentication is omitted from the diagram for simplicity. (c) consistently denotes security context.
 
 * (6) Workload 2 uses this new token/credential (t) to request an access token (a) for the external service from the external token service.
 
