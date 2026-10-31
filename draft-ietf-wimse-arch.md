@@ -183,7 +183,7 @@ A workload identifier MAY represent a logical workload, a service implemented by
 
 Workload identity credentials are provisioned directly to a workload or with assistance from an agent or the surrounding platform, as described in {{credential-provisioning}}.
 
-A WIC is an X.509 certificate and a WIT is a signed JWT, as defined in {{WIMSE-CREDS}}. Each contains a workload identifier and public key information. The corresponding private key is managed separately and is not part of the certificate or token.
+A WIC is an X.509 certificate and a WIT is a signed JWT, as defined in {{WIMSE-CREDS}}. Each contains a workload identifier and a public key. The corresponding private key is stored securely to prevent authorized access.
 
 The workload presents the WIC or WIT during authentication and uses the associated private key to produce a proof of possession. The private key remains secret. The protocol bindings described in {{workload-authentication}} specify how this proof is produced and verified.
 
