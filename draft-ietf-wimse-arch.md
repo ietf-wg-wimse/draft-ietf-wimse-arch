@@ -152,7 +152,7 @@ The following table summarizes deployment variants supported by these definition
 | Trust anchor to trust domains | One or more | A common CA trust anchor serves several domains, subject to the applicable constraints. |
 {: #trust-relationships title="Trust domain, issuer, and trust anchor relationships."}
 
-For example, an issuer can use an elliptic-curve signing key and a separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA) signing key. If both public keys are directly configured as trust anchors, that issuer is associated with two trust anchors, each with its own scope and algorithm policy. 
+For example, an issuer can use an elliptic-curve signing key and a separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA) signing key. If both public keys are directly configured as trust anchors, that issuer is associated with two trust anchors, each with its own scope and algorithm policy.
 
 Conversely, several issuing CAs can use distinct signing keys while their certificate paths terminate at a common trust anchor {{?RFC5280}}. Thus, multiple issuers or signing keys do not necessarily imply multiple trust anchors. The security consequences of shared keys and trust anchors are discussed in {{trust-domain-separation}}.
 
