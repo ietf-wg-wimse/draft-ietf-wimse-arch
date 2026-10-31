@@ -11,23 +11,23 @@
 <meta content="
        The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as software executing for a specific purpose, potentially comprising one or more running instances.  This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-wimse-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.5
-    ConfigArgParse 1.7.5
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.9.2
 -->
 <link href="draft-ietf-wimse-arch.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -63,7 +63,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -112,7 +111,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -177,7 +175,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1046,11 +1043,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">WIMSE Architecture</td>
-<td class="right">July 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salowey, et al.</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="center">Expires 4 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1060,12 @@ svg {
 <dd class="internet-draft">draft-ietf-wimse-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-10-31" class="published">31 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-04">4 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1118,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1246,10 +1243,13 @@ svg {
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-credential-theft" class="internal xref">Credential Theft</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-authentication-and-authoriz" class="internal xref">Authentication and Authorization</a></p>
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-trust-domain-separation" class="internal xref">Trust Domain Separation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
-                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-workload-compromise" class="internal xref">Workload Compromise</a></p>
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-authentication-and-authoriz" class="internal xref">Authentication and Authorization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7">
+                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.  <a href="#name-workload-compromise" class="internal xref">Workload Compromise</a></p>
 </li>
             </ul>
 </li>
@@ -1358,7 +1358,26 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-2-19.1.1">Trust Domain<a href="#section-2-19.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-20">A trust domain is a logical grouping of systems that share a common set of security controls and policies. As described in <span>[<a href="#I-D.ietf-wimse-s2s-protocol" class="cite xref">I-D.ietf-wimse-s2s-protocol</a>]</span>, trust domains should be identified by a fully qualified domain name associated with the organization defining the trust domain.<a href="#section-2-20" class="pilcrow">¶</a></p>
+<p id="section-2-20">A trust domain is an administrative scope for workload identities. It defines an identity namespace and common policies for issuing and validating workload identity credentials. Credential issuance within a trust domain is managed by one or more authorized issuers. This scope is analogous to a Kerberos realm <span>[<a href="#RFC4120" class="cite xref">RFC4120</a>]</span>, but does not require a particular credential format or a single issuer. Trust domain identifiers are described in <a href="#trust-domain" class="auto internal xref">Section 3.1.1</a>.<a href="#section-2-20" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-21.1">
+          <p id="section-2-21.1.1">Issuer<a href="#section-2-21.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-22">An issuer is an entity that issues workload identity credentials, such as Workload Identity Tokens or Workload Identity Certificates, on behalf of one or more trust domains. For JWT-based credentials, this corresponds to the issuer role described in <span>[<a href="#RFC9901" class="cite xref">RFC9901</a>]</span>. An issuer is a logical entity that may be implemented by multiple service instances and may use multiple signing keys. Its signing keys are distinct from the workload keys used to prove possession of workload identity credentials.<a href="#section-2-22" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-23.1">
+          <p id="section-2-23.1.1">Trust Anchor<a href="#section-2-23.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-24">A trust anchor is a public key and associated data that a relying party explicitly accepts as authoritative for validating credentials within a defined scope, following the terminology in <span>[<a href="#RFC9397" class="cite xref">RFC9397</a>]</span> and <span>[<a href="#RFC6024" class="cite xref">RFC6024</a>]</span>. It can be used to verify credential signatures directly or to validate certificate paths. The associated data constrains the purposes and identity namespaces for which the key is authoritative.<a href="#section-2-24" class="pilcrow">¶</a></p>
+<p id="section-2-25">Trust anchor information can be represented by an X.509 certificate, including a self-signed certificate, or by a raw public key with associated metadata. A securely provisioned cryptographic hash can identify the trusted certificate or public key. In that case, the relying party also needs to obtain the complete certificate or public key and verify it against the hash before using it for signature validation. A key, certificate, or hash does not establish trust by itself: its use for the intended trust domain and purpose must be explicitly authorized through trusted configuration. A certificate's self-signature does not provide that authorization.<a href="#section-2-25" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-26.1">
+          <p id="section-2-26.1.1">Relying Party<a href="#section-2-26.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-27">A relying party is an entity that validates a workload identity credential and relies on the resulting authenticated identity. This role can be performed by a workload, a gateway, or another component acting on behalf of a workload.<a href="#section-2-27" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="architecture">
@@ -1377,8 +1396,107 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-trust-domain">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-trust-domain" class="section-name selfRef">Trust Domain</a>
           </h4>
-<p id="section-3.1.1-1">A trust domain is a logical grouping of systems that share a common set of security controls and policies. Workload certificates and tokens are issued under the authority of a trust domain. Trust domains <span class="bcp14">SHOULD</span> be identified by a fully qualified domain name associated with the organization defining the trust domain. The FQDN format of a trust domain helps to ensure global uniqueness of the trust domain identifier. A trust domain maps to one or more trust anchors for validating X.509 certificates and a mechanism to securely obtain a JWK Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> for validating WIMSE WIT tokens. This mapping <span class="bcp14">MUST</span> be obtained through a secure mechanism that ensures the authenticity and integrity of the mapping is fresh and not compromised. This secure mechanism is out of scope for this document.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03#section-4.3" class="relref">Section 4.3</a> of [<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>. If two identifiers differ only by trust domain they still refer to two different entities.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">Trust domain identifiers <span class="bcp14">SHOULD</span> be fully qualified domain names associated with the organization administering the trust domain. This naming convention helps to avoid identifier collisions; a domain name alone does not establish trust.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">Each relying party <span class="bcp14">MUST</span> associate a trust domain with the issuers authorized to issue credentials for that domain and with the corresponding trust anchors and constraints. For Workload Identity Tokens, trusted public keys can be represented as a JWK Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>. For Workload Identity Certificates, trust anchors are used to validate X.509 certification paths. A credential <span class="bcp14">MUST</span> be validated using only the trust anchors associated with the trust domain named in its workload identifier, subject to the configured scope of each issuer and key. This mapping and any updates <span class="bcp14">MUST</span> be obtained through a secure mechanism that provides authenticity, integrity, and freshness. This document does not specify that mechanism.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">A single organization may define multiple trust domains for different purposes such as different departments or environments. Each trust domain must have a unique domain identifier. Workload identifiers are scoped within a trust domain as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04#section-4.3" class="relref">Section 4.3</a> of [<a href="#WIMSE-ID" class="cite xref">WIMSE-ID</a>]</span>. Identifiers that differ by trust domain represent distinct workload identities, even if the same underlying workload holds credentials in both domains.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<div id="relationships-among-trust-domains-issuers-and-trust-anchors">
+<section id="section-3.1.1.1">
+            <h5 id="name-relationships-among-trust-d">
+<a href="#section-3.1.1.1" class="section-number selfRef">3.1.1.1. </a><a href="#name-relationships-among-trust-d" class="section-name selfRef">Relationships among Trust Domains, Issuers, and Trust Anchors</a>
+            </h5>
+<p id="section-3.1.1.1-1">The following table summarizes deployment variants supported by these definitions. Each association describes configured authority for credential validation; it does not by itself imply an independent cryptographic security boundary.<a href="#section-3.1.1.1-1" class="pilcrow">¶</a></p>
+<span id="name-trust-domain-issuer-and-tru"></span><div id="trust-relationships">
+<table class="center" id="table-1">
+              <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-trust-domain-issuer-and-tru" class="selfRef">Trust domain, issuer, and trust anchor relationships.</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">Relationship</th>
+                  <th class="text-left" rowspan="1" colspan="1">Cardinality</th>
+                  <th class="text-left" rowspan="1" colspan="1">Deployment example or rationale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Trust domain to issuers</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">Separate issuers for certificates and tokens, or multiple authorized credential services.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Issuer to trust domains</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">A central credential service issues credentials for several domains, with explicit authorization for each domain.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Issuer to signing keys</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">Key rotation or support for different signature algorithms.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Issuer to trust anchors</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">Credentials are validated using directly trusted issuer keys or certificate paths to CA trust anchors.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Trust domain to trust anchors</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">Multiple issuers, algorithm choices, or trust anchor rollover.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Trust anchor to trust domains</td>
+                  <td class="text-left" rowspan="1" colspan="1">One or more</td>
+                  <td class="text-left" rowspan="1" colspan="1">A common CA trust anchor serves several domains, subject to the applicable constraints.</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<p id="section-3.1.1.1-3">For example, an issuer can use an elliptic-curve signing key and a separate Module-Lattice-Based Digital Signature Algorithm (ML-DSA) signing key. If both public keys are directly configured as trust anchors, that issuer is associated with two trust anchors, each with its own scope and algorithm policy. Algorithm support is determined by the applicable credential specifications; this example does not require support for either algorithm.<a href="#section-3.1.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1.1-4">Conversely, several issuing CAs can use distinct signing keys while their certificate paths terminate at a common trust anchor <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. Thus, multiple issuers or signing keys do not necessarily imply multiple trust anchors. Sharing a CA trust anchor is different from sharing a private signing key. The security consequences of shared keys and trust anchors are discussed in <a href="#trust-domain-separation" class="auto internal xref">Section 4.5</a>.<a href="#section-3.1.1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-key-deployments">
+<section id="section-3.1.1.2">
+            <h5 id="name-signing-key-deployment-vari">
+<a href="#section-3.1.1.2" class="section-number selfRef">3.1.1.2. </a><a href="#name-signing-key-deployment-vari" class="section-name selfRef">Signing Key Deployment Variants</a>
+            </h5>
+<p id="section-3.1.1.2-1">The following cases distinguish the logical issuer, the trust domains it serves, and the entities authorized to use a signing key. Each variant offers operational benefits and introduces dependencies that deployments need to consider.<a href="#section-3.1.1.2-1" class="pilcrow">¶</a></p>
+<span id="name-benefits-and-implications-o"></span><div id="signing-key-variants">
+<table class="center" id="table-2">
+              <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-benefits-and-implications-o" class="selfRef">Benefits and implications of signing key deployment variants.</a>
+              </caption>
+<thead>
+                <tr>
+                  <th class="text-left" rowspan="1" colspan="1">Deployment variant</th>
+                  <th class="text-left" rowspan="1" colspan="1">Benefits</th>
+                  <th class="text-left" rowspan="1" colspan="1">Operational and security implications</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Multiple instances of one issuer share a signing key.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Simplifies verification-key configuration for replicated issuer instances.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Requires coordinated key protection and rotation. Compromise of signing access at an instance can affect the issuer's full scope.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">One issuer uses a signing key across multiple trust domains.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Reduces the number of signing keys and associated lifecycle operations.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Domain separation relies on issuance policies and relying-party checks. Key compromise affects every domain for which the key is trusted.</td>
+                </tr>
+                <tr>
+                  <td class="text-left" rowspan="1" colspan="1">Separately administered issuers share a signing key.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Can ease migration or administrative handover by retaining an existing public verification key.</td>
+                  <td class="text-left" rowspan="1" colspan="1">Requires coordination across administrators for key protection, rotation, and compromise response. The shared key alone cannot distinguish which issuer produced a signature.</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
+<p id="section-3.1.1.2-3">Shared use of a signing key can be provided by a common signing service or by distributing the key to authorized instances. These approaches differ in where key material is held and how access is controlled. Sharing a CA trust anchor while retaining separate issuer signing keys is a further deployment choice, discussed in <a href="#trust-domain-separation" class="auto internal xref">Section 4.5</a>.<a href="#section-3.1.1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="workload-identifier">
@@ -2117,7 +2235,7 @@ Components and interactions from previous scenarios are still relevant to this e
           </h4>
 <p id="section-3.4.2-1">One of the most basic use cases for workload identity is authentication of one workload to another. In many deployments, this is described operationally as one service making a request to another service as part of a larger, more complex application. The identifier in the credentials may identify a logical service, a workload that implements that service, or a specific workload instance, depending on the identity model chosen by the issuing trust domain. Following authentication, the identity of the peer can be used to enforce fine-grained authorization policies as described in <a href="#authorization" class="auto internal xref">Section 3.4.4</a> and generate audit trails as described in <a href="#audit-trails" class="auto internal xref">Section 3.4.5</a>.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">Authentication mechanisms are used to establish the identity of the peer before secure communication can proceed. The peer identity is carried in a workload identity credential, even when the credential represents a service-level identity rather than a particular workload instance.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-3">Workloads often obtain their credentials without relying on pre-provisioned long-lived secrets. Instead, short-lived credentials are established through mechanisms provided by the infrastructure that allow a workload to prove it is running in a given environment. Common delivery patterns are described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-wimse-workload-identity-practices" class="cite xref">I-D.ietf-wimse-workload-identity-practices</a>]</span>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-4">Once credentials are issued, they are conveyed to peers using common security protocols. Typical mechanisms include:<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.2-5.1">
@@ -2526,22 +2644,32 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <p id="section-4.4-2">Private keys associated with workload identity credentials require appropriate lifecycle management. Deployments should protect these keys using platform mechanisms appropriate to the environment, limit the lifetime of credentials associated with the keys, rotate or replace key pairs periodically, and revoke or stop accepting credentials associated with keys that are suspected to be compromised. Long-running workload instances need a renewal mechanism that allows credentials and keys to be replaced without relying on long-lived static secrets.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="authentication-and-authorization">
+<div id="trust-domain-separation">
 <section id="section-4.5">
-        <h3 id="name-authentication-and-authoriz">
-<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-authentication-and-authoriz" class="section-name selfRef">Authentication and Authorization</a>
+        <h3 id="name-trust-domain-separation">
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-trust-domain-separation" class="section-name selfRef">Trust Domain Separation</a>
         </h3>
-<p id="section-4.5-1">Authentication of a workload establishes that the presenter controls the key material associated with the credential and that the credential was issued under the authority of a trusted issuer. This is not sufficient, by itself, to determine whether the workload is permitted to access a resource or perform a requested action.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">Access control requires a separate authorization decision. That decision needs to take into account the authenticated workload identity, the requested resource or operation, the applicable policy, and any relevant security context. The fact that a workload has a valid credential does not imply that it is authorized for all resources in the trust domain.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
-<p id="section-4.5-3">Issuers, relying parties, gateways, and workloads need to avoid treating successful authentication as implicit authorization.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.5-1">Trust domain names identify separate identity namespaces. The deployment variants in <a href="#issuer-key-deployments" class="auto internal xref">Section 3.1.1.2</a> differ in whether signing authority is also separated. If the same private signing key is authorized to issue credentials for multiple trust domains, compromise of that key permits forgery of credentials for all of those domains. Selecting trust anchors according to the trust domain in the workload identifier does not prevent this when the same key is trusted for each domain. Different issuer names do not restore cryptographic separation when their signing key is shared.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">A common X.509 CA trust anchor does not necessarily imply shared issuer signing keys. Separate intermediate CAs with domain-specific constraints, such as applicable name constraints, can restrict their issuing authority if relying parties enforce those constraints <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. However, the common root authority remains a shared trust dependency, and compromise of its private key can affect every domain that trusts it.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-3">The choice among these variants depends on the required availability, administrative independence, and key-management effort. Deployments requiring isolation against compromise of another domain's issuing key need separate signing keys and enforceable domain-specific limits on issuing authority. Their choice of trust anchors also determines which root authorities remain shared dependencies.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authentication-and-authorization">
+<section id="section-4.6">
+        <h3 id="name-authentication-and-authoriz">
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-authentication-and-authoriz" class="section-name selfRef">Authentication and Authorization</a>
+        </h3>
+<p id="section-4.6-1">Authentication of a workload establishes that the presenter controls the key material associated with the credential and that the credential was issued under the authority of a trusted issuer. This is not sufficient, by itself, to determine whether the workload is permitted to access a resource or perform a requested action.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.6-2">Access control requires a separate authorization decision. That decision needs to take into account the authenticated workload identity, the requested resource or operation, the applicable policy, and any relevant security context. The fact that a workload has a valid credential does not imply that it is authorized for all resources in the trust domain.<a href="#section-4.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.6-3">Issuers, relying parties, gateways, and workloads need to avoid treating successful authentication as implicit authorization.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="workload-compromise">
-<section id="section-4.6">
+<section id="section-4.7">
         <h3 id="name-workload-compromise">
-<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-workload-compromise" class="section-name selfRef">Workload Compromise</a>
+<a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-workload-compromise" class="section-name selfRef">Workload Compromise</a>
         </h3>
-<p id="section-4.6-1">Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.7-1">Even the most well-designed and implemented workloads may contain security flaws that allow an attacker to gain limited or full compromise. For example, a server side request forgery may result in the ability for an attacker to force the workload to make requests of other parts of a system even though the rest of the workload functionality may be unaffected. An attacker with this advantage may be able to utilize privileges of the compromised workload to attack other parts of the system. Therefore it is important that communicating workloads apply the principle of least privilege through security controls such as authorization.<a href="#section-4.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2583,7 +2711,7 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dd class="break"></dd>
 <dt id="WIMSE-ID">[WIMSE-ID]</dt>
       <dd>
-<span class="refAuthor">Rosomakho, Y.</span> and <span class="refAuthor">J. A. Salowey</span>, <span class="refTitle">"Workload Identifier"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-identifier-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Rosomakho, Y.</span> and <span class="refAuthor">J. A. Salowey</span>, <span class="refTitle">"Workload Identifier"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-identifier-04</span>, <time datetime="2026-10-23" class="refDate">23 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2596,11 +2724,11 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dl class="references">
 <dt id="I-D.draft-ietf-oauth-identity-chaining">[I-D.draft-ietf-oauth-identity-chaining]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-16</span>, <time datetime="2026-06-26" class="refDate">26 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span>, <span class="refAuthor">Kasselman, P.</span>, <span class="refAuthor">Burgin, K.</span>, <span class="refAuthor">Jenkins, M. J.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">A. Parecki</span>, <span class="refTitle">"OAuth Identity and Authorization Chaining Across Domains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-identity-chaining-17</span>, <time datetime="2026-07-19" class="refDate">19 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-17">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-chaining-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-oauth-transaction-tokens">[I-D.ietf-oauth-transaction-tokens]</dt>
         <dd>
-<span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-09</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-09">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Fletcher, G.</span>, and <span class="refAuthor">P. Kasselman</span>, <span class="refTitle">"Transaction Tokens"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-transaction-tokens-11</span>, <time datetime="2026-07-30" class="refDate">30 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-11">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-transaction-tokens-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-wimse-s2s-protocol">[I-D.ietf-wimse-s2s-protocol]</dt>
         <dd>
@@ -2608,15 +2736,35 @@ take place across intermediate workloads (in an end-to-end style).<a href="#sect
 <dd class="break"></dd>
 <dt id="I-D.ietf-wimse-workload-identity-practices">[I-D.ietf-wimse-workload-identity-practices]</dt>
         <dd>
-<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-05</span>, <time datetime="2026-06-30" class="refDate">30 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Schwenkschuster, A.</span> and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Workload Identity Practices"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-wimse-workload-identity-practices-08</span>, <time datetime="2026-10-30" class="refDate">30 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08">https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-identity-practices-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OAUTH-TOKEN-XCHANGE">[OAUTH-TOKEN-XCHANGE]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Nadalin, A.</span>, <span class="refAuthor">Campbell, B., Ed.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OAuth 2.0 Token Exchange"</span>, <span class="seriesInfo">RFC 8693</span>, <span class="seriesInfo">DOI 10.17487/RFC8693</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8693">https://www.rfc-editor.org/rfc/rfc8693</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4120">[RFC4120]</dt>
+        <dd>
+<span class="refAuthor">Neuman, C.</span>, <span class="refAuthor">Yu, T.</span>, <span class="refAuthor">Hartman, S.</span>, and <span class="refAuthor">K. Raeburn</span>, <span class="refTitle">"The Kerberos Network Authentication Service (V5)"</span>, <span class="seriesInfo">RFC 4120</span>, <span class="seriesInfo">DOI 10.17487/RFC4120</span>, <time datetime="2005-07" class="refDate">July 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4120">https://www.rfc-editor.org/rfc/rfc4120</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5280">[RFC5280]</dt>
+        <dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6024">[RFC6024]</dt>
+        <dd>
+<span class="refAuthor">Reddy, R.</span> and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"Trust Anchor Management Requirements"</span>, <span class="seriesInfo">RFC 6024</span>, <span class="seriesInfo">DOI 10.17487/RFC6024</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6024">https://www.rfc-editor.org/rfc/rfc6024</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9397">[RFC9397]</dt>
+        <dd>
+<span class="refAuthor">Pei, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Thaler, D.</span>, and <span class="refAuthor">D. Wheeler</span>, <span class="refTitle">"Trusted Execution Environment Provisioning (TEEP) Architecture"</span>, <span class="seriesInfo">RFC 9397</span>, <span class="seriesInfo">DOI 10.17487/RFC9397</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9397">https://www.rfc-editor.org/rfc/rfc9397</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9683">[RFC9683]</dt>
         <dd>
 <span class="refAuthor">Fedorkow, G. C., Ed.</span>, <span class="refAuthor">Voit, E.</span>, and <span class="refAuthor">J. Fitzgerald-McKay</span>, <span class="refTitle">"Remote Integrity Verification of Network Devices Containing Trusted Platform Modules"</span>, <span class="seriesInfo">RFC 9683</span>, <span class="seriesInfo">DOI 10.17487/RFC9683</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9683">https://www.rfc-editor.org/rfc/rfc9683</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9901">[RFC9901]</dt>
+        <dd>
+<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"Selective Disclosure for JSON Web Tokens"</span>, <span class="seriesInfo">RFC 9901</span>, <span class="seriesInfo">DOI 10.17487/RFC9901</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9901">https://www.rfc-editor.org/rfc/rfc9901</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SPIFFE">[SPIFFE]</dt>
         <dd>
