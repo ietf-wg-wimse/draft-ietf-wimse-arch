@@ -156,6 +156,19 @@ For example, an issuer can use an elliptic-curve signing key and a separate Modu
 
 Conversely, several issuing CAs can use distinct signing keys while their certificate paths terminate at a common trust anchor {{?RFC5280}}. Thus, multiple issuers or signing keys do not necessarily imply multiple trust anchors. Sharing a CA trust anchor is different from sharing a private signing key. The security consequences of shared keys and trust anchors are discussed in {{trust-domain-separation}}.
 
+#### Signing Key Deployment Variants {#issuer-key-deployments}
+
+The following cases distinguish the logical issuer, the trust domains it serves, and the entities authorized to use a signing key. Each variant offers operational benefits and introduces dependencies that deployments need to consider.
+
+| Deployment variant | Benefits | Operational and security implications |
+|--------------------|----------|---------------------------------------|
+| Multiple instances of one issuer share a signing key. | Simplifies verification-key configuration for replicated issuer instances. | Requires coordinated key protection and rotation. Compromise of signing access at an instance can affect the issuer's full scope. |
+| One issuer uses a signing key across multiple trust domains. | Reduces the number of signing keys and associated lifecycle operations. | Domain separation relies on issuance policies and relying-party checks. Key compromise affects every domain for which the key is trusted. |
+| Separately administered issuers share a signing key. | Can ease migration or administrative handover by retaining an existing public verification key. | Requires coordination across administrators for key protection, rotation, and compromise response. The shared key alone cannot distinguish which issuer produced a signature. |
+{: #signing-key-variants title="Benefits and implications of signing key deployment variants."}
+
+Shared use of a signing key can be provided by a common signing service or by distributing the key to authorized instances. These approaches differ in where key material is held and how access is controlled. Sharing a CA trust anchor while retaining separate issuer signing keys is a further deployment choice, discussed in {{trust-domain-separation}}.
+
 ### Workload Identifier
 
 A workload identifier uniquely names a workload within a trust domain and is carried in workload identity credentials.
@@ -698,11 +711,11 @@ Private keys associated with workload identity credentials require appropriate l
 
 ## Trust Domain Separation {#trust-domain-separation}
 
-Distinct trust domain names separate identity namespaces but do not, by themselves, guarantee cryptographic isolation. If the same private signing key is authorized to issue credentials for multiple trust domains, compromise of that key permits forgery of credentials for all of those domains. Selecting trust anchors according to the trust domain in the workload identifier does not prevent this when the same key is trusted for each domain. Different issuer names do not restore cryptographic separation when their signing key is shared.
+Trust domain names identify separate identity namespaces. The deployment variants in {{issuer-key-deployments}} differ in whether signing authority is also separated. If the same private signing key is authorized to issue credentials for multiple trust domains, compromise of that key permits forgery of credentials for all of those domains. Selecting trust anchors according to the trust domain in the workload identifier does not prevent this when the same key is trusted for each domain. Different issuer names do not restore cryptographic separation when their signing key is shared.
 
 A common X.509 CA trust anchor does not necessarily imply shared issuer signing keys. Separate intermediate CAs with domain-specific constraints, such as applicable name constraints, can restrict their issuing authority if relying parties enforce those constraints {{?RFC5280}}. However, the common root authority remains a shared trust dependency, and compromise of its private key can affect every domain that trusts it.
 
-Deployments requiring cryptographic isolation between trust domains need separate signing keys and enforceable domain-specific limits on issuing authority. Their choice of trust anchors also determines which root authorities remain shared dependencies. These requirements are distinct from operating multiple service instances of the same logical issuer.
+The choice among these variants depends on the required availability, administrative independence, and key-management effort. Deployments requiring isolation against compromise of another domain's issuing key need separate signing keys and enforceable domain-specific limits on issuing authority. Their choice of trust anchors also determines which root authorities remain shared dependencies.
 
 ## Authentication and Authorization
 
