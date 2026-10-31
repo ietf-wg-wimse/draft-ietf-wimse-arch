@@ -802,7 +802,7 @@ Table of Contents
       credential and provides the security context (c).  The token
       service determines what type of externally usable token to issue
       to the workload for use with the external token service.  Workload
-      authentication is omitted from the diagram for simplicity; (c)
+      authentication is omitted from the diagram for simplicity. (c)
       consistently denotes security context.
 
    *  (6) Workload 2 uses this new token/credential (t) to request an
