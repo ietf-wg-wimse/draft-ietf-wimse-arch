@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-29T05:29:45.769540+00:00",
+  "timestamp": "2026-11-01T05:44:15.899063+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -1880,7 +1880,7 @@
       "id": "I_kwDOLPTb0M8AAAABZJFs9g",
       "title": "Define issuer, trust anchor, and trust domain, and how they relate",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/141",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1889,8 +1889,8 @@
       "labels": [],
       "body": "The Trust Domain section maps a trust domain to one or more trust anchors, and says credentials are issued under the authority of a trust domain. Issuer, trust anchor, and trust domain are not defined as three entities, and the relationships among them are left implicit. In particular, the draft does not say whether one issuer or one trust anchor may serve more than one trust domain.\n\nThe credentials draft only requires validation against the anchors bound to the trust domain named in the Workload Identifier ([s2s #403](https://github.com/ietf-wg-wimse/draft-ietf-wimse-s2s-protocol/pull/403)).\n\nThis draft should define the three entities and state the relationships among them.",
       "createdAt": "2026-10-22T15:21:33Z",
-      "updatedAt": "2026-10-27T17:32:31Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-31T12:29:08Z",
+      "closedAt": "2026-10-31T12:29:08Z",
       "comments": []
     }
   ],
@@ -6604,26 +6604,28 @@
       "id": "PR_kwDOLPTb0M72yfXf",
       "title": "Some initial editorial comments about the intro section",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/138",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "elear",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "hannestschofenig"
       ],
       "labels": [],
       "body": "Gents, I needed to read this document and found that it was not succinct.  I've tried to help.  The intent is not to make any changes in the architecture, but I may have made a mistake.  Feel free to cherry pick any of this.  I may come back to the rest of the document later, time permitting.",
       "createdAt": "2026-07-27T07:51:25Z",
-      "updatedAt": "2026-10-27T17:10:54Z",
+      "updatedAt": "2026-10-31T12:25:39Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
       "headRepository": "elear/draft-ietf-wimse-arch",
       "headRefName": "eliot-editorial-pass",
-      "headRefOid": "736a2d9f77dcf01aa2b7f26721ee51e75ce8b5ba",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c0a9b433332a6974657d8dd845996aad330600f4",
+      "closedAt": "2026-10-31T12:25:39Z",
+      "mergedAt": "2026-10-31T12:25:39Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "6fb2507509cee0ee509b81a74dd2b09ca042b084"
+      },
       "comments": [],
       "reviews": []
     },
@@ -6641,7 +6643,7 @@
       "labels": [],
       "body": "## Summary\n\nClarifies the distinction between authenticated workload identity, delegation context, and authorization scope for AI/ML-based intermediaries.\n\nThis follows the discussion in #139. It separates two distinctions that the previous wording conflated:\n\n- **Autonomous vs. delegated execution** is distinguishable through workload identity and/or the delegation context carried with the request (see the draft's existing Delegation and Impersonation model), where the acting workload keeps its own identity.\n- **One logical agent vs. another** is where distinct workload identities matter: logically distinct agents that need to be independently audited, revoked, or subjected to policy should not share a workload identity.\n\nAuthorization scopes constrain what an authenticated workload may do, but do not establish a separate authenticated identity.\n\n## Changes\n\n- Keeps the existing requirement that autonomous actions be clearly distinguishable from delegated ones, and recognizes delegation context, not only separate workload identities, as a way to meet it.\n- Adds a SHOULD NOT that logically distinct agents needing independent audit, revocation, or policy treatment share a workload identity, and states that token scopes do not satisfy this.\n- Makes the operational consequences of a shared identity explicit:\n  - Audit: audit records attribute requests to the shared authenticated principal, so distinct agents are indistinguishable.\n  - Targeted revocation: a shared identity cannot be revoked for one agent without affecting the others.\n  - Per-agent policy: downstream policy cannot rely on a separately authenticated per-agent identity if differentiation exists only in scopes or out-of-band conventions.\n- Adds a short vendor-neutral example contrasting a shared execution role with per-agent workload identifiers.\n- Keeps the architecture guidance mechanism-neutral.\n\n## Scope\n\nThis PR does not mandate:\n\n- SPIFFE;\n- a specific JWT claim;\n- a particular credential format; or\n- a new workload-identity mechanism.\n\nThe related draft-heigh-wimse-agent-identity-metadata work was reviewed as useful background, particularly its separation of agent identity/attributes from authorization grants such as scopes. This PR does not make the architecture dependent on that individual draft.\n\n## Validation\n\nValidated with:\n\n- make\n- make lint\n- make check\n- git diff --check\n\nThe `idnits` findings reported by `make check` (2 errors, 2 warnings, 1 comment) are also present on clean `main` and are baseline rather than regressions introduced by this change.\n\n## Related issue\n\nRelated to #139.\n",
       "createdAt": "2026-09-25T20:05:42Z",
-      "updatedAt": "2026-10-27T17:09:23Z",
+      "updatedAt": "2026-10-31T22:42:24Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "0196009551afe60ae6c23509b56adabf75a15203",
@@ -6699,6 +6701,366 @@
           "body": "Thanks, LGTM!",
           "createdAt": "2026-09-29T16:32:42Z",
           "updatedAt": "2026-09-29T16:32:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVUC8Fw",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T22:29:14Z",
+          "updatedAt": "2026-10-31T22:29:14Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I would remove discussion of scope here as well. \n\n```suggestion\nLogically distinct agents that need to be independently audited, revoked, or subjected to policy SHOULD NOT share a workload identity.  When several logically distinct agents present the same workload credential, the authenticated principal remains the shared identity and the individual agent is not independently authenticated. Deployments that need individual agents to be distinguishable for audit, revocation, or downstream policy therefore need a way to identify a workload that is unique to a single logical agent and stable across that agent's requests.\n```",
+              "createdAt": "2026-10-31T22:29:14Z",
+              "updatedAt": "2026-10-31T22:38:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVUDJgQ",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T22:30:33Z",
+          "updatedAt": "2026-10-31T22:30:34Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "This text seems redundant.\n\n```suggestion\n```",
+              "createdAt": "2026-10-31T22:30:34Z",
+              "updatedAt": "2026-10-31T22:30:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVUEkvA",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T22:39:17Z",
+          "updatedAt": "2026-10-31T22:39:34Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Incorporate some of this text above. \n```suggestion\n```",
+              "createdAt": "2026-10-31T22:39:17Z",
+              "updatedAt": "2026-10-31T22:39:34Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "I  think scopes is out of place. \n\n```suggestion\nIn some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguishable from delegated ones, for example through separate workload identities or other attributes associated with the identity.\n```",
+              "createdAt": "2026-10-31T22:39:24Z",
+              "updatedAt": "2026-10-31T22:39:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVUE1UQ",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T22:40:52Z",
+          "updatedAt": "2026-10-31T22:40:53Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "this seems largely redundant with the text below.\n\n```suggestion\n```",
+              "createdAt": "2026-10-31T22:40:53Z",
+              "updatedAt": "2026-10-31T22:40:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVUFECQ",
+          "commit": {
+            "abbreviatedOid": "a9c6e48"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T22:42:24Z",
+          "updatedAt": "2026-10-31T22:42:24Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nA further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain MUST explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization and trust boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.\n```",
+              "createdAt": "2026-10-31T22:42:24Z",
+              "updatedAt": "2026-10-31T22:42:24Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 142,
+      "id": "PR_kwDOLPTb0M8AAAABL9NCtw",
+      "title": "Terminology",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/142",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR was created in response to https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/141\n",
+      "createdAt": "2026-10-31T12:05:02Z",
+      "updatedAt": "2026-10-31T12:28:32Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "6fb2507509cee0ee509b81a74dd2b09ca042b084",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "terminology",
+      "headRefOid": "818521d070005a06e9bc2153e3a8557aeedd17f8",
+      "closedAt": "2026-10-31T12:28:28Z",
+      "mergedAt": "2026-10-31T12:28:28Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "573f84c3d19201f03a6885d534f38c69d2306c1e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 143,
+      "id": "PR_kwDOLPTb0M8AAAABL9tItw",
+      "title": "Consistency Review",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/143",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-31T13:20:09Z",
+      "updatedAt": "2026-10-31T19:50:57Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "consistency-review",
+      "headRefOid": "2b702feb0e5693fcf2f6eb893e2a5efd9590fd5e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVRx2PQ",
+          "commit": {
+            "abbreviatedOid": "d59ee45"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T13:27:41Z",
+          "updatedAt": "2026-10-31T13:27:41Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\nA WIC is an X.509 certificate and a WIT is a signed JWT, as defined in {{WIMSE-CREDS}}. Each contains a workload identifier and a public key. The corresponding private key is stored securely to prevent authorized access.\n```",
+              "createdAt": "2026-10-31T13:27:41Z",
+              "updatedAt": "2026-10-31T13:27:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVRyJsg",
+          "commit": {
+            "abbreviatedOid": "99b5d6f"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T13:29:01Z",
+          "updatedAt": "2026-10-31T13:29:01Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "```suggestion\n* (5) Workload 2 determines it needs to communicate with an external service. In order to gain access to this service it must first obtain a token/credential (t) that it can use externally. It authenticates to the token service using its workload identity credential and provides the security context (c). The token service determines what type of externally usable token to issue to the workload for use with the external token service. Workload authentication is omitted from the diagram for simplicity. (c) consistently denotes security context.\n```",
+              "createdAt": "2026-10-31T13:29:01Z",
+              "updatedAt": "2026-10-31T13:29:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVRyfWQ",
+          "commit": {
+            "abbreviatedOid": "095bbc6"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T13:30:54Z",
+          "updatedAt": "2026-10-31T13:30:54Z",
+          "comments": [
+            {
+              "originalPosition": 149,
+              "body": "```suggestion\nForwarding application-layer authentication through an intermediary requires the proof to identify the intended recipient and its protected data to remain verifiable. A WPT binds its associated WIT and accompanying authorization or context tokens as specified in {{WIMSE-WPT}}, but does not provide general HTTP message integrity. HTTP Message Signatures protect the components specified by their profile and changes to a covered component invalidate the signature {{WIMSE-HTTPSIG}}. If an intermediary uses its own credential and produces a new proof, the destination authenticates that intermediary. Any asserted relationship to the original caller requires separate validation under the applicable policy.\n```",
+              "createdAt": "2026-10-31T13:30:54Z",
+              "updatedAt": "2026-10-31T13:30:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVTW_XQ",
+          "commit": {
+            "abbreviatedOid": "ddae96e"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T19:30:24Z",
+          "updatedAt": "2026-10-31T19:31:11Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "It seems that the mention of attestation is out of place, is there a reason why it should be included here? ",
+              "createdAt": "2026-10-31T19:30:24Z",
+              "updatedAt": "2026-10-31T19:31:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVTYNAw",
+          "commit": {
+            "abbreviatedOid": "ddae96e"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T19:33:54Z",
+          "updatedAt": "2026-10-31T19:33:54Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\nLegacy bearer credentials may be accepted for interoperability. A signature can protect such a credential against undetected modification, but anyone who obtains it may be able to reuse it. WIT-based authentication credentials require a separate proof of possession of the bound private key; they must not be used as bearer credentials.\n```",
+              "createdAt": "2026-10-31T19:33:54Z",
+              "updatedAt": "2026-10-31T19:33:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVTcryw",
+          "commit": {
+            "abbreviatedOid": "ddae96e"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-31T19:46:13Z",
+          "updatedAt": "2026-10-31T19:46:13Z",
+          "comments": [
+            {
+              "originalPosition": 194,
+              "body": "```suggestion\nSource workloads may submit asynchronous or batch requests that are executed after their original identity credentials expire. The executing workload obtains or renews its own WIC or WIT for workload authentication. Where continued delegated authority is required, an authorization service can issue a suitably scoped authorization or context token under deployment policy. That token may identify the originating principal as its subject and the executing workload as an actor, if the token format supports those semantics. Its acceptance and any binding to the executing workload are evaluated separately from validation of the WIC or WIT. Refreshing an identity credential does not, by itself, renew delegated authority. Deployments need to bind the lifetime of delegated authority and define how renewal, expiry, and revocation affect queued work.\n```",
+              "createdAt": "2026-10-31T19:46:13Z",
+              "updatedAt": "2026-10-31T19:46:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVTeORg",
+          "commit": {
+            "abbreviatedOid": "2b702fe"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-10-31T19:50:57Z",
+          "updatedAt": "2026-10-31T19:50:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 144,
+      "id": "PR_kwDOLPTb0M8AAAABL9_Kiw",
+      "title": "Shorten text",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/144",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I asked ChatGPT to shorten the text in the draft. This PR is the result.\n\nI would not merge this now and not as it looks like but I still find it interesting to read through the shorter version of the document.",
+      "createdAt": "2026-10-31T13:57:50Z",
+      "updatedAt": "2026-10-31T13:57:53Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "shorten-text",
+      "headRefOid": "2ed3e51104da11f202093d525ef5367877e37f96",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 145,
+      "id": "PR_kwDOLPTb0M8AAAABL-pPVA",
+      "title": "Adding Acknowledgments",
+      "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/145",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-31T15:18:24Z",
+      "updatedAt": "2026-10-31T19:21:47Z",
+      "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "baseRefName": "main",
+      "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
+      "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
+      "headRefName": "acknowledgments",
+      "headRefOid": "c89567440c326173e05cfb418b73449cc6f6ed7e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVTUObA",
+          "commit": {
+            "abbreviatedOid": "c895674"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-10-31T19:21:47Z",
+          "updatedAt": "2026-10-31T19:21:47Z",
           "comments": []
         }
       ]
