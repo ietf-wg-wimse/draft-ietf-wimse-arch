@@ -736,7 +736,15 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-Todo: Add your name here.
+The authors thank Flemming Andreasen, Brian Campbell, Arjun Garg,
+Shlomo Zalman Heigh, Dmitry Izumskiy, Pieter Kasselman, John Kemp,
+Josh Kline, Watson Ladd, Steve Lasker, Eliot Lear, Dapeng "Max" Liu,
+Jean-François "Jeff" Lombardo, Andrew McCormick, Ken McCracken,
+Thibault Meunier, Kathleen Moriarty, Mark Novak, Mingliang Pei,
+Yogi Porla, Justin Richer, Muhammad Usama Sardar, Dean H. Saxe,
+Arndt Schwenkschuster, Yaron Sheffer, Ned Smith, Dag Sneeggen,
+Noah Stride, and Jacob Valentic for their contributions, reviews,
+and discussions that helped shape this document.
 
 # Changes since draft -05
 {:numbered="false"}
