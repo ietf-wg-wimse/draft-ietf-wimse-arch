@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-01T05:44:15.899063+00:00",
+  "timestamp": "2026-11-03T06:23:37.004033+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -7030,24 +7030,26 @@
       "id": "PR_kwDOLPTb0M8AAAABL-pPVA",
       "title": "Adding Acknowledgments",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/145",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-31T15:18:24Z",
-      "updatedAt": "2026-10-31T19:21:47Z",
+      "updatedAt": "2026-11-02T22:05:03Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "acknowledgments",
       "headRefOid": "c89567440c326173e05cfb418b73449cc6f6ed7e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-11-02T22:05:03Z",
+      "mergedAt": "2026-11-02T22:05:03Z",
+      "mergedBy": "yaroslavros",
+      "mergeCommit": {
+        "oid": "13fa89a7a9c4137ea9138f2121e28195d74a59aa"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7061,6 +7063,19 @@
           "body": "",
           "createdAt": "2026-10-31T19:21:47Z",
           "updatedAt": "2026-10-31T19:21:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABVl9GKA",
+          "commit": {
+            "abbreviatedOid": "c895674"
+          },
+          "author": "yaroslavros",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-02T22:04:56Z",
+          "updatedAt": "2026-11-02T22:04:56Z",
           "comments": []
         }
       ]
