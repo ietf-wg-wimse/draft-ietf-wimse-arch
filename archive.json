@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T06:23:37.004033+00:00",
+  "timestamp": "2026-11-05T06:20:43.358517+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -6823,7 +6823,7 @@
       "labels": [],
       "body": "This PR was created in response to https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/issues/141\n",
       "createdAt": "2026-10-31T12:05:02Z",
-      "updatedAt": "2026-10-31T12:28:32Z",
+      "updatedAt": "2026-11-04T16:57:09Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "6fb2507509cee0ee509b81a74dd2b09ca042b084",
@@ -6836,7 +6836,15 @@
       "mergeCommit": {
         "oid": "573f84c3d19201f03a6885d534f38c69d2306c1e"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "trustanchoralliance-ctrl",
+          "authorAssociation": "NONE",
+          "body": "Thanks, the new \u00a72, \u00a73.1.1.1 and \u00a74.5 text covers this well. One small suggestion for \u00a74.5: note that marking the name constraint critical (RFC 5280, Section 4.2.1.10) means a relying party that does not process it rejects the chain rather than ignoring it, which closes the \u201cif relying parties enforce\u201d case. Normative wording for the credential drafts is proposed in ietf-wg-wimse/draft-ietf-wimse-s2s-protocol#416.",
+          "createdAt": "2026-11-04T16:57:09Z",
+          "updatedAt": "2026-11-04T16:57:09Z"
+        }
+      ],
       "reviews": []
     },
     {
