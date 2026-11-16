@@ -631,7 +631,6 @@ In some cases, AI systems may generate requests that are not attributable to a s
 Logically distinct agents that need to be independently audited, revoked, or subjected to policy SHOULD NOT share a workload identity.  When several logically distinct agents present the same workload credential, the authenticated principal remains the shared identity and the individual agent is not independently authenticated. Deployments that need individual agents to be distinguishable for audit, revocation, or downstream policy therefore need a way to identify a workload that is unique to a single logical agent and stable across that agent's requests.
 
 
-Deployments that need individual agents to be distinguishable for audit, revocation, or downstream policy therefore need a workload identifier that is unique to a single logical agent and stable across that agent's requests. This document does not mandate a particular identifier format or credential mechanism. For example, a platform may assign a single execution role to several logically distinct agents, so that all of them authenticate as the same workload; another may issue each deployed agent its own workload identifier.
 
 Because AI intermediaries may chain requests across multiple services, there is an elevated risk of privilege escalation if security context is propagated beyond the intended trust domain. Mechanisms such as cryptographic binding of delegation tokens or attestation of intermediary behavior can help mitigate these risks.
 
