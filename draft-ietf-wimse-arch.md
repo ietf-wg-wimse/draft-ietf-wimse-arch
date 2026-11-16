@@ -626,7 +626,7 @@ Emerging agentic AI systems and other ML-based intermediaries introduce new cons
 
 From WIMSE perspective, AI intermediaries are a special case of delegated workloads (see {{delegation}}). They inherit the upstream principal's security context and are expected to operate strictly within the constraints of that delegation. When invoking downstream workloads, the agent SHOULD propagate the upstream security context, unless it has been explicitly authorized to translate or reduce its scope.
 
-In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguishable from delegated ones, for example through separate workload identities or through the delegation context carried with the request (see {{delegation}}).
+In some cases, AI systems may generate requests that are not attributable to a specific upstream principal. Such autonomous actions MUST be clearly distinguishable from delegated ones, for example through separate workload identities or other attributes associated with the identity.
 
 Logically distinct agents that need to be independently audited, revoked, or subjected to policy SHOULD NOT share a workload identity. Token scopes do not satisfy this requirement: a scope constrains what an authenticated workload is authorized to do; it does not change which identity was authenticated. Where several logically distinct agents present the same workload credential, the authenticated principal remains the shared identity and the individual agent is not independently authenticated.
 
