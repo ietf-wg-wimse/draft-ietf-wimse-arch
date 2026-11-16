@@ -187,7 +187,7 @@ A WIC is an X.509 certificate and a WIT is a signed JWT, as defined in {{WIMSE-C
 
 The workload presents the WIC or WIT during authentication and uses the associated private key to produce a proof of possession. The private key remains secret. The protocol bindings described in {{workload-authentication}} specify how this proof is produced and verified.
 
-Legacy bearer credentials may be accepted for interoperability. A signature can protect such a credential against undetected modification, but anyone who obtains it may be able to reuse it. WIT-based authentication requires a separate proof of possession of the bound private key.
+Legacy bearer credentials may be accepted for interoperability. A signature can protect such a credential against undetected modification, but anyone who obtains it may be able to reuse it. WIT-based authentication credentials require a separate proof of possession of the bound private key; they must not be used as bearer credentials.
 
 The private key associated with a workload identity credential is security-sensitive key material. It may be generated and managed by the workload itself, by an agent, or by the surrounding platform or infrastructure. In all cases, the key material needs to be generated with sufficient entropy, stored securely, protected from unauthorized access, and rotated according to deployment policy.
 
