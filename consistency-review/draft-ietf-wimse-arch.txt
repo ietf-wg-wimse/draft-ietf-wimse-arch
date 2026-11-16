@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                        Palo Alto Networks
 Intended status: Informational                              Y. Rosomakho
-Expires: 4 May 2027                                              Zscaler
+Expires: 20 May 2027                                             Zscaler
                                                            H. Tschofenig
                                                                 UniBw M.
-                                                         31 October 2026
+                                                        16 November 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 May 2027.
+   This Internet-Draft will expire on 20 May 2027.
 
 Copyright Notice
 
@@ -457,8 +457,9 @@ Table of Contents
    Legacy bearer credentials may be accepted for interoperability.  A
    signature can protect such a credential against undetected
    modification, but anyone who obtains it may be able to reuse it.
-   WIT-based authentication requires a separate proof of possession of
-   the bound private key.
+   WIT-based authentication credentials require a separate proof of
+   possession of the bound private key; they must not be used as bearer
+   credentials.
 
    The private key associated with a workload identity credential is
    security-sensitive key material.  It may be generated and managed by
@@ -1685,9 +1686,9 @@ Table of Contents
               Kasselman, P., Lombardo, J., Rosomakho, Y., Campbell, B.,
               Steele, N., and A. Parecki, "AI Identity Management
               System", Work in Progress, Internet-Draft, draft-ietf-
-              wimse-aims-00, 15 September 2026,
+              wimse-aims-01, 2 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              aims-00>.
+              aims-01>.
 
    [WIMSE-CREDS]
               Campbell, B., Salowey, J. A., Schwenkschuster, A.,
