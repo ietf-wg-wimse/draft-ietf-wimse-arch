@@ -630,9 +630,6 @@ In some cases, AI systems may generate requests that are not attributable to a s
 
 Logically distinct agents that need to be independently audited, revoked, or subjected to policy SHOULD NOT share a workload identity.  When several logically distinct agents present the same workload credential, the authenticated principal remains the shared identity and the individual agent is not independently authenticated. Deployments that need individual agents to be distinguishable for audit, revocation, or downstream policy therefore need a way to identify a workload that is unique to a single logical agent and stable across that agent's requests.
 
-
-
-
 A further consideration arises when AI agents interact with other AI agents. In these cases, each agent may act both as a delegated workload and as a delegator, creating multi-hop delegation chains. To avoid ambiguity, each hop in the chain MUST explicitly scope and re-bind the security context so that downstream services can reliably evaluate provenance and authorization and trust boundaries. Without such controls, there is a risk that a chain of AI-to-AI interactions could unintentionally extend authority far beyond what was originally granted.
 
 ~~~aasvg
