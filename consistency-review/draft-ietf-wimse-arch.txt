@@ -5,10 +5,10 @@
 Workload Identity in Multi System Environments                J. Salowey
 Internet-Draft                                        Palo Alto Networks
 Intended status: Informational                              Y. Rosomakho
-Expires: 20 May 2027                                             Zscaler
+Expires: 27 May 2027                                             Zscaler
                                                            H. Tschofenig
                                                                 UniBw M.
-                                                        16 November 2026
+                                                        23 November 2026
 
 
   Workload Identity in a Multi System Environment (WIMSE) Architecture
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 May 2027.
+   This Internet-Draft will expire on 27 May 2027.
 
 Copyright Notice
 
@@ -276,10 +276,8 @@ Table of Contents
    A relying party is an entity that uses verified identity or security
    information to make an application decision.  For workload
    authentication, it validates a workload identity credential and
-   relies on the authenticated identity.  In remote attestation, it uses
-   Attestation Results from a verifier according to its appraisal
-   policy, as described in [RFC9334].  This role can be performed by a
-   workload, a gateway, or another component acting on behalf of a
+   relies on the authenticated identity.  This role can be performed by
+   a workload, a gateway, or another component acting on behalf of a
    workload.
 
 3.  Architecture
@@ -1627,9 +1625,9 @@ Table of Contents
    [I-D.ietf-wimse-workload-identity-practices]
               Schwenkschuster, A. and Y. Rosomakho, "Workload Identity
               Practices", Work in Progress, Internet-Draft, draft-ietf-
-              wimse-workload-identity-practices-08, 30 October 2026,
+              wimse-workload-identity-practices-09, 23 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-wimse-
-              workload-identity-practices-08>.
+              workload-identity-practices-09>.
 
    [OAUTH-TOKEN-XCHANGE]
               Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
@@ -1701,9 +1699,9 @@ Table of Contents
    [WIMSE-HTTPSIG]
               Salowey, J. A. and Y. Sheffer, "WIMSE Workload-to-Workload
               Authentication with HTTP Signatures", Work in Progress,
-              Internet-Draft, draft-ietf-wimse-http-signature-08, 20
-              October 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-wimse-http-signature-08>.
+              Internet-Draft, draft-ietf-wimse-http-signature-09, 20
+              November 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-wimse-http-signature-09>.
 
    [WIMSE-MTLS]
               Salowey, J. A. and Y. Rosomakho, "Workload Authentication
