@@ -122,7 +122,7 @@ Trust anchor information can be represented by an X.509 certificate, including a
 
 * Relying Party
 
-A relying party is an entity that uses verified identity or security information to make an application decision. For workload authentication, it validates a workload identity credential and relies on the authenticated identity. In remote attestation, it uses Attestation Results from a verifier according to its appraisal policy, as described in {{RFC9334}}. This role can be performed by a workload, a gateway, or another component acting on behalf of a workload.
+A relying party is an entity that uses verified identity or security information to make an application decision. For workload authentication, it validates a workload identity credential and relies on the authenticated identity. This role can be performed by a workload, a gateway, or another component acting on behalf of a workload.
 
 # Architecture
 
