@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-17T07:40:04.645598+00:00",
+  "timestamp": "2026-11-24T09:37:30.067376+00:00",
   "repo": "ietf-wg-wimse/draft-ietf-wimse-arch",
   "labels": [
     {
@@ -6894,24 +6894,26 @@
       "id": "PR_kwDOLPTb0M8AAAABL9tItw",
       "title": "Consistency Review",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/143",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-31T13:20:09Z",
-      "updatedAt": "2026-11-16T23:26:12Z",
+      "updatedAt": "2026-11-23T17:29:26Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "consistency-review",
-      "headRefOid": "cdc27a0270db57ccda9cd2552cefd8ca66f432a0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cc5a88a754bed9dfdf0eabda32f1d2ad5fd3f3d2",
+      "closedAt": "2026-11-23T17:29:21Z",
+      "mergedAt": "2026-11-23T17:29:21Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "fb13f4832e1b2aa9d01c89dee8319642faaefee2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7046,6 +7048,39 @@
           "createdAt": "2026-10-31T19:50:57Z",
           "updatedAt": "2026-10-31T19:50:57Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABZzBEkQ",
+          "commit": {
+            "abbreviatedOid": "ddae96e"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-23T17:22:41Z",
+          "updatedAt": "2026-11-23T17:22:41Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Removed the remote attestation sentence",
+              "createdAt": "2026-11-23T17:22:41Z",
+              "updatedAt": "2026-11-23T17:22:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPTb0M8AAAABZzIgTQ",
+          "commit": {
+            "abbreviatedOid": "cc5a88a"
+          },
+          "author": "jsalowey",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-11-23T17:29:26Z",
+          "updatedAt": "2026-11-23T17:29:26Z",
+          "comments": []
         }
       ]
     },
@@ -7054,21 +7089,21 @@
       "id": "PR_kwDOLPTb0M8AAAABL9_Kiw",
       "title": "Shorten text",
       "url": "https://github.com/ietf-wg-wimse/draft-ietf-wimse-arch/pull/144",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I asked ChatGPT to shorten the text in the draft. This PR is the result.\n\nI would not merge this now and not as it looks like but I still find it interesting to read through the shorter version of the document.",
       "createdAt": "2026-10-31T13:57:50Z",
-      "updatedAt": "2026-10-31T13:57:53Z",
+      "updatedAt": "2026-11-23T17:22:17Z",
       "baseRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "baseRefName": "main",
       "baseRefOid": "573f84c3d19201f03a6885d534f38c69d2306c1e",
       "headRepository": "ietf-wg-wimse/draft-ietf-wimse-arch",
       "headRefName": "shorten-text",
       "headRefOid": "2ed3e51104da11f202093d525ef5367877e37f96",
-      "closedAt": null,
+      "closedAt": "2026-11-23T17:22:17Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
